@@ -5,6 +5,8 @@ set smartcase
 set noswapfile
 set scrolloff=10
 set iskeyword+=-
+set ignorecase
+set pumheight=10
 set wrapmargin=10
 set showcmd
 set cmdheight=2 "more space in the neovim command line for displaying messages
@@ -80,7 +82,6 @@ Plug 's1n7ax/nvim-window-picker', { 'version' : '2.*' }
 Plug 'tpope/vim-sensible'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'rcarriga/nvim-notify'
-Plug 'zeioth/garbage-day.nvim', { 'event' : 'VeryLazy' }
 Plug 'folke/noice.nvim'
 Plug 'nvimtools/none-ls.nvim'
 Plug 'MunifTanjim/nui.nvim' 
@@ -94,7 +95,7 @@ Plug 'honza/vim-snippets'
 " Log coloring - SEE IF HELPFUL
 Plug 'mtdl9/vim-log-highlighting'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.*' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 Plug 'NeogitOrg/neogit'
 Plug 'sindrets/diffview.nvim'
 " Adds information about what changed to the file at the place of line numbers
@@ -103,8 +104,6 @@ Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
 Plug 'akinsho/bufferline.nvim' 
 " Open and close brackets automatically
 Plug 'jiangmiao/auto-pairs'
-" Colors brackets
-Plug 'frazrepo/vim-rainbow'
 " Help with surrounding stuff
 Plug 'tpope/vim-surround'
 " Terminal
@@ -112,23 +111,22 @@ Plug 'akinsho/toggleterm.nvim', { 'tag' : '2.*'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'BurntSushi/ripgrep'
-Plug 'williamboman/nvim-lsp-installer'
 " Multi cursor
 Plug 'mg979/vim-visual-multi'
+Plug 'goolord/alpha-nvim'
 " Check gramma
 Plug 'rhysd/vim-grammarous'
 Plug 'ckipp01/stylua-nvim', { 'run' : 'cargo install stylua' }
 " Tree sitter
+Plug 'williamboman/mason.nvim' 
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'nvim-treesitter/nvim-treesitter' 
-  
+Plug 'zeioth/garbage-day.nvim', { 'event' : 'VeryLazy', 'opts' : { 'notifications' : 'true', 'timeout' : '2000', 'retries' : '7' }}
 " Theme
 Plug 'ellisonleao/gruvbox.nvim'
 call plug#end()
-colorscheme gruvbox
-
-" FLUTTER AND NERDTREE
+lua require('alpha').setup(require('alpha.themes.theta').config)
 let mapleader=","
-
 " OPTIONAL Type jj to exit insert mode quickly.
 "inoremap jj <Esc>
 "tnoremap jj <c-\><c-n>
@@ -139,7 +137,7 @@ nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
-
+nnoremap <silent> n <Nop>
 " Flutter commands
 nnoremap <silent> <space>fr <cmd>:FlutterRun<cr>
 nnoremap <silent> <space>fq <cmd>:FlutterQuit<cr>
@@ -176,10 +174,7 @@ nnoremap <silent> <C-L> :BufferNext<CR>
 nnoremap <silent> <space>d  :BufferDelete<CR>
 nnoremap <silent> <space>1  :BufferFirst<CR>
 nnoremap <silent> <space>2  :BufferLast<CR>
-
-" Terminal
-nnoremap <silent> <C-m> :ToggleTerm<CR>
-
+nmap <S-+> <Nop>
 " FZF
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -203,15 +198,12 @@ let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit'
-  \ }
-
+    \ }
 " Activate if you want to use Signify
 " Jump though hunks
 " nmap <space>gj <plug>(signify-next-hunk)
 " nmap <space>gk <plug>(signify-prev-hunk)
 
-" Vim Rainbow
-au FileType dart,ts,java,c,cpp call rainbow#load()
 
 let g:dart_format_on_save = 1
 let g:dartfmt_options = ['--fix', '--line-length 80']
@@ -244,17 +236,50 @@ nnoremap <silent> <space>qd <cmd>:SessionDelete<CR>
 nnoremap <silent> <C-a> <CMD>Neotree toggle<CR>
 
 " Custom actions
-nnoremap <silent> <C-s> <CMD>lua vim.lsp.buf.format()<CR><CMD>:wall<CR>
+nnoremap <silent> <C-s> <CMD>:wall<CR>
+" Activate if you wanna a hotkey that format file on save (could be slow on large files)
+" nnoremap <silent> <C-q> <CMD>lua vim.lsp.buf.format()<CR><CMD>:wqall<CR><cmd>:SessionSave<CR>
 nnoremap <silent> <C-q> <CMD>lua vim.lsp.buf.format()<CR><CMD>:wqall<CR><cmd>:SessionSave<CR>
-" nnoremap <silent> <A-F> <CMD>lua vim.lsp.buf.format()<CR>
+nnoremap <silent> <space>fo <CMD>lua vim.lsp.buf.format()<CR>
 " Go move 
 nmap <S-h> <Plug>GoNSMLeft
 nmap <S-j> <Plug>GoNSMDown
 nmap <S-k> <Plug>GoNSMUp
 nmap <S-l> <Plug>GoNSMRight
 
+lua << EOF
+require("mason").setup()
+require("mason-lspconfig").setup()
+EOF
 
-lua require("nvim-lsp-installer").setup {} 
+lua << EOF
+require("gruvbox").setup({
+  terminal_colors = true, 
+  undercurl = true,
+  underline = true,
+  bold = true,
+  italic = {
+    strings = true,
+    emphasis = true,
+    comments = true,
+    operators = false,
+    folds = true,
+  },
+  strikethrough = true,
+  invert_selection = false,
+  invert_signs = false,
+  invert_tabline = false,
+  invert_intend_guides = false,
+  inverse = false, -- invert background for search, diffs, statuslines and errors
+  contrast = "soft", -- can be "hard", "soft" or empty string
+  palette_overrides = {},
+  overrides = {},
+  dim_inactive = false,
+  transparent_mode = true,
+})
+EOF
+" Must be after setup since the options wont be applied
+colorscheme gruvbox
 
 lua << EOF
 require("bufferline").setup{
@@ -272,7 +297,6 @@ require("bufferline").setup{
 }
 EOF
 
-" Setup all dependencies that needed
 lua << EOF
  require('lualine').setup{
  sections = { 
@@ -312,7 +336,7 @@ lua << EOF
 -- IA
 require('tabnine').setup({
   disable_auto_comment=true,
-  accept_keymap="<Tab>",
+  accept_keymap="<S-Tab>",
   dismiss_keymap = "<C-]>",
   debounce_ms = 800,
   suggestion_color = {gui = "#808080", cterm = 244},
@@ -323,19 +347,292 @@ EOF
 
 lua << EOF
 -- Formatter
-local  null_ls = require("null-ls") 
+local null_ls = require("null-ls") 
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
+local function get_class_node()
+  local node = vim.treesitter.get_node()
+  while node do
+    if node:type() == "class_definition" then
+      return node
+    end
+    node = node:parent()
+  end
+  return nil
+end
+
+local function get_constructor(class_node)
+    for child in class_node:iter_children() do
+        if child:type() == "constructor_signature" then
+        return child;
+        end
+    end
+end
+
+local function get_class_attributes(class_node, bufnr)
+    local attributes = {}
+
+    -- Iterar sobre los hijos del nodo de la clase
+    for child in class_node:iter_children() do
+        if child:type() == "class_body" then
+            -- Iterar sobre las declaraciones dentro del class_body
+            for declaration in child:iter_children() do
+                local isNullable = false
+                -- Solo procesar nodos de tipo "declaration"
+                if declaration:type() == "declaration" then
+                local type_node, type_arguments,identifier_nodes = nil, nil,{}
+                -- Iterar sobre los hijos de la declaración para encontrar type_node e identifier_nodes
+                for node in declaration:iter_children() do
+                if node:type() == 'type_arguments' then
+                   type_arguments = node 
+                elseif node:type() == "type_identifier" or node:type() == "inferred_type" then 
+                    type_node = node
+                elseif node:type() == "initialized_identifier_list" then
+                    -- Iterar sobre los identificadores inicializados dentro de initialized_identifier_list
+                    for  identifier_node in node:iter_children() do
+                        if identifier_node:type() == "initialized_identifier" then
+                          table.insert(identifier_nodes, identifier_node:child(0))
+                        end
+                    end
+                end
+            end
+
+                -- Verificar que se hayan encontrado nodos válidos para tipo y nombre
+                if type_node and #identifier_nodes > 0 then
+                    -- Obtener el texto del tipo
+                    local type_text = vim.treesitter.get_node_text(type_node, bufnr)
+                    local arguments = '' 
+                    if type_arguments~=nil then
+                      arguments = vim.treesitter.get_node_text(type_arguments, bufnr)
+                    end
+                    -- Obtener los textos de los nombres de los identificadores
+                    local names = {}
+                    for _, id_node in ipairs(identifier_nodes) do
+                        local name_text = vim.treesitter.get_node_text(id_node, bufnr)
+                        if name_text then
+                            table.insert(names, name_text)
+                        end
+                    end
+                    -- Añadir los atributos a la lista de atributos
+                    if type_text and #names > 0 then
+                        for _, name_text in ipairs(names) do
+                            table.insert(attributes, {
+                                type = type_text,
+                                name = name_text,
+                                arguments = arguments,
+                            })
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+    return attributes
+end
+
+local function generate_to_json(class_name, attributes)
+  if type(attributes) ~= "table" then return {"// No attributes found", attributes} end
+  vim.api.nvim_buf_set_lines(0, 0, 0, false, { 'import "dart:convert";' })
+  local lines = { '' }
+  table.insert(lines, 'Map<String, dynamic> toMap() {')
+  table.insert(lines, "  return {")
+  for _, attr in ipairs(attributes) do
+    table.insert(lines, string.format('    "%s": %s,', attr.name, attr.name))
+  end
+  table.insert(lines, "  };")
+  table.insert(lines, "}")
+  table.insert(lines, " ")
+  -- fromMap
+  table.insert(lines, string.format("factory %s.fromMap(Map<String,dynamic> map) {", class_name))
+  table.insert(lines, "   throw UnimplementedError('No implemented fromMap');")
+  table.insert(lines, "}")
+  table.insert(lines, " ")
+  --fromJson
+  table.insert(lines, string.format("factory %s.fromJson(String source) => %s.fromMap(json.decode(source) as Map<String,dynamic>);", class_name, class_name))
+  table.insert(lines, " ")
+  --toJson
+  table.insert(lines, "String toJson() => json.encode(toMap());")
+  table.insert(lines, " ")
+  return lines
+end
+
+local function generate_copy_with(class_name, attributes)
+  local method_body = {}
+
+    -- Construir el encabezado del método
+    table.insert(method_body, string.format("%s copyWith({", class_name))
+
+    -- Construir los parámetros del método
+    for idx, attr in ipairs(attributes) do
+        -- Determinar si el parámetro es nullable
+        local invalidNullable = attr.type == 'var' or attr.type == 'dynamic'
+        -- Construir la línea del parámetro con tipo y nombre
+        local param_line = string.format("  %s%s%s %s%s",
+            attr.type:gsub("[?]",''),  -- Remover el "?" para obtener el tipo base
+            attr.arguments, 
+            invalidNullable==false and '?' or '',
+            attr.name,
+            idx < #attributes and "," or ""  -- Añadir coma si no es el último parámetro
+        )
+        table.insert(method_body, param_line)
+    end
+
+    -- Construir el cuerpo del método
+    table.insert(method_body, "}) {")
+    table.insert(method_body, "   throw UnimplementedError('No implemented copyWith');")
+    table.insert(method_body, "}")
+
+    return method_body
+end
+
+
+local function generate_equals(class_name, attributes)
+if type(attributes) ~= "table" then return {"// No attributes found"} end
+  local lines = { "bool operator ==(Object other) {" }
+  table.insert(lines, "  if (identical(this, other)) return true;")
+  table.insert(lines, string.format("  return other is %s &&", class_name))
+  for i, attr in ipairs(attributes) do
+    if i == #attributes then
+      table.insert(lines, string.format("    other.%s == %s;", attr.name, attr.name))
+    else
+      table.insert(lines, string.format("    other.%s == %s &&", attr.name, attr.name))
+    end
+  end
+  table.insert(lines, "}")
+  table.insert(lines, "")
+  return lines
+end
+
+local function generate_hash_code(class_name,attributes)
+if type(attributes) ~= "table" then return {"// No attributes found"} end
+  local lines = { "@override" }
+  table.insert(lines, "int get hashCode =>")
+  for i, attr in ipairs(attributes) do
+    if i == #attributes then
+      table.insert(lines, string.format("    %s.hashCode;", attr.name))
+    else
+      table.insert(lines, string.format("    %s.hashCode ^", attr.name))
+    end
+  end
+  table.insert(lines, " ")
+  return lines
+end
+
+local function generate_method_action(params, generator_function)
+  local node = get_class_node()
+  if not node then
+    return
+  end
+
+  local bufnr = params.bufnr
+  local class_name_node = node:field("name")[1]
+  if not class_name_node then
+    return
+  end
+  local class_name = vim.treesitter.get_node_text(class_name_node, bufnr)
+  local attributes = get_class_attributes(node, bufnr)
+  local constructor = get_constructor(node) 
+  local method_lines = generator_function(class_name, attributes,node,constructor)
+  if #method_lines > 0 then
+    vim.api.nvim_buf_set_lines(bufnr, params.row, params.row, false, method_lines)
+  end
+end
+
+
+null_ls.register({
+  name = 'tojson',
+  method = null_ls.methods.CODE_ACTION,
+  filetypes =  { 'dart' },
+  generator = {
+    fn = function(params)
+      return {
+        {
+          title = "Generate toJson",
+          action = function() generate_method_action(params, generate_to_json) end,
+        }
+      }
+    end,
+  }
+})
+
+null_ls.register({
+  name = 'copywith',
+  method = null_ls.methods.CODE_ACTION,
+  filetypes =  { 'dart' },
+  generator = {
+    fn = function(params)
+      return {
+        {
+          title = "Generate copyWith",
+          action = function() generate_method_action(params, generate_copy_with) end,
+        }
+      }
+    end,
+  },
+})
+
+null_ls.register({
+  name = 'equals-and-hashcode',
+  filetypes =  { 'dart' },
+  method = null_ls.methods.CODE_ACTION,
+  generator = {
+    fn = function(params)
+      return {
+        {
+          title = "Generate equals and hashcode",
+          action = function() 
+            generate_method_action(params, generate_equals) 
+            generate_method_action(params, generate_hash_code)
+          end,
+        }
+      }
+    end,
+  },
+})
+
+null_ls.register({
+  name = 'equals',
+  filetypes =  { 'dart' },
+  method = null_ls.methods.CODE_ACTION,
+  generator = {
+    fn = function(params)
+      return {
+        {
+          title = "Generate equals",
+          action = function() generate_method_action(params, generate_equals) end,
+        }
+      }
+    end,
+  },
+})
+null_ls.register({
+  name = 'hashcode',
+  method = null_ls.methods.CODE_ACTION,
+  filetypes =  { 'dart' },
+  generator = {
+    fn = function(params)
+      return {
+        {
+          title = "Generate hashCode",
+          action = function() generate_method_action(params, generate_hash_code) end,
+        }
+      }
+    end,
+  },
+})
+
 null_ls.setup({
   debug = false,
+  timeout = 100000,
   sources = {
-    formatting.stylua,
-    formatting.cljstyle,
-    diagnostics.clj_kondo,
+    formatting.dart_format,
   },
-  on_attach = function(client, bufnr)
+  -- To format on save (can be slow with large files)
+ --[[ on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
       vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
       vim.api.nvim_create_autocmd("BufWritePre", {
@@ -347,6 +644,7 @@ null_ls.setup({
       })
     end
   end,
+  ]]
 })
 EOF
 
@@ -407,7 +705,7 @@ EOF
 lua << EOF
 require("nvim-treesitter").setup {}
 require("nvim-treesitter.configs").setup({
-   ensure_installed = { "c", "lua", "vim", "vimdoc", "rust", "query", "elixir", "heex", "javascript", "html" },
+   ensure_installed = { "lua","vim", "vimdoc", 'regex', "javascript", "html" },
    sync_install = true,
    highlight = { enable = true },
    indent = { enable = true },  
@@ -465,15 +763,13 @@ lsp = {
 })
 EOF
 
-lua << EOF 
+lua << EOF
 vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
 vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
 vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" }) 
 vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
-EOF
 
-lua << EOF 
-  require 'window-picker'.setup({
+require 'window-picker'.setup({
                 filter_rules = {
                     include_current_win = false,
                     autoselect_one = true,
@@ -485,9 +781,8 @@ lua << EOF
                         buftype = { 'terminal', "quickfix" },
                     },
             },
-        })
-EOF
-lua << EOF
+})
+
 require('neogit').setup {
  -- Hides the hints at the top of the status buffer
   disable_hint = false,
@@ -785,14 +1080,16 @@ require('neogit').setup {
 }
 EOF
 lua require("mini.cursorword").setup()
-lua require("toggleterm").setup {}
+nnoremap <silent> <space>tt <CMD>:ToggleTerm<CR>
 lua << EOF
 require("toggleterm").setup({
    hide_numbers = true, -- hide the number column in toggleterm buffers
    autochdir = false,
+   size = '50',
    start_in_insert = true,
    insert_mappings = true, -- whether or not the open mapping applies in insert mode
-   terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
+   direction = 'float',
+   terminal_mappings = false, -- whether or not the open mapping applies in the opened terminals
    persist_size = true,
    persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
    close_on_exit = true, -- close the terminal window when the process exits
@@ -1003,8 +1300,8 @@ require("neo-tree").setup({
           }
         },
    source_selector = {
-            winbar = true,
-            statusline = true, 
+            winbar = false,
+            statusline =false , 
   },
 })
 EOF
@@ -1116,15 +1413,12 @@ local cmp = require('cmp')
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
 luasnip.filetype_extend("flutter", { "dart" })
-require("luasnip.loaders.from_vscode").lazy_load( {
-  '~/.vscode/extensions/nash.awesome-flutter-snippets-4.0.1/snippets',
-})
+require("luasnip.loaders.from_vscode").lazy_load( {'~/.vscode/extensions/nash.awesome-flutter-snippets-4.0.1/snippets'})
 cmp.setup({
 event = {"InsertEnter", "CmdlineEnter"},
 snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body) -- For `luasnip` users.
-        -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
       end,
     },
 	 completion = { completeopt = "menu,menuone,noselect" },
@@ -1211,6 +1505,7 @@ local ls = require('luasnip')
 local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
+
 ls.add_snippets("dart", {
     s("mateapp", {
       t({"import 'package:flutter/material.dart';", "", "void main() => runApp(const MyApp());", "", "class MyApp extends StatelessWidget {", "  const MyApp({super.key});", "", "  @override", "  Widget build(BuildContext context) {", "    return MaterialApp(", "      title: 'Material App',", "      home: Scaffold(", "        appBar: AppBar(", "          title: const Text('Material App Bar'),", "        ),", "        body: const Center(", "          child: Text('Hello World'),", "        ),", "      ),", "    );", "  }", "}"})
@@ -1265,7 +1560,6 @@ ls.add_snippets('dart', {
       t({"@override", "void dispose(){", "  "}), i(0), t({"", "  super.dispose();", "}"})
     }),
 })
-
 ls.add_snippets('dart', {
     s("didC", {
       t({"@override", "void didChangeDependencies() {", "  "}), i(0), t({"", "  super.didChangeDependencies();", "}"})
@@ -1334,36 +1628,6 @@ ls.add_snippets('dart', {
       t({"", "  const "}), i(4, "MyInitialState"), t({"();", "}"})
   })
 })
-EOF
-
-lua << EOF 
-require("gruvbox").setup({
-  terminal_colors = true, 
-  undercurl = true,
-  underline = true,
-  bold = true,
-  italic = {
-    strings = true,
-    emphasis = true,
-    comments = true,
-    operators = false,
-    folds = true,
-  },
-  strikethrough = true,
-  invert_selection = false,
-  invert_signs = false,
-  invert_tabline = false,
-  invert_intend_guides = false,
-  inverse = true, -- invert background for search, diffs, statuslines and errors
-  contrast = "", -- can be "hard", "soft" or empty string
-  palette_overrides = {},
-  overrides = {},
-  dim_inactive = false,
-  transparent_mode = true,
-})
-EOF
-
-lua << EOF
 require("notify").setup({
 	fps = 60, 
 	render = "compact", 
@@ -1405,7 +1669,7 @@ require("flutter-tools").setup {
 	},	
 	dev_log = {
     enabled = true,
-    notify_errors = true, -- if there is an error whilst running then notify the user
+    notify_errors = false, -- if there is an error whilst running then notify the user
   },
   dev_tools = {
     autostart = false, -- autostart devtools server if not detected
