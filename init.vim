@@ -9,9 +9,7 @@ set ignorecase
 set pumheight=10
 set wrapmargin=10
 set showcmd
-set cmdheight=2 "more space in the neovim command line for displaying messages
 set showmatch
-set hlsearch
 set showtabline=2                         " always show tabs
 set smartcase                        " smart case
 set smartindent                      " make indenting smarter again
@@ -27,8 +25,9 @@ set nobackup
 set autoindent
 set colorcolumn=120
 set textwidth=120
-set scrollbind 
+" set scrollbind     sync the scroll for all windows on vim 
 set undofile
+set hlsearch
 set incsearch
 set expandtab
 set tabstop=2
@@ -47,20 +46,21 @@ filetype plugin indent on
 " set spell spelllang=en_us
 set laststatus=2
 let g:netrw_browsex_viewer="chrome"
-set encoding=utf-8
-set nowritebackup
-set updatetime=300
 set background=dark " or light if you want light mode
 
 call plug#begin()
+" Auto sessions manager
 Plug 'rmagatti/auto-session'
-Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
-Plug 'neovim/nvim-lspconfig'	
-Plug 'hrsh7th/nvim-cmp'
 " Intellisense
 Plug 'petertriho/cmp-git'
+" Snippets
 Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'honza/vim-snippets'
+Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
 Plug 'rafamadriz/friendly-snippets'	
+" LSP Configurer
+Plug 'neovim/nvim-lspconfig'	
+Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
@@ -72,35 +72,46 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'stevearc/dressing.nvim' 
 " IA Asistant 
 Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
+" Debugger
 Plug 'mfussenegger/nvim-dap' 
 Plug 'nvim-neo-tree/neo-tree.nvim'
 " Window Tabs 
 Plug 'nvim-tree/nvim-web-devicons' 
+" Git 
 Plug 'lewis6991/gitsigns.nvim' 
+" Tabs
 Plug 'romgrk/barbar.nvim'
+" Windows picker manager
 Plug 's1n7ax/nvim-window-picker', { 'version' : '2.*' }  
 Plug 'tpope/vim-sensible'
+" Custom status line
 Plug 'nvim-lualine/lualine.nvim'
+" Notifications
 Plug 'rcarriga/nvim-notify'
 Plug 'folke/noice.nvim'
+" Code Formatter
 Plug 'nvimtools/none-ls.nvim'
 Plug 'MunifTanjim/nui.nvim' 
+" Indent line guides
 Plug 'lukas-reineke/indent-blankline.nvim'
 " Actions Hints
 Plug 'roobert/action-hints.nvim'
+" Line mover
 Plug 'booperlv/nvim-gomove'
+" Underline border for current word at current cursor position
 Plug 'echasnovski/mini.cursorword', { 'branch': 'stable' }
-" General snippets - also relevant for Flutter
-Plug 'honza/vim-snippets'
 " Log coloring - SEE IF HELPFUL
 Plug 'mtdl9/vim-log-highlighting'
-Plug 'nvim-lua/plenary.nvim'
+" Telescope (files finder, line finder, notifier, etc)
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+" Visual git manager
 Plug 'NeogitOrg/neogit'
+" Diff view for git
 Plug 'sindrets/diffview.nvim'
 " Adds information about what changed to the file at the place of line numbers
 " Plug 'mhinz/vim-signify'
 Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
+" Buffer
 Plug 'akinsho/bufferline.nvim' 
 " Open and close brackets automatically
 Plug 'jiangmiao/auto-pairs'
@@ -108,29 +119,59 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 " Terminal
 Plug 'akinsho/toggleterm.nvim', { 'tag' : '2.*'}
+" FZf
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'BurntSushi/ripgrep'
 " Multi cursor
 Plug 'mg979/vim-visual-multi'
+" Dashboard
 Plug 'goolord/alpha-nvim'
 " Check gramma
 Plug 'rhysd/vim-grammarous'
+" Styles for lua (still doesn't work)
 Plug 'ckipp01/stylua-nvim', { 'run' : 'cargo install stylua' }
-" Tree sitter
+" Mason LSP,DAP,LINTER AND FORMATTER
 Plug 'williamboman/mason.nvim' 
 Plug 'williamboman/mason-lspconfig.nvim'
+" Tree sitter
 Plug 'nvim-treesitter/nvim-treesitter' 
+" LSP manager timeout (avoid large size memory (Ram) consume)
 Plug 'zeioth/garbage-day.nvim', { 'event' : 'VeryLazy', 'opts' : { 'notifications' : 'true', 'timeout' : '2000', 'retries' : '7' }}
+" Navigator 
+Plug 'aserowy/tmux.nvim'
 " Theme
 Plug 'ellisonleao/gruvbox.nvim'
 call plug#end()
+
 lua require('alpha').setup(require('alpha.themes.theta').config)
+
+lua << EOF
+require('tmux').setup({
+navigation = {
+        -- cycles to opposite pane while navigating into the border
+        cycle_navigation = true,
+
+        -- enables default keybindings (C-hjkl) for normal mode
+        enable_default_keybindings = false,
+
+        -- prevents unzoom tmux when navigating beyond vim border
+        persist_zoom = true,
+    },
+resize = {
+        -- enables default keybindings (A-hjkl) for normal mode
+        enable_default_keybindings = false,
+
+        -- sets resize steps for x axis
+        resize_step_x = 1,
+
+        -- sets resize steps for y axis
+        resize_step_y = 1,
+    }
+})
+EOF
+
 let mapleader=","
-" OPTIONAL Type jj to exit insert mode quickly.
-"inoremap jj <Esc>
-"tnoremap jj <c-\><c-n>
-" Use ctrl-[hjkl] to select the active split!
 
 " Moving between splitted windows
 nmap <silent> <c-k> :wincmd k<CR>
@@ -141,16 +182,16 @@ nnoremap <silent> n <Nop>
 " Flutter commands
 nnoremap <silent> <space>fr <cmd>:FlutterRun<cr>
 nnoremap <silent> <space>fq <cmd>:FlutterQuit<cr>
-nnoremap <silent> <space>fd <cmd>:FlutterDevices<cr>
+nnoremap <silent> <space>mo <cmd>:FlutterDevices<cr>
 nnoremap <silent> <space>fe <cmd>:FlutterEmulators<cr>
-nnoremap <silent> <space>fro <cmd>:FlutterReload<cr>
-nnoremap <silent> <space>fre <cmd>:FlutterRestart<cr>
-nnoremap <silent> <space>fsp <cmd>:FlutterLspRestart<cr>
-nnoremap <silent> <space>fx <cmd>:FlutterReanalyze<cr>
+nnoremap <silent> <space>ro <cmd>:FlutterReload<cr>
+nnoremap <silent> <space>re <cmd>:FlutterRestart<cr>
+nnoremap <silent> <space>sp <cmd>:FlutterLspRestart<cr>
+nnoremap <silent> <space>ra <cmd>:FlutterReanalyze<cr>
 nnoremap <silent> <space>fn <cmd>:FlutterRename<cr>
-nnoremap <silent> <space>fg <cmd>:FlutterPubGet<cr>
-nnoremap <silent> <space>fgu <cmd>:FlutterPubUpgrade<cr>
-nnoremap <silent> <space>ff <cmd>:FlutterLogClear<cr>
+nnoremap <silent> <space>eg <cmd>:FlutterPubGet<cr>
+nnoremap <silent> <space>ug <cmd>:FlutterPubUpgrade<cr>
+nnoremap <silent> <space>cl <cmd>:FlutterLogClear<cr>
 
 " Neogit 
 noremap <silent> <space>gi <cmd>:Neogit<CR>
@@ -164,13 +205,12 @@ noremap <silent> <space>gm <cmd>:Neogit merge<CR>
 
 "Alternative file searhing with Fzf mappings
 "nmap <C-P> :Files<CR>
-"nmap <space>l :Lines<CR>
-"nmap <space>h :History<CR>
+"nmap <C-f> :Lines<CR>
 
 " Quit
 nnoremap <C-q> :q<cr>
 nnoremap <C-Q> :qa!<cr>
-nnoremap <silent> <C-L> :BufferNext<CR>
+nnoremap <silent> <space>n :BufferNext<CR>
 nnoremap <silent> <space>d  :BufferDelete<CR>
 nnoremap <silent> <space>1  :BufferFirst<CR>
 nnoremap <silent> <space>2  :BufferLast<CR>
@@ -208,7 +248,6 @@ let g:fzf_action = {
 let g:dart_format_on_save = 1
 let g:dartfmt_options = ['--fix', '--line-length 80']
 let g:dart_style_guide = 2
-
 " Decomment if you want to show git changes on files
 "let g:signify_sign_show_count = 0
 "let g:signify_sign_show_text = 1
@@ -216,14 +255,18 @@ let g:dart_style_guide = 2
 
 let g:barbar_auto_setup = v:false 
 let g:lsc_auto_map = v:true
-let g:rainbow_guifgs = ['#d8d83e', '#d8653e', '6f3ed8', '#d83e93', 'd8743e']
-let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red']
 let g:auto_session_root_dir = "/home/cathood/.config/nvim/sessions" 
 " Telescope
-nnoremap <C-p> <cmd>Telescope find_files<cr>
-nnoremap <C-f> <cmd>Telescope live_grep<cr>
+nnoremap <C-p> <cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>
+nnoremap <C-f> <cmd>lua require'telescope.builtin'.live_grep()<cr>
 nnoremap <silent> <C-d>d <Cmd>lua require("telescope.builtin").lsp_definitions()<CR>
+lua << EOF
+vim.g["sneak#label"] = true
 
+if vim.fn.executable("rg") then
+  vim.o.grepprg = "rg --vimgrep --hidden -g !.git"
+end
+EOF
 " Show code actions
 nnoremap <silent> <space>ca <cmd>lua vim.lsp.buf.code_action()<CR>
 
@@ -239,13 +282,14 @@ nnoremap <silent> <C-a> <CMD>Neotree toggle<CR>
 nnoremap <silent> <C-s> <CMD>:wall<CR>
 " Activate if you wanna a hotkey that format file on save (could be slow on large files)
 " nnoremap <silent> <C-q> <CMD>lua vim.lsp.buf.format()<CR><CMD>:wqall<CR><cmd>:SessionSave<CR>
-nnoremap <silent> <C-q> <CMD>lua vim.lsp.buf.format()<CR><CMD>:wqall<CR><cmd>:SessionSave<CR>
+nnoremap <silent> <space>qq <CMD>lua vim.lsp.buf.format()<CR><CMD>:wqall<CR><cmd>:SessionSave<CR>
 nnoremap <silent> <space>fo <CMD>lua vim.lsp.buf.format()<CR>
+nnoremap <silent> <space>w <Cmd>lua vim.lsp.buf.hover()<CR>
 " Go move 
-nmap <S-h> <Plug>GoNSMLeft
+"nmap <S-h> <Plug>GoNSMLeft
 nmap <S-j> <Plug>GoNSMDown
 nmap <S-k> <Plug>GoNSMUp
-nmap <S-l> <Plug>GoNSMRight
+"nmap <S-l> <Plug>GoNSMRight
 
 lua << EOF
 require("mason").setup()
@@ -629,7 +673,8 @@ null_ls.setup({
   debug = false,
   timeout = 100000,
   sources = {
-    formatting.dart_format,
+    -- If you wanna dart_format services, active it, but, it could have issues with dartls and doesn't show widget actions
+    --formatting.dart_format,
   },
   -- To format on save (can be slow with large files)
  --[[ on_attach = function(client, bufnr)
@@ -659,6 +704,8 @@ telescope.setup{
       vimgrep_arguments = {
         "rg",
         "--color=never",
+        "--hidden",
+        "--color=never",
         "--no-heading",
         "--with-filename",
         "--line-number",
@@ -666,6 +713,7 @@ telescope.setup{
         "--smart-case",
         "--ignore-file=" .. vim.fn.expand("$HOME") .. "/.fdignore"
       },
+      find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },
       prompt_prefix = " ",
       --prompt_prefix = "🔍, ",
       selection_caret = " ",
@@ -684,6 +732,11 @@ telescope.setup{
         preview_cutoff = 120,
         horizontal = {mirror = false, preview_cutoff = 1},
       },
+      pickers = {
+        find_files = {
+          hidden = true
+        }
+      },
       file_sorter = require("telescope.sorters").get_fuzzy_file,
       generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
       path_display = {"truncate"}, -- path_display = {"absolute"},
@@ -691,7 +744,7 @@ telescope.setup{
       border = {},
       borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"},
  		  color_devicons = true,
-      use_less = true,
+      use_less = false,
       set_env = {["COLORTERM"] = "truecolor"}, -- default = nil,
       file_previewer = require("telescope.previewers").vim_buffer_cat.new,
       grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
@@ -1097,7 +1150,7 @@ require("toggleterm").setup({
    auto_scroll = true, -- automatically scroll to the bottom on terminal output
    float_opts = {
       border = 'single', 
-      title_pos = 'left', 
+      title_pos = 'center', 
    },
 })
 EOF
@@ -1379,7 +1432,7 @@ lua << EOF
   -- already assigned, the behavior is to assign letters in order of
   -- usability (see order below)
   semantic_letters = true,
-
+ 
   -- Set the filetypes which barbar will offset itself for
   sidebar_filetypes = {
     -- Use the default values: {event = 'BufWinLeave', text = '', align = 'left'}
@@ -1452,7 +1505,7 @@ snippet = {
 					expandable_indicator = false,
 					format = lspkind.cmp_format({
 						mode = "symbol_text",
-						maxwidth = 50,
+						maxwidth = 70,
 						ellipsis_char = "...",
 						symbol_map = {
 							Copilot = "",
@@ -1630,10 +1683,9 @@ ls.add_snippets('dart', {
 })
 require("notify").setup({
 	fps = 60, 
-	render = "compact", 
-	stages = "slide", 
-	stages = 'fade_in_slide_out',
-	background_colour = 'FloatShadow',
+	render = "minimal", -- default | minimal | compact 
+	stages = 'fade_in_slide_out', -- fade_in_slide_out | fade | slide | static 
+	background_colour = 'FloatShadow', 
 	timeout = 3000,
 	top_down = false,
 })
@@ -1644,6 +1696,10 @@ require("flutter-tools").setup {
   lineLength = 120,
   debugger = { -- integrate with nvim dap + install dart code debugger
     enabled = true,
+    register_configurations = function(_)
+      require("dap").configurations.dart = {}
+      require("dap.ext.vscode").load_launchjs()
+    end,
 	 	exception_breakpoints = nil,
   },
   ui = {
@@ -1670,6 +1726,7 @@ require("flutter-tools").setup {
 	dev_log = {
     enabled = true,
     notify_errors = false, -- if there is an error whilst running then notify the user
+    -- open_cmd = "tabedit", -- command to use to open the log buffer
   },
   dev_tools = {
     autostart = false, -- autostart devtools server if not detected
@@ -1712,9 +1769,8 @@ require("flutter-tools").setup {
       enableSnippets = true,
       updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
     }
-    
-    }
   }
+}
 EOF
 
 lua << EOF
@@ -1733,3 +1789,13 @@ require('auto-session').setup(opts)
 EOF
 
 lua require('ibl').setup()
+
+nnoremap <space>h <cmd>lua require("tmux").resize_left()<cr>
+nnoremap <space>j <cmd>lua require("tmux").resize_bottom()<cr>
+nnoremap <space>k <cmd>lua require("tmux").resize_top()<cr>
+nnoremap <space>l <cmd>lua require("tmux").resize_right()<cr>
+
+" Nop section
+nnoremap <silent> w <Nop>
+nnoremap <silent> <C-w><C-w> <Nop>
+nmap <C-q> <Nop>
