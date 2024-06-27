@@ -1,7 +1,7 @@
 {
   "diagnostic.checkCurrentLine": true,
-  "flutter.sdk.path": "/home/cathood/development/flutter/bin/flutter",
-  "flutter.sdk.searchPaths":["/home/cathood/development/flutter/bin"],
+  "flutter.sdk.path": "/home/<user>/development/flutter/bin/flutter",
+  "flutter.sdk.searchPaths":["/home/<user>/development/flutter/bin"],
   "coc.preferences.enableMarkdown": true,
   "diagnostic.enable": true,
   "diagnostic.autoRefresh": true,
