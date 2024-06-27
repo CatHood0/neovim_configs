@@ -1,0 +1,49 @@
+{
+  "diagnostic.checkCurrentLine": true,
+  "flutter.sdk.path": "/home/cathood/development/flutter/bin/flutter",
+  "flutter.sdk.searchPaths":["/home/cathood/development/flutter/bin"],
+  "coc.preferences.enableMarkdown": true,
+  "diagnostic.enable": true,
+  "diagnostic.autoRefresh": true,
+  "diagnostic.showDeprecated": true,
+  "suggest.snippetsSupport": true,
+  "suggest.enablePreselect": true,
+  "outline.showLineNumber": true,
+  "outline.autoPreview": true,
+  "suggest.snippetIndicator": " 💡",
+  "snippets.ultisnips.directories": [
+    "~/.config/nvim/ultisnips"
+  ],
+  "dart.enableSdkFormatter": true,
+  "dart.lineLength": 80,
+  "dart.showTodos": true,
+  "dart.analysisExcludedFolders": [  ],
+  "dart.completeFunctionCalls": true,
+  "coc.preferences.formatOnSave": true,
+  "languageserver": {
+    "python": {
+      "command": "pyls",
+      "filetypes": ["python"],
+      "settings": {
+        "pyls": {
+          "configurationSources": ["flake8"],
+          "plugins": {
+            "pyls_mypy": {
+              "enabled": true,
+              "live_mode": false
+            },
+            "pyls_black": {
+              "enabled": true
+            },
+            "pyls_isort": {
+              "enabled": true
+            },
+            "pyls_flake8": {
+              "enabled": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

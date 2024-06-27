@@ -1,0 +1,323 @@
+snippet consumerW "consumer widget" b
+class ${1:ClassName} extends ConsumerWidget {
+  const ${1:ClassName}({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container();
+  }
+}
+endsnippet
+
+snippet tsu "adds set up method to test" b
+setUp(() {
+
+});
+endsnippet
+
+snippet navigator "Get navigator of context" b
+final navigator = Navigator.of(context);
+endsnippet
+
+snippet riverViewModel "riverpod style view model" b
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:goodbadday/common/architecture/view/view_model.dart';
+
+final ${1:ViewModelName}Provider =
+    StateNotifierProvider.autoDispose<${2:ViewModelClass}, ${3:StateClass}>(
+  (ref) => ${2:ViewModelClass}(),
+);
+
+class ${2:ViewModelClass} extends ViewModel<${3:StateClass}> {
+  ${2:ViewModelClass}() : super(null);
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+  }
+}
+endsnippet
+
+snippet constConstructor "constant constructor" b
+const ${1:ClassName}({Key? key}): super(key:key);
+endsnippet
+
+snippet tw "test widget" b
+testWidgets('${1:description}', (WidgetTester tester) async {
+  ${0}
+});
+endsnippet
+
+snippet grp "unit test group" b
+group('${1:description}', () {
+  ${0}
+});
+endsnippet
+
+snippet tst "unit test" b
+test('${1:description}', () {
+  ${0}
+});
+endsnippet
+
+snippet tsta "async unit test" b
+test('${1:description}', () async {
+  ${0}
+});
+endsnippet
+
+snippet mock "create mockito class" b
+class Mock${1:ClassName} extends Mock implements ${1:ClassName} {}
+endsnippet
+
+snippet jsbuilt "create JsonSerializable class" b
+import 'package:json_annotation/json_annotation.dart';
+
+part '${1:`!v expand('%:t:r')`.g.dart}';
+
+@JsonSerializable()
+class ${1:CLASS_NAME} {
+
+  factory ${1:CLASS_NAME}.fromJson(Map<String, dynamic> json) =>
+    _\$${1:CLASS_NAME}FromJson(json);
+
+  Map<String, dynamic> toJson() => _\$${1:CLASS_NAME}ToJson(this);
+}
+endsnippet
+
+snippet toJson "Json methods" b
+Map<String, dynamic> toMap() {
+  return {};
+}
+
+factory ${1:ClassName}.fromMap(Map<String,dynamic> json){
+  return ${1:ClassName}();
+}
+
+factory ${1:ClassName}.fromJson(String json) => json.decode(json);
+
+String toJson() => json.convert(${1:ClassName}.toMap);
+endsnippet
+
+snippet testFile "unit test file" b
+import 'package:flutter_test/flutter_test.dart';
+
+void main() {
+  group('${1:GroupName}', (){
+    test('${2:TestName}', () {
+      ${0}
+    });
+  });
+}
+endsnippet
+
+snippet wtestFile "widget test file" b
+import 'package:flutter_test/flutter_test.dart';
+
+void main() {
+  testWidgets('${1:description}', (WidgetTester tester) async {
+    ${0}
+  });
+}
+endsnippet
+
+snippet nbloc "The original Bloc Pattern implementation without packages" b
+import 'dart:async';
+
+abstract class ${1:MyEvent} {}
+
+class ${2:MyState} {
+  const ${2:MyState}();
+}
+
+class ${3:MyBloc} {
+  final _stateController = StreamController<${2:MyState}>();
+
+  Stream<${2:MyState}> get state => _stateController.stream;
+
+  final _eventController = StreamController<${1:MyEvent}>();
+
+  Sink<${1:MyEvent}> get eventSink => _eventController.sink;
+
+  ${3:MyBloc}() {
+    _eventController.stream.listen(_mapEventToState);
+  }
+
+  void _mapEventToState(${1:MyEvent} event) {
+    // TODO: Add Logic
+    // Example:
+    // if (event is MySpecificEvent) {
+    //   _stateController.sink.add(MySpecificState());
+    // }
+  }
+
+  void dispose() {
+    _stateController.close();
+    _eventController.close();
+  }
+}
+
+class ${4:MySpecificEvent} extends ${1:MyEvent} {}
+
+class ${5:MySpecificState} extends ${2:MyState} {
+  const ${5:MySpecificState}();
+}
+endsnippet
+
+snippet bloc "Flutter Bloc pattern implementation example" b
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+/// Events
+abstract class MyEvent {}
+
+class IncrementEvent extends MyEvent {}
+
+class DecrementEvent extends MyEvent {}
+
+/// State
+abstract class MyState {}
+
+class IncrementState extends MyState {}
+
+class DecrementState extends MyState {}
+
+/// Bloc
+class MyBloc extends Bloc<MyEvent, MyState> {
+  MyBloc() : super(InitialMyState());
+
+  @override
+  Stream<MyState> mapEventToState(MyEvent event) async* {
+    if (event is IncrementEvent) {
+      yield IncrementState();
+    } else if (event is DecrementEvent) {
+      yield DecrementState();
+    }
+  }
+}
+
+endsnippet
+
+snippet inheritedW "InheritedWidget" b
+class ${1:Name} extends InheritedWidget {
+  const ${1:Name}({super.key, required this.child}) : super(child: child);
+  final Widget child;
+
+  static ${1:Name}? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<${1:Name}>();
+  }
+
+  @override
+  bool updateShouldNotify(${1:Name} oldWidget) {
+    return ${2:true};
+  }
+}
+endsnippet
+
+snippet mateapp "Material App Widget" b
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Material App',
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Material App Bar'),
+        ),
+        body: const Center(
+          child: Text('Hello World'),
+        ),
+      ),
+    );
+  }
+}
+endsnippet
+
+snippet f-test "" b
+test(
+  "Test",
+  () {
+
+  },
+);
+endsnippet
+
+snippet valueListenable "ValueListenableBuilder Widget" b
+ValueListenableBuilder(
+  valueListenable: ${1:null},
+  builder: (BuildContext context, ${2:dynamic} value, Widget? child) {
+    return ${3:Container()};
+  }
+)
+endsnippet
+
+snippet reassemble "StatefulWidget method" b
+@override
+void reassemble(){
+  ${0}
+  super.reassemble();
+}
+endsnippet
+
+snippet useEffect "useEffect hook method" b
+useEffect(() {
+  ${0}
+  return null;
+}, <Object?>[]);
+endsnippet
+
+snippet init "StatefulWidget method" b
+@override
+void initState(){
+  super.initState();
+}
+endsnippet
+
+snippet dis "StatefulWidget method" b
+@override
+void dispose(){
+  ${0}
+  super.dispose();
+}
+endsnippet
+
+snippet didC "StatefulWidget method" b
+@override
+void didChangeDependencies() {
+  ${0}
+  super.didChangeDependencies();
+}
+endsnippet
+
+snippet statefulW "Stateful Widget" b
+class ${1:ClassName} extends StatefulWidget {
+  const ${1:ClassName}({super.key});
+
+  @override
+  State<${1:ClassName}> createState() => _${1:ClassName}State();
+}
+class _${1:ClassName}State extends State<${1:ClassName}> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+endsnippet
+
+snippet statelessW "Stateless Widget" b
+class ${1:ClassName} extends StatelessWidget {
+  const ${1:ClassName}({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+endsnippet
