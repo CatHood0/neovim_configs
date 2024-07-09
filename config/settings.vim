@@ -8,7 +8,7 @@ set ignorecase
 set pumheight=10
 "set wrapmargin=10
 set showcmd
-set showmatch
+" set showmatch
 "set paste
 set showtabline=2                         " always show tabs
 set smartcase                        " smart case
@@ -23,7 +23,7 @@ set wildmode=longest:full,full
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 set nobackup
 set colorcolumn=120
-set textwidth=120
+set textwidth=140
 " set scrollbind     sync the scroll for all windows on vim 
 set undofile
 set hlsearch
@@ -38,6 +38,7 @@ set mouse=a
 set encoding=utf-8
 set hidden
 set nowritebackup
+" Default is 4000 MS instead 300
 set updatetime=300
 set shortmess+=c
 syntax on

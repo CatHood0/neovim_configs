@@ -1,25 +1,21 @@
 {
   "diagnostic.checkCurrentLine": true,
   "flutter.sdk.path": "/home/cathood/development/flutter/bin/flutter",
-  "flutter.sdk.searchPaths":["/home/cathood/development/flutter/bin"],
+  "flutter.sdk.searchPaths": ["/home/cathood/development/flutter/bin"],
   "coc.preferences.enableMarkdown": true,
   "diagnostic.enable": true,
   "diagnostic.autoRefresh": true,
   "diagnostic.showDeprecated": true,
   "suggest.snippetsSupport": true,
   "suggest.enablePreselect": true,
-  "outline.showLineNumber": true,
-  "outline.autoPreview": true,
   "suggest.snippetIndicator": " 💡",
-  "snippets.ultisnips.directories": [
-    "~/.config/nvim/ultisnips"
-  ],
+  "snippets.ultisnips.directories": ["~/.config/nvim/ultisnips"],
   "dart.enableSdkFormatter": true,
-  "dart.lineLength": 80,
+  "dart.lineLength": 120,
   "dart.showTodos": true,
-  "dart.analysisExcludedFolders": [  ],
+  "dart.analysisExcludedFolders": [],
   "dart.completeFunctionCalls": true,
-  "coc.preferences.formatOnSave": true,
+  "coc.preferences.formatOnSave": false,
   "languageserver": {
     "python": {
       "command": "pyls",

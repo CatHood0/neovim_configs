@@ -328,11 +328,17 @@ lua << EOF
 } 
 EOF
 
+" Translation 
+" TODO: implement more languages
+" nnoremap <space>te viw:Translate <locale name><CR>
+nnoremap <space>te viw:Translate es<CR>
+lua require("translate").setup({})
+
 lua << EOF
 -- IA
 require('tabnine').setup({
   disable_auto_comment=true,
-  accept_keymap="<S-e>",
+  accept_keymap="<S-Tab>",
   dismiss_keymap = "<C-]>",
   debounce_ms = 800,
   suggestion_color = {gui = "#808080", cterm = 244},
@@ -1260,7 +1266,7 @@ nnoremap <silent> <space>cf  <Plug>(coc-fix-current)
 "nnoremap <silent> <space>cc  <Plug>(coc-codeaction-cursor)
 " nmap <silent><leader>g <Plug>(coc-definition)
 "    nmap <leader>t <Plug>(coc-type-definition)
-"    nmap <leader>i <Plug>(coc-implementation)
+ nmap <C-d>i <Plug>(coc-type-definition)
  nmap <leader>w <Plug>(coc-references)
 "    nmap <leader>r <Plug>(coc-rename)
 "Remap keys for applying codeAction to the current buffer.
@@ -1599,4 +1605,11 @@ null_ls.setup({
  
 })
 ]]
+EOF
+
+lua << EOF
+vim.treesitter.language.register('markdown', 'vimwiki')
+require('render-markdown').setup({
+    file_types = { 'markdown', 'vimwiki' },
+})
 EOF

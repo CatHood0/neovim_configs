@@ -31,6 +31,11 @@ nnoremap <silent> <space>eg <cmd>:CocCommand flutter.pub.get<cr>
 nnoremap <silent> <space>co <cmd>:CocCommand flutter.dev.openDevLog<CR>
 nnoremap <silent> <space>cl <cmd>:CocCommand flutter.dev.clearDevLog<cr>
 
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+
 " Neogit 
 noremap <silent> <space>gi <cmd>:Neogit<CR>
 noremap <silent> <space>gf <cmd>:Neogit fetch<CR>
@@ -152,7 +157,11 @@ vnoremap <silent> <S-l> :MoveHBlock 1<CR>
 "nmap <S-h> <Plug>GoNSMLeft
 "nmap <S-l> <Plug>GoNSMRight
 
-nnoremap <silent> <space>pc <cmd>PickColor<cr>
+" Git diff view
+nnoremap <silent> <space>pp :DiffviewOpen<CR>
+nnoremap <silent> <space>pc :DiffviewClose<CR>
+
+nnoremap <silent> <space>pi <cmd>PickColor<cr>
 
 " Terminal
 nnoremap <silent> <space>tt <CMD>:ToggleTerm<CR>
@@ -169,3 +178,4 @@ nnoremap <silent> <C-w><C-w> <Nop>
 nmap <C-q> <Nop>
 nmap <C-q> <CMD>:vsplit<CR>
 nmap <C-q>v <CMD>:split<CR>
+vmap n <Nop>

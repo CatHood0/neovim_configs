@@ -1,4 +1,8 @@
 call plug#begin()
+" Vim test
+Plug 'vim-test/vim-test'
+" Translator
+Plug 'uga-rosa/translate.nvim'
 " Auto sessions manager
 Plug 'rmagatti/auto-session'
 " Snippets
@@ -97,4 +101,6 @@ Plug 'navarasu/onedark.nvim'
 Plug 'projekt0n/github-nvim-theme'
 " Color picker
 Plug 'ziontee113/color-picker.nvim'
+Plug 'MeanderingProgrammer/markdown.nvim'
+Plug 'echasnovski/mini.nvim', { 'name' : 'render-markdown' }
 call plug#end()
