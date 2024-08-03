@@ -20,7 +20,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-path'
 " IA Asistant 
-Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
+" Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 " Debugger
 Plug 'mfussenegger/nvim-dap' 
 " File explorer
@@ -99,6 +99,7 @@ Plug 'rose-pine/neovim', { 'as' : 'rose-pine' }
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'navarasu/onedark.nvim'
 Plug 'projekt0n/github-nvim-theme'
+Plug 'rebelot/kanagawa.nvim'
 " Color picker
 Plug 'ziontee113/color-picker.nvim'
 Plug 'MeanderingProgrammer/markdown.nvim'

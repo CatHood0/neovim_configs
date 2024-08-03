@@ -76,7 +76,7 @@ EOF
 lua << EOF
 require("nvim-treesitter").setup {}
 require("nvim-treesitter.configs").setup({
-   ensure_installed = { "lua", "vim", 'dart', "vimdoc", 'regex', "javascript", "html" },
+   ensure_installed = { "lua", "vim", 'dart', "vimdoc", 'regex', "javascript", 'typescript', 'css',"html" },
    sync_install = true,
    endwise = {
         enable = true,
@@ -223,9 +223,9 @@ onedark.setup {
     code_style = {
         comments = 'italic',
         keywords = 'none',
-        functions = 'none',
-        strings = 'none',
-        variables = 'none'
+        functions = 'bold',
+        strings = 'bold',
+        variables = 'italic'
     },
 
     -- Lualine options --
@@ -278,7 +278,7 @@ require('github-theme').setup({
     darken = {                 -- Darken floating windows and sidebar-like windows
       floats = false,
       sidebars = {
-        enabled = true,
+        enable = true,
         list = {},             -- Apply dark background to specific windows
       },
     },
@@ -290,14 +290,43 @@ require('github-theme').setup({
   specs = {},
   groups = {},
 })
+
+require('kanagawa').setup({
+    compile = false,             -- enable compiling the colorscheme
+    undercurl = true,            -- enable undercurls
+    commentStyle = { italic = true },
+    functionStyle = {},
+    keywordStyle = { italic = true },
+    statementStyle = { bold = true },
+    typeStyle = {},
+    transparent = true,         -- do not set background color
+    dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
+    terminalColors = true,       -- define vim.g.terminal_color_{0,17}
+    colors = {                   -- add/modify theme and palette colors
+        palette = {},
+        theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+    },
+    overrides = function(colors) -- add/modify highlights
+        return {}
+    end,
+    theme = "wave",              -- Load "wave" theme when 'background' option is not set
+    background = {               -- map the value of 'background' option to a theme
+        dark = "wave",           -- try "dragon" !
+        light = "lotus"
+    },
+})
 EOF
 " Must be after setup since the options wont be applied
 "colorscheme rose-pine-moon
 "colorscheme rose-pine-main
 "colorscheme rose-pine-moon
 "colorscheme rose-pine-dawn
-"colorscheme gruvbox
-colorscheme onedark
+colorscheme gruvbox
+"colorscheme onedark
+"colorscheme kanagawa-wave
+"colorscheme kanagawa-dragon
+"colorscheme kanagawa-lotus
+"colorscheme kanagawa
 "colorscheme palenight
 "colorscheme github_dark
 "colorscheme github_dark_default
@@ -336,6 +365,7 @@ lua require("translate").setup({})
 
 lua << EOF
 -- IA
+--[[
 require('tabnine').setup({
   disable_auto_comment=true,
   accept_keymap="<S-Tab>",
@@ -345,17 +375,59 @@ require('tabnine').setup({
   exclude_filetypes = {"TelescopePrompt", "NvimTree"},
   log_file_path = nil, -- absolute path to Tabnine log file
 })
+]]
 EOF
-
-
 
 lua << EOF
 local telescope = require('telescope')
 telescope.load_extension("noice")
 telescope.load_extension("notify")
 telescope.setup{
+    extensions_list = { "themes", "terms", "fzf" },
+    extensions = {
+        fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+        },
+    },
     previewer = true,
-	  defaults = {
+	defaults = {
+      preview = {
+      mime_hook = function(filepath, bufnr, opts)
+        local api = require "image"
+        local preview_id = "telescope_image_id"
+        api.clear(preview_id)
+
+        local is_image = function(filepath)
+          local image_extensions = { "png", "jpg", "jpeg", "gif" } -- Supported image formats
+          local split_path = vim.split(filepath:lower(), ".", { plain = true })
+          local extension = split_path[#split_path]
+          return vim.tbl_contains(image_extensions, extension)
+        end
+        if is_image(filepath) then
+          local image = api.from_file(filepath, {
+            id = preview_id,
+            buffer = bufnr,
+            x = 110,
+            y = 20,
+            width = 40,
+            height = 40,
+          })
+          if image ~= nil then
+            print("image = " .. vim.inspect(image))
+            image:render()
+          end
+        else
+          require("telescope.previewers.utils").set_preview_message(
+                bufnr,
+                opts.winid,
+                "Something else"
+              )
+        end
+      end,
+    },
       vimgrep_arguments = {
         "rg",
         "--color=never",

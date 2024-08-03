@@ -19,13 +19,14 @@ nnoremap <silent> n <Nop>
 
 
 " Flutter commands
-nnoremap <silent> <space>fr <cmd>:CocCommand flutter.run<cr><cmd>sleep 3<CR><cmd>:CocCommand flutter.dev.openDevLog<CR>
+nnoremap <silent> <space>fr <cmd>:CocCommand flutter.run<cr>
 nnoremap <silent> <space>fq <cmd>:CocCommand flutter.dev.quit<cr>
+
 nnoremap <silent> <space>fmo <cmd>:CocCommand flutter.devices<cr>
 nnoremap <silent> <space>ro <cmd>:CocCommand flutter.dev.hotReload<cr>
 nnoremap <silent> <space>re <cmd>:CocCommand flutter.dev.hotRestart<cr>
 nnoremap <silent> <space>sp <cmd>:CocCommand flutter.lsp.restart<cr>
-nnoremap <silent> <space>ra <cmd>:FlutterReanalyze<cr>
+nnoremap <silent> <space>op <cmd>:CocCommand flutter.dev.openDevToolsProfiler<cr>
 nnoremap <silent> <space>fn <cmd>:CocCommand workspace.renameCurrentFile<cr>
 nnoremap <silent> <space>eg <cmd>:CocCommand flutter.pub.get<cr>
 nnoremap <silent> <space>co <cmd>:CocCommand flutter.dev.openDevLog<CR>
@@ -128,7 +129,8 @@ let g:auto_session_root_dir = "/home/cathood/.config/nvim/sessions"
 " Telescope
 " Removed '--hidden' because load too many files
 nnoremap <C-p> <cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '-g', '!.git' }})<cr>
-nnoremap <C-f> <cmd>lua require("telescope.builtin").current_buffer_fuzzy_find({ sorter = require('telescope.sorters').get_substr_matcher({})})<cr>
+nnoremap <C-f> <cmd>lua require("telescope.builtin").current_buffer_fuzzy_find({ sorter = require('telescope.sorters').get_fzy_sorter({})})<cr>
+"nnoremap <C-f> <cmd>lua require("telescope.builtin").current_buffer_fuzzy_find({ sorter = require('telescope.sorters').get_substr_matcher({})})<cr>
 nnoremap <leader>f <cmd>lua require'telescope.builtin'.live_grep()<cr>
 
 " Sessions

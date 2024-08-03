@@ -11,12 +11,44 @@
   "suggest.snippetIndicator": " 💡",
   "snippets.ultisnips.directories": ["~/.config/nvim/ultisnips"],
   "dart.enableSdkFormatter": true,
-  "dart.lineLength": 120,
+  "dart.lineLength": 125,
   "dart.showTodos": true,
   "dart.analysisExcludedFolders": [],
   "dart.completeFunctionCalls": true,
+  "flutter.autoOpenDevLog": true,
+  "flutter.autoHideDevLog": true,
   "coc.preferences.formatOnSave": false,
+  "eslint.autoFixOnSave": false,
+  "prettier.requireConfig": false,
+  "prettier.disableLanguages": ["vue"],
+  "prettier.tabWidth": 2,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all",
+  "eslint.packageManager": "yarn",
+  "eslint.nodePath": ".yarn/sdks",
+  "workspace.workspaceFolderCheckCwd": false,
+  "tsserver.tsdk": ".yarn/sdks/typescript/lib",
   "languageserver": {
+    "html": {
+      "command": "vscode-html-languageserver",
+      "args": ["--stdio"],
+      "filetypes": ["html"]
+    },
+    "css": {
+      "command": "vscode-css-languageserver",
+      "args": ["--stdio"],
+      "filetypes": ["css", "scss"]
+    },
+    "javascript": {
+      "command": "typescript-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["javascript", "javascriptreact"]
+    },
+    "typescript": {
+      "command": "typescript-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["typescript", "typescriptreact"]
+    },
     "python": {
       "command": "pyls",
       "filetypes": ["python"],
