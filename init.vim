@@ -76,7 +76,7 @@ EOF
 lua << EOF
 require("nvim-treesitter").setup {}
 require("nvim-treesitter.configs").setup({
-   ensure_installed = { "lua", "vim", 'dart', "vimdoc", 'regex', "javascript", 'typescript', 'css',"html" },
+   ensure_installed = { "lua", "vim", 'dart', "vimdoc", 'regex', "javascript", 'typescript', 'css',"html", "rust", "kotlin" },
    sync_install = true,
    endwise = {
         enable = true,
@@ -245,6 +245,8 @@ onedark.setup {
     },
 }
 onedark.load()
+-- Necessary options for autosession
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 require('github-theme').setup({
   options = {
@@ -853,13 +855,26 @@ EOF
 lua require("mini.cursorword").setup()
 
 lua << EOF
+require('tabnine').setup({
+  disable_auto_comment=true,
+  accept_keymap="<S-Tab>",
+  dismiss_keymap = "<C-]>",
+  debounce_ms = 800,
+  suggestion_color = {gui = "#808080", cterm = 244},
+  exclude_filetypes = {"TelescopePrompt", "NvimTree"},
+  log_file_path = nil, -- absolute path to Tabnine log file
+  ignore_certificate_errors = false,
+})
+EOF
+
+lua << EOF
 require("toggleterm").setup({
    hide_numbers = true, -- hide the number column in toggleterm buffers
    autochdir = false,
-   size = '50',
+   size = 9,
    start_in_insert = true,
    insert_mappings = true, -- whether or not the open mapping applies in insert mode
-   direction = 'float',
+   direction = 'horizontal', --'vertical' | 'horizontal' | 'tab' | 'float',
    terminal_mappings = false, -- whether or not the open mapping applies in the opened terminals
    persist_size = true,
    persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
@@ -867,7 +882,13 @@ require("toggleterm").setup({
   -- shell = vim.o.shell
    auto_scroll = true, -- automatically scroll to the bottom on terminal output
    float_opts = {
-      border = 'single', 
+      -- like `size`, width, height, row, and col can be a number or function which is passed the current terminal
+      --width = <value>,
+      --height = <value>,
+      --row = <value>,
+      --col = <value>,
+      --zindex = <value>,
+      border = 'curved', --| 'double' | 'shadow' | 'curved' | ... other options supported by win open
       title_pos = 'center', 
    },
 })

@@ -1,6 +1,6 @@
 snippet consumerW "consumer widget" b
-class ${1:ClassName} extends ConsumerWidget {
-  const ${1:ClassName}({Key? key}) : super(key: key);
+class ${1} extends ConsumerWidget {
+  const ${1}({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,13 +23,13 @@ snippet riverViewModel "riverpod style view model" b
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goodbadday/common/architecture/view/view_model.dart';
 
-final ${1:ViewModelName}Provider =
-    StateNotifierProvider.autoDispose<${2:ViewModelClass}, ${3:StateClass}>(
-  (ref) => ${2:ViewModelClass}(),
+final ${1}Provider =
+    StateNotifierProvider.autoDispose<${2}, ${3}>(
+  (ref) => ${2}(),
 );
 
-class ${2:ViewModelClass} extends ViewModel<${3:StateClass}> {
-  ${2:ViewModelClass}() : super(null);
+class ${2} extends ViewModel<${3}> {
+  ${2}() : super(null);
 
   @override
   void onInit() {
@@ -39,35 +39,35 @@ class ${2:ViewModelClass} extends ViewModel<${3:StateClass}> {
 endsnippet
 
 snippet constConstructor "constant constructor" b
-const ${1:ClassName}({Key? key}): super(key:key);
+const ${1}({Key? key}): super(key:key);
 endsnippet
 
 snippet tw "test widget" b
-testWidgets('${1:description}', (WidgetTester tester) async {
+testWidgets('${1}', (WidgetTester tester) async {
   ${0}
 });
 endsnippet
 
 snippet grp "unit test group" b
-group('${1:description}', () {
+group('${1}', () {
   ${0}
 });
 endsnippet
 
 snippet tst "unit test" b
-test('${1:description}', () {
+test('${1}', () {
   ${0}
 });
 endsnippet
 
 snippet tsta "async unit test" b
-test('${1:description}', () async {
+test('${1}', () async {
   ${0}
 });
 endsnippet
 
 snippet mock "create mockito class" b
-class Mock${1:ClassName} extends Mock implements ${1:ClassName} {}
+class Mock${1} extends Mock implements ${1} {}
 endsnippet
 
 snippet jsbuilt "create JsonSerializable class" b
@@ -76,12 +76,12 @@ import 'package:json_annotation/json_annotation.dart';
 part '${1:`!v expand('%:t:r')`.g.dart}';
 
 @JsonSerializable()
-class ${1:CLASS_NAME} {
+class ${1} {
 
-  factory ${1:CLASS_NAME}.fromJson(Map<String, dynamic> json) =>
-    _\$${1:CLASS_NAME}FromJson(json);
+  factory ${1}.fromJson(Map<String, dynamic> json) =>
+    _\$${1}FromJson(json);
 
-  Map<String, dynamic> toJson() => _\$${1:CLASS_NAME}ToJson(this);
+  Map<String, dynamic> toJson() => _\$${1}ToJson(this);
 }
 endsnippet
 
@@ -90,21 +90,21 @@ Map<String, dynamic> toMap() {
   return {};
 }
 
-factory ${1:ClassName}.fromMap(Map<String,dynamic> json){
-  return ${1:ClassName}();
+factory ${1}.fromMap(Map<String,dynamic> json){
+  return ${1}();
 }
 
-factory ${1:ClassName}.fromJson(String json) => json.decode(json);
+factory ${1}.fromJson(String json) => json.decode(json);
 
-String toJson() => json.convert(${1:ClassName}.toMap);
+String toJson() => json.convert(${1}.toMap);
 endsnippet
 
 snippet testFile "unit test file" b
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('${1:GroupName}', (){
-    test('${2:TestName}', () {
+  group('${1}', (){
+    test('${2}', () {
       ${0}
     });
   });
@@ -115,7 +115,7 @@ snippet wtestFile "widget test file" b
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('${1:description}', (WidgetTester tester) async {
+  testWidgets('${1}', (WidgetTester tester) async {
     ${0}
   });
 }
@@ -124,26 +124,26 @@ endsnippet
 snippet nbloc "The original Bloc Pattern implementation without packages" b
 import 'dart:async';
 
-abstract class ${1:MyEvent} {}
+abstract class ${1} {}
 
-class ${2:MyState} {
-  const ${2:MyState}();
+class ${2} {
+  const ${2}();
 }
 
-class ${3:MyBloc} {
-  final _stateController = StreamController<${2:MyState}>();
+class ${3} {
+  final _stateController = StreamController<${2}>();
 
-  Stream<${2:MyState}> get state => _stateController.stream;
+  Stream<${2}> get state => _stateController.stream;
 
-  final _eventController = StreamController<${1:MyEvent}>();
+  final _eventController = StreamController<${1}>();
 
-  Sink<${1:MyEvent}> get eventSink => _eventController.sink;
+  Sink<${1}> get eventSink => _eventController.sink;
 
-  ${3:MyBloc}() {
+  ${3}() {
     _eventController.stream.listen(_mapEventToState);
   }
 
-  void _mapEventToState(${1:MyEvent} event) {
+  void _mapEventToState(${1} event) {
     // TODO: Add Logic
     // Example:
     // if (event is MySpecificEvent) {
@@ -157,10 +157,10 @@ class ${3:MyBloc} {
   }
 }
 
-class ${4:MySpecificEvent} extends ${1:MyEvent} {}
+class ${4} extends ${1} {}
 
-class ${5:MySpecificState} extends ${2:MyState} {
-  const ${5:MySpecificState}();
+class ${5} extends ${2} {
+  const ${5}();
 }
 endsnippet
 
@@ -199,17 +199,17 @@ class MyBloc extends Bloc<MyEvent, MyState> {
 endsnippet
 
 snippet inheritedW "InheritedWidget" b
-class ${1:Name} extends InheritedWidget {
-  const ${1:Name}({super.key, required this.child}) : super(child: child);
+class ${1} extends InheritedWidget {
+  const ${1}({super.key, required this.child}) : super(child: child);
   final Widget child;
 
-  static ${1:Name}? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<${1:Name}>();
+  static ${1}? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<${1}>();
   }
 
   @override
-  bool updateShouldNotify(${1:Name} oldWidget) {
-    return ${2:true};
+  bool updateShouldNotify(${1} oldWidget) {
+    return false;
   }
 }
 endsnippet
@@ -250,9 +250,9 @@ endsnippet
 
 snippet valueListenable "ValueListenableBuilder Widget" b
 ValueListenableBuilder(
-  valueListenable: ${1:null},
-  builder: (BuildContext context, ${2:dynamic} value, Widget? child) {
-    return ${3:Container()};
+  valueListenable: ${1},
+  builder: (BuildContext context, dynamic value, Widget? child) {
+    return Container();
   }
 )
 endsnippet
@@ -296,13 +296,13 @@ void didChangeDependencies() {
 endsnippet
 
 snippet statefulW "Stateful Widget" b
-class ${1:ClassName} extends StatefulWidget {
-  const ${1:ClassName}({super.key});
+class ${1} extends StatefulWidget {
+  const ${1}({super.key});
 
   @override
-  State<${1:ClassName}> createState() => _${1:ClassName}State();
+  State<${1}> createState() => _${1}State();
 }
-class _${1:ClassName}State extends State<${1:ClassName}> {
+class _${1}State extends State<${1}> {
 
   @override
   Widget build(BuildContext context) {
@@ -312,8 +312,8 @@ class _${1:ClassName}State extends State<${1:ClassName}> {
 endsnippet
 
 snippet statelessW "Stateless Widget" b
-class ${1:ClassName} extends StatelessWidget {
-  const ${1:ClassName}({super.key});
+class ${1} extends StatelessWidget {
+  const ${1}({super.key});
 
   @override
   Widget build(BuildContext context) {

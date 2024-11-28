@@ -22,6 +22,7 @@ nnoremap <silent> n <Nop>
 nnoremap <silent> <space>fr <cmd>:CocCommand flutter.run<cr>
 nnoremap <silent> <space>fq <cmd>:CocCommand flutter.dev.quit<cr>
 
+nnoremap <silent> <space>tou <cmd>:CocCommand flutter.toggleOutline<cr>
 nnoremap <silent> <space>fmo <cmd>:CocCommand flutter.devices<cr>
 nnoremap <silent> <space>ro <cmd>:CocCommand flutter.dev.hotReload<cr>
 nnoremap <silent> <space>re <cmd>:CocCommand flutter.dev.hotRestart<cr>
@@ -59,6 +60,9 @@ nnoremap <silent> <space>n :BufferPrevious<CR>
 nnoremap <silent> <space>d  :BufferDelete<CR>
 nnoremap <silent> <space>1  :BufferFirst<CR>
 nnoremap <silent> <space>2  :BufferLast<CR>
+nnoremap <silent> <space>vs  :BufferMoveStart<CR>
+nnoremap <silent> <space>vm  :BufferMoveNext<CR>
+nnoremap <silent> <space>vn  :BufferMovePrevious<CR>
 nmap <S-+> <Nop>
 " FZF
 command! -bang -nargs=* Rg

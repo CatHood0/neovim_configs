@@ -3,7 +3,26 @@
   "flutter.sdk.path": "/home/cathood/development/flutter/bin/flutter",
   "flutter.sdk.searchPaths": ["/home/cathood/development/flutter/bin"],
   "coc.preferences.enableMarkdown": true,
+  "coc.preferences.useQuickfixForLocations": true,
+  "workspace.ignoredFolders": [
+    "/home/cathood/",
+    "/home/cathood/.cargo/**",
+    "/home/cathood/.rustup/**"
+  ], 
+  "flutter.enabled": true,
+  "flutter.lsp.initialization.onlyAnalyzeProjectsWithOpenFiles": true,
+  "flutter.UIPath": true,
+  "xml.preferences.quoteStyle": "single",
   "diagnostic.enable": true,
+  "rust-analyzer.server.path": "/home/cathood/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rust-analyzer",
+  "rust-analyzer.completion.limit": null,
+  "rust-analyzer.checkOnSave": true,
+  "rust-analyzer.check.features": "all",
+  "rust-analyzer.cargo.buildScripts.rebuildOnSave": true,
+  "rust-analyzer.joinLines.joinElseIf": true,
+  "rust-analyzer.updates.checkOnStartup": true,
+  "rust-analyzer.completion.postfix.enable": true,
+  "rust-analyzer.enable": true,
   "diagnostic.autoRefresh": true,
   "diagnostic.showDeprecated": true,
   "suggest.snippetsSupport": true,
@@ -11,7 +30,7 @@
   "suggest.snippetIndicator": " 💡",
   "snippets.ultisnips.directories": ["~/.config/nvim/ultisnips"],
   "dart.enableSdkFormatter": true,
-  "dart.lineLength": 125,
+  "dart.lineLength": 115,
   "dart.showTodos": true,
   "dart.analysisExcludedFolders": [],
   "dart.completeFunctionCalls": true,
@@ -19,7 +38,7 @@
   "flutter.autoHideDevLog": true,
   "coc.preferences.formatOnSave": false,
   "eslint.autoFixOnSave": false,
-  "prettier.requireConfig": false,
+  "prettier.requireConfig": true,
   "prettier.disableLanguages": ["vue"],
   "prettier.tabWidth": 2,
   "prettier.singleQuote": true,
@@ -73,5 +92,6 @@
         }
       }
     }
-  }
+  },
+  "snippets.ultisnips.pythonPrompt": false
 }

@@ -20,7 +20,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-path'
 " IA Asistant 
-" Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
+Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 " Debugger
 Plug 'mfussenegger/nvim-dap' 
 " File explorer
