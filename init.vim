@@ -29,42 +29,40 @@ lua require('alpha').setup(require('alpha.themes.theta').config)
 lua require('pubspec-assist').setup()
 lua << EOF
 require('tmux').setup({
-navigation = {
-        -- cycles to opposite pane while navigating into the border
-        cycle_navigation = true,
-        -- enables default keybindings (C-hjkl) for normal mode
-        enable_default_keybindings = false,
-        -- prevents unzoom tmux when navigating beyond vim border
-        persist_zoom = true,
-    },
-resize = {
-        -- enables default keybindings (A-hjkl) for normal mode
-        enable_default_keybindings = false,
-
-        -- sets resize steps for x axis
-        resize_step_x = 4,
-
-        -- sets resize steps for y axis
-        resize_step_y = 4,
-    }
+ navigation = {
+   -- cycles to opposite pane while navigating into the border
+   cycle_navigation = true,
+   -- enables default keybindings (C-hjkl) for normal mode
+   enable_default_keybindings = false,
+   -- prevents unzoom tmux when navigating beyond vim border
+   persist_zoom = true,
+ },
+ resize = {
+   -- enables default keybindings (A-hjkl) for normal mode
+   enable_default_keybindings = false,
+   -- sets resize steps for x axis
+   resize_step_x = 4,
+   -- sets resize steps for y axis
+   resize_step_y = 4,
+ }
 })
 EOF
 lua << EOF
 local cmp = require('cmp')
 cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
-	 sources = {
-      { name = 'buffer' }
-    }
+  mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+   { name = 'buffer' }
+  }
 })
 cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    }),
-    matching = { disallow_symbol_nonprefix_matching = false }
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  }),
+  matching = { disallow_symbol_nonprefix_matching = false }
 })
 EOF
 
@@ -76,10 +74,10 @@ EOF
 lua << EOF
 require("nvim-treesitter").setup {}
 require("nvim-treesitter.configs").setup({
-   ensure_installed = { "lua", "vim", 'dart', "vimdoc", 'regex', "javascript", 'typescript', 'css',"html", "rust", "kotlin" },
+   ensure_installed = { "lua", "vim", 'dart', "vimdoc", 'regex', "javascript", 'typescript', 'css',"html", "rust", "kotlin", 'c', 'cpp', 'xml' },
    sync_install = true,
    endwise = {
-        enable = true,
+    enable = true,
    },
    highlight = { enable = true },
     rainbow = {
@@ -239,7 +237,7 @@ onedark.setup {
 
     -- Plugins Config --
     diagnostics = {
-        darker = false, -- darker colors for diagnostic
+        darker = true, -- darker colors for diagnostic
         undercurl = true,   -- use undercurl instead of underline for diagnostics
         background = true,    -- use background color for virtual text
     },
@@ -301,7 +299,7 @@ require('kanagawa').setup({
     keywordStyle = { italic = true },
     statementStyle = { bold = true },
     typeStyle = {},
-    transparent = true,         -- do not set background color
+    transparent = false,         -- do not set background color
     dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
     terminalColors = true,       -- define vim.g.terminal_color_{0,17}
     colors = {                   -- add/modify theme and palette colors
@@ -323,7 +321,8 @@ EOF
 "colorscheme rose-pine-main
 "colorscheme rose-pine-moon
 "colorscheme rose-pine-dawn
-colorscheme gruvbox
+"colorscheme gruvbox
+colorscheme srcery " most similar to gruvbox
 "colorscheme onedark
 "colorscheme kanagawa-wave
 "colorscheme kanagawa-dragon
@@ -340,22 +339,23 @@ colorscheme gruvbox
 
 lua << EOF
  require('lualine').setup{
- sections = {
-   lualine_a = { 'mode' },
-   lualine_b = { 'filename' },
-   lualine_c = { 'branch', 'diff', 'diagnostics' },
-   lualine_x = { 'encoding', 'fileformat', 'filetype' }, 
-   lualine_y = { 'lsp_progress', 'tabnine' },
-   lualine_z = { 'progress' , 'localtion' }
- },
- inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
+   extensions = { 'nvim-tree', 'fugitive' },
+   sections = {
+     lualine_a = { 'mode' },
+     lualine_b = { 'filename', 'filesize', 'searchcount' },
+     lualine_c = { 'branch', 'diff', 'diagnostics' },
+     lualine_x = { 'encoding', 'fileformat', 'filetype' }, 
+     lualine_y = { 'g:coc_status', 'g:coc_progress', 'tabnine' },
+     lualine_z = { 'selectioncount', 'location' }
+   },
+   inactive_sections = {
+     lualine_a = {},
+     lualine_b = {},
+     lualine_c = {'filename'},
+     lualine_x = {'location'},
+     lualine_y = {},
+     lualine_z = {}
+   },
 } 
 EOF
 
@@ -364,21 +364,6 @@ EOF
 " nnoremap <space>te viw:Translate <locale name><CR>
 nnoremap <space>te viw:Translate es<CR>
 lua require("translate").setup({})
-
-lua << EOF
--- IA
---[[
-require('tabnine').setup({
-  disable_auto_comment=true,
-  accept_keymap="<S-Tab>",
-  dismiss_keymap = "<C-]>",
-  debounce_ms = 800,
-  suggestion_color = {gui = "#808080", cterm = 244},
-  exclude_filetypes = {"TelescopePrompt", "NvimTree"},
-  log_file_path = nil, -- absolute path to Tabnine log file
-})
-]]
-EOF
 
 lua << EOF
 local telescope = require('telescope')
@@ -394,42 +379,8 @@ telescope.setup{
             case_mode = "smart_case",
         },
     },
-    previewer = true,
+    previewer = false,
 	defaults = {
-      preview = {
-      mime_hook = function(filepath, bufnr, opts)
-        local api = require "image"
-        local preview_id = "telescope_image_id"
-        api.clear(preview_id)
-
-        local is_image = function(filepath)
-          local image_extensions = { "png", "jpg", "jpeg", "gif" } -- Supported image formats
-          local split_path = vim.split(filepath:lower(), ".", { plain = true })
-          local extension = split_path[#split_path]
-          return vim.tbl_contains(image_extensions, extension)
-        end
-        if is_image(filepath) then
-          local image = api.from_file(filepath, {
-            id = preview_id,
-            buffer = bufnr,
-            x = 110,
-            y = 20,
-            width = 40,
-            height = 40,
-          })
-          if image ~= nil then
-            print("image = " .. vim.inspect(image))
-            image:render()
-          end
-        else
-          require("telescope.previewers.utils").set_preview_message(
-                bufnr,
-                opts.winid,
-                "Something else"
-              )
-        end
-      end,
-    },
       vimgrep_arguments = {
         "rg",
         "--color=never",
@@ -437,50 +388,50 @@ telescope.setup{
         "--color=never",
         "--no-heading",
         "--with-filename",
-        "--line-number",
-        "--column",
-        "--smart-case",
-        "--ignore-file=" .. vim.fn.expand("$HOME") .. "/.fdignore"
-      },
-      find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },
-      prompt_prefix = " ",
-      --prompt_prefix = "🔍, ",
-      selection_caret = " ",
-      entry_prefix = "  ",
-      initial_mode = "insert",
-      selection_strategy = "reset",
-      sorting_strategy = "ascending",
-      layout_strategy = "horizontal",
-      preview = {
-        treesitter = true
-      },
-      layout_config = {
-        prompt_position = "top",
-        width = 0.87,
-        height = 0.80,
-        preview_cutoff = 120,
-        horizontal = {mirror = false, preview_cutoff = 1},
-      },
-      pickers = {
-        find_files = {
-          hidden = true
-        }
-      },
-      file_sorter = require("telescope.sorters").get_fuzzy_file,
-      generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-      path_display = {"truncate"}, -- path_display = {"absolute"},
-      winblend = 0,
-      border = {},
-      borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"},
+        "--line-number", 
+        "--column", 
+        "--smart-case", 
+        "--ignore-file=" .. vim.fn.expand("$HOME") .. "/.fdignore" 
+      }, 
+      find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' }, 
+      prompt_prefix = " ", 
+      --prompt_prefix = "🔍, ", 
+      selection_caret = " ", 
+      entry_prefix = "  ", 
+      initial_mode = "insert", 
+      selection_strategy = "reset", 
+      sorting_strategy = "ascending", 
+      layout_strategy = "horizontal", -- horizontal, allows preview 
+      preview = { 
+        treesitter = true 
+      }, 
+      layout_config = { 
+        prompt_position = "top", 
+        width = 0.65, 
+        height = 0.80, 
+        preview_cutoff = 120, 
+        horizontal = {mirror = false, preview_cutoff = 1}, 
+      }, 
+      pickers = { 
+        find_files = { 
+          hidden = false  
+        } 
+      }, 
+      file_sorter = require("telescope.sorters").get_fuzzy_file, 
+      generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter, 
+      path_display = {"truncate"}, -- path_display = {"absolute"}, 
+      winblend = 15, -- the opacity of the windows 
+      border = {}, 
+      borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"}, 
  		  color_devicons = true,
-      use_less = false,
-      set_env = {["COLORTERM"] = "truecolor"}, -- default = nil,
-      file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-      grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-      qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-      -- Developer configurations: Not meant for general override
-      buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker
-    },
+      use_less = false, 
+      set_env = {["COLORTERM"] = "truecolor"}, -- default = nil, 
+      file_previewer = require("telescope.previewers").vim_buffer_cat.new, 
+      grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new, 
+      qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new, 
+      -- Developer configurations: Not meant for general override 
+      buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker 
+  }
 }
 EOF
 
@@ -855,6 +806,8 @@ EOF
 lua require("mini.cursorword").setup()
 
 lua << EOF
+-- IA
+--[[
 require('tabnine').setup({
   disable_auto_comment=true,
   accept_keymap="<S-Tab>",
@@ -865,6 +818,7 @@ require('tabnine').setup({
   log_file_path = nil, -- absolute path to Tabnine log file
   ignore_certificate_errors = false,
 })
+]]
 EOF
 
 lua << EOF
@@ -894,110 +848,105 @@ require("toggleterm").setup({
 })
 EOF
 
-
 lua << EOF
 require("neo-tree").setup({
 -- Diagnostics configs
 sources = {
     "filesystem",
-    "buffers",
     "git_status",
-    "diagnostics",
+    "buffers",
+    --"diagnostics",
     -- ...and any additional source
   },
-  -- These are the defaults
-  diagnostics = {
-    auto_preview = { -- May also be set to `true` or `false`
-      enabled = true, -- Whether to automatically enable preview mode
-      preview_config = {}, -- Config table to pass to auto preview (for example `{ use_float = true }`)
-      event = "neo_tree_buffer_enter", -- The event to enable auto preview upon (for example `"neo_tree_window_after_open"`)
+  -- Default configs
+ 	close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+  popup_border_style = "rounded",
+  enable_git_status = true,
+  enable_diagnostics = true,
+  open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
+  sort_case_insensitive = true, -- used when sorting files and directories in the tree
+  sort_function = nil , -- use a custom function for sorting files and directories in the tree 
+  renderers = {
+    file = {
+      { "icon" },  
+      { "name" }, 
+      { "diagnostics" },
     },
-    bind_to_cwd = true,
-    diag_sort_function = "severity", -- "severity" means diagnostic items are sorted by severity in addition to their positions.
-                                     -- "position" means diagnostic items are sorted strictly by their positions.
-                                     -- May also be a function.
-    follow_current_file = { -- May also be set to `true` or `false`
-      enabled = true, -- This will find and focus the file in the active buffer every time
-      always_focus_file = false, -- Focus the followed file, even when focus is currently on a diagnostic item belonging to that file
-      expand_followed = true, -- Ensure the node of the followed file is expanded
-      leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
-      leave_files_open = false, -- `false` closes auto expanded files, such as with `:Neotree reveal`
-    },
-    group_dirs_and_files = true, -- when true, empty folders and files will be grouped together
-    group_empty_dirs = true, -- when true, empty directories will be grouped together
-    show_unloaded = true, -- show diagnostics from unloaded buffers
-    refresh = {
-      delay = 100, -- Time (in ms) to wait before updating diagnostics. Might resolve some issues with Neovim hanging.
-      event = "vim_diagnostic_changed", -- Event to use for updating diagnostics (for example `"neo_tree_buffer_enter"`)
-                                        -- Set to `false` or `"none"` to disable automatic refreshing
-      max_items = 10000, -- The maximum number of diagnostic items to attempt processing
-                         -- Set to `false` for no maximum
+    folder = {
+      { "icon" },  
+      { "name" }, 
+      { "diagnostics" },
     },
   },
--- Default configs
-    	  close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
-        popup_border_style = "rounded",
-        enable_git_status = true,
-        enable_diagnostics = true,
-        open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
-        sort_case_insensitive = true, -- used when sorting files and directories in the tree
-        sort_function = nil , -- use a custom function for sorting files and directories in the tree 
-
-        default_component_configs = {
-          container = {
-            enable_character_fade = true
-          },
-          indent = {
-            indent_size = 2,
-            padding = 1, -- extra padding on left hand side
-            with_markers = true,
-            indent_marker = "│",
-            last_indent_marker = "└",
-            highlight = "NeoTreeIndentMarker",
-            with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
-            expander_collapsed = "",
-            expander_expanded = "",
-            expander_highlight = "NeoTreeExpander",
-          },
-          icon = {
-            folder_closed = "",
-            folder_open = "",
-            folder_empty = "󰜌",
-            -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
-            -- then these will never be used.
-            default = "*",
-            highlight = "NeoTreeFileIcon"
-          },
-          modified = {
-            symbol = "[+]",
-            highlight = "NeoTreeModified",
-          },
-          name = {
-            trailing_slash = true,
-            use_git_status_colors = true,
-            highlight = "NeoTreeFileName",
-          },
-          git_status = {
-            symbols = {
-              -- Change type
-              added     = "✚", -- or "✚", but this is redundant info if you use git_status_colors on the name
-              modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-              deleted   = "✖",-- this can only be used in the git_status source
-              renamed   = "󰁕",-- this can only be used in the git_status source
-              -- Status type
-              untracked = "",
-              ignored   = "",
-              unstaged  = "!",
-              staged    = "",
-              conflict  = "",
-            }
-          },
-          -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
-          file_size = {
-            enabled = true,
-            required_width = 64, -- min width of window required to show this column
-          },
-          type = {
+  default_component_configs = {
+    container = {
+      enable_character_fade = true
+    },
+    indent = {
+     indent_size = 2,
+     padding = 1, -- extra padding on left hand side
+     with_markers = true,
+     indent_marker = "│",
+     last_indent_marker = "└",
+     highlight = "NeoTreeIndentMarker",
+     with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
+     expander_collapsed = "",
+     expander_expanded = "",
+     expander_highlight = "NeoTreeExpander",
+    },
+    diagnostics = {
+      symbols = {
+        error = "E",  -- Símbolo para errores
+        warn = "W",   -- Símbolo para advertencias
+        info = "I",   -- Símbolo para información
+        hint = "H",   -- Símbolo para sugerencias
+      },
+      highlights = {
+        error = "DiagnosticError",  -- Resaltado para errores
+        warn = "DiagnosticWarn",    -- Resaltado para advertencias
+        info = "DiagnosticInfo",    -- Resaltado para información
+        hint = "DiagnosticHint",    -- Resaltado para sugerencias
+      },
+    },
+    icon = {
+     folder_closed = "",
+     folder_open = "",
+     folder_empty = "󰜌",
+     -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
+     -- then these will never be used.
+     default = "*",
+     highlight = "NeoTreeFileIcon"
+    },
+    modified = {
+     symbol = "[✚]",
+     highlight = "NeoTreeModified",
+    },
+    name = {
+     trailing_slash = true,
+     use_git_status_colors = true,
+     highlight = "NeoTreeFileName",
+    },
+    git_status = {
+     symbols = {
+     -- Change type
+     added  = "✚", -- or "✚", but this is redundant info if you use git_status_colors on the name
+     modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
+     deleted   = " ",-- this can only be used in the git_status source
+     renamed   = "󰁕",-- this can only be used in the git_status source
+     -- Status type
+     untracked = "",
+     ignored   = "",
+     unstaged  = "!",
+     staged = "",
+     conflict  = "",
+     }
+    },
+    -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
+    file_size = {
+      enabled = true,
+      required_width = 64, -- min width of window required to show this column
+    },
+    type = {
             enabled = true,
             required_width = 122, -- min width of window required to show this column
           },
@@ -1298,16 +1247,14 @@ require("notify").setup({
 })
 EOF
 
-lua require('ibl').setup()
-
-" COC
+"lua require('ibl').setup()
 
 " Use <c-space> to trigger completion (optional since by default COC give us this functionality)
-""if has('nvim')
-""  inoremap <silent><expr> <c-space> coc#refresh()
-""else
-""  inoremap <silent><expr> <c-@> coc#refresh()
-""endif
+"if has('nvim')
+"  inoremap <silent><expr> <c-space> coc#refresh()
+"else
+"  inoremap <silent><expr> <c-@> coc#refresh()
+"endif
 augroup group_coc 
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -1341,7 +1288,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 "
-nnoremap <silent> <space>w :call ShowDocumentation()<CR>
 
 " Highlight the symbol and its references when holding the cursor
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -1353,352 +1299,6 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
-nnoremap <silent> <space>ca <Plug>(coc-codeaction-cursor)
-nnoremap <silent> <space>cs <Plug>(coc-codeaction-source)
-nnoremap <silent> <space>cf  <Plug>(coc-fix-current)
-"nnoremap <silent> <space>cc  <Plug>(coc-codeaction-cursor)
-" nmap <silent><leader>g <Plug>(coc-definition)
-"    nmap <leader>t <Plug>(coc-type-definition)
- nmap <C-d>i <Plug>(coc-type-definition)
- nmap <leader>w <Plug>(coc-references)
-"    nmap <leader>r <Plug>(coc-rename)
-"Remap keys for applying codeAction to the current buffer.
-"    nmap <leader>d  <Plug>(coc-codeaction)
-"    nmap <leader>u  <Plug>(coc-codeaction-source)
-"    nmap <leader>k  <Plug>(coc-codeaction-selected)w
-"    nmap <leader>j  <Plug>(coc-codeaction-line)
-"    nmap <leader>h  <Plug>(coc-codeaction-cursor)
-nnoremap <silent> <space>fi <CMD>:CocDiagnostics<CR> 
-nnoremap <silent> <C-d>d <Plug>(coc-definition)
-" Remove CMP key to search in CMP autocomplete instead Coc
-
-imap  <C-n> <Nop>
-imap  <C-p> <Nop>
-
-
-
-lua << EOF
--- Just works with LSP native 
--- Formatter
---[[local null_ls = require("null-ls") 
-local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-local function get_class_node()
-  local node = vim.treesitter.get_node()
-  while node do
-    if node:type() == "class_definition" then
-      return node
-    end
-    node = node:parent()
-  end
-  return nil
-end
-
-local function get_constructor(class_node)
-    for child in class_node:iter_children() do
-        if child:type() == "constructor_signature" then
-        return child;
-        end
-    end
-end
-
-local function get_class_attributes(class_node, bufnr)
-    local attributes = {}
-
-    -- Iterar sobre los hijos del nodo de la clase
-    for child in class_node:iter_children() do
-        if child:type() == "class_body" then
-            -- Iterar sobre las declaraciones dentro del class_body
-            for declaration in child:iter_children() do
-                local isNullable = false
-                -- Solo procesar nodos de tipo "declaration"
-                if declaration:type() == "declaration" then
-                local type_node, type_arguments,identifier_nodes = nil, nil,{}
-                -- Iterar sobre los hijos de la declaración para encontrar type_node e identifier_nodes
-                for node in declaration:iter_children() do
-                if node:type() == 'type_arguments' then
-                   type_arguments = node 
-                elseif node:type() == "type_identifier" or node:type() == "inferred_type" then 
-                    type_node = node
-                elseif node:type() == "initialized_identifier_list" then
-                    -- Iterar sobre los identificadores inicializados dentro de initialized_identifier_list
-                    for  identifier_node in node:iter_children() do
-                        if identifier_node:type() == "initialized_identifier" then
-                          table.insert(identifier_nodes, identifier_node:child(0))
-                        end
-                    end
-                end
-            end
-
-                -- Verificar que se hayan encontrado nodos válidos para tipo y nombre
-                if type_node and #identifier_nodes > 0 then
-                    -- Obtener el texto del tipo
-                    local type_text = vim.treesitter.get_node_text(type_node, bufnr)
-                    local arguments = '' 
-                    if type_arguments~=nil then
-                      arguments = vim.treesitter.get_node_text(type_arguments, bufnr)
-                    end
-                    -- Obtener los textos de los nombres de los identificadores
-                    local names = {}
-                    for _, id_node in ipairs(identifier_nodes) do
-                        local name_text = vim.treesitter.get_node_text(id_node, bufnr)
-                        if name_text then
-                            table.insert(names, name_text)
-                        end
-                    end
-                    -- Añadir los atributos a la lista de atributos
-                    if type_text and #names > 0 then
-                        for _, name_text in ipairs(names) do
-                            table.insert(attributes, {
-                                type = type_text,
-                                name = name_text,
-                                arguments = arguments,
-                            })
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
-
-    return attributes
-end
-
-local function generate_to_json(class_name, attributes)
-  if type(attributes) ~= "table" then return {"// No attributes found", attributes} end
-  vim.api.nvim_buf_set_lines(0, 0, 0, false, { 'import "dart:convert";' })
-  local lines = { '' }
-  table.insert(lines, 'Map<String, dynamic> toMap() {')
-  table.insert(lines, "  return {")
-  for _, attr in ipairs(attributes) do
-    table.insert(lines, string.format('    "%s": %s,', attr.name, attr.name))
-  end
-  table.insert(lines, "  };")
-  table.insert(lines, "}")
-  table.insert(lines, " ")
-  -- fromMap
-  table.insert(lines, string.format("factory %s.fromMap(Map<String,dynamic> map) {", class_name))
-  table.insert(lines, "   throw UnimplementedError('No implemented fromMap');")
-  table.insert(lines, "}")
-  table.insert(lines, " ")
-  --fromJson
-  table.insert(lines, string.format("factory %s.fromJson(String source) => %s.fromMap(json.decode(source) as Map<String,dynamic>);", class_name, class_name))
-  table.insert(lines, " ")
-  --toJson
-  table.insert(lines, "String toJson() => json.encode(toMap());")
-  table.insert(lines, " ")
-  return lines
-end
-
-local function generate_copy_with(class_name, attributes)
-  local method_body = {}
-
-    -- Construir el encabezado del método
-    table.insert(method_body, string.format("%s copyWith({", class_name))
-
-    -- Construir los parámetros del método
-    for idx, attr in ipairs(attributes) do
-        -- Determinar si el parámetro es nullable
-        local invalidNullable = attr.type == 'var' or attr.type == 'dynamic'
-        -- Construir la línea del parámetro con tipo y nombre
-        local param_line = string.format("  %s%s%s %s%s",
-            attr.type:gsub("[?]",''),  -- Remover el "?" para obtener el tipo base
-            attr.arguments, 
-            invalidNullable==false and '?' or '',
-            attr.name,
-            idx < #attributes and "," or ""  -- Añadir coma si no es el último parámetro
-        )
-        table.insert(method_body, param_line)
-    end
-
-    -- Construir el cuerpo del método
-    table.insert(method_body, "}) {")
-    table.insert(method_body, "   throw UnimplementedError('No implemented copyWith');")
-    table.insert(method_body, "}")
-
-    return method_body
-end
-
-
-local function generate_equals(class_name, attributes)
-if type(attributes) ~= "table" then return {"// No attributes found"} end
-  local lines = { "bool operator ==(Object other) {" }
-  table.insert(lines, "  if (identical(this, other)) return true;")
-  table.insert(lines, string.format("  return other is %s &&", class_name))
-  for i, attr in ipairs(attributes) do
-    if i == #attributes then
-      table.insert(lines, string.format("    other.%s == %s;", attr.name, attr.name))
-    else
-      table.insert(lines, string.format("    other.%s == %s &&", attr.name, attr.name))
-    end
-  end
-  table.insert(lines, "}")
-  table.insert(lines, "")
-  return lines
-end
-
-local function generate_hash_code(class_name,attributes)
-if type(attributes) ~= "table" then return {"// No attributes found"} end
-  local lines = { "@override" }
-  table.insert(lines, "int get hashCode =>")
-  for i, attr in ipairs(attributes) do
-    if i == #attributes then
-      table.insert(lines, string.format("    %s.hashCode;", attr.name))
-    else
-      table.insert(lines, string.format("    %s.hashCode ^", attr.name))
-    end
-  end
-  table.insert(lines, " ")
-  return lines
-end
-
-local function generate_method_action(params, generator_function)
-  local node = get_class_node()
-  if not node then
-    return
-  end
-
-  local bufnr = params.bufnr
-  local class_name_node = node:field("name")[1]
-  if not class_name_node then
-    return
-  end
-  local class_name = vim.treesitter.get_node_text(class_name_node, bufnr)
-  local attributes = get_class_attributes(node, bufnr)
-  local constructor = get_constructor(node) 
-  local method_lines = generator_function(class_name, attributes,node,constructor)
-  if #method_lines > 0 then
-    vim.api.nvim_buf_set_lines(bufnr, params.row, params.row, false, method_lines)
-  end
-end
-
-
-null_ls.register({
-  name = 'tojson',
-  method = null_ls.methods.CODE_ACTION,
-  filetypes =  { 'dart' },
-  generator = {
-    fn = function(params)
-      return {
-        {
-          title = "Generate toJson",
-          action = function() generate_method_action(params, generate_to_json) end,
-        }
-      }
-    end,
-  }
-})
-
-null_ls.register({
-  name = 'copywith',
-  method = null_ls.methods.CODE_ACTION,
-  filetypes =  { 'dart' },
-  generator = {
-    fn = function(params)
-      return {
-        {
-          title = "Generate copyWith",
-          action = function() generate_method_action(params, generate_copy_with) end,
-        }
-      }
-    end,
-  },
-})
-
-null_ls.register({
-  name = 'equals-and-hashcode',
-  filetypes =  { 'dart' },
-  method = null_ls.methods.CODE_ACTION,
-  generator = {
-    fn = function(params)
-      return {
-        {
-          title = "Generate equals and hashcode",
-          action = function() 
-            generate_method_action(params, generate_equals) 
-            generate_method_action(params, generate_hash_code)
-          end,
-        }
-      }
-    end,
-  },
-})
-
-null_ls.register({
-  name = 'equals',
-  filetypes =  { 'dart' },
-  method = null_ls.methods.CODE_ACTION,
-  generator = {
-    fn = function(params)
-      return {
-        {
-          title = "Generate equals",
-          action = function() generate_method_action(params, generate_equals) end,
-        }
-      }
-    end,
-  },
-})
-null_ls.register({
-  name = 'hashcode',
-  method = null_ls.methods.CODE_ACTION,
-  filetypes =  { 'dart' },
-  generator = {
-    fn = function(params)
-      return {
-        {
-          title = "Generate hashCode",
-          action = function() generate_method_action(params, generate_hash_code) end,
-        }
-      }
-    end,
-  },
-})
-
-null_ls.setup({
-  debug = false,
-  sources = {
-    -- If you wanna dart_format services, active it, but, it could have issues with dartls and doesn't show widget actions
-    --formatting.dart_format,
-  },
-    border = nil,
-    cmd = { "nvim" },
-    debounce = 250,
-    debug = false,
-    default_timeout = 20000,
-    diagnostic_config = {
-    },
-    diagnostics_format = "#{m}",
-    fallback_severity = vim.diagnostic.severity.ERROR,
-    log_level = "warn",
-    notify_format = "[null-ls] %s",
-    on_attach = nil,
-    on_init = nil,
-    on_exit = nil,
-    root_dir = require("null-ls.utils").root_pattern(".null-ls-root", "Makefile", ".git"),
-    should_attach = nil,
-    temp_dir = '~/.config/nvim/null-ls-temp',
-    update_in_insert = false,
-  -- To format on save (can be slow with large files)
- --[[ on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.format()
-        end,
-      })
-    end
-  end,
- 
-})
-]]
-EOF
 
 lua << EOF
 vim.treesitter.language.register('markdown', 'vimwiki')

@@ -16,7 +16,21 @@ nnoremap <silent> n <Nop>
 "  return !col || getline('.')[col - 1]  =~# '\s'
 "endfunction
 
+" Debugger
+" mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
+" for normal mode - the word under the cursor
+"nmap <space>be <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+"xmap <space>be <Plug>VimspectorBalloonEval
+"nmap <space>br <Plug>VimspectorBreakpoints
+"nmap <space>tb <Plug>VimspectorToggleBreakpoint
+"nmap <space>vc <Plug>VimspectorContinue
+"nmap <space>vs <Plug>VimspectorStop
+"nmap <space>vss <Plug>VimspectorRestart
+"nmap <space>vp <Plug>VimspectorPause
 
+"nmap <c-Ñ> <Plug>VimspectorJumpToNextBreakpoint
+"nmap <c-ñ> <Plug>VimspectorJumpToPreviousBreakpoint
 
 " Flutter commands
 nnoremap <silent> <space>fr <cmd>:CocCommand flutter.run<cr>
@@ -55,14 +69,14 @@ noremap <silent> <space>gm <cmd>:Neogit merge<CR>
 " Quit
 nnoremap <C-q> :q<cr>
 nnoremap <C-Q> :qa!<cr>
-nnoremap <silent> <space>m :BufferNext<CR>
-nnoremap <silent> <space>n :BufferPrevious<CR>
-nnoremap <silent> <space>d  :BufferDelete<CR>
-nnoremap <silent> <space>1  :BufferFirst<CR>
-nnoremap <silent> <space>2  :BufferLast<CR>
-nnoremap <silent> <space>vs  :BufferMoveStart<CR>
-nnoremap <silent> <space>vm  :BufferMoveNext<CR>
-nnoremap <silent> <space>vn  :BufferMovePrevious<CR>
+nmap <silent> <space>m :BufferNext<CR>
+nmap <silent> <space>n :BufferPrevious<CR>
+nmap <silent> <space>d  :BufferDelete<CR>
+nmap <silent> <space>1  :BufferFirst<CR>
+nmap <silent> <space>2  :BufferLast<CR>
+nmap <silent> <space>vs  :BufferMoveStart<CR>
+nmap <silent> <space>vm  :BufferMoveNext<CR>
+nmap <silent> <space>vn  :BufferMovePrevious<CR>
 nmap <S-+> <Nop>
 " FZF
 command! -bang -nargs=* Rg
@@ -185,3 +199,25 @@ nmap <C-q> <Nop>
 nmap <C-q> <CMD>:vsplit<CR>
 nmap <C-q>v <CMD>:split<CR>
 vmap n <Nop>
+
+" COc mapping
+nnoremap <silent> <space>w :call ShowDocumentation()<CR>
+nnoremap <silent> <space>ca <Plug>(coc-codeaction-cursor)
+nnoremap <silent> <space>cs <Plug>(coc-codeaction-source)
+nnoremap <silent> <space>cf  <Plug>(coc-fix-current)
+nmap <C-d>i <Plug>(coc-type-definition)
+nmap <leader>w <Plug>(coc-references)
+nnoremap <silent> <space>fi <CMD>:CocDiagnostics<CR> 
+nnoremap <silent> <C-d>d <Plug>(coc-definition)
+" nnoremap <silent> <space>cc  <Plug>(coc-codeaction-cursor)
+" nmap <silent><leader>g <Plug>(coc-definition)
+" nmap <leader>t <Plug>(coc-type-definition)
+" nmap <leader>r <Plug>(coc-rename)
+" Remap keys for applying codeAction to the current buffer.
+" nmap <leader>d  <Plug>(coc-codeaction)
+" nmap <leader>u  <Plug>(coc-codeaction-source)
+" nmap <leader>k  <Plug>(coc-codeaction-selected)w
+" nmap <leader>j  <Plug>(coc-codeaction-line)
+" nmap <leader>h  <Plug>(coc-codeaction-cursor)
+imap  <C-n> <Nop>
+imap  <C-p> <Nop>

@@ -11,7 +11,6 @@ Plug 'natebosch/dartlang-snippets'
 "Plug 'honza/vim-snippets'
 " LSP tools preconfigured
 Plug 'neoclide/coc.nvim', { 'branch': 'release'}
-Plug 'mrbjarksen/neo-tree-diagnostics.nvim', { 'module' : 'neo-tree.sources.diagnostics' } " if wanting to lazyload
 Plug 'nvim-lua/plenary.nvim'
 Plug 'stevearc/dressing.nvim' 
 " cmdline autocomplete (since the coc.nvim doesnt have support for cmdline autocompletion then this at least implement
@@ -20,13 +19,11 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-path'
 " IA Asistant 
-Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
+"Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 " Debugger
 Plug 'mfussenegger/nvim-dap' 
 " File explorer
 Plug 'nvim-neo-tree/neo-tree.nvim'
-" Window Tabs 
-Plug 'nvim-tree/nvim-web-devicons' 
 " Git 
 Plug 'lewis6991/gitsigns.nvim' 
 " Tabs
@@ -80,8 +77,6 @@ Plug 'ckipp01/stylua-nvim', { 'run' : 'cargo install stylua' }
 " Mason LSP,DAP,LINTER AND FORMATTER
 Plug 'williamboman/mason.nvim' 
 Plug 'williamboman/mason-lspconfig.nvim'
-" Tree sitter
-Plug 'nvim-treesitter/nvim-treesitter' 
 " LSP manager timeout (avoid large size memory (Ram) consume)
 Plug 'zeioth/garbage-day.nvim', { 'event' : 'VeryLazy' }
 " Navigator 
@@ -93,6 +88,8 @@ if has('nvim') || has('patch-8.0.902')
 else
   Plug 'mhinz/vim-signify', { 'tag': 'legacy' }
 endif
+" code highlighting 
+Plug 'nvim-treesitter/nvim-treesitter' 
 " Theme
 Plug 'ellisonleao/gruvbox.nvim'
 Plug 'rose-pine/neovim', { 'as' : 'rose-pine' }
@@ -100,8 +97,10 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'navarasu/onedark.nvim'
 Plug 'projekt0n/github-nvim-theme'
 Plug 'rebelot/kanagawa.nvim'
+Plug 'srcery-colors/srcery-vim'
 " Color picker
 Plug 'ziontee113/color-picker.nvim'
 Plug 'MeanderingProgrammer/markdown.nvim'
 Plug 'echasnovski/mini.nvim', { 'name' : 'render-markdown' }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 call plug#end()
