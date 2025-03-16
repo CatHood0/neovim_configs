@@ -69,14 +69,12 @@ noremap <silent> <space>gm <cmd>:Neogit merge<CR>
 " Quit
 nnoremap <C-q> :q<cr>
 nnoremap <C-Q> :qa!<cr>
-nmap <silent> <space>m :BufferNext<CR>
-nmap <silent> <space>n :BufferPrevious<CR>
-nmap <silent> <space>d  :BufferDelete<CR>
-nmap <silent> <space>1  :BufferFirst<CR>
-nmap <silent> <space>2  :BufferLast<CR>
-nmap <silent> <space>vs  :BufferMoveStart<CR>
-nmap <silent> <space>vm  :BufferMoveNext<CR>
-nmap <silent> <space>vn  :BufferMovePrevious<CR>
+nmap <silent> <space>m   :BufferLineCycleNext<CR>
+nmap <silent> <space>n   :BufferLineCyclePrev<CR>
+nmap <silent> <space>d   :bdelete<CR>
+nmap <silent> <space>vc  :BufferLinePick<CR>
+nmap <silent> <space>vm  :BufferLineMoveNext<CR>
+nmap <silent> <space>vn  :BufferLineMovePrev<CR>
 nmap <S-+> <Nop>
 " FZF
 command! -bang -nargs=* Rg
@@ -141,9 +139,8 @@ let g:dart_style_guide = 2
 "let g:signify_sign_show_text = 1
 "let g:signify_sign_change = '~'
 
-let g:barbar_auto_setup = v:false 
 let g:lsc_auto_map = v:true
-let g:auto_session_root_dir = "/home/cathood/.config/nvim/sessions" 
+let g:auto_session_root_dir = "/home/cathood/.nvim_sessions" 
 " Telescope
 " Removed '--hidden' because load too many files
 nnoremap <C-p> <cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '-g', '!.git' }})<cr>

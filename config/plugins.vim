@@ -27,8 +27,8 @@ Plug 'nvim-neo-tree/neo-tree.nvim'
 " Git 
 Plug 'lewis6991/gitsigns.nvim' 
 " Tabs
-Plug 'romgrk/barbar.nvim'
-"Plug 'akinsho/bufferline.nvim' 
+Plug 'akinsho/bufferline.nvim' 
+"Plug 'romgrk/barbar.nvim'
 " Windows picker manager
 Plug 's1n7ax/nvim-window-picker', { 'version' : '2.*' }  
 Plug 'tpope/vim-sensible'

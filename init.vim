@@ -335,9 +335,79 @@ colorscheme srcery " most similar to gruvbox
 "colorscheme github_dark_high_contrast
 "colorscheme github_dark_colorblind
 "colorscheme github_dark_tritanopia
+"
+"
+
+lua << EOF
+require("bufferline").setup({
+  highlights = {
+    background = {
+      gui = "italic",
+    },
+    buffer_selected = {
+      gui = "bold",
+    },
+  },
+  options = {
+      numbers = "none", -- can be "none" | "ordinal" | "buffer_id" | "both" | function
+      -- this is the delete command for tabs
+      close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+      -- we shouldn't use right mouse command since it removes the tab
+      right_mouse_command = "vert sbuffer %d", -- can be a string | function, see "Mouse actions"
+      left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
+      middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
+      -- NOTE: this plugin is designed with this icon in mind,
+      -- and so changing this is NOT recommended, this is intended
+      -- as an escape hatch for people who cannot bear it for whatever reason
+      indicator_icon = "▎",
+      buffer_close_icon = "",
+      modified_icon = "●",
+      close_icon = "",
+      left_trunc_marker = "",
+      right_trunc_marker = "",
+      --- name_formatter can be used to change the buffer's label in the bufferline.
+      --- Please note some names can/will break the
+      --- bufferline so use this at your discretion knowing that it has
+      --- some limitations that will *NOT* be fixed.
+      name_formatter = function(buf) -- buf contains a "name", "path" and "bufnr"
+        -- remove extension from markdown files for example
+        if buf.name:match "%.md" then
+          return vim.fn.fnamemodify(buf.name, ":t:r")
+        end
+      end,
+      max_name_length = 18,
+      max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
+    tab_size = 18,
+    diagnostics_update_in_insert = false,
+    diagnostics_indicator = diagnostics_indicator,
+    diagnostics = "coc", -- lsp  
+    diagnostics_indicator = function(count, level, diagnostics_dict, context)
+    local s = " "
+      for e, n in pairs(diagnostics_dict) do
+        local sym = e == "error" and " "
+        or (e == "warning" and " " or " ")
+      s = s .. n .. sym
+    end
+    return s
+  end,
+      show_buffer_icons = true, -- disable filetype icons for buffers
+      show_buffer_close_icons = true,
+      show_close_icon = false,
+      show_tab_indicators = true,
+      persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+      -- can also be a table containing 2 custom separators
+      -- [focused and unfocused]. eg: { '|', '|' }
+      separator_style = "thin",
+      enforce_regular_tabs = false,
+      always_show_bufferline = false,
+      sort_by = "id",
+  },
+})
+EOF
 
 
 lua << EOF
+
  require('lualine').setup{
    extensions = { 'nvim-tree', 'fugitive' },
    sections = {
@@ -1085,131 +1155,6 @@ sources = {
   },
 })
 EOF
-
-lua << EOF
-  require'barbar'.setup {
-  animation = true,
-  -- Automatically hide the tabline when there are this many buffers left.
-  -- Set to any value >=0 to enable.
-  auto_hide = false,
-
-  -- Enable/disable current/total tabpages indicator (top right corner)
-  tabpages = false,
-
-  -- Enables/disable clickable tabs
-  --  - left-click: go to buffer
-  --  - middle-click: delete buffer
-  clickable = true,
-
-  -- Excludes buffers from the tabline
- -- exclude_ft = {'javascript'},
-  --exclude_name = {'package.json'},
-
-  -- A buffer to this direction will be focused (if it exists) when closing the current buffer.
-  -- Valid options are 'left' (the default), 'previous', and 'right'
-  focus_on_close = 'left',
-
-  -- Hide inactive buffers and file extensions. Other options are `alternate`, `current`, and `visible`.
-
-  -- Disable highlighting alternate buffers
-  highlight_alternate = true,
-
-  -- Disable highlighting file icons in inactive buffers
-  highlight_inactive_file_icons = true,
-
-  -- Enable highlighting visible buffers
-  highlight_visible = true,
-     cons = {
-    -- Configure the base icons on the bufferline.
-    -- Valid options to display the buffer index and -number are `true`, 'superscript' and 'subscript'
-    buffer_index = true,
-    buffer_number = true,
-    button = '',
-    -- Enables / disables diagnostic symbols
-    diagnostics = {
-      [vim.diagnostic.severity.ERROR] = {enabled = true, icon = 'ﬀ'},
-      [vim.diagnostic.severity.WARN] = {enabled = true, icon = 'x'},
-      [vim.diagnostic.severity.INFO] = {enabled = true, icon = '!'},
-      [vim.diagnostic.severity.HINT] = {enabled = true, icon = '¶'},
-    },
-    gitsigns = {
-      added = {enabled = true, icon = '+'},
-      changed = {enabled = true, icon = '•'},
-      deleted = {enabled = true, icon = 'x'},
-    },
-    filetype = {
-      -- Sets the icon's highlight group.
-      -- If false, will use nvim-web-devicons colors
-      custom_colors = false,
-
-      -- Requires `nvim-web-devicons` if `true`
-      enabled = true,
-    },
-    separator = {left = '▎', right = ''},
-
-    -- If true, add an additional separator at the end of the buffer list
-    separator_at_end = true,
-
-    -- Configure the icons on the bufferline when modified or pinned.
-    -- Supports all the base icon options.
-    modified = {button = '●'},
-    pinned = {button = '', filename = true},
-
-    -- Use a preconfigured buffer appearance— can be 'default', 'powerline', or 'slanted'
-    preset = 'slanted',
-  },
-
-  -- If true, new buffers will be inserted at the start/end of the list.
-  -- Default is to insert after current buffer.
-  insert_at_end = false,
-  insert_at_start = false,
-
-  -- Sets the maximum padding width with which to surround each tab
-  maximum_padding = 3,
-
-  -- Sets the minimum padding width with which to surround each tab
-  minimum_padding = 1,
-
-  -- Sets the maximum buffer name length.
-  maximum_length = 30,
-
-  -- Sets the minimum buffer name length.
-  minimum_length = 0,
-
-  -- If set, the letters for each buffer in buffer-pick mode will be
-  -- assigned based on their name. Otherwise or in case all letters are
-  -- already assigned, the behavior is to assign letters in order of
-  -- usability (see order below)
-  semantic_letters = true,
- 
-  -- Set the filetypes which barbar will offset itself for
-  sidebar_filetypes = {
-      event = { 'BufWinLeave', text = '', align = 'left'},
-    NvimTree = true,
-    -- Or, specify the text used for the offset:
-    undotree = {
-      text = 'undotree',
-      align = 'left', -- *optionally* specify an alignment (either 'left', 'center', or 'right')
-    },
-    -- Or, specify the event which the sidebar executes when leaving:
-    -- Or, specify all three
-    -- ['neo-tree'] = {event = 'BufWipeout'},
-    Outline = {event = 'BufWinLeave', text = 'symbols-outline', align = 'right'},
-  },
-
-  -- New buffer letters are assigned in this order. This order is
-  -- optimal for the qwerty keyboard layout but might need adjustment
-  -- for other layouts.
-  letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
-
-  -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
-  -- where X is the buffer number. But only a static string is accepted here.
-  no_name_title = 'Neovim',
-  --version = '^1.0.0', -- optional: only update when a new 1.x version is released
-}
-EOF
-
-
 
 lua << EOF
 local opts = {
