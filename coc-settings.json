@@ -1,5 +1,5 @@
 {
-  "clangd.path": "~/clangd_19/bin/clangd",
+  "clangd.path": "/home/cathood/clangd_19/bin/clangd",
   "clangd.arguments": ["--background-index", "--clang-tidy"],
   "clangd.fallbackFlags": ["-std=c++23"],
   "clangd.enabled": true,
