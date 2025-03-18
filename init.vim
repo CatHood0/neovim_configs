@@ -321,8 +321,8 @@ EOF
 "colorscheme rose-pine-main
 "colorscheme rose-pine-moon
 "colorscheme rose-pine-dawn
-"colorscheme gruvbox
-colorscheme srcery " most similar to gruvbox
+colorscheme gruvbox
+"colorscheme srcery " most similar to gruvbox
 "colorscheme onedark
 "colorscheme kanagawa-wave
 "colorscheme kanagawa-dragon
@@ -349,7 +349,7 @@ require("bufferline").setup({
     },
   },
   options = {
-      numbers = "none", -- can be "none" | "ordinal" | "buffer_id" | "both" | function
+      numbers = "buffer_id", -- can be "none" | "ordinal" | "buffer_id" | "both" | function
       -- this is the delete command for tabs
       close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
       -- we shouldn't use right mouse command since it removes the tab
@@ -378,7 +378,7 @@ require("bufferline").setup({
       max_name_length = 18,
       max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
     tab_size = 18,
-    diagnostics_update_in_insert = false,
+    diagnostics_update_in_insert = true,
     diagnostics_indicator = diagnostics_indicator,
     diagnostics = "coc", -- lsp  
     diagnostics_indicator = function(count, level, diagnostics_dict, context)
@@ -390,6 +390,37 @@ require("bufferline").setup({
     end
     return s
   end,
+      offsets = {
+        {
+          filetype = "undotree",
+          text = "Undotree",
+          highlight = "PanelHeading",
+          padding = 1,
+        },
+     --   {
+     --    filetype = "neo-tree",
+     --     text = "Explorer",
+     --     highlight = "PanelHeading",
+     --     padding = 1,
+     --   },
+        {
+          filetype = "DiffviewFiles",
+          text = "Diff View",
+          highlight = "PanelHeading",
+          padding = 1,
+        },
+        {
+          filetype = "flutterToolsOutline",
+          text = "Flutter Outline",
+          highlight = "PanelHeading",
+        },
+        {
+          filetype = "packer",
+          text = "Packer",
+          highlight = "PanelHeading",
+          padding = 1,
+        },
+      },
       show_buffer_icons = true, -- disable filetype icons for buffers
       show_buffer_close_icons = true,
       show_close_icon = false,
@@ -399,7 +430,7 @@ require("bufferline").setup({
       -- [focused and unfocused]. eg: { '|', '|' }
       separator_style = "thin",
       enforce_regular_tabs = false,
-      always_show_bufferline = false,
+      always_show_bufferline = true,
       sort_by = "id",
   },
 })
@@ -490,7 +521,7 @@ telescope.setup{
       file_sorter = require("telescope.sorters").get_fuzzy_file, 
       generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter, 
       path_display = {"truncate"}, -- path_display = {"absolute"}, 
-      winblend = 15, -- the opacity of the windows 
+      winblend = 0, -- the opacity of the windows 
       border = {}, 
       borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"}, 
  		  color_devicons = true,
@@ -505,6 +536,53 @@ telescope.setup{
 }
 EOF
 
+lua << EOF
+local dap = require('dap')
+-- dart
+dap.configurations.dart = {
+  {
+    type = "dart",
+    request = "launch",
+    name = "Launch dart",
+    dartSdkPath = "/home/cathood/development/flutter/bin/flutter/bin/cache/dart-sdk/bin/dart", 
+    flutterSdkPath = "/home/cathood/development/flutter/bin/flutter",             
+    program = "${workspaceFolder}/lib/main.dart",
+    cwd = "${workspaceFolder}",
+  },
+  {
+    type = "flutter",
+    request = "launch",
+    name = "Launch flutter",
+    dartSdkPath = "/home/cathood/development/flutter/bin/flutter/bin/cache/dart-sdk/bin/dart", 
+    flutterSdkPath = "/home/cathood/development/flutter/bin/flutter", 
+    program = "${workspaceFolder}/lib/main.dart", 
+    cwd = "${workspaceFolder}",
+  }
+}
+-- c++/c/rust
+dap.adapters.codelldb = {
+  type = "executable",
+  command = "/home/cathood/Descargas/debugger_adapters/codelldb/extension/adapter/codelldb", -- or if not in $PATH: "/absolute/path/to/codelldb"
+  -- On windows you may have to uncomment this:
+  -- detached = false,
+}
+-- configs
+dap.configurations.cpp = {
+  {
+    name = "Launch file",
+    type = "codelldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+  },
+}
+
+dap.configurations.c = dap.configurations.cpp
+dap.configurations.rust = dap.configurations.cpp
+EOF
 
 lua << EOF
 require("action-hints").setup({
@@ -923,10 +1001,6 @@ require("neo-tree").setup({
 -- Diagnostics configs
 sources = {
     "filesystem",
-    "git_status",
-    "buffers",
-    --"diagnostics",
-    -- ...and any additional source
   },
   -- Default configs
  	close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
@@ -936,6 +1010,23 @@ sources = {
   open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
   sort_case_insensitive = true, -- used when sorting files and directories in the tree
   sort_function = nil , -- use a custom function for sorting files and directories in the tree 
+	source_selector = {
+    -- statusline = true,
+	  winbar = true,
+    statusline = true, 
+		sources = {
+			{
+				source = "filesystem",
+				display_name = "Explorer",
+			},
+		},
+		content_layout = "center",
+		highlight_tab = "NeoTreeTabInactive", -- string
+		highlight_tab_active = "NeoTreeTabActive", -- string
+		highlight_background = "NeoTreeTabInactive", -- string
+		highlight_separator = "ActiveWindow", -- string
+		highlight_separator_active = "NeoTreeTabSeparatorActive", -- string
+	},
   renderers = {
     file = {
       { "icon" },  
@@ -1149,10 +1240,6 @@ sources = {
             }
           }
         },
-   source_selector = {
-            winbar = true,
-            statusline = true , 
-  },
 })
 EOF
 

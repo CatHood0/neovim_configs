@@ -16,7 +16,7 @@ nnoremap <silent> n <Nop>
 "  return !col || getline('.')[col - 1]  =~# '\s'
 "endfunction
 
-" Debugger
+" vimspector
 " mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
 " for normal mode - the word under the cursor
 "nmap <space>be <Plug>VimspectorBalloonEval
@@ -66,13 +66,20 @@ noremap <silent> <space>gm <cmd>:Neogit merge<CR>
 "nmap <C-P> :Files<CR>
 "nmap <C-f> :Lines<CR>
 
+" Debugger
+" nvim-dap
+nmap <space>tb <cmd>:DapToggleBreakpoint<cr>
+nmap <F4> <cmd>:DapContinue<cr>
+nmap <F5> <cmd>:DapDisconnect<cr>
+nmap <space>tm <cmd>:DapContinue<cr>
+
 " Quit
 nnoremap <C-q> :q<cr>
 nnoremap <C-Q> :qa!<cr>
 nmap <silent> <space>m   :BufferLineCycleNext<CR>
 nmap <silent> <space>n   :BufferLineCyclePrev<CR>
-nmap <silent> <space>d   :bdelete<CR>
-nmap <silent> <space>vc  :BufferLinePick<CR>
+nmap <silent> <space>d   :bdelete!<CR>
+nmap <silent> <space>vc  :BufferLineTogglePin<CR>
 nmap <silent> <space>vm  :BufferLineMoveNext<CR>
 nmap <silent> <space>vn  :BufferLineMovePrev<CR>
 nmap <S-+> <Nop>
