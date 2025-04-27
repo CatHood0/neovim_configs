@@ -11,6 +11,129 @@ require('ultimate-autopair').setup({
 EOF
 
 lua << EOF
+  require'barbar'.setup {
+  animation = true,
+  -- Automatically hide the tabline when there are this many buffers left.
+  -- Set to any value >=0 to enable.
+  auto_hide = false,
+
+  -- Enable/disable current/total tabpages indicator (top right corner)
+  tabpages = false,
+
+  -- Enables/disable clickable tabs
+  --  - left-click: go to buffer
+  --  - middle-click: delete buffer
+  clickable = true,
+
+  -- Excludes buffers from the tabline
+ -- exclude_ft = {'javascript'},
+  --exclude_name = {'package.json'},
+
+  -- A buffer to this direction will be focused (if it exists) when closing the current buffer.
+  -- Valid options are 'left' (the default), 'previous', and 'right'
+  focus_on_close = 'left',
+
+  -- Hide inactive buffers and file extensions. Other options are `alternate`, `current`, and `visible`.
+
+  -- Disable highlighting alternate buffers
+  highlight_alternate = true,
+
+  -- Disable highlighting file icons in inactive buffers
+  highlight_inactive_file_icons = true,
+
+  -- Enable highlighting visible buffers
+  highlight_visible = true,
+     cons = {
+    -- Configure the base icons on the bufferline.
+    -- Valid options to display the buffer index and -number are `true`, 'superscript' and 'subscript'
+    buffer_index = true,
+    buffer_number = true,
+    button = '',
+    -- Enables / disables diagnostic symbols
+    diagnostics = {
+      [vim.diagnostic.severity.ERROR] = {enabled = true, icon = 'ﬀ'},
+      [vim.diagnostic.severity.WARN] = {enabled = true, icon = 'x'},
+      [vim.diagnostic.severity.INFO] = {enabled = true, icon = '!'},
+      [vim.diagnostic.severity.HINT] = {enabled = true, icon = '¶'},
+    },
+    gitsigns = {
+      added = {enabled = true, icon = '+'},
+      changed = {enabled = true, icon = '•'},
+      deleted = {enabled = true, icon = 'x'},
+    },
+    filetype = {
+      -- Sets the icon's highlight group.
+      -- If false, will use nvim-web-devicons colors
+      custom_colors = false,
+
+      -- Requires `nvim-web-devicons` if `true`
+      enabled = true,
+    },
+    separator = {left = '▎', right = ''},
+
+    -- If true, add an additional separator at the end of the buffer list
+    separator_at_end = true,
+
+    -- Configure the icons on the bufferline when modified or pinned.
+    -- Supports all the base icon options.
+    modified = {button = '●'},
+    pinned = {button = '', filename = true},
+
+    -- Use a preconfigured buffer appearance— can be 'default', 'powerline', or 'slanted'
+    preset = 'slanted',
+  },
+
+  -- If true, new buffers will be inserted at the start/end of the list.
+  -- Default is to insert after current buffer.
+  insert_at_end = false,
+  insert_at_start = false,
+
+  -- Sets the maximum padding width with which to surround each tab
+  maximum_padding = 3,
+
+  -- Sets the minimum padding width with which to surround each tab
+  minimum_padding = 1,
+
+  -- Sets the maximum buffer name length.
+  maximum_length = 30,
+
+  -- Sets the minimum buffer name length.
+  minimum_length = 0,
+
+  -- If set, the letters for each buffer in buffer-pick mode will be
+  -- assigned based on their name. Otherwise or in case all letters are
+  -- already assigned, the behavior is to assign letters in order of
+  -- usability (see order below)
+  semantic_letters = true,
+ 
+  -- Set the filetypes which barbar will offset itself for
+  sidebar_filetypes = {
+      event = { 'BufWinLeave', text = '', align = 'left'},
+    NvimTree = true,
+    -- Or, specify the text used for the offset:
+    undotree = {
+      text = 'undotree',
+      align = 'left', -- *optionally* specify an alignment (either 'left', 'center', or 'right')
+    },
+    -- Or, specify the event which the sidebar executes when leaving:
+    -- Or, specify all three
+    -- ['neo-tree'] = {event = 'BufWipeout'},
+    Outline = {event = 'BufWinLeave', text = 'symbols-outline', align = 'right'},
+  },
+
+  -- New buffer letters are assigned in this order. This order is
+  -- optimal for the qwerty keyboard layout but might need adjustment
+  -- for other layouts.
+  letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
+
+  -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
+  -- where X is the buffer number. But only a static string is accepted here.
+  no_name_title = 'Neovim',
+  --version = '^1.0.0', -- optional: only update when a new 1.x version is released
+}
+EOF
+
+lua << EOF
 require('color-picker').setup({
 	["icons"] = { "", "   " },
 	["border"] = "rounded", -- none | single | double | rounded | solid | shadow
@@ -243,8 +366,6 @@ onedark.setup {
     },
 }
 onedark.load()
--- Necessary options for autosession
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 require('github-theme').setup({
   options = {
@@ -315,13 +436,66 @@ require('kanagawa').setup({
         light = "lotus"
     },
 })
+require("catppuccin").setup({
+    flavour = "macchiato", -- latte, frappe, macchiato, mocha
+    background = { -- :h background
+        light = "latte",
+        dark = "macchiato",
+    },
+    transparent_background = false, -- disables setting the background color.
+    show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+    term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
+    dim_inactive = {
+        enabled = false, -- dims the background color of inactive window
+        shade = "dark",
+        percentage = 0.15, -- percentage of the shade to apply to the inactive window
+    },
+    no_italic = false, -- Force no italic
+    no_bold = false, -- Force no bold
+    no_underline = false, -- Force no underline
+    styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+        comments = { "italic" }, -- Change the style of comments
+        conditionals = { "italic" },
+        loops = {},
+        functions = { "bold" },
+        keywords = { },
+        strings = { "italic" },
+        variables = {},
+        numbers = { "bold" },
+        booleans = { "bold" },
+        properties = { },
+        types = { "bold" },
+        operators = {},
+        -- miscs = {}, -- Uncomment to turn off hard-coded styles
+    },
+    color_overrides = {},
+    custom_highlights = {},
+    default_integrations = true,
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        notify = true,
+        barbar = true,
+        mini = {
+            enabled = true,
+            indentscope_color = "",
+        },
+    },
+})
 EOF
 " Must be after setup since the options wont be applied
+colorscheme catppuccin 
+"colorscheme catppuccin-latte
+"colorscheme catppuccin-frappe
+"colorscheme catppuccin-macchiato
+"colorscheme catppuccin-mocha
 "colorscheme rose-pine-moon
 "colorscheme rose-pine-main
 "colorscheme rose-pine-moon
 "colorscheme rose-pine-dawn
-colorscheme gruvbox
+"colorscheme gruvbox
 "colorscheme srcery " most similar to gruvbox
 "colorscheme onedark
 "colorscheme kanagawa-wave
@@ -339,114 +513,15 @@ colorscheme gruvbox
 "
 
 lua << EOF
-require("bufferline").setup({
-  highlights = {
-    background = {
-      gui = "italic",
-    },
-    buffer_selected = {
-      gui = "bold",
-    },
-  },
-  options = {
-      numbers = "buffer_id", -- can be "none" | "ordinal" | "buffer_id" | "both" | function
-      -- this is the delete command for tabs
-      close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-      -- we shouldn't use right mouse command since it removes the tab
-      right_mouse_command = "vert sbuffer %d", -- can be a string | function, see "Mouse actions"
-      left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
-      middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
-      -- NOTE: this plugin is designed with this icon in mind,
-      -- and so changing this is NOT recommended, this is intended
-      -- as an escape hatch for people who cannot bear it for whatever reason
-      indicator_icon = "▎",
-      buffer_close_icon = "",
-      modified_icon = "●",
-      close_icon = "",
-      left_trunc_marker = "",
-      right_trunc_marker = "",
-      --- name_formatter can be used to change the buffer's label in the bufferline.
-      --- Please note some names can/will break the
-      --- bufferline so use this at your discretion knowing that it has
-      --- some limitations that will *NOT* be fixed.
-      name_formatter = function(buf) -- buf contains a "name", "path" and "bufnr"
-        -- remove extension from markdown files for example
-        if buf.name:match "%.md" then
-          return vim.fn.fnamemodify(buf.name, ":t:r")
-        end
-      end,
-      max_name_length = 18,
-      max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
-    tab_size = 18,
-    diagnostics_update_in_insert = true,
-    diagnostics_indicator = diagnostics_indicator,
-    diagnostics = "coc", -- lsp  
-    diagnostics_indicator = function(count, level, diagnostics_dict, context)
-    local s = " "
-      for e, n in pairs(diagnostics_dict) do
-        local sym = e == "error" and " "
-        or (e == "warning" and " " or " ")
-      s = s .. n .. sym
-    end
-    return s
-  end,
-      offsets = {
-        {
-          filetype = "undotree",
-          text = "Undotree",
-          highlight = "PanelHeading",
-          padding = 1,
-        },
-     --   {
-     --    filetype = "neo-tree",
-     --     text = "Explorer",
-     --     highlight = "PanelHeading",
-     --     padding = 1,
-     --   },
-        {
-          filetype = "DiffviewFiles",
-          text = "Diff View",
-          highlight = "PanelHeading",
-          padding = 1,
-        },
-        {
-          filetype = "flutterToolsOutline",
-          text = "Flutter Outline",
-          highlight = "PanelHeading",
-        },
-        {
-          filetype = "packer",
-          text = "Packer",
-          highlight = "PanelHeading",
-          padding = 1,
-        },
-      },
-      show_buffer_icons = true, -- disable filetype icons for buffers
-      show_buffer_close_icons = true,
-      show_close_icon = false,
-      show_tab_indicators = true,
-      persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-      -- can also be a table containing 2 custom separators
-      -- [focused and unfocused]. eg: { '|', '|' }
-      separator_style = "thin",
-      enforce_regular_tabs = false,
-      always_show_bufferline = true,
-      sort_by = "id",
-  },
-})
-EOF
-
-
-lua << EOF
 
  require('lualine').setup{
-   extensions = { 'nvim-tree', 'fugitive' },
+   extensions = { 'nvim-tree', 'neo-tree', 'fugitive' },
    sections = {
      lualine_a = { 'mode' },
      lualine_b = { 'filename', 'filesize', 'searchcount' },
      lualine_c = { 'branch', 'diff', 'diagnostics' },
      lualine_x = { 'encoding', 'fileformat', 'filetype' }, 
-     lualine_y = { 'g:coc_status', 'g:coc_progress', 'tabnine' },
+     lualine_y = { --[["g:coc_status'",]] 'g:coc_progress', 'tabnine' },
      lualine_z = { 'selectioncount', 'location' }
    },
    inactive_sections = {
@@ -460,6 +535,44 @@ lua << EOF
 } 
 EOF
 
+lua << EOF
+require("noice").setup({
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+    },
+  },
+  markdown = {
+    hover = {
+      ["|(%S-)|"] = vim.cmd.help, -- vim help links
+      ["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
+    },
+    highlights = {
+      ["|%S-|"] = "@text.reference",
+      ["@%S+"] = "@parameter",
+      ["^%s*(Parameters:)"] = "@text.title",
+      ["^%s*(Return:)"] = "@text.title",
+      ["^%s*(See also:)"] = "@text.title",
+      ["{%S-}"] = "@parameter",
+    },
+  },
+  health = {
+    checker = true, -- Disable if you don't want health checks to run
+  },
+  -- you can enable a preset for easier configuration
+  presets = {
+    bottom_search = true, -- use a classic bottom cmdline for search
+    command_palette = true, -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false, -- add a border to hover docs and signature help
+  },
+})
+EOF
+
 " Translation 
 " TODO: implement more languages
 " nnoremap <space>te viw:Translate <locale name><CR>
@@ -468,8 +581,8 @@ lua require("translate").setup({})
 
 lua << EOF
 local telescope = require('telescope')
-telescope.load_extension("noice")
 telescope.load_extension("notify")
+telescope.load_extension("noice")
 telescope.setup{
     extensions_list = { "themes", "terms", "fzf" },
     extensions = {
@@ -544,8 +657,8 @@ dap.configurations.dart = {
     type = "dart",
     request = "launch",
     name = "Launch dart",
-    dartSdkPath = "/home/cathood/development/flutter/bin/flutter/bin/cache/dart-sdk/bin/dart", 
-    flutterSdkPath = "/home/cathood/development/flutter/bin/flutter",             
+    dartSdkPath = "/home/cathood0/development/flutter/bin/flutter/bin/cache/dart-sdk/bin/dart", 
+    flutterSdkPath = "/home/cathood0/development/flutter/bin/flutter",             
     program = "${workspaceFolder}/lib/main.dart",
     cwd = "${workspaceFolder}",
   },
@@ -553,8 +666,8 @@ dap.configurations.dart = {
     type = "flutter",
     request = "launch",
     name = "Launch flutter",
-    dartSdkPath = "/home/cathood/development/flutter/bin/flutter/bin/cache/dart-sdk/bin/dart", 
-    flutterSdkPath = "/home/cathood/development/flutter/bin/flutter", 
+    dartSdkPath = "/home/cathood0/development/flutter/bin/flutter/bin/cache/dart-sdk/bin/dart", 
+    flutterSdkPath = "/home/cathood0/development/flutter/bin/flutter", 
     program = "${workspaceFolder}/lib/main.dart", 
     cwd = "${workspaceFolder}",
   }
@@ -562,7 +675,7 @@ dap.configurations.dart = {
 -- c++/c/rust
 dap.adapters.codelldb = {
   type = "executable",
-  command = "/home/cathood/Descargas/debugger_adapters/codelldb/extension/adapter/codelldb", -- or if not in $PATH: "/absolute/path/to/codelldb"
+  command = "/home/cathood0/Descargas/debugger_adapters/codelldb/extension/adapter/codelldb", -- or if not in $PATH: "/absolute/path/to/codelldb"
   -- On windows you may have to uncomment this:
   -- detached = false,
 }
@@ -582,57 +695,6 @@ dap.configurations.cpp = {
 
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
-EOF
-
-lua << EOF
-require("action-hints").setup({
-     template = {
-        	definition = { text = " ⊛", color = "#add8e6" },
-        	references = { text = " ↱%s", color = "#ff6666" },
-     },
-	  sections = {
-    		lualine_x = { require("action-hints").statusline },
-  	  },
-     use_virtual_text = true,
-})
-EOF
-
-lua << EOF
-require("noice").setup({
-lsp = {
-    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-    },
-  },
-  markdown = {
-  hover = {
-      ["|(%S-)|"] = vim.cmd.help, -- vim help links
-      ["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
-    },
-    highlights = {
-      ["|%S-|"] = "@text.reference",
-      ["@%S+"] = "@parameter",
-      ["^%s*(Parameters:)"] = "@text.title",
-      ["^%s*(Return:)"] = "@text.title",
-      ["^%s*(See also:)"] = "@text.title",
-      ["{%S-}"] = "@parameter",
-    },
-  },
-  health = {
-    checker = true, -- Disable if you don't want health checks to run
-  },
-  -- you can enable a preset for easier configuration
-  presets = {
-    bottom_search = true, -- use a classic bottom cmdline for search
-    command_palette = true, -- position the cmdline and popupmenu together
-    long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false, -- add a border to hover docs and signature help
-  },
-})
 EOF
 
 lua << EOF
@@ -945,8 +1007,6 @@ require('neogit').setup {
       ["<c-t>"] = "TabOpen",
       ["{"] = "GoToPreviousHunkHeader",
       ["}"] = "GoToNextHunkHeader",
-      ["[c"] = "OpenOrScrollUp",
-      ["]c"] = "OpenOrScrollDown",
     },
   },
 }
@@ -977,7 +1037,7 @@ require("toggleterm").setup({
    start_in_insert = true,
    insert_mappings = true, -- whether or not the open mapping applies in insert mode
    direction = 'horizontal', --'vertical' | 'horizontal' | 'tab' | 'float',
-   terminal_mappings = false, -- whether or not the open mapping applies in the opened terminals
+   terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
    persist_size = true,
    persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
    close_on_exit = true, -- close the terminal window when the process exits
@@ -998,9 +1058,143 @@ EOF
 
 lua << EOF
 require("neo-tree").setup({
--- Diagnostics configs
-sources = {
+  event_handlers = {
+    {
+      event = "file_open_requested",
+      handler = function()
+        vim.cmd("Neotree close")
+      end
+    },
+    {
+      event = "neo_tree_buffer_enter",
+      handler = function()
+        vim.cmd("highlight! Cursor blend=100")
+      end,
+    },
+    {
+      event = "neo_tree_buffer_leave",
+      handler = function()
+        vim.cmd("highlight! Cursor guibg=#5f87af blend=0")
+      end,
+    },
+  },
+  hide_root_node = true,
+  retain_hidden_root_indent = true,
+  filesystem = {
+    filtered_items = {
+      -- when true, they will just be displayed differently 
+      -- than normal items
+      visible = true, 
+      hide_dotfiles = true,
+      hide_gitignored = true,
+      -- only works on Windows for hidden files/directories
+      hide_hidden = true, 
+      show_hidden_count = false,
+      never_show = {
+       '.DS_Store',
+      },
+    },
+    follow_current_file = {
+      enabled = true, -- This will find and focus the file in the active buffer every time
+      -- the current file is changed while the tree is open.
+      leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+    },
+    group_empty_dirs = false, -- when true, empty folders will be grouped together
+    -- netrw disabled, opening a directory opens neo-tree
+    -- in whatever position is specified in window.position
+    -- "open_default" -- netrw disabled, opening a directory opens within the
+    -- window like netrw would, regardless of window.position
+    -- "disabled" -- netrw left alone, neo-tree does not handle opening dirs
+    hijack_netrw_behavior = "open_current", 
+    use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
+    window = {
+      mappings = {
+        ["<bs>"] = "navigate_up",
+        ["."] = "set_root",
+        ["f"] = "filter_on_submit",
+        ["[g"] = "prev_git_modified",
+        ["]g"] = "next_git_modified",
+        ["o"] = { "show_help", nowait=false, config = { title = "Order by", prefix_key = "o" }},
+      },
+    },
+    commands = {} -- Add a custom command or override a global one using the same function name
+  },
+  buffers = {
+    -- the current file is changed while the tree is open.
+    follow_current_file = {
+      -- This will find and focus the file in the active buffer every time
+      enabled = true, 
+      -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+      leave_dirs_open = false,
+    },
+    -- when true, empty folders will be grouped together
+    group_empty_dirs = true,
+    show_unloaded = true,
+    window = {
+      mappings = {
+        ["bd"] = "buffer_delete",
+        ["."] = "set_root",
+        ["oc"] = { "order_by_created", nowait = false },
+        ["od"] = { "order_by_diagnostics", nowait = false },
+        ["om"] = { "order_by_modified", nowait = false },
+        ["on"] = { "order_by_name", nowait = false },
+        ["os"] = { "order_by_size", nowait = false },
+        ["ot"] = { "order_by_type", nowait = false },
+      }
+    },
+  },
+  git_status = {
+    window = {
+      position = "float",
+      mappings = {
+       ["A"]  = "git_add_all",
+       ["gu"] = "git_unstage_file",
+       ["ga"] = "git_add_file",
+       ["gr"] = "git_revert_file",
+       ["gc"] = "git_commit",
+       ["gp"] = "git_push",
+       ["gg"] = "git_commit_and_push",
+       ["o"] = { "show_help", nowait=false, config = { title = "Order by", prefix_key = "o" }},
+       ["oc"] = { "order_by_created", nowait = false },
+       ["od"] = { "order_by_diagnostics", nowait = false },
+       ["om"] = { "order_by_modified", nowait = false },
+       ["on"] = { "order_by_name", nowait = false },
+       ["os"] = { "order_by_size", nowait = false },
+       ["ot"] = { "order_by_type", nowait = false },
+      },
+    },
+  },
+  diagnostics = {
+    auto_preview = { -- May also be set to `true` or `false`
+      enabled = false, -- Whether to automatically enable preview mode
+      preview_config = {}, -- Config table to pass to auto preview (for example `{ use_float = true }`)
+      event = "neo_tree_buffer_enter", -- The event to enable auto preview upon (for example `"neo_tree_window_after_open"`)
+    },
+    bind_to_cwd = true,
+    diag_sort_function = "severity", -- "severity" means diagnostic items are sorted by severity in addition to their positions.
+                                     -- "position" means diagnostic items are sorted strictly by their positions.
+                                     -- May also be a function.
+    follow_current_file = { -- May also be set to `true` or `false`
+      enabled = true, -- This will find and focus the file in the active buffer every time
+      always_focus_file = false, -- Focus the followed file, even when focus is currently on a diagnostic item belonging to that file
+      expand_followed = true, -- Ensure the node of the followed file is expanded
+      leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+      leave_files_open = false, -- `false` closes auto expanded files, such as with `:Neotree reveal`
+    },
+    group_dirs_and_files = true, -- when true, empty folders and files will be grouped together
+    group_empty_dirs = true, -- when true, empty directories will be grouped together
+    show_unloaded = true, -- show diagnostics from unloaded buffers
+    refresh = {
+      delay = 100, -- Time (in ms) to wait before updating diagnostics. Might resolve some issues with Neovim hanging.
+      event = "vim_diagnostic_changed", -- Event to use for updating diagnostics (for example `"neo_tree_buffer_enter"`)
+                                        -- Set to `false` or `"none"` to disable automatic refreshing
+      max_items = 10000, -- The maximum number of diagnostic items to attempt processing
+                         -- Set to `false` for no maximum
+    },
+  },
+  sources = {
     "filesystem",
+    "diagnostics",
   },
   -- Default configs
  	close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
@@ -1012,14 +1206,8 @@ sources = {
   sort_function = nil , -- use a custom function for sorting files and directories in the tree 
 	source_selector = {
     -- statusline = true,
-	  winbar = true,
+	  winbar = false, -- removes the header bar
     statusline = true, 
-		sources = {
-			{
-				source = "filesystem",
-				display_name = "Explorer",
-			},
-		},
 		content_layout = "center",
 		highlight_tab = "NeoTreeTabInactive", -- string
 		highlight_tab_active = "NeoTreeTabActive", -- string
@@ -1044,16 +1232,13 @@ sources = {
       enable_character_fade = true
     },
     indent = {
-     indent_size = 2,
-     padding = 1, -- extra padding on left hand side
-     with_markers = true,
-     indent_marker = "│",
-     last_indent_marker = "└",
-     highlight = "NeoTreeIndentMarker",
-     with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
-     expander_collapsed = "",
-     expander_expanded = "",
-     expander_highlight = "NeoTreeExpander",
+      indent_size = 2,
+      padding = 1, -- extra padding on left hand side
+      with_markers = true,
+      indent_marker = "│",
+      last_indent_marker = "└",
+      highlight = "NeoTreeIndentMarker",
+      expander_highlight = "NeoTreeExpander",
     },
     diagnostics = {
       symbols = {
@@ -1165,94 +1350,45 @@ sources = {
             ["i"] = "show_file_details",
           }
         },
-        nesting_rules = {},
-        filesystem = {
-          filtered_items = {
-            visible = true, -- when true, they will just be displayed differently than normal items
-            hide_dotfiles = true,
-            hide_gitignored = true,
-            hide_hidden = true, -- only works on Windows for hidden files/directories
-          },
-          follow_current_file = {
-            enabled = true, -- This will find and focus the file in the active buffer every time
-            --               -- the current file is changed while the tree is open.
-            leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
-          },
-          group_empty_dirs = false, -- when true, empty folders will be grouped together
-          hijack_netrw_behavior = "open_current", -- netrw disabled, opening a directory opens neo-tree
-                                                  -- in whatever position is specified in window.position
-                                -- "open_default",  -- netrw disabled, opening a directory opens within the
-                                                  -- window like netrw would, regardless of window.position
-                                -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-          use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
-          window = {
-            mappings = {
-              ["<bs>"] = "navigate_up",
-              ["."] = "set_root",
-              ["f"] = "filter_on_submit",
-              ["[g"] = "prev_git_modified",
-              ["]g"] = "next_git_modified",
-              ["o"] = { "show_help", nowait=false, config = { title = "Order by", prefix_key = "o" }},
-            },
-          },
-
-          commands = {} -- Add a custom command or override a global one using the same function name
-        },
-        buffers = {
-          follow_current_file = {
-            enabled = true, -- This will find and focus the file in the active buffer every time
-            --              -- the current file is changed while the tree is open.
-            leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
-          },
-          group_empty_dirs = true, -- when true, empty folders will be grouped together
-          show_unloaded = true,
-          window = {
-            mappings = {
-              ["bd"] = "buffer_delete",
-              ["."] = "set_root",
-              ["oc"] = { "order_by_created", nowait = false },
-              ["od"] = { "order_by_diagnostics", nowait = false },
-              ["om"] = { "order_by_modified", nowait = false },
-              ["on"] = { "order_by_name", nowait = false },
-              ["os"] = { "order_by_size", nowait = false },
-              ["ot"] = { "order_by_type", nowait = false },
-            }
-          },
-        },
-        git_status = {
-          window = {
-            position = "float",
-            mappings = {
-              ["A"]  = "git_add_all",
-              ["gu"] = "git_unstage_file",
-              ["ga"] = "git_add_file",
-              ["gr"] = "git_revert_file",
-              ["gc"] = "git_commit",
-              ["gp"] = "git_push",
-              ["gg"] = "git_commit_and_push",
-              ["o"] = { "show_help", nowait=false, config = { title = "Order by", prefix_key = "o" }},
-              ["oc"] = { "order_by_created", nowait = false },
-              ["od"] = { "order_by_diagnostics", nowait = false },
-              ["om"] = { "order_by_modified", nowait = false },
-              ["on"] = { "order_by_name", nowait = false },
-              ["os"] = { "order_by_size", nowait = false },
-              ["ot"] = { "order_by_type", nowait = false },
-            }
-          }
-        },
+        nesting_rules = {}, 
 })
 EOF
 
 lua << EOF
+-- Necessary options for autosession
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 local opts = {
-  log_level = 'info',
-  auto_session_enable_last_session = vim.loop.cwd() == vim.loop.os_homedir(),
-  auto_session_root_dir = vim.fn.stdpath('data').."/sessions/",
-  auto_session_enabled = true,
-  auto_save_enabled = true,
-  auto_restore_enabled = true,
-  auto_session_suppress_dirs = nil,
-  auto_session_use_git_branch = true,
+  enabled = true, -- Enables/disables auto creating, saving and restoring
+  root_dir = "~/.nvim_sessions/", -- Root dir where sessions will be stored
+  auto_save = true, -- Enables/disables auto saving session on exit
+  auto_restore = true, -- Enables/disables auto restoring session on start
+  auto_create = true, -- Enables/disables auto creating new session files. Can take a function that should return true/false if a new session file should be created or not
+  suppressed_dirs = nil, -- Suppress session restore/create in certain directories
+  allowed_dirs = nil, -- Allow session restore/create in certain directories
+  auto_restore_last_session = false, -- On startup, loads the last saved session if session for cwd does not exist
+  use_git_branch = false, -- Include git branch name in session name
+  lazy_support = true, -- Automatically detect if Lazy.nvim is being used and wait until Lazy is done to make sure session is restored correctly. Does nothing if Lazy isn't being used. Can be disabled if a problem is suspected or for debugging
+  bypass_save_filetypes = nil, -- List of filetypes to bypass auto save when the only buffer open is one of the file types listed, useful to ignore dashboards
+  close_unsupported_windows = true, -- Close windows that aren't backed by normal file before autosaving a session
+  args_allow_single_directory = true, -- Follow normal sesion save/load logic if launched with a single directory as the only argument
+  args_allow_files_auto_save = false, -- Allow saving a session even when launched with a file argument (or multiple files/dirs). It does not load any existing session first. While you can just set this to true, you probably want to set it to a function that decides when to save a session when launched with file args. See documentation for more detail
+  continue_restore_on_error = true, -- Keep loading the session even if there's an error
+  show_auto_restore_notif = false, -- Whether to show a notification when auto-restoring
+  cwd_change_handling = false, -- Follow cwd changes, saving a session before change and restoring after
+  lsp_stop_on_restore = false, -- Should language servers be stopped when restoring a session. Can also be a function that will be called if set. Not called on autorestore from startup
+  restore_error_handler = nil, -- Called when there's an error restoring. By default, it ignores fold errors otherwise it displays the error and returns false to disable auto_save
+  log_level = "error", -- Sets the log level of the plugin (debug, info, warn, error).
+
+  session_lens = {
+    load_on_setup = true, -- Initialize on startup (requires Telescope)
+    theme_conf = { -- Pass through for Telescope theme options
+      -- layout_config = { -- As one example, can change width/height of picker
+      --   width = 0.8,    -- percent of window
+      --   height = 0.5,
+      -- },
+    },
+    previewer = false, -- File preview for session picker
+  },
 }
 
 require('auto-session').setup(opts)

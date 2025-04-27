@@ -10,7 +10,7 @@ Plug 'SirVer/Ultisnips'
 Plug 'natebosch/dartlang-snippets'
 "Plug 'honza/vim-snippets'
 " LSP tools preconfigured
-Plug 'neoclide/coc.nvim', { 'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'nvim-lua/plenary.nvim'
 Plug 'stevearc/dressing.nvim' 
 " cmdline autocomplete (since the coc.nvim doesnt have support for cmdline autocompletion then this at least implement
@@ -24,11 +24,12 @@ Plug 'hrsh7th/cmp-path'
 Plug 'mfussenegger/nvim-dap' 
 " File explorer
 Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'mrbjarksen/neo-tree-diagnostics.nvim'
 " Git 
 Plug 'lewis6991/gitsigns.nvim' 
 " Tabs
-Plug 'akinsho/bufferline.nvim' 
-"Plug 'romgrk/barbar.nvim'
+"Plug 'akinsho/bufferline.nvim' " It's good, but it has a lot of issues when try to remove tabs with shortcuts 
+Plug 'romgrk/barbar.nvim'
 " Windows picker manager
 Plug 's1n7ax/nvim-window-picker', { 'version' : '2.*' }  
 Plug 'tpope/vim-sensible'
@@ -37,13 +38,14 @@ Plug 'nvim-lualine/lualine.nvim'
 " Notifications
 Plug 'rcarriga/nvim-notify'
 Plug 'folke/noice.nvim'
+
 " Code Formatter
 Plug 'nvimtools/none-ls.nvim'
 Plug 'MunifTanjim/nui.nvim' 
 " Indent line guides
 Plug 'lukas-reineke/indent-blankline.nvim'
 " Actions Hints
-Plug 'roobert/action-hints.nvim'
+"Plug 'roobert/action-hints.nvim'
 " Line mover
 Plug 'hinell/move.nvim'
 " Underline border for current word at current cursor position
@@ -98,6 +100,7 @@ Plug 'navarasu/onedark.nvim'
 Plug 'projekt0n/github-nvim-theme'
 Plug 'rebelot/kanagawa.nvim'
 Plug 'srcery-colors/srcery-vim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 " Color picker
 Plug 'ziontee113/color-picker.nvim'
 Plug 'MeanderingProgrammer/markdown.nvim'
