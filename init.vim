@@ -1423,6 +1423,7 @@ EOF
 "else
 "  inoremap <silent><expr> <c-@> coc#refresh()
 "endif
+"
 augroup group_coc 
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -1446,19 +1447,29 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 imap <silent><expr> <C-Space> coc#refresh()
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
+ 
+" Add `:Format` command to format current buffer
+command! -nargs=0 Format :call CocActionAsync('format')
 
 " Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=? Fold :call     CocActionAsync('fold', <f-args>)
 
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+" Add `:OR` command for organize imports of the current buffer
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 "
+" Add (Neo)Vim's native statusline support
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Highlight the symbol and its references when holding the cursor
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+autocmd BufWritePre *.go :call CocActionAsync('runCommand', 'editor.action.organizeImport')
+autocmd BufWritePre *.tsx :call CocActionAsync('runCommand', 'editor.action.organizeImport')
+autocmd BufWritePre *.ts :call CocActionAsync('runCommand', 'editor.action.organizeImport')
+autocmd BufWritePre *.js :call CocActionAsync('runCommand', 'editor.action.organizeImport')
+autocmd BufWritePre *.jsx :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')

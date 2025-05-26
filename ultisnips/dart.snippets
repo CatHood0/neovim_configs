@@ -32,34 +32,11 @@ setUp(() {
 });
 endsnippet
 
-snippet navigator "Get navigator of context" b
-final navigator = Navigator.of(context);
-endsnippet
-
-snippet riverViewModel "riverpod style view model" b
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:goodbadday/common/architecture/view/view_model.dart';
-
-final ${1}Provider =
-    StateNotifierProvider.autoDispose<${2}, ${3}>(
-  (ref) => ${2}(),
-);
-
-class ${2} extends ViewModel<${3}> {
-  ${2}() : super(null);
-
-  @override
-  void onInit() {
-    // TODO: implement onInit
-  }
-}
-endsnippet
-
-snippet constConstructor "constant constructor" b
+snippet cobuild "constant constructor" b
 const ${1}({Key? key}): super(key:key);
 endsnippet
 
-snippet tw "test widget" b
+snippet twidget "test widget" b
 testWidgets('${1}', (WidgetTester tester) async {
   ${0}
 });
@@ -87,22 +64,7 @@ snippet mock "create mockito class" b
 class Mock${1} extends Mock implements ${1} {}
 endsnippet
 
-snippet jsbuilt "create JsonSerializable class" b
-import 'package:json_annotation/json_annotation.dart';
-
-part '${1:`!v expand('%:t:r')`.g.dart}';
-
-@JsonSerializable()
-class ${1} {
-
-  factory ${1}.fromJson(Map<String, dynamic> json) =>
-    _\$${1}FromJson(json);
-
-  Map<String, dynamic> toJson() => _\$${1}ToJson(this);
-}
-endsnippet
-
-snippet toJson "Json methods" b
+snippet tojson "Json methods" b
 Map<String, dynamic> toMap() {
   return {};
 }
@@ -215,22 +177,6 @@ class MyBloc extends Bloc<MyEvent, MyState> {
 
 endsnippet
 
-snippet inheritedW "InheritedWidget" b
-class ${1} extends InheritedWidget {
-  const ${1}({super.key, required this.child}) : super(child: child);
-  final Widget child;
-
-  static ${1}? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<${1}>();
-  }
-
-  @override
-  bool updateShouldNotify(${1} oldWidget) {
-    return false;
-  }
-}
-endsnippet
-
 snippet mateapp "Material App Widget" b
 import 'package:flutter/material.dart';
 
@@ -265,7 +211,7 @@ test(
 );
 endsnippet
 
-snippet valueListenable "ValueListenableBuilder Widget" b
+snippet valuelistenable "ValueListenableBuilder Widget" b
 ValueListenableBuilder(
   valueListenable: ${1},
   builder: (BuildContext context, dynamic value, Widget? child) {
@@ -277,7 +223,6 @@ endsnippet
 snippet reassemble "StatefulWidget method" b
 @override
 void reassemble(){
-  ${0}
   super.reassemble();
 }
 endsnippet
@@ -289,7 +234,7 @@ useEffect(() {
 }, <Object?>[]);
 endsnippet
 
-snippet init "StatefulWidget method" b
+snippet initstate "StatefulWidget method" b
 @override
 void initState(){
   super.initState();
@@ -299,20 +244,18 @@ endsnippet
 snippet dis "StatefulWidget method" b
 @override
 void dispose(){
-  ${0}
   super.dispose();
 }
 endsnippet
 
-snippet didC "StatefulWidget method" b
+snippet didc "StatefulWidget method" b
 @override
 void didChangeDependencies() {
-  ${0}
   super.didChangeDependencies();
 }
 endsnippet
 
-snippet statefulW "Stateful Widget" b
+snippet statefulw "Stateful Widget" b
 class ${1} extends StatefulWidget {
   const ${1}({super.key});
 
@@ -328,7 +271,7 @@ class _${1}State extends State<${1}> {
 }
 endsnippet
 
-snippet statelessW "Stateless Widget" b
+snippet statelessw "Stateless Widget" b
 class ${1} extends StatelessWidget {
   const ${1}({super.key});
 

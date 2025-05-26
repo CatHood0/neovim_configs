@@ -46,17 +46,33 @@
   "flutter.autoOpenDevLog": true,
   "flutter.autoHideDevLog": true,
   "coc.preferences.formatOnSave": false,
+  "javascript.preferences.jsxAttributeCompletionStyle": "auto",
+  "javascript.format.enable": true,
+  "javascript.format.semicolons": "insert",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.format.enable": true,
+  "typescript.format.semicolons": "insert",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "tsserver.useLocalTsdk": true,
+  "go.enable": true,
+  "go.trace.server": "verbose",
   "eslint.autoFixOnSave": false,
   "prettier.requireConfig": true,
-  "prettier.disableLanguages": ["vue"],
   "prettier.tabWidth": 2,
   "prettier.singleQuote": true,
   "prettier.trailingComma": "all",
-  "eslint.packageManager": "yarn",
-  "eslint.nodePath": ".yarn/sdks",
+  "tsserver.enable": true,
+  "tsserver.log": "verbose",
   "workspace.workspaceFolderCheckCwd": false,
-  "tsserver.tsdk": ".yarn/sdks/typescript/lib",
   "languageserver": {
+   "go": {
+      "command": "gopls",
+      "rootPatterns": ["go.work", "go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
+    },
     "html": {
       "command": "vscode-html-languageserver",
       "args": ["--stdio"],
@@ -75,7 +91,12 @@
     "typescript": {
       "command": "typescript-language-server",
       "args": ["--stdio"],
-      "filetypes": ["typescript", "typescriptreact"]
+      "filetypes": ["typescript", "typescriptreact"],
+    },
+    "tsserver": {
+      "command": "typescript-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["typescript", "typescriptreact"],
     },
     "python": {
       "command": "pyls",
@@ -102,5 +123,8 @@
       }
     }
   },
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }

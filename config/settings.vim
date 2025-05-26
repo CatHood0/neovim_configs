@@ -42,7 +42,7 @@ set signcolumn=yes
 " Default is 4000 MS instead 300
 set updatetime=300
 set shortmess+=c
-"""""highlight the column where the wrapping will be made
+" highlight the column where the wrapping will be made
 syntax on
 filetype plugin indent on
 " Spelling correction
@@ -55,7 +55,7 @@ set background=dark " or light if you want light mode
 let mapleader=","
 let g:barbar_auto_setup = v:false
 
-let g:coc_global_extensions = ['coc-json', 'coc-css', 'coc-html', 'coc-clangd', 'coc-prettier', 'coc-eslint', 'coc-flutter-tools']
+let g:coc_global_extensions = ['coc-json', 'coc-css', 'coc-html', 'coc-clangd', 'coc-prettier', 'coc-eslint', 'coc-flutter-tools', 'coc-tsserver']
 
 let g:python3_host_prog = '/usr/bin/python3'
 " disable perl
@@ -65,4 +65,3 @@ let g:UltiSnipsSnippetDirectories=['UltiSnips', $HOME.'/.config/nvim/ultisnips/d
 let g:palenight_terminal_italics=1
 "One dark config
 let g:onedark_config = {'style': 'darker'}
-
