@@ -16,7 +16,6 @@ require('gitsigns').setup({
   numhl = true,
   linehl = false,
   word_diff = true,
-  preview_hunk_inline = true,
   watch_gitdir = {
     interval = 1000,
     follow_files = true
