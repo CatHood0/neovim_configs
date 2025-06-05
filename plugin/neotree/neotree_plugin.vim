@@ -137,6 +137,7 @@ require("neo-tree").setup({
   sources = {
     "filesystem",
     "diagnostics",
+    -- ...and any additional source
   },
   -- Default configs
  	close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab

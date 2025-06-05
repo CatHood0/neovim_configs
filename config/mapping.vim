@@ -32,21 +32,6 @@ nnoremap <silent> n <Nop>
 "nmap <c-Ñ> <Plug>VimspectorJumpToNextBreakpoint
 "nmap <c-ñ> <Plug>VimspectorJumpToPreviousBreakpoint
 
-" Flutter commands
-nnoremap <silent> <space>fr <cmd>:CocCommand flutter.run<cr>
-nnoremap <silent> <space>fq <cmd>:CocCommand flutter.dev.quit<cr>
-
-nnoremap <silent> <space>tou <cmd>:CocCommand flutter.toggleOutline<cr>
-nnoremap <silent> <space>fmo <cmd>:CocCommand flutter.devices<cr>
-nnoremap <silent> <space>ro <cmd>:CocCommand flutter.dev.hotReload<cr>
-nnoremap <silent> <space>re <cmd>:CocCommand flutter.dev.hotRestart<cr>
-nnoremap <silent> <space>sp <cmd>:CocCommand flutter.lsp.restart<cr>
-nnoremap <silent> <space>op <cmd>:CocCommand flutter.dev.openDevToolsProfiler<cr>
-nnoremap <silent> <space>fn <cmd>:CocCommand workspace.renameCurrentFile<cr>
-nnoremap <silent> <space>eg <cmd>:CocCommand flutter.pub.get<cr>
-nnoremap <silent> <space>co <cmd>:CocCommand flutter.dev.openDevLog<CR>
-nnoremap <silent> <space>cl <cmd>:CocCommand flutter.dev.clearDevLog<cr>
-
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
@@ -171,7 +156,7 @@ nnoremap <silent> <space>ql <cmd>:SessionRestore<CR>
 nnoremap <silent> <space>qd <cmd>:SessionDelete<CR>
 
 " Tree
-nmap <silent> <C-a> <CMD>Neotree toggle<CR>
+map <silent> <C-a> <CMD>Neotree toggle<CR>
 "nmap <C-a> <Cmd>CocCommand explorer<CR>
 " Custom actions
 nnoremap <silent> <C-s> <CMD>:wall<CR>
@@ -223,6 +208,20 @@ nmap <C-d>i <Plug>(coc-type-definition)
 nmap <leader>w <Plug>(coc-references)
 nnoremap <silent> <space>fi <CMD>:CocDiagnostics<CR> 
 nnoremap <silent> <C-d>d <Plug>(coc-definition)
+" Flutter commands
+nnoremap <silent> <space>fr <cmd>:CocCommand flutter.run<cr>
+nnoremap <silent> <space>fq <cmd>:CocCommand flutter.dev.quit<cr>
+
+nnoremap <silent> <space>tou <cmd>:CocCommand flutter.toggleOutline<cr>
+nnoremap <silent> <space>fmo <cmd>:CocCommand flutter.devices<cr>
+nnoremap <silent> <space>ro <cmd>:CocCommand flutter.dev.hotReload<cr>
+nnoremap <silent> <space>re <cmd>:CocCommand flutter.dev.hotRestart<cr>
+nnoremap <silent> <space>sp <cmd>:CocCommand flutter.lsp.restart<cr>
+nnoremap <silent> <space>op <cmd>:CocCommand flutter.dev.openDevToolsProfiler<cr>
+nnoremap <silent> <space>fn <cmd>:CocCommand workspace.renameCurrentFile<cr>
+nnoremap <silent> <space>eg <cmd>:CocCommand flutter.pub.get<cr>
+nnoremap <silent> <space>co <cmd>:CocCommand flutter.dev.openDevLog<CR>
+nnoremap <silent> <space>cl <cmd>:CocCommand flutter.dev.clearDevLog<cr>
 " nnoremap <silent> <space>cc  <Plug>(coc-codeaction-cursor)
 " nmap <silent><leader>g <Plug>(coc-definition)
 " nmap <leader>t <Plug>(coc-type-definition)

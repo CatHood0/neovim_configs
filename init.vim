@@ -3,21 +3,21 @@ source ~/.config/nvim/config/settings.vim
 source ~/.config/nvim/config/mapping.vim
 source ~/.config/nvim/config/plugins.vim
 " Plugins
-source ~/.config/nvim/config/plugins/autosession/autosession_plugin.vim
-source ~/.config/nvim/config/plugins/coc/coc_plugin.vim
-source ~/.config/nvim/config/plugins/dart_dap/dap_plugin.vim
-source ~/.config/nvim/config/plugins/neotree/neotree_plugin.vim
-source ~/.config/nvim/config/plugins/notify/notify_plugin.vim
-source ~/.config/nvim/config/plugins/toggleterm/toggleterm_plugin.vim
-source ~/.config/nvim/config/plugins/cursors/cursors_plugins.vim
-source ~/.config/nvim/config/plugins/barbar/barbar_plugin.vim
-source ~/.config/nvim/config/plugins/cmp/cmp_plugin.vim
-source ~/.config/nvim/config/plugins/treesitter/treesitter_plugin.vim
-source ~/.config/nvim/config/plugins/telescope/telescope_plugin.vim
-source ~/.config/nvim/config/plugins/themes/themes_plugin.vim
-source ~/.config/nvim/config/plugins/git/git_plugins.vim
-source ~/.config/nvim/config/plugins/statusline/statusline_plugin.vim
-source ~/.config/nvim/config/plugins/indent_line/indent_line_plugin.vim
+source ~/.config/nvim/plugin/git/git_plugins.vim
+source ~/.config/nvim/plugin/statusline/statusline_plugin.vim
+source ~/.config/nvim/plugin/autosession/autosession_plugin.vim
+source ~/.config/nvim/plugin/themes/themes_plugin.vim
+source ~/.config/nvim/plugin/neotree/neotree_plugin.vim
+source ~/.config/nvim/plugin/indent_line/indent_line_plugin.vim
+source ~/.config/nvim/plugin/notify/notify_plugin.vim
+source ~/.config/nvim/plugin/notify/noice.vim
+source ~/.config/nvim/plugin/toggleterm/toggleterm_plugin.vim
+source ~/.config/nvim/plugin/cursors/cursors_plugins.vim
+source ~/.config/nvim/plugin/barbar/barbar_plugin.vim
+source ~/.config/nvim/plugin/treesitter/treesitter_plugin.vim
+source ~/.config/nvim/plugin/cmp/cmp_plugin.vim
+source ~/.config/nvim/plugin/telescope/telescope_plugin.vim
+source ~/.config/nvim/plugin/dart_dap/dap_plugin.vim
 
 lua << EOF
 require('ultimate-autopair').setup({
@@ -67,44 +67,6 @@ require('tmux').setup({
 })
 EOF
 
-lua << EOF
-require("noice").setup({
-  lsp = {
-    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-    },
-  },
-  markdown = {
-    hover = {
-      ["|(%S-)|"] = vim.cmd.help, -- vim help links
-      ["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
-    },
-    highlights = {
-      ["|%S-|"] = "@text.reference",
-      ["@%S+"] = "@parameter",
-      ["^%s*(Parameters:)"] = "@text.title",
-      ["^%s*(Return:)"] = "@text.title",
-      ["^%s*(See also:)"] = "@text.title",
-      ["{%S-}"] = "@parameter",
-    },
-  },
-  health = {
-    checker = true, -- Disable if you don't want health checks to run
-  },
-  -- you can enable a preset for easier configuration
-  presets = {
-    bottom_search = true, -- use a classic bottom cmdline for search
-    command_palette = true, -- position the cmdline and popupmenu together
-    long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false, -- add a border to hover docs and signature help
-  },
-})
-EOF
-
 " Translation 
 " nnoremap <space>te viw:Translate <locale name><CR>
 nnoremap <space>te viw:Translate es<CR>
@@ -148,4 +110,54 @@ EOF
 "else
 "  inoremap <silent><expr> <c-@> coc#refresh()
 "endif
+"
+augroup group_coc 
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
+augroup command_window
+  function! ReInitCoc()
+        execute("CocDisable")
+        execute("CocEnable")
+    endfunction
+  autocmd CmdwinEnter * startinsert
+  autocmd CmdwinEnter * call ReInitCoc()
+augroup END
+
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+imap <silent><expr> <C-Space> coc#refresh()
+ 
+" Add `:Format` command to format current buffer
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocActionAsync('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+"
+" Add (Neo)Vim's native statusline support
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
