@@ -20,7 +20,7 @@ set clipboard+=unnamedplus
 " auto completition on tab
 set wildmenu
 set wildmode=longest:full,full
-set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx,*.odt,*.psd,*.jpeg,*.wepb
+set wildignore=*.jpg,*.png,*.gif,*.pdf,*.pyc,*.flv,*.img,*.xlsx,*.psd,*.jpeg
 set nobackup
 set colorcolumn=120
 set textwidth=300
@@ -55,7 +55,7 @@ set background=dark " or light if you want light mode
 let mapleader=","
 let g:barbar_auto_setup = v:false
 
-let g:coc_global_extensions = ['coc-json', 'coc-css', 'coc-html', 'coc-clangd', 'coc-prettier', 'coc-eslint', 'coc-flutter-tools', 'coc-tsserver']
+let g:coc_global_extensions = ['coc-json', 'coc-css', 'coc-html', 'coc-clangd', 'coc-eslint', 'coc-flutter-tools', 'coc-tsserver', 'coc-go', 'coc-git', 'coc-rust-analyzer']
 
 let g:python3_host_prog = '/usr/bin/python3'
 " disable perl
@@ -65,3 +65,10 @@ let g:UltiSnipsSnippetDirectories=['UltiSnips', $HOME.'/.config/nvim/ultisnips/d
 let g:palenight_terminal_italics=1
 "One dark config
 let g:onedark_config = {'style': 'darker'}
+
+lua << EOF
+vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" }) 
+vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
+EOF

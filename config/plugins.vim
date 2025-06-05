@@ -5,10 +5,14 @@ Plug 'vim-test/vim-test'
 Plug 'uga-rosa/translate.nvim'
 " Auto sessions manager
 Plug 'rmagatti/auto-session'
+" Indent line
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'HiPhish/rainbow-delimiters.nvim'
 " Snippets
 Plug 'SirVer/Ultisnips'
 Plug 'natebosch/dartlang-snippets'
 "Plug 'honza/vim-snippets'
+Plug 'tpope/vim-fugitive'
 " LSP tools preconfigured
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'nvim-lua/plenary.nvim'
@@ -42,8 +46,6 @@ Plug 'folke/noice.nvim'
 " Code Formatter
 Plug 'nvimtools/none-ls.nvim'
 Plug 'MunifTanjim/nui.nvim' 
-" Indent line guides
-Plug 'lukas-reineke/indent-blankline.nvim'
 " Actions Hints
 "Plug 'roobert/action-hints.nvim'
 " Line mover
@@ -55,7 +57,9 @@ Plug 'mtdl9/vim-log-highlighting'
 " Telescope (files finder, line finder, notifier, etc)
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 " Visual git manager
-Plug 'NeogitOrg/neogit'
+" "Non used since has conflicts with coc-git and vim-fugitive"   Plug 'NeogitOrg/neogit'
+" Smooth cursor feature
+Plug 'sphamba/smear-cursor.nvim'
 " Diff view for git
 Plug 'sindrets/diffview.nvim'
 Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)

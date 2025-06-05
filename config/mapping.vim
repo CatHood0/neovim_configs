@@ -53,14 +53,14 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 
 " Neogit 
-noremap <silent> <space>gi <cmd>:Neogit<CR>
-noremap <silent> <space>gf <cmd>:Neogit fetch<CR>
-noremap <silent> <space>gl <cmd>:Neogit pull<CR>
-noremap <silent> <space>gu <cmd>:Neogit push<CR>
-noremap <silent> <space>gc <cmd>:Neogit commit<CR>
-noremap <silent> <space>gb <cmd>:Neogit branch<CR>
-noremap <silent> <space>gd <cmd>:Neogit diff<CR>
-noremap <silent> <space>gm <cmd>:Neogit merge<CR>
+"noremap <silent> <space>gi <cmd>:Neogit<CR>
+"noremap <silent> <space>gf <cmd>:Neogit fetch<CR>
+"noremap <silent> <space>gl <cmd>:Neogit pull<CR>
+"noremap <silent> <space>gu <cmd>:Neogit push<CR>
+"noremap <silent> <space>gc <cmd>:Neogit commit<CR>
+"noremap <silent> <space>gb <cmd>:Neogit branch<CR>
+"noremap <silent> <space>gd <cmd>:Neogit diff<CR>
+"noremap <silent> <space>gm <cmd>:Neogit merge<CR>
 
 "Alternative file searhing with Fzf mappings
 "nmap <C-P> :Files<CR>

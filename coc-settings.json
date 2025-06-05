@@ -16,7 +16,6 @@
   "flutter.enabled": true,
   "flutter.lsp.initialization.onlyAnalyzeProjectsWithOpenFiles": true,
   "flutter.UIPath": true,
-  "xml.preferences.quoteStyle": "single",
   "diagnostic.enable": true,
   "rust-analyzer.server.path": "~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rust-analyzer",
   "rust-analyzer.completion.limit": null,
@@ -32,7 +31,6 @@
   "suggest.snippetsSupport": true,
   "suggest.enablePreselect": true,
   "suggest.snippetIndicator": " 💡",
-  "snippets.ultisnips.directories": ["~/.config/nvim/ultisnips"],
   "dart.enableSdkFormatter": true,
   "dart.lineLength": 90,
   "dart.showTodos": true,
@@ -63,6 +61,11 @@
   "prettier.trailingComma": "all",
   "tsserver.enable": true,
   "tsserver.log": "verbose",
+  "git.showCommitInFloating": true,
+  "git.semanticCommit.scope": true,
+  "coc.preferences.maxFileSize": "70MB",
+  "coc.preferences.enableMessageDialog": true,
+  "coc.preferences.messageLevel": "warning",
   "workspace.workspaceFolderCheckCwd": false,
   "languageserver": {
    "go": {
@@ -123,7 +126,6 @@
       }
     }
   },
-  "snippets.ultisnips.pythonPrompt": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   }
