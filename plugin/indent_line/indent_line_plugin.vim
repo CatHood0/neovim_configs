@@ -47,9 +47,14 @@ require("ibl").setup {
   -- removes the dynamic colors of every indent line scope
   whitespace = {
     highlight = backgroundHighlight,
-    remove_blankline_trail = true,
+    remove_blankline_trail = false,
   },
   scope = { enabled = true, highlight = highlight},
 }
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+-- Removes first indent line
+--[[hooks.register(
+  hooks.type.WHITESPACE,
+  hooks.builtin.hide_first_space_indent_level
+)]]
 EOF

@@ -1,7 +1,6 @@
-"lua require("mini.cursorword").setup()
+lua require("mini.cursorword").setup()
 
 lua << EOF
---[[
 require('smear_cursor').setup({
   cursor_color = '#ff8800',
   transparent_bg_fallback_color = "#303030",
@@ -16,7 +15,7 @@ require('smear_cursor').setup({
   scroll_buffer_space = true,
   -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
   -- Smears will blend better on all backgrounds.
-  legacy_computing_symbols_support = false,
+  legacy_computing_symbols_support = true,
   -- Smear cursor in insert mode.
   -- See also `vertical_bar_cursor_insert_mode` and `distance_stop_animating_vertical_bar`.
   smear_insert_mode = true,
@@ -26,5 +25,4 @@ require('smear_cursor').setup({
   trailing_stiffness_insert_mode = 0.6, -- 0.4      [0, 1]
   distance_stop_animating = 0.5,        -- 0.1      > 0
 })
-]]--
 EOF
