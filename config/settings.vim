@@ -76,6 +76,17 @@ let g:palenight_terminal_italics=1
 "One dark config
 let g:onedark_config = {'style': 'darker'}
 
+let g:dart_format_on_save = 0 " Pass "1" if you want automatic format on save current buffer
+let g:dartfmt_options = ['--fix', '--line-length 90']
+let g:dart_style_guide = 2
+
+" let g:signify_sign_show_count = 0
+" let g:signify_sign_show_text = 1
+" let g:signify_sign_change = '~'
+
+let g:lsc_auto_map = v:true
+let g:auto_session_root_dir = "~/.nvim_sessions" 
+
 " ==================== LUA Section ====================
 lua << EOF
 vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
