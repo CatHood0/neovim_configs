@@ -234,3 +234,11 @@ nnoremap <silent> <space>cl <cmd>:CocCommand flutter.dev.clearDevLog<cr>
 " nmap <leader>h  <Plug>(coc-codeaction-cursor)
 imap  <C-n> <Nop>
 imap  <C-p> <Nop>
+
+" IA (Codeium config mapping)
+imap <script><silent><nowait><expr> <TAB> codeium#Accept()
+imap <script><silent><nowait><expr> <C-h> codeium#AcceptNextWord()
+imap <script><silent><nowait><expr> <C-j> codeium#AcceptNextLine()
+imap <C-;>   <Cmd>call codeium#CycleCompletions(1)<CR>
+imap <C-,>   <Cmd>call codeium#CycleCompletions(-1)<CR>
+imap <C-x>   <Cmd>call codeium#Clear()<CR>

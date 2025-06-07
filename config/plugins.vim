@@ -45,8 +45,6 @@ Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-path'
-" Visualizador de problemas
-Plug 'folke/trouble.nvim'
 
 " Snippets
 Plug 'SirVer/Ultisnips'
@@ -118,7 +116,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' 
 " Color Picker
 Plug 'ziontee113/color-picker.nvim'
 
-" IA (comentado originalmente)
-" Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
+" IA
+Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
 
 call plug#end()
