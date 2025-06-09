@@ -11,11 +11,11 @@ require('gitsigns').setup({
   signs_staged_enable = true,
   signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
   auto_attach = true,
-  attach_to_untracked = true,
+  attach_to_untracked = false,
   signcolumn = true,
   numhl = true,
   linehl = false,
-  word_diff = true,
+  word_diff = false,
   watch_gitdir = {
     interval = 1000,
     follow_files = true

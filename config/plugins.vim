@@ -1,7 +1,8 @@
 call plug#begin()
 " 1. CONFIGURACIÓN BÁSICA Y ESENCIALES
 Plug 'tpope/vim-sensible'
-Plug 'romgrk/barbar.nvim'          " Tabs (reemplazo de bufferline)
+"Plug 'romgrk/barbar.nvim'          " Tabs (reemplazo de bufferline)
+Plug 'akinsho/bufferline.nvim'     " Tabs 
 Plug 'stevearc/dressing.nvim'      " Mejoras UI para inputs y selects
 
 " 2. INTERFAZ DE USUARIO Y TEMAS
@@ -23,8 +24,8 @@ Plug 'nvim-tree/nvim-web-devicons'  " Iconos
 " 3. NAVEGACIÓN Y BUSQUEDA
 " Explorador de archivos
 Plug 'nvim-neo-tree/neo-tree.nvim'
-Plug 'mrbjarksen/neo-tree-diagnostics.nvim'
 Plug 'ryanoasis/vim-devicons' " Iconos
+Plug 'ryanoasis/vim-web-devicons' " Iconos
 
 " Buscadores
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }

@@ -37,22 +37,22 @@ nnoremap <silent> <space>qq <CMD>:Format<CR><CMD>:wqall<CR><cmd>:SessionSave<CR>
 
 " ==================== Buffer Management ====================
 " Barbar
-nmap <silent> <space>m :BufferNext<CR>
-nmap <silent> <space>n :BufferPrevious<CR>
-nmap <silent> <space>d  :BufferDelete<CR>
-nmap <silent> <space>1  :BufferFirst<CR>
-nmap <silent> <space>2  :BufferLast<CR>
-nmap <silent> <space>vs  :BufferMoveStart<CR>
-nmap <silent> <space>vm  :BufferMoveNext<CR>
-nmap <silent> <space>vn  :BufferMovePrevious<CR>
+" nmap <silent> <space>m :BufferNext<CR>
+" nmap <silent> <space>n :BufferPrevious<CR>
+" nmap <silent> <space>d  :BufferDelete<CR>
+" nmap <silent> <space>1  :BufferFirst<CR>
+" nmap <silent> <space>2  :BufferLast<CR>
+" nmap <silent> <space>vs  :BufferMoveStart<CR>
+" nmap <silent> <space>vm  :BufferMoveNext<CR>
+" nmap <silent> <space>vn  :BufferMovePrevious<CR>
 
 " Bufferline (commented)
-" nmap <silent> <space>m   :BufferLineCycleNext<CR>
-" nmap <silent> <space>n   :BufferLineCyclePrev<CR>
-" nmap <silent> <space>d   :bdelete!<CR>
-" nmap <silent> <space>vc  :BufferLineTogglePin<CR>
-" nmap <silent> <space>vm  :BufferLineMoveNext<CR>
-" nmap <silent> <space>vn  :BufferLineMovePrev<CR>
+nmap <silent> <space>m   :BufferLineCycleNext<CR>
+nmap <silent> <space>n   :BufferLineCyclePrev<CR>
+nmap <silent> <space>d   :bdelete!<CR>
+nmap <silent> <space>vc  :BufferLineTogglePin<CR>
+nmap <silent> <space>vm  :BufferLineMoveNext<CR>
+nmap <silent> <space>vn  :BufferLineMovePrev<CR>
 
 " ==================== Search/Finding ====================
 " FZF (commented)
@@ -137,7 +137,7 @@ nnoremap <silent> <space>ca <Plug>(coc-codeaction-cursor)
 nnoremap <silent> <space>cs <Plug>(coc-codeaction-source)
 nnoremap <silent> <space>cf  <Plug>(coc-fix-current)
 nmap <C-d>i <Plug>(coc-type-definition)
-nmap <leader>w <Plug>(coc-references)
+nmap <C-w> <Plug>(coc-references)
 nnoremap <silent> <space>fi <CMD>:CocDiagnostics<CR> 
 nnoremap <silent> <C-d>d <Plug>(coc-definition)
 

@@ -1,4 +1,5 @@
 lua << EOF
+--[[
   require'barbar'.setup {
   animation = true,
   -- Automatically hide the tabline when there are this many buffers left.
@@ -119,4 +120,5 @@ lua << EOF
   no_name_title = 'Neovim',
   --version = '^1.0.0', -- optional: only update when a new 1.x version is released
 }
+  ]]
 EOF

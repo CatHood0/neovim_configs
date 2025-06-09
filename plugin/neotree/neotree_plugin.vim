@@ -149,7 +149,7 @@ require("neo-tree").setup({
   sort_function = nil , -- use a custom function for sorting files and directories in the tree 
 	source_selector = {
     -- statusline = true,
-	  winbar = false, -- removes the header bar
+	  winbar = true, -- removes the header bar
     statusline = true, 
 		content_layout = "center",
 		highlight_tab = "NeoTreeTabInactive", -- string
@@ -185,10 +185,10 @@ require("neo-tree").setup({
     },
     diagnostics = {
       symbols = {
-        error = "E",  -- Símbolo para errores
-        warn = "W",   -- Símbolo para advertencias
-        info = "I",   -- Símbolo para información
-        hint = "H",   -- Símbolo para sugerencias
+        error = " ",  -- Símbolo para errores
+        warn = " ",   -- Símbolo para advertencias
+        info = " ",   -- Símbolo para información
+        hint = "󰌵 ",   -- Símbolo para sugerencias
       },
       highlights = {
         error = "DiagnosticError",  -- Resaltado para errores

@@ -1,25 +1,59 @@
-{ 
-  "suggest.formatItems": [ "kind", "abbr", "menu", "shortcut"],
+{
+  "suggest.formatItems": [
+    "kind",
+    "abbr",
+    "menu",
+    "shortcut"
+  ],
+  "diagnostic.errorSign": " ",
+  "diagnostic.warningSign": " ",
+  "diagnostic.infoSign": " ",
+  "diagnostic.hintSign": "󰌵 ",
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.showRelatedInformation": true,
+  "diagnostic.floatConfig": {
+    "border": true,
+    "rounded": true,
+    "focusable": true,
+    "close": false,
+    "title": " Diagnostic",
+    "position": "auto"
+  },
+  "preview": "",
+  "list.source.diagnostics.includeCode": true,
   "coc.source.around.shortcut": "",
   "suggest.snippetsSupport": true,
   "suggest.enablePreselect": true,
   "suggest.snippetIndicator": " 💡",
-  "clangd.arguments": ["--background-index", "--clang-tidy"],
-  "clangd.fallbackFlags": ["-std=c++20"],
+  "clangd.arguments": [
+    "--background-index",
+    "--clang-tidy"
+  ],
+  "clangd.fallbackFlags": [
+    "-std=c++20"
+  ],
   "clangd.enabled": true,
   "diagnostic.checkCurrentLine": true,
   "flutter.sdk.path": "~/development/flutter/bin/flutter",
-  "flutter.sdk.searchPaths": ["~/development/flutter/bin"],
+  "flutter.sdk.searchPaths": [
+    "~/development/flutter/bin"
+  ],
   "coc.preferences.enableMarkdown": true,
   "coc.preferences.useQuickfixForLocations": true,
   "workspace.ignoredFolders": [
     "~/",
     "~/.cargo/**",
     "~/.rustup/**"
-  ], 
+  ],
   "flutter.enabled": true,
   "flutter.lsp.initialization.onlyAnalyzeProjectsWithOpenFiles": true,
-  "flutter.UIPath": true,
+  "flutter.UIPath": false,
+  "flutter.trace.server": "verbose",
+  "flutter.outlineIconPadding": 1,
+  "typescript.implementationsCodeLens.enabled": true,
+  "javascript.implementationsCodeLens.enabled": true,
   "diagnostic.enable": true,
   "rust-analyzer.server.path": "~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rust-analyzer",
   "rust-analyzer.completion.limit": null,
@@ -32,19 +66,25 @@
   "rust-analyzer.enable": true,
   "diagnostic.autoRefresh": true,
   "diagnostic.showDeprecated": true,
+  "coc.preferences.formatOnSave": true,
+  "coc.preferences.formatOnSaveTimeout": 700,
   "dart.enableSdkFormatter": true,
   "dart.lineLength": 90,
   "dart.showTodos": true,
   "dart.analysisExcludedFolders": [
-    "/build"     
+    "/build"
   ],
+  "codeLens.display": true,
+  "codeLens.enable": true,
+  "codeLens.position": "top",
+  "codeLens.subseparator": " | ",
+  "codeLens.separator": "",
   "dart.completeFunctionCalls": true,
   "flutter.provider.hot-reload": true,
   "flutter.lsp.initialization.closingLabels": true,
   "flutter.lsp.debug": false,
   "flutter.autoOpenDevLog": true,
   "flutter.autoHideDevLog": true,
-  "coc.preferences.formatOnSave": false,
   "javascript.preferences.jsxAttributeCompletionStyle": "auto",
   "javascript.format.enable": true,
   "javascript.format.semicolons": "insert",
@@ -56,10 +96,6 @@
   "go.enable": true,
   "go.trace.server": "verbose",
   "eslint.autoFixOnSave": false,
-  "prettier.requireConfig": true,
-  "prettier.tabWidth": 2,
-  "prettier.singleQuote": true,
-  "prettier.trailingComma": "all",
   "tsserver.enable": true,
   "tsserver.log": "verbose",
   "git.showCommitInFloating": true,
@@ -69,45 +105,81 @@
   "coc.preferences.messageLevel": "warning",
   "workspace.workspaceFolderCheckCwd": false,
   "languageserver": {
-   "go": {
+    "go": {
       "command": "gopls",
-      "rootPatterns": ["go.work", "go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"],
+      "rootPatterns": [
+        "go.work",
+        "go.mod",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "filetypes": [
+        "go"
+      ],
       "initializationOptions": {
         "usePlaceholders": true
       }
     },
     "html": {
       "command": "vscode-html-languageserver",
-      "args": ["--stdio"],
-      "filetypes": ["html"]
+      "args": [
+        "--stdio"
+      ],
+      "filetypes": [
+        "html"
+      ]
     },
     "css": {
       "command": "vscode-css-languageserver",
-      "args": ["--stdio"],
-      "filetypes": ["css", "scss"]
+      "args": [
+        "--stdio"
+      ],
+      "filetypes": [
+        "css",
+        "scss"
+      ]
     },
     "javascript": {
       "command": "typescript-language-server",
-      "args": ["--stdio"],
-      "filetypes": ["javascript", "javascriptreact"]
+      "args": [
+        "--stdio"
+      ],
+      "filetypes": [
+        "javascript",
+        "javascriptreact"
+      ]
     },
     "typescript": {
       "command": "typescript-language-server",
-      "args": ["--stdio"],
-      "filetypes": ["typescript", "typescriptreact"],
+      "args": [
+        "--stdio"
+      ],
+      "filetypes": [
+        "typescript",
+        "typescriptreact"
+      ],
     },
     "tsserver": {
       "command": "typescript-language-server",
-      "args": ["--stdio"],
-      "filetypes": ["typescript", "typescriptreact"],
+      "args": [
+        "--stdio"
+      ],
+      "filetypes": [
+        "typescript",
+        "typescriptreact"
+      ],
     },
     "python": {
       "command": "pyls",
-      "filetypes": ["python"],
+      "filetypes": [
+        "python"
+      ],
       "settings": {
         "pyls": {
-          "configurationSources": ["flake8"],
+          "configurationSources": [
+            "flake8"
+          ],
           "plugins": {
             "pyls_mypy": {
               "enabled": true,

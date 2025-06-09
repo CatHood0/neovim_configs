@@ -13,7 +13,8 @@ source ~/.config/nvim/plugin/notify/notify_plugin.vim
 source ~/.config/nvim/plugin/notify/noice.vim
 source ~/.config/nvim/plugin/toggleterm/toggleterm_plugin.vim
 source ~/.config/nvim/plugin/cursors/cursors_plugins.vim
-source ~/.config/nvim/plugin/barbar/barbar_plugin.vim
+" source ~/.config/nvim/plugin/tabs/barbar_plugin.vim
+source ~/.config/nvim/plugin/tabs/bufferline_plugin.vim
 source ~/.config/nvim/plugin/treesitter/treesitter_plugin.vim
 source ~/.config/nvim/plugin/cmp/cmp_plugin.vim
 source ~/.config/nvim/plugin/telescope/telescope_plugin.vim
