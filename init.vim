@@ -105,37 +105,24 @@ require('tabnine').setup({
 ]]
 EOF
 
-" Use <c-space> to trigger completion (optional since by default COC give us this functionality)
-"if has('nvim')
-"  inoremap <silent><expr> <c-space> coc#refresh()
-"else
-"  inoremap <silent><expr> <c-@> coc#refresh()
-"endif
-"
-augroup group_coc 
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
 
-augroup command_window
-  function! ReInitCoc()
-        execute("CocDisable")
-        execute("CocEnable")
-    endfunction
-  autocmd CmdwinEnter * startinsert
-  autocmd CmdwinEnter * call ReInitCoc()
-augroup END
-
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
+" This avoid an issue where, when we confirm a suggestion selection
+" this action breaks the completion, and add weird new lines after the
+" change (unnecessarily)
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" =========== COC keys definition ===========
+" These need to be here since are overrided by other plugins
+
+" Make possible scroll into the suggestion menu using CTRL+J/K
+" JUST INSERT MODE
+imap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+imap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
+
+" Make possible show the suggestion menu just pressing CTRL+Spacekey
 imap <silent><expr> <C-Space> coc#refresh()
  
 " Add `:Format` command to format current buffer
@@ -146,14 +133,12 @@ command! -nargs=? Fold :call     CocActionAsync('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
-"
-" Add (Neo)Vim's native statusline support
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Highlight the symbol and its references when holding the cursor
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Add background highlighting for cursor holding
+highlight CocHighlightText guibg=#3e5551 ctermbg=239  " Gris oscuro
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
