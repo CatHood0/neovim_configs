@@ -6,7 +6,7 @@ require('lualine').setup{
      lualine_b = { 'filename', 'filesize', 'searchcount' },
      lualine_c = { 'branch', 'diff', 'diagnostics' },
      lualine_x = { 'g:coc_status', 'encoding', 'filetype' }, 
-     lualine_y = { 'g:coc_progress', 'codeium#GetStatusString' },
+     lualine_y = { 'g:coc_progress' }, -- , 'codeium#GetStatusString' },
      lualine_z = { 'selectioncount', 'location' }
    },
    inactive_sections = {

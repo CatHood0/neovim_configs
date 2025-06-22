@@ -1,7 +1,28 @@
 lua << EOF
 require("nvim-treesitter").setup {}
 require("nvim-treesitter.configs").setup({
-   ensure_installed = { "lua", "vim", 'dart', "vimdoc", 'regex', "javascript", 'typescript', 'css',"html", "rust", "kotlin", 'c', 'cpp', 'xml', 'go', 'gomod', 'gosum', 'json', 'markdown', 'tsx'},
+    ensure_installed = { 
+      'lua', 
+      'vim', 
+      'dart', 
+      'vimdoc', 
+      'regex', 
+      'javascript', 
+      'typescript', 
+      'css','html', 
+      'rust', 
+      'kotlin', 
+      'c', 
+      'cpp', 
+      'xml', 
+      'go', 
+      'gomod', 
+      'gosum', 
+      'json', 
+      'markdown', 
+      'tsx', 
+      'java',
+    },
    sync_install = true,
    endwise = {
     enable = true,

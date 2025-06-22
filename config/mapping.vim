@@ -101,9 +101,6 @@ vnoremap <silent> <S-l> :MoveHBlock 1<CR>
 nnoremap <silent> <space>pp :DiffviewOpen<CR>
 nnoremap <silent> <space>pc :DiffviewClose<CR>
 
-" ==================== Terminal ====================
-nnoremap <silent> <space>tt <CMD>:ToggleTerm<CR>
-
 " ==================== Window Resizing ====================
 nnoremap <space>h <cmd>lua require("tmux").resize_left()<cr>
 nnoremap <space>j <cmd>lua require("tmux").resize_bottom()<cr>

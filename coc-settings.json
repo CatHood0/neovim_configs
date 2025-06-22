@@ -21,7 +21,6 @@
     "title": " Diagnostic",
     "position": "auto"
   },
-  "preview": "",
   "list.source.diagnostics.includeCode": true,
   "coc.source.around.shortcut": "",
   "suggest.snippetsSupport": true,
@@ -41,6 +40,23 @@
     "~/development/flutter/bin"
   ],
   "coc.preferences.enableMarkdown": true,
+  "java.enabled": false,
+  "java.project.referencedLibraries": [
+    "~/Descargas/Proyectos/trabajo/go/go-sybase/libs/TDSLink/externalJars/HikariCP-4.0.3.jar",
+    "~/Descargas/Proyectos/trabajo/go/go-sybase/libs/TDSLink/externalJars/jconn4.jar",
+    "~/Descargas/Proyectos/trabajo/go/go-sybase/libs/TDSLink/externalJars/json-smart-1.2.jar",
+    "~/Descargas/Proyectos/trabajo/go/go-sybase/libs/TDSLink/externalJars/slf4j-api-2.0.9.jar",
+    "~/Descargas/Proyectos/trabajo/go/go-sybase/libs/TDSLink/externalJars/slf4j-jdk14-2.0.9.jar",
+  ],
+  "java.jdt.ls.statusIcons": {
+    "warning": "",
+    "ready": "󰌵",
+    "error": ""
+  },
+  "java.import.maven.enabled": true,
+  "java.import.maven.offline.enabled": true,
+  "java.codeGeneration.insertionLocation": "afterCursor",
+  "java.jdt.ls.java.home": "/usr/lib/jvm/jdk-21",
   "coc.preferences.useQuickfixForLocations": true,
   "workspace.ignoredFolders": [
     "~/",
@@ -66,11 +82,17 @@
   "rust-analyzer.enable": true,
   "diagnostic.autoRefresh": true,
   "diagnostic.showDeprecated": true,
-  "coc.preferences.formatOnSave": true,
-  "coc.preferences.formatOnSaveTimeout": 700,
+  "coc.preferences.formatOnSave": false,
   "dart.enableSdkFormatter": true,
-  "dart.lineLength": 90,
+  "dart.lineLength": 80,
   "dart.showTodos": true,
+  "go.goplsUseDaemon": true,
+  "hover.autoHide": true,
+  "json.format.keepLines": true,
+  "suggest.virtualText": true,
+  "outline.codeActionKinds": [ "quickfix", "refactor", "source" ],
+  "outline.autoPreview": true,
+  "outline.showLineNumber": true,
   "dart.analysisExcludedFolders": [
     "/build"
   ],
@@ -102,8 +124,9 @@
   "git.semanticCommit.scope": true,
   "coc.preferences.maxFileSize": "70MB",
   "coc.preferences.enableMessageDialog": true,
-  "coc.preferences.messageLevel": "warning",
+  "coc.preferences.messageLevel": "more",
   "workspace.workspaceFolderCheckCwd": false,
+  "golines.path": "golines",
   "languageserver": {
     "go": {
       "command": "gopls",

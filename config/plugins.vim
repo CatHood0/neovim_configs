@@ -25,7 +25,6 @@ Plug 'nvim-tree/nvim-web-devicons'  " Iconos
 " Explorador de archivos
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'ryanoasis/vim-devicons' " Iconos
-Plug 'ryanoasis/vim-web-devicons' " Iconos
 
 " Buscadores
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
@@ -102,9 +101,6 @@ Plug 'ckipp01/stylua-nvim', { 'run': 'cargo install stylua' }
 " Traducción
 Plug 'uga-rosa/translate.nvim'
 
-" Gestión de memoria
-Plug 'zeioth/garbage-day.nvim', { 'event': 'VeryLazy' }
-
 " 10. LENGUAJES ESPECÍFICOS
 " Dart/Flutter
 Plug 'akinsho/pubspec-assist.nvim'
@@ -118,6 +114,9 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' 
 Plug 'ziontee113/color-picker.nvim'
 
 " IA
-Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
+"Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
+
+" Resting remainder
+Plug 'waizui/anal.nvim'
 
 call plug#end()
