@@ -66,7 +66,7 @@ set wildignore=*.jpg,*.png,*.gif,*.pdf,*.pyc,*.flv,*.img,*.xlsx,*.psd,*.jpeg
 let g:netrw_browsex_viewer="chrome"
 let mapleader=","
 let g:barbar_auto_setup = v:false
-let g:coc_global_extensions = ['coc-json', 'coc-css', 'coc-html', 'coc-clangd', 'coc-eslint', 'coc-flutter-tools', 'coc-tsserver', 'coc-go', 'coc-git', 'coc-rust-analyzer', 'coc-java', 'coc-vimlsp', 'coc-lua', 'coc-golines']
+let g:coc_global_extensions = ['coc-json', 'coc-css', 'coc-html', 'coc-clangd', 'coc-eslint', 'coc-flutter-tools', 'coc-tsserver', 'coc-go', 'coc-git', 'coc-rust-analyzer', 'coc-java', 'coc-vimlsp', 'coc-lua', 'coc-golines', 'coc-markdownlint']
 let g:python3_host_prog = '/usr/bin/python3'
 " disable perl
 let g:loaded_perl_provider = 0

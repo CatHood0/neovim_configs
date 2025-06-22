@@ -1,13 +1,16 @@
 {
-  "suggest.removeDuplicateItems": true,
+  "suggest.removeDuplicateItems": false,
   "suggest.enableFloat": true,
-  "suggest.reTriggerAfterIndent": true,
   "suggest.noselect": false,
   "suggest.acceptSuggestionOnCommitCharacter": false,
-  "suggest.detailField": "preview",
-  "suggest.maxCompleteItemCount": 130,
-  "list.nextKeymap": "<C-j>",
-  "list.previousKeymap": "<C-k>",
+  "hover.floatConfig": {
+    "border": true,
+    "rounded": true,
+    "highlight": "CocFloating",
+    "borderhighlight": "CocFloatBorder",
+    "title": " Documentation ",
+    "focusable": true,
+  },
   "suggest.floatConfig": {
     "border": true,
     "rounded": true,
@@ -46,6 +49,13 @@
     "abbr",
     "menu",
   ],
+  "explorer.toggle": true,
+  "explorer.sources": [
+    {
+      "name": "file",
+      "expand": true
+    }
+  ],
   "diagnostic.errorSign": " ",
   "diagnostic.warningSign": " ",
   "diagnostic.infoSign": " ",
@@ -62,7 +72,6 @@
     "title": " Diagnostic",
     "position": "auto"
   },
-  "list.source.diagnostics.includeCode": true,
   "coc.source.around.shortcut": "",
   "suggest.snippetsSupport": true,
   "suggest.enablePreselect": true,
@@ -81,6 +90,10 @@
     "~/development/flutter/bin"
   ],
   "coc.preferences.enableMarkdown": true,
+  "coc.preferences.bracketEnterImprove": true,
+  "coc.preferences.enableGFMBreaksInMarkdownDocument": true,
+  "signature.target": "float",
+  "signature.preferShownAbove": true,
   "java.enabled": false,
   "java.project.referencedLibraries": [
     "~/Descargas/Proyectos/trabajo/go/go-sybase/libs/TDSLink/externalJars/HikariCP-4.0.3.jar",

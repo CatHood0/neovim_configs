@@ -109,8 +109,6 @@ EOF
 " This avoid an issue where, when we confirm a suggestion selection
 " this action breaks the completion, and add weird new lines after the
 " change (unnecessarily)
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
@@ -119,9 +117,8 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 
 " Make possible scroll into the suggestion menu using CTRL+J/K
 " JUST INSERT MODE
-imap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
-imap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
-
+inoremap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+inoremap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
 " Make possible show the suggestion menu just pressing CTRL+Spacekey
 imap <silent><expr> <C-Space> coc#refresh()
  
@@ -138,7 +135,7 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Add background highlighting for cursor holding
-highlight CocHighlightText guibg=#3e5551 ctermbg=239  " Gris oscuro
+highlight CocHighlightText guibg=#4F4451 ctermbg=239 " Gris oscuro
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')

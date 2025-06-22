@@ -39,7 +39,8 @@ Plug 'aserowy/tmux.nvim'            " Integración con tmux
 
 " 4. LENGUAJE Y DESARROLLO
 " LSP y autocompletado
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+"Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'hrsh7th/nvim-cmp'
@@ -114,7 +115,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' 
 Plug 'ziontee113/color-picker.nvim'
 
 " IA
-"Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
+Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
 
 " Resting remainder
 Plug 'waizui/anal.nvim'

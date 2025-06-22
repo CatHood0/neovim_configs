@@ -71,7 +71,6 @@ nnoremap <silent> <space>qd <cmd>:SessionDelete<CR>
 
 " ==================== File Tree ====================
 map <silent> <C-a> <CMD>Neotree toggle<CR>
-" nmap <C-a> <Cmd>CocCommand explorer<CR>
 
 " ==================== Formatting ====================
 nnoremap <silent> <space>fo <CMD>:Format<CR> 
@@ -132,11 +131,13 @@ nmap <S-+> <Nop>
 nnoremap <silent> <space>w :call ShowDocumentation()<CR>
 nnoremap <silent> <space>ca <Plug>(coc-codeaction-cursor)
 nnoremap <silent> <space>cs <Plug>(coc-codeaction-source)
-nnoremap <silent> <space>cf  <Plug>(coc-fix-current)
-nmap <C-d>i <Plug>(coc-type-definition)
-nmap <C-w> <Plug>(coc-references)
-nnoremap <silent> <space>fi <CMD>:CocDiagnostics<CR> 
-nnoremap <silent> <C-d>d <Plug>(coc-definition)
+nnoremap <silent> <space>fi :CocList diagnostics<CR> 
+nnoremap <silent><nowait> <space>o  :CocList outline<CR>
+" Search workspace symbols
+nnoremap <silent><nowait> <space>s  :CocList -I symbols<CR>
+nnoremap <silent><nowait> <C-d>d <Plug>(coc-definition)
+nmap <silent><nowait> <C-d>i <Plug>(coc-type-definition)
+nmap <silent><nowait> <C-w> <Plug>(coc-references)
 
 " ==================== Flutter ====================
 nnoremap <silent> <space>fr <cmd>:CocCommand flutter.run<cr>
@@ -162,7 +163,7 @@ imap  <C-p> <Nop>
 " ==================== Codeium (AI) ====================
 imap <script><silent><nowait><expr> <TAB> codeium#Accept()
 imap <script><silent><nowait><expr> <C-h> codeium#AcceptNextWord()
-imap <script><silent><nowait><expr> <C-j> codeium#AcceptNextLine()
+imap <script><silent><nowait><expr> <C-l> codeium#AcceptNextLine()
 imap <C-;>   <Cmd>call codeium#CycleCompletions(1)<CR>
 imap <C-,>   <Cmd>call codeium#CycleCompletions(-1)<CR>
 imap <C-x>   <Cmd>call codeium#Clear()<CR>
