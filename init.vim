@@ -98,7 +98,7 @@ endfunction
 
 " =========== COC to Native LSP diagnostic implementation ===========
 lua << EOF
-local coc_diag = require("coc-diagnostics-adapter")
+local coc_diag = require("coc_diagnostic_adapter")
 
 local sync_timer = nil
 local function debounced_sync()
