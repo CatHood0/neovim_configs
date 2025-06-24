@@ -131,7 +131,8 @@ nmap <S-+> <Nop>
 nnoremap <silent> <space>w :call ShowDocumentation()<CR>
 nnoremap <silent> <space>ca <Plug>(coc-codeaction-cursor)
 nnoremap <silent> <space>cs <Plug>(coc-codeaction-source)
-nnoremap <silent> <space>fi :CocList diagnostics<CR> 
+nnoremap <silent> <space>fi <CMD>CocDiagnostics<CR> 
+nnoremap <silent> <space>fu :CocList diagnostics<CR> 
 nnoremap <silent><nowait> <space>o  :CocList outline<CR>
 " Search workspace symbols
 nnoremap <silent><nowait> <space>s  :CocList -I symbols<CR>

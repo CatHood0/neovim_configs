@@ -130,14 +130,14 @@ require("neo-tree").setup({
 	},
   renderers = {
     file = {
+      { "diagnostics" },
       { "icon" },  
       { "name" }, 
-      { "diagnostics" },
     },
     folder = {
+      { "diagnostics" },
       { "icon" },  
       { "name" }, 
-      { "diagnostics" },
     },
   },
   default_component_configs = {
@@ -154,6 +154,7 @@ require("neo-tree").setup({
       expander_highlight = "NeoTreeExpander",
     },
     diagnostics = {
+      enabled = true,
       symbols = {
         error = " ",  -- Símbolo para errores
         warn = " ",   -- Símbolo para advertencias

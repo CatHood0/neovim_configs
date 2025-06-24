@@ -29,22 +29,11 @@ require('ultimate-autopair').setup({
 EOF
 
 lua << EOF
-require('color-picker').setup({
-	["icons"] = { "", "   " },
-	["border"] = "rounded", -- none | single | double | rounded | solid | shadow
-	["keymap"] = { -- mapping example:
-		["U"] = "<Plug>ColorPickerSlider5Decrease",
-		["O"] = "<Plug>ColorPickerSlider5Increase",
-	},
-	["background_highlight_group"] = "Normal", -- default
-	["border_highlight_group"] = "FloatBorder", -- default
-  ["text_highlight_group"] = "Normal", --default
-})
-vim.cmd([[hi FloatBorder guibg=NONE]]) -- if you don't want weird border background colors around the popup.
+require('dashboard').setup {
+  theme = 'hyper',
+}
 EOF
 
-
-lua require('alpha').setup(require('alpha.themes.theta').config)
 lua require('pubspec-assist').setup()
 
 lua << EOF
@@ -67,44 +56,6 @@ require('tmux').setup({
  }
 })
 EOF
-
-" Translation 
-" nnoremap <space>te viw:Translate <locale name><CR>
-nnoremap <space>te viw:Translate es<CR>
-lua require("translate").setup({})
-
-lua << EOF
-require 'window-picker'.setup({
-    filter_rules = {
-    include_current_win = false,
-    autoselect_one = true,
-    -- filter using buffer options
-    bo = {
-      -- if the file type is one of following, the window will be ignored
-      filetype = { 'neo-tree', "neo-tree-popup", "notify" },
-        -- if the buffer type is one of following, the window will be ignored
-        buftype = { 'terminal', "quickfix" },
-      },
-    },
-})
-EOF
-
-lua << EOF
--- IA
---[[
-require('tabnine').setup({
-  disable_auto_comment=true,
-  accept_keymap="<S-Tab>",
-  dismiss_keymap = "<C-]>",
-  debounce_ms = 800,
-  suggestion_color = {gui = "#808080", cterm = 244},
-  exclude_filetypes = {"TelescopePrompt", "NvimTree"},
-  log_file_path = nil, -- absolute path to Tabnine log file
-  ignore_certificate_errors = false,
-})
-]]
-EOF
-
 
 " This avoid an issue where, when we confirm a suggestion selection
 " this action breaks the completion, and add weird new lines after the
@@ -144,3 +95,41 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
+
+" =========== COC to Native LSP diagnostic implementation ===========
+lua << EOF
+local coc_diag = require("coc-diagnostics-adapter")
+
+local sync_timer = nil
+local function debounced_sync()
+  if sync_timer then
+    sync_timer:close()
+  end
+  sync_timer = vim.defer_fn(coc_diag.sync_coc_diagnostics, 300)
+end
+
+-- On general change 
+vim.api.nvim_create_autocmd("User", {
+  pattern = "CocDiagnosticChange",
+  callback = debounced_sync
+})
+
+-- On update document after a code action 
+-- (yeah, we need this to avoid loss diagnostics)
+vim.api.nvim_create_autocmd("User", {
+  pattern = "CocAction",
+  callback = function(args)
+    local bufnr = vim.api.nvim_get_current_buf()
+    vim.defer_fn(function()
+      coc_diag.update_buffer_diagnostics(bufnr)
+    end, 200)
+  end
+})
+
+-- On save document
+vim.api.nvim_create_autocmd("BufWritePost", {
+  callback = function()
+    vim.defer_fn(debounced_sync, 500)
+  end
+})
+EOF

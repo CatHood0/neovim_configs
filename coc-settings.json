@@ -8,7 +8,6 @@
     "rounded": true,
     "highlight": "CocFloating",
     "borderhighlight": "CocFloatBorder",
-    "title": " Documentation ",
     "focusable": true,
   },
   "suggest.floatConfig": {
@@ -62,7 +61,9 @@
   "diagnostic.hintSign": "󰌵 ",
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
-  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.refreshOnInsertMode": false,
+  "pullDiagnostic.onSave": true,
+  "pullDiagnostic.onChange": true,
   "diagnostic.showRelatedInformation": true,
   "diagnostic.floatConfig": {
     "border": true,

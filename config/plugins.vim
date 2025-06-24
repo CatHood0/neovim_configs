@@ -18,12 +18,14 @@ Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 " Barra de estado y dashboard
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'goolord/alpha-nvim'
+"Plug 'goolord/alpha-nvim'
+Plug 'nvimdev/dashboard-nvim'
 Plug 'nvim-tree/nvim-web-devicons'  " Iconos
 
 " 3. NAVEGACIÓN Y BUSQUEDA
 " Explorador de archivos
 Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'mrbjarksen/neo-tree-diagnostics.nvim'
 Plug 'ryanoasis/vim-devicons' " Iconos
 
 " Buscadores
@@ -34,15 +36,11 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'BurntSushi/ripgrep'
 
 " Gestión de ventanas
-Plug 's1n7ax/nvim-window-picker', { 'version': '2.*' }
 Plug 'aserowy/tmux.nvim'            " Integración con tmux
 
 " 4. LENGUAJE Y DESARROLLO
 " LSP y autocompletado
-"Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-path'
@@ -50,7 +48,6 @@ Plug 'hrsh7th/cmp-path'
 " Snippets
 Plug 'SirVer/Ultisnips'
 Plug 'natebosch/dartlang-snippets'
-" Plug 'honza/vim-snippets'          (comentado originalmente)
 
 " Debugging
 Plug 'mfussenegger/nvim-dap'
@@ -99,9 +96,6 @@ Plug 'nvimtools/none-ls.nvim'
 Plug 'MunifTanjim/nui.nvim'         " Dependencia UI
 Plug 'ckipp01/stylua-nvim', { 'run': 'cargo install stylua' }
 
-" Traducción
-Plug 'uga-rosa/translate.nvim'
-
 " 10. LENGUAJES ESPECÍFICOS
 " Dart/Flutter
 Plug 'akinsho/pubspec-assist.nvim'
@@ -111,13 +105,7 @@ Plug 'MeanderingProgrammer/markdown.nvim'
 Plug 'echasnovski/mini.nvim', { 'name': 'render-markdown' }
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
-" Color Picker
-Plug 'ziontee113/color-picker.nvim'
-
 " IA
 Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
-
-" Resting remainder
-Plug 'waizui/anal.nvim'
 
 call plug#end()
