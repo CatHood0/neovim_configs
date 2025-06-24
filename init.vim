@@ -98,20 +98,16 @@ endfunction
 
 " =========== COC to Native LSP diagnostic implementation ===========
 lua << EOF
-local coc_diag = require("coc_diagnostic_adapter")
+local diagnostic_adapter = require("coc_diagnostic_adapter")
 
-local sync_timer = nil
-local function debounced_sync()
-  if sync_timer then
-    sync_timer:close()
-  end
-  sync_timer = vim.defer_fn(coc_diag.sync_coc_diagnostics, 300)
+local function handle_sync()
+  vim.defer_fn(diagnostic_adapter.sync_coc_diagnostics, 300)
 end
 
 -- On general change 
 vim.api.nvim_create_autocmd("User", {
   pattern = "CocDiagnosticChange",
-  callback = debounced_sync
+  callback = handle_sync 
 })
 
 -- On update document after a code action 
@@ -121,15 +117,15 @@ vim.api.nvim_create_autocmd("User", {
   callback = function(args)
     local bufnr = vim.api.nvim_get_current_buf()
     vim.defer_fn(function()
-      coc_diag.update_buffer_diagnostics(bufnr)
-    end, 200)
+      diagnostic_adapter.update_buffer_diagnostics(bufnr)
+    end, 300)
   end
 })
 
 -- On save document
 vim.api.nvim_create_autocmd("BufWritePost", {
   callback = function()
-    vim.defer_fn(debounced_sync, 500)
+    vim.defer_fn(handle_sync, 500)
   end
 })
 EOF

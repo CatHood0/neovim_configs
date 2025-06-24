@@ -54,6 +54,7 @@ local function coc_to_nvim_diagnostic(coc_diag)
     }
   end
 
+
   local pos = range_to_pos(range)
   local severity = type(coc_diag.severity) == "string"
       and SEVERITY_MAP[coc_diag.severity:lower()]
