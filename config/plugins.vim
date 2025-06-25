@@ -106,6 +106,6 @@ Plug 'echasnovski/mini.nvim', { 'name': 'render-markdown' }
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
 " IA
-Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
+"Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
 
 call plug#end()

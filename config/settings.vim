@@ -86,11 +86,3 @@ let g:dart_style_guide = 2
 
 let g:lsc_auto_map = v:true
 let g:auto_session_root_dir = "~/.nvim_sessions" 
-
-" ==================== LUA Section ====================
-lua << EOF
-vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" }) 
-vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
-EOF

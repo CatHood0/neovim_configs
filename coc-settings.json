@@ -55,6 +55,9 @@
       "expand": true
     }
   ],
+  "diagnostic.enable": true,
+  "diagnostic.autoRefresh": true,
+  "diagnostic.showDeprecated": true,
   "diagnostic.errorSign": " ",
   "diagnostic.warningSign": " ",
   "diagnostic.infoSign": " ",
@@ -125,7 +128,6 @@
   "flutter.outlineIconPadding": 1,
   "typescript.implementationsCodeLens.enabled": true,
   "javascript.implementationsCodeLens.enabled": true,
-  "diagnostic.enable": true,
   "rust-analyzer.server.path": "~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rust-analyzer",
   "rust-analyzer.completion.limit": null,
   "rust-analyzer.checkOnSave": true,
@@ -135,8 +137,6 @@
   "rust-analyzer.updates.checkOnStartup": true,
   "rust-analyzer.completion.postfix.enable": true,
   "rust-analyzer.enable": true,
-  "diagnostic.autoRefresh": true,
-  "diagnostic.showDeprecated": true,
   "coc.preferences.formatOnSave": false,
   "dart.enableSdkFormatter": true,
   "dart.lineLength": 80,

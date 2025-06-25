@@ -99,33 +99,46 @@ endfunction
 " =========== COC to Native LSP diagnostic implementation ===========
 lua << EOF
 local diagnostic_adapter = require("coc_diagnostic_adapter")
+diagnostic_adapter.setup()
+EOF
 
-local function handle_sync()
-  vim.defer_fn(diagnostic_adapter.sync_coc_diagnostics, 300)
+" =========== Native winbar implementation ===========
+lua << EOF
+local devicons_ok, devicons = pcall(require, 'nvim-web-devicons')
+if not devicons_ok then
+  vim.notify("No se pudo cargar nvim-web-devicons", vim.log.levels.WARN)
+  return
 end
 
--- On general change 
-vim.api.nvim_create_autocmd("User", {
-  pattern = "CocDiagnosticChange",
-  callback = handle_sync 
+-- Configuración básica de devicons (esto debe ir ANTES de usarlo)
+devicons.setup({
+  override = {
+    folder = {
+      icon = "",
+      color = "#7ebae4",
+      name = "folder"
+    }
+  }
 })
+local winbar = require("coc_winbar_adapter")
 
--- On update document after a code action 
--- (yeah, we need this to avoid loss diagnostics)
-vim.api.nvim_create_autocmd("User", {
-  pattern = "CocAction",
-  callback = function(args)
-    local bufnr = vim.api.nvim_get_current_buf()
-    vim.defer_fn(function()
-      diagnostic_adapter.update_buffer_diagnostics(bufnr)
-    end, 300)
-  end
-})
-
--- On save document
-vim.api.nvim_create_autocmd("BufWritePost", {
-  callback = function()
-    vim.defer_fn(handle_sync, 500)
-  end
+winbar.setup({
+  enabled = true,
+  separator = "»",
+  show_diagnostic = true,
+  color_dirs = "Normal",
+  color_files = "Normal",
+  depth = {
+    limit = 5,
+    separator = "«"
+  },
+  on_get_folder = function(name)
+    local icon, color = devicons.get_icon("folder", "", { default = true })
+    return icon, color
+  end, 
+  on_get_file = function(name, ext)
+    local icon, color = devicons.get_icon(name, ext, { default = true })
+    return icon, color
+  end,
 })
 EOF
