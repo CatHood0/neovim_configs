@@ -1,0 +1,1 @@
+require('pubspec-assist').setup({})
