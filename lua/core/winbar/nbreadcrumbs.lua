@@ -16,7 +16,7 @@ function M.setup(user_config)
   utils.setup_buffer_cleanup()
 
   vim.schedule(function()
-    local ok, msg = pcall(require, 'nui')
+    local ok, _ = pcall(require, 'nui')
     if not ok then
       vim.notify("[nui] is not installed. We will show the native winbar (does not support most of the features)", vim.log.levels.WARN)
       shared_state.config.use_nui = false

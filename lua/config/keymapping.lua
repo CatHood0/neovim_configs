@@ -1,130 +1,129 @@
-local function setup_mappings()
-  local map = vim.keymap.set
+local map = vim.keymap.set
 
-  -- ==================== Window Navigation ====================
-  map('n', '<c-k>', '<cmd>wincmd k<cr>', { silent = true })
-  map('n', '<c-j>', '<cmd>wincmd j<cr>', { silent = true })
-  map('n', '<c-h>', '<cmd>wincmd h<cr>', { silent = true })
-  map('n', '<c-l>', '<cmd>wincmd l<cr>', { silent = true })
-  map('n', 'n', '<nop>', { silent = true })
+-- ==================== Window Navigation ====================
+map('n', '<c-k>', '<cmd>wincmd k<cr>', { silent = true })
+map('n', '<c-j>', '<cmd>wincmd j<cr>', { silent = true })
+map('n', '<c-h>', '<cmd>wincmd h<cr>', { silent = true })
+map('n', '<c-l>', '<cmd>wincmd l<cr>', { silent = true })
+map('n', 'n', '<nop>', { silent = true })
 
-  -- ==================== Testing ====================
-  map('n', '<leader>t', '<cmd>TestNearest<cr>', { silent = true })
-  map('n', '<leader>T', '<cmd>TestFile<cr>', { silent = true })
-  map('n', '<leader>a', '<cmd>TestSuite<cr>', { silent = true })
-  map('n', '<leader>l', '<cmd>TestLast<cr>', { silent = true })
+-- ==================== Testing ====================
+map('n', '<leader>t', '<cmd>TestNearest<cr>', { silent = true })
+map('n', '<leader>T', '<cmd>TestFile<cr>', { silent = true })
+map('n', '<leader>a', '<cmd>TestSuite<cr>', { silent = true })
+map('n', '<leader>l', '<cmd>TestLast<cr>', { silent = true })
 
-  -- ==================== Debugging ====================
-  -- nvim-dap
-  map('n', '<space>tb', '<cmd>DapToggleBreakpoint<cr>')
-  map('n', '<F4>', '<cmd>DapContinue<cr>')
-  map('n', '<F5>', '<cmd>DapDisconnect<cr>')
-  map('n', '<space>tm', '<cmd>DapContinue<cr>')
+-- ==================== Debugging ====================
+-- nvim-dap
+map('n', '<space>tb', '<cmd>DapToggleBreakpoint<cr>')
+map('n', '<F4>', '<cmd>DapContinue<cr>')
+map('n', '<F5>', '<cmd>DapDisconnect<cr>')
+map('n', '<space>tm', '<cmd>DapContinue<cr>')
 
-  -- ==================== File Operations ====================
-  map('n', '<C-q>', '<cmd>q<cr>')
-  map('n', '<C-Q>', '<cmd>qa!<cr>')
-  map('n', '<C-s>', '<cmd>wall<cr>', { silent = true })
-  map('n', '<space>qq', '<cmd>Format<cr><cmd>wqall<cr><cmd>SessionSave<cr>', { silent = true })
+-- ==================== File Operations ====================
+map('n', '<C-q>', '<cmd>q<cr>')
+map('n', '<C-Q>', '<cmd>qa!<cr>')
+map('n', '<C-s>', '<cmd>wall<cr>', { silent = true })
+map('n', '<space>qq', '<cmd>Format<cr><cmd>wqall<cr><cmd>SessionSave<cr>', { silent = true })
 
-  -- ==================== Buffer Management ====================
-  -- Bufferline
-  map('n', '<space>m', '<cmd>BufferLineCycleNext<cr>', { silent = true })
-  map('n', '<space>n', '<cmd>BufferLineCyclePrev<cr>', { silent = true })
-  map('n', '<space>d', '<cmd>bdelete!<cr>', { silent = true })
-  map('n', '<space>vc', '<cmd>BufferLineTogglePin<cr>', { silent = true })
-  map('n', '<space>vm', '<cmd>BufferLineMoveNext<cr>', { silent = true })
-  map('n', '<space>vn', '<cmd>BufferLineMovePrev<cr>', { silent = true })
+-- ==================== Buffer Management ====================
+-- Bufferline
+map('n', '<space>m', '<cmd>BufferLineCycleNext<cr>', { silent = true })
+map('n', '<space>n', '<cmd>BufferLineCyclePrev<cr>', { silent = true })
+map('n', '<space>d', '<cmd>bdelete!<cr>', { silent = true })
+map('n', '<space>vc', '<cmd>BufferLineTogglePin<cr>', { silent = true })
+map('n', '<space>vm', '<cmd>BufferLineMoveNext<cr>', { silent = true })
+map('n', '<space>vn', '<cmd>BufferLineMovePrev<cr>', { silent = true })
 
-  -- ==================== Search/Finding ====================
-  -- Telescope
-  map('n', '<C-p>', function()
-    require('telescope.builtin').find_files({ find_command = {'rg', '--files', '-g', '!.git'} })
-  end)
-  map('n', '<C-f>', function()
-    require('telescope.builtin').current_buffer_fuzzy_find({ 
-      sorter = require('telescope.sorters').get_fzy_sorter({})
-    })
-  end)
-  map('n', '<leader>f', '<cmd>lua require("telescope.builtin").live_grep()<cr>')
+-- ==================== Search/Finding ====================
+-- Telescope
+map('n', '<C-p>', function()
+  require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '-g', '!.git' } })
+end)
+map('n', '<C-f>', function()
+  require('telescope.builtin').current_buffer_fuzzy_find({
+    sorter = require('telescope.sorters').get_fzy_sorter({})
+  })
+end)
+map('n', '<leader>f', '<cmd>lua require("telescope.builtin").live_grep()<cr>')
 
-  -- ==================== Sessions ====================
-  map('n', '<space>qs', '<cmd>SessionSave<cr>', { silent = true })
-  map('n', '<space>ql', '<cmd>SessionRestore<cr>', { silent = true })
-  map('n', '<space>qd', '<cmd>SessionDelete<cr>', { silent = true })
+-- ==================== Sessions ====================
+map('n', '<space>qs', '<cmd>SessionSave<cr>', { silent = true })
+map('n', '<space>ql', '<cmd>SessionRestore<cr>', { silent = true })
+map('n', '<space>qd', '<cmd>SessionDelete<cr>', { silent = true })
 
-  -- ==================== File Tree ====================
-  map('n', '<C-a>', '<cmd>Neotree toggle<cr>', { silent = true })
+-- ==================== File Tree ====================
+map('n', '<C-a>', '<cmd>Neotree toggle<cr>', { silent = true })
 
-  -- ==================== Formatting ====================
-  map('n', '<space>fo', '<cmd>Format<cr>', { silent = true })
+-- ==================== Formatting ====================
+map('n', '<space>fo', '<cmd>Format<cr>', { silent = true })
 
-  -- ==================== Line Movement ====================
-  map('n', '<S-j>', '<cmd>MoveLine 1<cr>', { silent = true })
-  map('n', '<S-k>', '<cmd>MoveLine -1<cr>', { silent = true })
-  map('n', '<S-l>', '<cmd>MoveHChar 1<cr>', { silent = true })
-  map('n', '<S-h>', '<cmd>MoveHChar -1<cr>', { silent = true })
-  map('v', '<S-h>', '<cmd>MoveHBlock -1<cr>', { silent = true })
-  map('x', '<S-j>', '<cmd>MoveBlock 1<cr>', { silent = true })
-  map('x', '<S-k>', '<cmd>MoveBlock -1<cr>', { silent = true })
-  map('v', '<S-l>', '<cmd>MoveHBlock 1<cr>', { silent = true })
+-- ==================== Line Movement ====================
+map('n', '<S-j>', '<cmd>MoveLine 1<cr>', { silent = true })
+map('n', '<S-k>', '<cmd>MoveLine -1<cr>', { silent = true })
+map('n', '<S-l>', '<cmd>MoveHChar 1<cr>', { silent = true })
+map('n', '<S-h>', '<cmd>MoveHChar -1<cr>', { silent = true })
+map('v', '<S-h>', '<cmd>MoveHBlock -1<cr>', { silent = true })
+map('x', '<S-j>', '<cmd>MoveBlock 1<cr>', { silent = true })
+map('x', '<S-k>', '<cmd>MoveBlock -1<cr>', { silent = true })
+map('v', '<S-l>', '<cmd>MoveHBlock 1<cr>', { silent = true })
 
-  -- ==================== Git ====================
-  -- Git diff view
-  map('n', '<space>pp', '<cmd>DiffviewOpen<cr>', { silent = true })
-  map('n', '<space>pc', '<cmd>DiffviewClose<cr>', { silent = true })
+-- ==================== Git ====================
+-- Git diff view
+map('n', '<space>pp', '<cmd>DiffviewOpen<cr>', { silent = true })
+map('n', '<space>pc', '<cmd>DiffviewClose<cr>', { silent = true })
 
-  -- ==================== Window Resizing ====================
-  map('n', '<space>h', '<cmd>lua require("tmux").resize_left()<cr>')
-  map('n', '<space>j', '<cmd>lua require("tmux").resize_bottom()<cr>')
-  map('n', '<space>k', '<cmd>lua require("tmux").resize_top()<cr>')
-  map('n', '<space>l', '<cmd>lua require("tmux").resize_right()<cr>')
+-- ==================== Window Resizing ====================
+map('n', '<space>h', '<cmd>lua require("tmux").resize_left()<cr>')
+map('n', '<space>j', '<cmd>lua require("tmux").resize_bottom()<cr>')
+map('n', '<space>k', '<cmd>lua require("tmux").resize_top()<cr>')
+map('n', '<space>l', '<cmd>lua require("tmux").resize_right()<cr>')
 
-  -- ==================== Custom Mappings ====================
-  map('n', 'w', '<nop>', { silent = true })
-  map('n', '<C-w><C-w>', '<nop>', { silent = true })
-  map('n', '<C-q>', '<nop>')
-  map('n', '<C-q>', '<cmd>vsplit<cr>')
-  map('n', '<C-q>v', '<cmd>split<cr>')
-  map('v', 'n', '<nop>')
-  map('n', '<S-+>', '<nop>')
+-- ==================== Custom Mappings ====================
+map('n', 'w', '<nop>', { silent = true })
+map('n', '<C-w><C-w>', '<nop>', { silent = true })
+map('n', '<C-q>', '<nop>')
+map('n', '<C-q>', '<cmd>vsplit<cr>')
+map('n', '<C-q>v', '<cmd>split<cr>')
+map('v', 'n', '<nop>')
+map('n', '<S-+>', '<nop>')
 
-  -- ==================== COC Mappings ====================
-  map('n', '<space>w', '<cmd>lua vim.fn.ShowDocumentation()<cr>', { silent = true })
-  map('n', '<space>ca', '<Plug>(coc-codeaction-cursor)', { silent = true })
-  map('n', '<space>cs', '<Plug>(coc-codeaction-source)', { silent = true })
-  map('n', '<space>fi', '<cmd>CocDiagnostics<cr>', { silent = true })
-  map('n', '<space>fu', '<cmd>CocList diagnostics<cr>', { silent = true })
-  map('n', '<space>o', '<cmd>CocList outline<cr>', { silent = true, nowait = true })
-  map('n', '<space>s', '<cmd>CocList -I symbols<cr>', { silent = true, nowait = true })
-  map('n', '<C-d>d', '<Plug>(coc-definition)', { silent = true, nowait = true })
-  map('n', '<C-d>i', '<Plug>(coc-type-definition)', { silent = true, nowait = true })
-  map('n', '<C-w>', '<Plug>(coc-references)', { silent = true, nowait = true })
+-- ==================== COC Mappings ====================
+map('n', '<space>w', '<cmd>lua vim.fn.ShowDocumentation()<cr>', { silent = true })
+map('n', '<space>ca', '<Plug>(coc-codeaction-cursor)', { silent = true })
+map('n', '<space>cs', '<Plug>(coc-codeaction-source)', { silent = true })
+map('n', '<space>fi', '<cmd>CocDiagnostics<cr>', { silent = true })
+map('n', '<space>fu', '<cmd>CocList diagnostics<cr>', { silent = true })
+map('n', '<space>o', '<cmd>CocList outline<cr>', { silent = true, nowait = true })
+map('n', '<space>s', '<cmd>CocList -I symbols<cr>', { silent = true, nowait = true })
+map('n', '<C-d>d', '<Plug>(coc-definition)', { silent = true, nowait = true })
+map('n', '<C-d>i', '<Plug>(coc-type-definition)', { silent = true, nowait = true })
+map('n', '<C-w>', '<Plug>(coc-references)', { silent = true, nowait = true })
 
-  -- ==================== Flutter ====================
-  map('n', '<space>fr', '<cmd>CocCommand flutter.run<cr>', { silent = true })
-  map('n', '<space>fq', '<cmd>CocCommand flutter.dev.quit<cr>', { silent = true })
-  map('n', '<space>tou', '<cmd>CocCommand flutter.toggleOutline<cr>', { silent = true })
-  map('n', '<space>fmo', '<cmd>CocCommand flutter.devices<cr>', { silent = true })
-  map('n', '<space>ro', '<cmd>CocCommand flutter.dev.hotReload<cr>', { silent = true })
-  map('n', '<space>re', '<cmd>CocCommand flutter.dev.hotRestart<cr>', { silent = true })
-  map('n', '<space>sp', '<cmd>CocCommand flutter.lsp.restart<cr>', { silent = true })
-  map('n', '<space>op', '<cmd>CocCommand flutter.dev.openDevToolsProfiler<cr>', { silent = true })
-  map('n', '<space>fn', '<cmd>CocCommand workspace.renameCurrentFile<cr>', { silent = true })
-  map('n', '<space>eg', '<cmd>CocCommand flutter.pub.get<cr>', { silent = true })
-  map('n', '<space>co', '<cmd>CocCommand flutter.dev.openDevLog<cr>', { silent = true })
-  map('n', '<space>cl', '<cmd>CocCommand flutter.dev.clearDevLog<cr>', { silent = true })
+-- ==================== Flutter ====================
+map('n', '<space>fr', '<cmd>CocCommand flutter.run<cr>', { silent = true })
+map('n', '<space>fq', '<cmd>CocCommand flutter.dev.quit<cr>', { silent = true })
+map('n', '<space>tou', '<cmd>CocCommand flutter.toggleOutline<cr>', { silent = true })
+map('n', '<space>fmo', '<cmd>CocCommand flutter.devices<cr>', { silent = true })
+map('n', '<space>ro', '<cmd>CocCommand flutter.dev.hotReload<cr>', { silent = true })
+map('n', '<space>re', '<cmd>CocCommand flutter.dev.hotRestart<cr>', { silent = true })
+map('n', '<space>sp', '<cmd>CocCommand flutter.lsp.restart<cr>', { silent = true })
+map('n', '<space>op', '<cmd>CocCommand flutter.dev.openDevToolsProfiler<cr>', { silent = true })
+map('n', '<space>fn', '<cmd>CocCommand workspace.renameCurrentFile<cr>', { silent = true })
+map('n', '<space>eg', '<cmd>CocCommand flutter.pub.get<cr>', { silent = true })
+map('n', '<space>co', '<cmd>CocCommand flutter.dev.openDevLog<cr>', { silent = true })
+map('n', '<space>cl', '<cmd>CocCommand flutter.dev.clearDevLog<cr>', { silent = true })
 
-  -- ==================== Color Picker ====================
-  map('n', '<space>pi', '<cmd>PickColor<cr>', { silent = true })
+-- ==================== Color Picker ====================
+map('n', '<space>pi', '<cmd>PickColor<cr>', { silent = true })
 
-  -- ==================== Insert Mode Mappings ====================
-  map('i', '<C-n>', '<nop>')
-  map('i', '<C-p>', '<nop>')
+-- ==================== Insert Mode Mappings ====================
+map('i', '<C-n>', '<nop>')
+map('i', '<C-p>', '<nop>')
 
-  -- ==================== Codeium (AI) ====================
-  -- Note: These need to remain as Vimscript expressions
-  --[[ vim.cmd([[
+-- ==================== Codeium (AI) ====================
+-- Note: These need to remain as Vimscript expressions
+--[[ vim.cmd([[
     imap <script><silent><nowait><expr> <TAB> codeium#Accept()
     imap <script><silent><nowait><expr> <C-h> codeium#AcceptNextWord()
     imap <script><silent><nowait><expr> <C-l> codeium#AcceptNextLine()
@@ -133,9 +132,9 @@ local function setup_mappings()
     imap <C-x>   <Cmd>call codeium#Clear()<CR>
   ]]
 
-  -- ==================== FZF Configuration ====================
-  -- These need to remain in Vimscript
-  vim.cmd([[
+-- ==================== FZF Configuration ====================
+-- These need to remain in Vimscript
+vim.cmd([[
     command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
       \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
@@ -171,9 +170,4 @@ local function setup_mappings()
     endif
 
     let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8, 'highlight': 'Normal' } }
-  ]])
-end
-
-return {
-  setup = setup_mappings
-}
+]])

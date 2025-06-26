@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup(require('config.plugins'))
 
 require('config.settings')
-require('config.keymapping').setup()
+require('config.keymapping')
 
 -- Load plugin configurations
 require('plugin.autopair')
