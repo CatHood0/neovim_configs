@@ -3,7 +3,7 @@ local M = {}
 local utils = require("winbar.utils")
 local shared_state = require('winbar.nbreadcrumb_state')
 
--- Format every each element by its own way 
+-- Format every each element by its own way
 function M.format_element(part, ext, is_file, is_last, is_part_break, mode)
   if is_part_break and not is_file then return "" end
   if shared_state.config.on_format_element then
@@ -31,9 +31,7 @@ function M.format_element(part, ext, is_file, is_last, is_part_break, mode)
       shared_state.config.folder_hl_group
   if is_last and is_file then
     local diag = utils.get_diagnostic()
-    color = diag ~= nil and diag or shared_state.config.color_files
-  else
-    color = shared_state.config.color_dirs
+    color = diag ~= nil and diag or shared_state.config.file_hl_color
   end
   element = element .. string.format("%%#%s#%s", useCommentMode and "Comment" or color, part)
 
@@ -77,14 +75,15 @@ function M.generate_winbar(mode)
     if partBreak then
       partBreak = false
       table.insert(winbar_parts,
-        string.format("%%#%s#%s", "Comment",
+        string.format("%%#%s#%s", shared_state.config.separator_hl_color,
           "…  " .. (shared_state.config.depth.separator ~= nil and shared_state.config.depth.separator or "") .. "  "))
     else
       if i < #parts then
         if mode ~= nil and type(mode) == "string" then
           table.insert(winbar_parts, string.format("%%#%s#%s", mode, " " .. shared_state.config.separator .. " "))
         else
-          table.insert(winbar_parts, string.format("%s", " " .. shared_state.config.separator .. " "))
+          table.insert(winbar_parts,
+            string.format("%%#%s#%s", shared_state.config.separator_hl_color, " " .. shared_state.config.separator .. " "))
         end
       end
     end

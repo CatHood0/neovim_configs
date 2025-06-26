@@ -127,12 +127,6 @@ winbar.setup({
   enabled = true,
   separator = "»",
   show_diagnostic = true,
-  color_dirs = "Normal",
-  color_files = "Normal",
-  depth = {
-    limit = 5,
-    separator = "«"
-  },
   on_get_folder = function(name)
     local icon, color = devicons.get_icon("folder", "", { default = true })
     return icon, color

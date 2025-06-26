@@ -26,7 +26,9 @@ end
 
 --- Get all the diagnostics of the current buffer
 function M.get_diagnostic()
-  if shared_state.config.show_diagnostics then return nil end
+  if not shared_state.config.show_diagnostic then
+    return nil
+  end
   local bufnr = vim.api.nvim_get_current_buf()
 
   local diagnostics = vim.diagnostic.get(bufnr)

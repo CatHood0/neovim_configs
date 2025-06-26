@@ -6,12 +6,19 @@ local shared_state = require('winbar.nbreadcrumb_state')
 
 function M.setup(user_config)
   shared_state.config = vim.tbl_deep_extend("force", winbar_opts, user_config or {})
+
+  if not shared_state.config.enabled then
+    vim.opt.winbar = nil
+    return
+  end
+
   utils.define_hl_groups()
   utils.setup_buffer_cleanup()
 
   vim.schedule(function()
     if not pcall(require, 'nui') then
-      vim.notify("[nui] is not installed. We will show the native winbar (does not support most of the features)", vim.log.levels.WARN)
+      vim.notify("[nui] is not installed. We will show the native winbar (does not support most of the features)",
+        vim.log.levels.WARN)
       shared_state.config.use_nui = false
     else
       shared_state.config.use_nui = true
