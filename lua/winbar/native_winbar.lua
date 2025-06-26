@@ -3,7 +3,7 @@ local M = {}
 local utils = require("winbar.utils")
 local shared_state = require('winbar.nbreadcrumb_state')
 
--- Formatear elemento individual
+-- Format every each element by its own way 
 function M.format_element(part, ext, is_file, is_last, is_part_break, mode)
   if is_part_break and not is_file then return "" end
   if shared_state.config.on_format_element then
