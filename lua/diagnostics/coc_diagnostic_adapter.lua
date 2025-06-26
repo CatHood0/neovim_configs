@@ -195,14 +195,6 @@ function M.setup()
     update_in_insert = true,
   })
 
-  vim.api.nvim_create_autocmd("User", {
-    pattern = "CocNvimInit",
-    callback = function()
-      M.sync_coc_diagnostics()
-    end,
-    once = true
-  })
-
   -- On general change
   vim.api.nvim_create_autocmd("User", {
     pattern = "CocDiagnosticChange",

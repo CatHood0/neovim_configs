@@ -98,7 +98,7 @@ endfunction
 
 " =========== COC to Native LSP diagnostic implementation ===========
 lua << EOF
-local diagnostic_adapter = require("coc_diagnostic_adapter")
+local diagnostic_adapter = require("diagnostics/coc_diagnostic_adapter")
 diagnostic_adapter.setup()
 EOF
 
@@ -120,7 +120,8 @@ devicons.setup({
     }
   }
 })
-local winbar = require("coc_winbar_adapter")
+
+local winbar = require("winbar/nbreadcrumbs")
 
 winbar.setup({
   enabled = true,
