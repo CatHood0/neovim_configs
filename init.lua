@@ -13,11 +13,6 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-local nvim_lua_path = vim.fn.stdpath('config') .. '/lua/'
-vim.opt.runtimepath:append(nvim_lua_path)
-package.path = package.path ..
-';' .. vim.fn.stdpath('config') .. '/lua/?.lua;' .. vim.fn.stdpath('config') .. '/lua/?/init.lua'
-
 require('lazy').setup(require('config.plugins'))
 
 require('config.settings')

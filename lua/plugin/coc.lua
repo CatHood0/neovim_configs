@@ -5,13 +5,14 @@ function M.setup()
     " This avoid an issue where, when we confirm a suggestion selection
     " this action breaks the completion, and add weird new lines after the
     " change (unnecessarily)
-    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
     " =========== COC keys definition ===========
     " These need to be here since are overrided by other plugins
     " Make possible scroll into the suggestion menu using CTRL+J/K
     " JUST INSERT MODE
     inoremap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
     inoremap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
+    
     " Make possible show the suggestion menu just pressing CTRL+Spacekey
     imap <silent><expr> <C-Space> coc#refresh()
     " Add `:Format` command to format current buffer
