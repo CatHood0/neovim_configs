@@ -26,19 +26,6 @@ function M.setup()
     " Add background highlighting for cursor holding
     highlight CocHighlightText guibg=#4F4451 ctermbg=239 " Gris oscuro
 
-    " Set the vim global library to lua diagnostics
-    if !exists('g:lua_coc_library_configured')
-      augroup LuaCocLibrary
-        autocmd!
-        autocmd FileType lua call s:SetLuaLibrary()
-      augroup END
-    endif
-
-    function! s:SetLuaLibrary() abort
-      let g:lua_coc_library_configured = 1
-      call coc#config('Lua.workspace.library', nvim_get_runtime_file('', 1))
-    endfunction
-
     function! ShowDocumentation()
       if CocAction('hasProvider', 'hover')
         call CocActionAsync('doHover')

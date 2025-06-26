@@ -96,6 +96,7 @@
   "coc.preferences.enableMarkdown": true,
   "coc.preferences.bracketEnterImprove": true,
   "coc.preferences.enableGFMBreaksInMarkdownDocument": true,
+  "Lua.workspace.checkThirdParty": false,
   "Lua.codeLens.enable": true,
   "Lua.completion.showParams": true,
   "Lua.hover.enable": true,
