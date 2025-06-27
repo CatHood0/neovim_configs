@@ -122,6 +122,7 @@ function M.update_winbar()
     local new_winbar = M.generate_winbar()
     if new_winbar ~= shared_state.state.buffers[buf] then
       shared_state.state.buffers[buf] = new_winbar
+      ---@diagnostic disable-next-line: deprecated
       vim.api.nvim_win_set_option(win, 'winbar', new_winbar or '')
     end
     if shared_state.state.buffers[buf] == nil then

@@ -60,11 +60,10 @@ else
     }
   })
 
-  require('core.winbar.nbreadcrumbs').setup({
+require('core.winbar.nbreadcrumbs').setup({
     enabled = true,
     separator = "»",
     show_diagnostic = true,
-    use_nui = true,
     on_get_folder = function(_)
       local icon, color = devicons.get_icon("folder", "", { default = true })
       return icon, color

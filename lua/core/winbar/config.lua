@@ -25,9 +25,6 @@ local winbar_opts = {
   -- Update winbar while in insert mode
   update_in_insert = true,
 
-  -- Use NUI for rendering the winbar (requires nui.nvim)
-  use_nui = true,
-
   -- List of buffer types where winbar will be disabled
   exclude_winbar_from = {
     "bin",             -- Binary buffers

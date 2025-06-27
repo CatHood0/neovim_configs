@@ -5,7 +5,7 @@ return {
     'akinsho/bufferline.nvim',
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
-     -- require('bufferline').setup()
+      -- require('bufferline').setup()
     end
   },
   {
@@ -28,7 +28,7 @@ return {
     'catppuccin/nvim',
     name = 'catppuccin',
     config = function()
-     -- require('catppuccin').setup()
+      -- require('catppuccin').setup()
     end
   },
 
@@ -47,6 +47,7 @@ return {
     end
   },
   { 'nvim-tree/nvim-web-devicons' },
+  { 'MunifTanjim/nui.nvim' },
 
   -- 3. NAVIGATION AND SEARCH
   -- File explorer
@@ -56,7 +57,6 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
-      'MunifTanjim/nui.nvim',
       'mrbjarksen/neo-tree-diagnostics.nvim'
     },
     config = function()
@@ -162,12 +162,12 @@ return {
   -- Text manipulation
   {
     'hinell/move.nvim',
-  dependencies = {
-    'mrjones2014/legendary.nvim'  -- Add this dependency
-  },
+    dependencies = {
+      'mrjones2014/legendary.nvim' -- Add this dependency
+    },
     config = function()
       require('move').setup({
-        use_default_keymaps = true,  -- Don't rely on legendary
+        use_default_keymaps = true, -- Don't rely on legendary
       })
     end
   },
