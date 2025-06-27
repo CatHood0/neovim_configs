@@ -44,8 +44,9 @@
     "typeParameter": " ",
   },
   "suggest.formatItems": [
-    "kind",
+    "shortcut",
     "abbr",
+    "kind",
     "menu",
   ],
   "explorer.toggle": true,
