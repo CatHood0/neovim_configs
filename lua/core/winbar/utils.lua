@@ -71,12 +71,12 @@ end
 function M.setup_buffer_cleanup()
   local group = vim.api.nvim_create_augroup("WinBarBufferCleanup", { clear = true })
 
-  -- Cuando un buffer se elimina completamente
-  vim.api.nvim_create_autocmd('BufWipeout', {
+
+  vim.api.nvim_create_autocmd({ 'BufWipeout', 'BufDelete' }, {
     group = group,
     callback = function(args)
       local buf = args.buf
-      shared_state.state.buffers[buf] = nil -- Limpiar el winbar almacenado
+      shared_state.state.buffers[buf] = nil
     end
   })
 end

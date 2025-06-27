@@ -46,10 +46,17 @@ local winbar_opts = {
 
   -- Events that trigger winbar updates
   update_events = {
-    'BufEnter',         -- When entering a buffer
-    'DirChanged',       -- When changing directories
-    'InsertLeave',      -- When leaving insert mode
-    'DiagnosticChanged' -- When diagnostics change
+    'BufEnter',            -- When entering a buffer
+    'BufLeave',            -- When leaving a buffer
+    'DirChanged',          -- When changing directories
+    'CursorMoved',         -- When moving the cursor
+    'WinEnter',            -- When entering in a new window
+    'WinLeave',            -- When leaving a window
+    'InsertLeave',         -- When leaving insert mode
+    'DiagnosticChanged',   -- When diagnostics change
+    'WinResized',
+    'VimResized',
+    'BufWritePost',
   },
 
   -- Folder icon configuration

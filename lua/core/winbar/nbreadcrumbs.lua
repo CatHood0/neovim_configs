@@ -14,20 +14,20 @@ function M.setup(user_config)
 
   utils.define_hl_groups()
   utils.setup_buffer_cleanup()
-
   if shared_state.config.enabled then
     local group = vim.api.nvim_create_augroup("WinBarUpdater", {})
     vim.api.nvim_clear_autocmds({ group = group })
     local winbar = nativeWinbar
 
     for _, event in ipairs(shared_state.config.update_events) do
-      vim.api.nvim_create_autocmd(event, {
-        group = group,
-        callback = winbar.update_winbar
-      })
+      if event ~= 'CocDiagnosticChange' or event == 'CocDiagnosticChange' and vim.g.coc_service_initialized == 1 then
+        vim.api.nvim_create_autocmd(event, {
+          group = group,
+          callback = winbar.update_winbar
+        })
+      end
     end
 
-    -- Comandos personalizados
     vim.api.nvim_create_user_command("WinbarToggle", function()
       shared_state.config.enabled = not shared_state.config.enabled
       winbar.update_winbar()

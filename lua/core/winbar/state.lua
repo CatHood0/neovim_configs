@@ -3,7 +3,6 @@ local M = {
   state = {
     current_path = "",
     buffers = {},
-    update_pending = false,
     hl_groups_defined = false
   },
   config = vim.deepcopy(winbar_opts)

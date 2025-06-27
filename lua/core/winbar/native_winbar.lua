@@ -3,6 +3,58 @@ local M = {}
 local utils = require("core.winbar.utils")
 local shared_state = require('core.winbar.state')
 
+function M.update_winbar()
+  vim.schedule(function()
+    if vim.api.nvim_get_mode().mode == 'i' and not shared_state.config.update_in_insert then
+      return
+    end
+
+    local buf = vim.api.nvim_get_current_buf()
+    local win = vim.api.nvim_get_current_win()
+
+    if not vim.api.nvim_buf_is_loaded(buf) or not vim.api.nvim_buf_is_valid(buf) or not vim.api.nvim_win_is_valid(win) then
+      return
+    end
+
+    local buftype = vim.bo[buf].buftype
+    local filetype = vim.bo[buf].filetype
+
+    if shared_state.config.exclude_winbar_from and #shared_state.config.exclude_winbar_from > 0 then
+      for _, exclude in ipairs(shared_state.config.exclude_winbar_from) do
+        if exclude == buftype or exclude == filetype then
+          return
+        end
+      end
+    end
+
+    local new_winbar = M.generate_winbar()
+
+    --[[print(vim.inspect({
+      current_buffer = buf - 1,
+      win = win,
+      ---@diagnostic disable-next-line: param-type-mismatch
+      args = new_winbar == nil and " " or string.sub(new_winbar, 60, nil),
+    }))
+    ]] --
+
+    -- Get the current winbar of the window
+    ---@diagnostic disable-next-line: deprecated
+    local current_visible_winbar = vim.api.nvim_win_get_option(win, 'winbar') or ''
+
+    -- Update if:
+    -- 1. The content is different from the cached one
+    -- 2. The winbar is empty
+    -- 3. The winbar is different from the new generated one
+    if new_winbar ~= shared_state.state.buffers[buf] or
+        current_visible_winbar == '' or
+        current_visible_winbar ~= new_winbar then
+      shared_state.state.buffers[buf] = new_winbar
+      ---@diagnostic disable-next-line: deprecated
+      vim.api.nvim_win_set_option(win, 'winbar', new_winbar or '')
+    end
+  end)
+end
+
 -- Format every each element by its own way
 function M.format_element(part, ext, is_file, is_last, is_part_break, mode)
   if is_part_break and not is_file then return "" end
@@ -89,47 +141,6 @@ function M.generate_winbar(mode)
     end
   end
   return "  " .. table.concat(winbar_parts, "")
-end
-
-function M.update_winbar()
-  if shared_state.state.update_pending then return end
-
-  shared_state.state.update_pending = true
-  vim.schedule(function()
-    if vim.api.nvim_get_mode().mode == 'i' and not shared_state.config.update_in_insert then
-      shared_state.state.update_pending = false
-      return
-    end
-
-    local buf = vim.api.nvim_get_current_buf()
-    local win = vim.api.nvim_get_current_win()
-
-    if not vim.api.nvim_buf_is_loaded(buf) or not vim.api.nvim_buf_is_valid(buf) or not vim.api.nvim_win_is_valid(win) then
-      shared_state.state.update_pending = false
-      return
-    end
-
-    local buftype = vim.bo[buf].buftype
-
-    if shared_state.config.exclude_winbar_from and #shared_state.config.exclude_winbar_from > 0 then
-      for _, exclude in ipairs(shared_state.config.exclude_winbar_from) do
-        if exclude == buftype then
-          return
-        end
-      end
-    end
-
-    local new_winbar = M.generate_winbar()
-    if new_winbar ~= shared_state.state.buffers[buf] then
-      shared_state.state.buffers[buf] = new_winbar
-      ---@diagnostic disable-next-line: deprecated
-      vim.api.nvim_win_set_option(win, 'winbar', new_winbar or '')
-    end
-    if shared_state.state.buffers[buf] == nil then
-      shared_state.state.buffers[buf] = new_winbar
-    end
-    shared_state.state.update_pending = false
-  end)
 end
 
 return M
