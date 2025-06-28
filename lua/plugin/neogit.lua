@@ -17,7 +17,7 @@ require('neogit').setup {
   },
   -- "ascii"   is the graph the git CLI generates
   -- "unicode" is the graph like https://github.com/rbong/vim-flog
-  graph_style = "ascii",
+  graph_style = "unicode",
   -- Used to generate URL's for branch popup action "pull request".
   git_services = {
     ["github.com"] = "https://github.com/${owner}/${repository}/compare/${branch_name}?expand=1",
@@ -45,7 +45,7 @@ require('neogit').setup {
   highlight = {
     italic = true,
     bold = true,
-    underline = true
+    underline = true,
   },
   -- Set to false if you want to be responsible for creating _ALL_ keymappings
   use_default_keymaps = true,
@@ -131,10 +131,9 @@ require('neogit').setup {
     kind = "split",
   },
   signs = {
-    -- { CLOSED, OPENED }
-    hunk = { "", "" },
-    item = { ">", "v" },
-    section = { ">", "v" },
+    hunk = { "▸", "▾" },
+    item = { "⏵", "⏷" },
+    section = { "▶", "▼" },
   },
   -- Each Integration is auto-detected through plugin presence, however, it can be disabled by setting to `false`
   integrations = {
