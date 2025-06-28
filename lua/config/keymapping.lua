@@ -59,17 +59,26 @@ map('n', '<C-a>', '<cmd>Neotree toggle<cr>', { silent = true })
 map('n', '<space>fo', '<cmd>Format<cr>', { silent = true })
 
 -- ==================== Line Movement ====================
-map('n', '<S-j>', '<cmd>MoveLine 1<cr>', { silent = true })
-map('n', '<S-k>', '<cmd>MoveLine -1<cr>', { silent = true })
-map('n', '<S-l>', '<cmd>MoveHChar 1<cr>', { silent = true })
-map('n', '<S-h>', '<cmd>MoveHChar -1<cr>', { silent = true })
-map('v', '<S-h>', '<cmd>MoveHBlock -1<cr>', { silent = true })
-map('x', '<S-j>', '<cmd>MoveBlock 1<cr>', { silent = true })
-map('x', '<S-k>', '<cmd>MoveBlock -1<cr>', { silent = true })
-map('v', '<S-l>', '<cmd>MoveHBlock 1<cr>', { silent = true })
+--map('n', '<S-j>', '<cmd>MoveLine 1<cr>', { silent = true })
+--map('n', '<S-k>', '<cmd>MoveLine -1<cr>', { silent = true })
+--map('n', '<S-l>', '<cmd>MoveHChar 1<cr>', { silent = true })
+--map('n', '<S-h>', '<cmd>MoveHChar -1<cr>', { silent = true })
+--map('v', '<S-h>', '<cmd>MoveHBlock -1<cr>', { silent = true })
+--map('x', '<S-j>', '<cmd>MoveBlock 1<cr>', { silent = true })
+--map('x', '<S-k>', '<cmd>MoveBlock -1<cr>', { silent = true })
+--map('v', '<S-l>', '<cmd>MoveHBlock 1<cr>', { silent = true })
+vim.cmd([[
+nnoremap <silent> <S-j> :MoveLine 1<CR>
+nnoremap <silent> <S-k> :MoveLine -1<CR>
+nnoremap <silent> <S-l> :MoveHChar 1<CR>
+nnoremap <silent> <S-h> :MoveHChar -1<CR>
+vnoremap <silent> <S-h> :MoveHBlock -1<CR>
+xnoremap <silent> <S-j> :MoveBlock 1<CR>
+xnoremap <silent> <S-k> :MoveBlock -1<CR>
+vnoremap <silent> <S-l> :MoveHBlock 1<CR>
+]])
 
 -- ==================== Git ====================
--- Git diff view
 map('n', '<space>pp', '<cmd>DiffviewOpen<cr>', { silent = true })
 map('n', '<space>pc', '<cmd>DiffviewClose<cr>', { silent = true })
 
@@ -92,10 +101,7 @@ map('n', '<S-+>', '<nop>')
 map('n', '<space>w', '<cmd>lua vim.fn.ShowDocumentation()<cr>', { silent = true })
 map('n', '<space>ca', '<Plug>(coc-codeaction-cursor)', { silent = true })
 map('n', '<space>cs', '<Plug>(coc-codeaction-source)', { silent = true })
-map('n', '<space>fi', '<cmd>CocDiagnostics<cr>', { silent = true })
-map('n', '<space>fu', '<cmd>CocList diagnostics<cr>', { silent = true })
-map('n', '<space>o', '<cmd>CocList outline<cr>', { silent = true, nowait = true })
-map('n', '<space>s', '<cmd>CocList -I symbols<cr>', { silent = true, nowait = true })
+map('n', '<space>fi', '<cmd>Trouble diagnostics toggle focus=true<cr>', { silent = true })
 map('n', '<C-d>d', '<Plug>(coc-definition)', { silent = true, nowait = true })
 map('n', '<C-d>i', '<Plug>(coc-type-definition)', { silent = true, nowait = true })
 map('n', '<C-w>', '<Plug>(coc-references)', { silent = true, nowait = true })
@@ -113,9 +119,6 @@ map('n', '<space>fn', '<cmd>CocCommand workspace.renameCurrentFile<cr>', { silen
 map('n', '<space>eg', '<cmd>CocCommand flutter.pub.get<cr>', { silent = true })
 map('n', '<space>co', '<cmd>CocCommand flutter.dev.openDevLog<cr>', { silent = true })
 map('n', '<space>cl', '<cmd>CocCommand flutter.dev.clearDevLog<cr>', { silent = true })
-
--- ==================== Color Picker ====================
-map('n', '<space>pi', '<cmd>PickColor<cr>', { silent = true })
 
 -- ==================== Insert Mode Mappings ====================
 map('i', '<C-n>', '<nop>')

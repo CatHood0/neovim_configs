@@ -47,10 +47,19 @@ return {
     end
   },
   { 'nvim-tree/nvim-web-devicons' },
+  { 'echasnovski/mini.nvim',      version = '*' },
   { 'MunifTanjim/nui.nvim' },
 
   -- 3. NAVIGATION AND SEARCH
   -- File explorer
+  {
+    'nvim-tree/nvim-tree.lua',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'mrbjarksen/neo-tree-diagnostics.nvim'
+    },
+  },
   {
     'nvim-neo-tree/neo-tree.nvim',
     branch = 'v3.x',
@@ -112,6 +121,11 @@ return {
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-path'
     }
+  },
+  {
+    "folke/trouble.nvim",
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = "Trouble"
   },
 
   -- Snippets
@@ -186,7 +200,6 @@ return {
   -- 7. TERMINAL
   {
     'akinsho/toggleterm.nvim',
-    tag = '2.*',
     config = function()
       -- require('toggleterm').setup()
     end
@@ -240,10 +253,9 @@ return {
   { 'MeanderingProgrammer/markdown.nvim' },
   {
     'echasnovski/mini.nvim',
-    name = 'render-markdown',
     config = function()
-      -- require('mini.render-markdown').setup()
-    end
+      require('mini.icons').setup()
+    end,
   },
   {
     'iamcco/markdown-preview.nvim',

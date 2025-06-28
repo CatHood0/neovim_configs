@@ -27,7 +27,7 @@ function M.update_winbar()
       end
     end
 
-    local new_winbar = M.generate_winbar()
+    local new_winbar, full_path = M.generate_winbar()
 
     --[[print(vim.inspect({
       current_buffer = buf - 1,
@@ -45,10 +45,12 @@ function M.update_winbar()
     -- 1. The content is different from the cached one
     -- 2. The winbar is empty
     -- 3. The winbar is different from the new generated one
-    if new_winbar ~= shared_state.state.buffers[buf] or
+    if not shared_state.state.buffers[buf] or new_winbar ~= shared_state.state.buffers[buf].winbar or
         current_visible_winbar == '' or
         current_visible_winbar ~= new_winbar then
-      shared_state.state.buffers[buf] = new_winbar
+      shared_state.state.buffers[buf] = {}
+      shared_state.state.buffers[buf].winbar = new_winbar
+      shared_state.state.buffers[buf].path = full_path
       ---@diagnostic disable-next-line: deprecated
       vim.api.nvim_win_set_option(win, 'winbar', new_winbar or '')
     end
@@ -66,7 +68,7 @@ function M.format_element(part, ext, is_file, is_last, is_part_break, mode)
   local icon, icon_color
   if is_file then
     icon, icon_color = utils.get_file_icon(part)
-    icon = icon or shared_state.config.file_icon.fallback_icon
+    icon = icon or shared_state.config.file_icon.icon
     icon_color = icon_color or shared_state.config.file_icon.hl_group
   else
     icon, icon_color = utils.get_folder_icon(part)
@@ -90,7 +92,9 @@ function M.format_element(part, ext, is_file, is_last, is_part_break, mode)
   return element
 end
 
--- Núcleo de generación de winbar
+---Winbar str generator
+---@param mode string?
+---@return string?, string?
 function M.generate_winbar(mode)
   if not shared_state.config.enabled then return "" end
   shared_state.state.current_path = ""
@@ -99,6 +103,7 @@ function M.generate_winbar(mode)
   if file_path == "" then return "" end
 
   local parts = {}
+  local curPartPath = ""
   for part in file_path:gmatch("[^/]+") do
     table.insert(parts, part)
   end
@@ -114,11 +119,14 @@ function M.generate_winbar(mode)
   local partBreak = false
   if shared_state.config.depth and shared_state.config.depth.limit and #parts > shared_state.config.depth.limit then
     partBreak = true
-    parts = { "…", unpack(parts, #parts - shared_state.config.depth.limit + 1) }
+    local unpacked = unpack(parts, #parts - shared_state.config.depth.limit + 1)
+    parts = { "…", unpacked }
+    curPartPath = vim.fs.joinpath("~/", table.concat(unpacked, ""))
   end
 
   local winbar_parts = {}
   for i, part in ipairs(parts) do
+    curPartPath = vim.fs.joinpath(curPartPath, part)
     shared_state.state.current_path = shared_state.state.current_path .. (i > 1 and "/" or "") .. part
     local is_file = (i == #parts)
     local ext = part:match(".+%.(.*)$") or ""
@@ -140,7 +148,8 @@ function M.generate_winbar(mode)
       end
     end
   end
-  return "  " .. table.concat(winbar_parts, "")
+
+  return "  " .. table.concat(winbar_parts, ""), file_path
 end
 
 return M

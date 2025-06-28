@@ -1,31 +1,42 @@
--- Default configuration for the Winbar plugin
--- All these options can be overridden when calling setup()
+---@class WinbarOpts
+---@field enabled boolean? Enable/disable the winbar
+---@field icons boolean? Show icons for file and folder names
+---@field icons_provider string? Set the provider of the icons. Supported: [nvim-web-devicons, mini-icons] 
+---@field separator string Separator? between path elements (e.g., ">")
+---@field folder_hl_group string? Highlight group for folders
+---@field file_hl_color string? Highlight group for current file
+---@field separator_hl_color string? Highlight group for separators
+---@field show_diagnostic boolean? Show diagnostic icons in winbar
+---@field update_in_insert boolean? Update winbar in insert mode
+---@field exclude_winbar_from string[]? Buffer types where winbar is disabled
+---@field depth DepthConfig? Depth settings for long paths
+---@field update_events string[]? Events triggering winbar updates
+---@field folder_icon IconConfig? Folder icon settings
+---@field file_icon IconConfig? File icon settings
+---@field on_get_folder fun(name: string)?:string,string? Custom folder icon/color
+---@field on_get_file fun(name: string, ext: string)?:string,string? Custom file icon/color
+---@field on_format_element fun(part: string, ext: string?, is_file: boolean, is_last: boolean)?:string Formatter
+
+---@class DepthConfig
+---@field limit integer? Max path elements (nil = no limit)
+---@field separator string Truncation separator (e.g., "...")
+
+---@class IconConfig
+---@field icon string Icon character
+---@field color string Color code
+---@field hl_group string Highlight group
+
 local winbar_opts = {
-  -- Enable/disable the winbar completely
   enabled = true,
-
-  -- Show icons next to file and folder names
   icons = true,
-
-  -- Separator between path elements (e.g., home » documents » file)
   separator = ">",
-
-  -- Highlight group for folders in the path
+  icons_provider = nil,
   folder_hl_group = "Normal",
-
-  -- Highlight group for current file (last element)
   file_hl_color = "Normal",
-
-  -- Highlight group for the separators
   separator_hl_color = "Comment",
-
-  -- Show diagnostic icons (errors, warnings) in the winbar
   show_diagnostic = false,
-
-  -- Update winbar while in insert mode
   update_in_insert = true,
 
-  -- List of buffer types where winbar will be disabled
   exclude_winbar_from = {
     "bin",             -- Binary buffers
     "help",            -- Help windows
@@ -34,78 +45,44 @@ local winbar_opts = {
     "NvimTree",        -- NvimTree plugin
     "TelescopePrompt", -- Telescope prompt
     "quickfix",        -- Quickfix window
-    'noice',           -- noice.nvim plugin
-    'nui',             -- nui.nvim internal buffers
+    "noice",           -- noice.nvim plugin
+    "nui",             -- nui.nvim internal buffers
   },
 
-  -- Depth configuration for long paths
   depth = {
     limit = nil,    -- Maximum number of elements to show (nil = no limit)
     separator = "", -- Separator for truncated paths (e.g., "...docs/file")
   },
 
-  -- Events that trigger winbar updates
   update_events = {
-    'BufEnter',            -- When entering a buffer
-    'BufLeave',            -- When leaving a buffer
-    'DirChanged',          -- When changing directories
-    'CursorMoved',         -- When moving the cursor
-    'WinEnter',            -- When entering in a new window
-    'WinLeave',            -- When leaving a window
-    'InsertLeave',         -- When leaving insert mode
-    'DiagnosticChanged',   -- When diagnostics change
-    'WinResized',
-    'VimResized',
-    'BufWritePost',
+    "BufEnter",          -- When entering a buffer
+    "BufLeave",          -- When leaving a buffer
+    "DirChanged",        -- When changing directories
+    "CursorMoved",       -- When moving the cursor
+    "WinEnter",          -- When entering in a new window
+    "WinLeave",          -- When leaving a window
+    "InsertLeave",       -- When leaving insert mode
+    "DiagnosticChanged", -- When diagnostics change
+    "WinResized",
+    "VimResized",
+    "BufWritePost",
   },
 
-  -- Folder icon configuration
   folder_icon = {
     icon = "", -- Default folder icon
     color = "#7ebae4", -- Default color
-    hl_group = "Normal" -- Custom highlight group
+    hl_group = "Normal",
   },
 
-  -- File icon configuration
   file_icon = {
-    fallback_icon = "", -- Default icon for files without specific icon
-    fallback_color = "#6d8086", -- Default color
-    hl_group = "Normal" -- Custom highlight group
+    icon = "", -- Default icon for files without specific icon
+    color = "#6d8086", -- Default color
+    hl_group = "Normal",
   },
 
-  -- Function to get custom icon and color for folders
-  -- @param name: folder name
-  -- @return icon, hl_group
   on_get_folder = nil,
-
-  -- Function to get custom icon and color for files
-  -- @param name: file name
-  -- @param ext: file extension
-  -- @return icon, hl_group
   on_get_file = nil,
-
-  -- Function to format individual winbar elements
-  -- @param part: element text (file/folder name)
-  -- @param ext: file extension (for files only)
-  -- @param is_file: boolean, true if file
-  -- @param is_last: boolean, true if last element
-  -- @return formatted string
   on_format_element = nil,
-
-  -- ============== These ones just works with nui ==============
-
-  -- Callback when clicking a folder in winbar
-  -- @param path: full folder path
-  on_press_folder = nil,
-
-  -- Callback when clicking a file in winbar
-  -- @param path: full file path
-  on_press_file = nil,
-
-  -- Callback when hovering over winbar element
-  -- @param path: element path
-  -- @param is_file: boolean, true if file
-  on_hover = nil,
 }
 
 return winbar_opts

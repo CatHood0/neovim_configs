@@ -1,5 +1,8 @@
+---@diagnostic disable: undefined-global
 local M = {}
 
+---@module 'core.winbar.state'
+---@type State
 local shared_state = require('core.winbar.state')
 
 local diagnostic_severity = {
@@ -8,6 +11,80 @@ local diagnostic_severity = {
   [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
   [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
 }
+
+local support_providers = { "nvim-web-devicons", "mini-icons" }
+
+---@param table string[]
+---@param value string?
+local function contains(table, value)
+  for i = 1, #table do
+    if (table[i] == value) then
+      return true
+    end
+  end
+  return false
+end
+
+function M.setup_provider()
+  if M.check_provider() then
+    if shared_state.config.icons_provider == support_providers[1] then
+      shared_state.state.use_full_paths = false
+      local devicons_ok, devicons = pcall(require, 'nvim-web-devicons')
+      if not devicons_ok then
+        vim.notify("Could not load nvim-web-devicons", vim.log.levels.WARN)
+        return
+      end
+      devicons.setup({
+        override = {
+          folder = {
+            icon = "",
+            color = "#7ebae4",
+            name = "folder"
+          }
+        }
+      })
+      shared_state.state.get_folder_icon = not devicons_ok and nil or
+          function(_)
+            local icon, color = devicons.get_icon("folder", "", { default = true })
+            return icon, color
+          end
+      shared_state.state.get_file_icon = not devicons_ok and nil or
+          function(name, ext)
+            local icon, color = devicons.get_icon(name, ext, { default = true })
+            return icon, color
+          end
+    end
+    if shared_state.config.icons_provider == support_providers[2] then
+      if MiniIcons == nil then
+        vim.notify("Could not load mini-icons. Please, ensure that you call require('mini.icons').setup() before this",
+          vim.log.levels.WARN)
+        return
+      end
+      shared_state.state.use_full_paths = true
+      shared_state.state.get_folder_icon =
+          function(name)
+            local icon, color = MiniIcons.get("directory", name)
+            ---@diagnostic disable-next-line: redundant-return-value
+            return icon, color
+          end
+      shared_state.state.get_file_icon =
+          function(name, _)
+            local icon, color = MiniIcons.get("extension", name)
+            ---@diagnostic disable-next-line: redundant-return-value
+            return icon, color
+          end
+    end
+  end
+end
+
+---@return boolean validates if the provider passed if valid to be used
+function M.check_provider()
+  if not shared_state.config.icons_provider or
+      not contains(support_providers, shared_state.config.icons_provider) then
+    return false
+  end
+  return true
+end
 
 --- Define custom hl groups
 function M.define_hl_groups()
@@ -18,7 +95,7 @@ function M.define_hl_groups()
   })
 
   vim.api.nvim_set_hl(0, shared_state.config.file_icon.hl_group, {
-    fg = shared_state.config.file_icon.fallback_color
+    fg = shared_state.config.file_icon.color,
   })
 
   shared_state.state.hl_groups_defined = true
@@ -40,6 +117,7 @@ function M.get_diagnostic()
   local max_severity = vim.diagnostic.severity.HINT
   for _, diag in ipairs(diagnostics) do
     if diag.severity < max_severity then
+      ---@diagnostic disable-next-line: cast-local-type
       max_severity = diag.severity
     end
   end
@@ -48,7 +126,14 @@ function M.get_diagnostic()
 end
 
 --- Get an icon using the name of the folder
+---@param name string
+---@return string, string?
 function M.get_folder_icon(name)
+  if shared_state.state.get_folder_icon then
+    local icon, _ = shared_state.state.get_folder_icon(name)
+    return icon, _
+  end
+
   if shared_state.config.on_get_folder then
     local icon, color = shared_state.config.on_get_folder(name)
     return icon, color
@@ -58,14 +143,21 @@ function M.get_folder_icon(name)
 end
 
 --- Get an icon using the name of the file and its extension
+---@param name string
+---@return string, string?
 function M.get_file_icon(name)
+  local ext = name:match(".+%.(.*)$") or ""
+  if shared_state.state.get_file_icon then
+    local icon, _ = shared_state.state.get_file_icon(name, ext)
+    return icon, _
+  end
+
   if shared_state.config.on_get_file then
-    local ext = name:match(".+%.(.*)$") or ""
     local icon, color = shared_state.config.on_get_file(name, ext)
     return icon, color
   end
 
-  return shared_state.config.file_icon.fallback_icon, shared_state.config.file_icon.hl_group
+  return shared_state.config.file_icon.icon, shared_state.config.file_icon.hl_group
 end
 
 function M.setup_buffer_cleanup()
