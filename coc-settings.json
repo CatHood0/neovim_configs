@@ -3,6 +3,7 @@
   "suggest.enableFloat": true,
   "suggest.noselect": false,
   "suggest.acceptSuggestionOnCommitCharacter": false,
+  "suggest.labelMaxLength": 70,
   "hover.floatConfig": {
     "border": true,
     "rounded": true,
@@ -16,6 +17,9 @@
     "highlight": "CocFloating",
     "borderhighlight": "CocFloatBorder",
   },
+  "callHierarchy.enableTooltip": true,
+  "callHierarchy.openCommand": "edit",
+  "vimlsp.suggest.fromVimruntime": true,
   "suggest.completionItemKindLabels": {
     "text": " ",
     "method": " ",
@@ -58,6 +62,7 @@
   ],
   "diagnostic.enable": true,
   "diagnostic.autoRefresh": true,
+  "diagnostic.enableHighlightLineNumber": true,
   "diagnostic.showDeprecated": true,
   "diagnostic.errorSign": " ",
   "diagnostic.warningSign": " ",
@@ -65,10 +70,8 @@
   "diagnostic.hintSign": "󰌵 ",
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
-  "diagnostic.refreshOnInsertMode": false,
-  "pullDiagnostic.onSave": true,
-  "pullDiagnostic.onChange": true,
   "diagnostic.showRelatedInformation": true,
+  "diagnostic.checkCurrentLine": true,
   "diagnostic.floatConfig": {
     "border": true,
     "rounded": true,
@@ -81,6 +84,7 @@
   "suggest.snippetsSupport": true,
   "suggest.enablePreselect": true,
   "suggest.snippetIndicator": " 💡",
+  "clangd.path": "/usr/bin/clangd-15",
   "clangd.arguments": [
     "--background-index",
     "--clang-tidy"
@@ -89,7 +93,6 @@
     "-std=c++20"
   ],
   "clangd.enabled": true,
-  "diagnostic.checkCurrentLine": true,
   "flutter.sdk.path": "~/development/flutter/bin/flutter",
   "flutter.sdk.searchPaths": [
     "~/development/flutter/bin"
