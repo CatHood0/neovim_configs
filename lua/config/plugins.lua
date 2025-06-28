@@ -84,6 +84,13 @@ return {
     end
   },
   {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'make',
+    config = function()
+      require('telescope').load_extension('fzf')
+    end
+  },
+  {
     'junegunn/fzf',
     build = function()
       -- Versión compatible con Lua del comando fzf#install()
