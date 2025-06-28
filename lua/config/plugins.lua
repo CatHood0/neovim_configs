@@ -136,6 +136,14 @@ return {
   { 'mfussenegger/nvim-dap' },
 
   -- 5. VERSION CONTROL (GIT)
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "ibhagwan/fzf-lua",
+      "folke/snacks.nvim",
+    },
+  },
   { 'tpope/vim-fugitive' },
   {
     'lewis6991/gitsigns.nvim',

@@ -81,10 +81,14 @@ xnoremap <silent> <S-k> :MoveBlock -1<CR>
 vnoremap <silent> <S-l> :MoveHBlock 1<CR>
 ]])
 
+-- =================== Notifications ===================
+map('n', '<space>tn', '<cmd>Telescope notify<cr>', { silent = true, nowait = true })
+
 -- ==================== Git ====================
 map('n', '<space>pp', '<cmd>DiffviewOpen<cr>', { silent = true })
 map('n', '<space>pc', '<cmd>DiffviewClose<cr>', { silent = true })
 map('n', '<space>ph', '<cmd>DiffviewFileHistory<cr>', { silent = true })
+map('n', '<space>gi', '<cmd>Neogit<cr>', { silent = true })
 
 -- ==================== Window Resizing ====================
 map('n', '<space>h', '<cmd>lua require("tmux").resize_left()<cr>')
