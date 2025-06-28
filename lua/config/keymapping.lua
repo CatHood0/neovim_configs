@@ -59,6 +59,8 @@ map('n', '<C-a>', '<cmd>Neotree toggle<cr>', { silent = true })
 map('n', '<space>fo', '<cmd>Format<cr>', { silent = true })
 
 -- ==================== Line Movement ====================
+-- Idk exactly why, mapping these keys using vim.api.keyset
+-- applies them, but, them not work as i expect
 --map('n', '<S-j>', '<cmd>MoveLine 1<cr>', { silent = true })
 --map('n', '<S-k>', '<cmd>MoveLine -1<cr>', { silent = true })
 --map('n', '<S-l>', '<cmd>MoveHChar 1<cr>', { silent = true })
@@ -67,6 +69,7 @@ map('n', '<space>fo', '<cmd>Format<cr>', { silent = true })
 --map('x', '<S-j>', '<cmd>MoveBlock 1<cr>', { silent = true })
 --map('x', '<S-k>', '<cmd>MoveBlock -1<cr>', { silent = true })
 --map('v', '<S-l>', '<cmd>MoveHBlock 1<cr>', { silent = true })
+-- Only using vimscripting makes them works exactly as they should
 vim.cmd([[
 nnoremap <silent> <S-j> :MoveLine 1<CR>
 nnoremap <silent> <S-k> :MoveLine -1<CR>
@@ -81,6 +84,7 @@ vnoremap <silent> <S-l> :MoveHBlock 1<CR>
 -- ==================== Git ====================
 map('n', '<space>pp', '<cmd>DiffviewOpen<cr>', { silent = true })
 map('n', '<space>pc', '<cmd>DiffviewClose<cr>', { silent = true })
+map('n', '<space>ph', '<cmd>DiffviewFileHistory<cr>', { silent = true })
 
 -- ==================== Window Resizing ====================
 map('n', '<space>h', '<cmd>lua require("tmux").resize_left()<cr>')
