@@ -27,5 +27,8 @@
       ".repro"
     ],
     "telemetry.enable": false
-  }
+  },
+    "diagnostics.disable": [
+        "unused-local"
+    ]
 }

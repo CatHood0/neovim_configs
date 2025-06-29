@@ -38,6 +38,8 @@ require('plugin.telescope')
 require('plugin.tmux')
 require('plugin.toggleterm')
 require('plugin.treesitter')
+require('plugin.lspkind')
+require('plugin.lsp.lsp').setup()
 
 -- Load core
 require('core.winbar.nbreadcrumbs').setup({
@@ -47,7 +49,10 @@ require('core.winbar.nbreadcrumbs').setup({
   icons_provider = 'nvim-web-devicons',
 })
 
-require('core.diagnostics.coc_diagnostic_adapter').setup()
-
-require('plugin.coc').setup()
 require('plugin.themes').theme()
+
+vim.cmd([[
+  autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
+  autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+  autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+]])

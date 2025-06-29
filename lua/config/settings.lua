@@ -1,6 +1,7 @@
 -- ==================== UI/Visual ====================
 vim.opt.number = true
 vim.opt.cursorline = true
+vim.opt.fileformat= "dos"
 vim.opt.scrolloff = 10
 vim.opt.showcmd = true
 vim.opt.showtabline = 2 -- always show tabs

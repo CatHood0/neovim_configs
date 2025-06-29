@@ -117,17 +117,52 @@ return {
 
   -- 4. LANGUAGE AND DEVELOPMENT
   -- LSP and completion
-  {
+  --[[{
     'neoclide/coc.nvim',
     branch = 'release',
     build = 'yarn install --frozen-lockfile'
   },
+  ]]
+  -- Snippet engine and snippets
+  {
+    'L3MON4D3/LuaSnip',
+    version = 'v2.*',
+    build = 'make install_jsregexp',
+    dependencies = {
+      'honza/vim-snippets',
+    },
+  },
+
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
-      'hrsh7th/cmp-path'
-    }
+      'saadparwaiz1/cmp_luasnip',
+      'rafamadriz/friendly-snippets'
+    },
+  },
+  { 'mfussenegger/nvim-jdtls' },
+  -- required for nvim-jdtls
+  -- see the java section in the README
+  {
+    "mason-org/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end,
+    opts = {}
+  },
+  { 'neovim/nvim-lspconfig' },
+  { 'onsails/lspkind.nvim' },
+  {
+    'akinsho/flutter-tools.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'stevearc/dressing.nvim',
+    },
+    config = true,
   },
   {
     "folke/trouble.nvim",
@@ -234,16 +269,16 @@ return {
 
   -- Notifications and UI
   {
-    'rcarriga/nvim-notify',
-    config = function()
-      -- require('notify').setup()
-    end
-  },
-  {
     'folke/noice.nvim',
     dependencies = 'MunifTanjim/nui.nvim',
     config = function()
       -- require('noice').setup()
+    end
+  },
+  {
+    'rcarriga/nvim-notify',
+    config = function()
+      -- require('notify').setup()
     end
   },
 

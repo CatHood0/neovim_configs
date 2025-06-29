@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+local lsp = require('plugin.lsp.lsp')
 
 -- ==================== Window Navigation ====================
 map('n', '<c-k>', '<cmd>wincmd k<cr>', { silent = true })
@@ -21,9 +22,9 @@ map('n', '<F5>', '<cmd>DapDisconnect<cr>')
 map('n', '<space>tm', '<cmd>DapContinue<cr>')
 
 -- ==================== File Operations ====================
-map('n', '<C-q>', '<cmd>q<cr>')
 map('n', '<C-Q>', '<cmd>qa!<cr>')
 map('n', '<C-s>', '<cmd>wall<cr>', { silent = true })
+map('n', '<C-s>a', '<cmd>wqall<cr>')
 map('n', '<space>qq', '<cmd>Format<cr><cmd>wqall<cr><cmd>SessionSave<cr>', { silent = true })
 
 -- ==================== Buffer Management ====================
@@ -54,9 +55,6 @@ map('n', '<space>qd', '<cmd>SessionDelete<cr>', { silent = true })
 
 -- ==================== File Tree ====================
 map('n', '<C-a>', '<cmd>Neotree toggle<cr>', { silent = true })
-
--- ==================== Formatting ====================
-map('n', '<space>fo', '<cmd>Format<cr>', { silent = true })
 
 -- ==================== Line Movement ====================
 -- Idk exactly why, mapping these keys using vim.api.keyset
@@ -106,27 +104,30 @@ map('v', 'n', '<nop>')
 map('n', '<S-+>', '<nop>')
 
 -- ==================== COC Mappings ====================
-map('n', '<space>w', '<cmd>lua vim.fn.ShowDocumentation()<cr>', { silent = true })
-map('n', '<space>ca', '<Plug>(coc-codeaction-cursor)', { silent = true })
-map('n', '<space>cs', '<Plug>(coc-codeaction-source)', { silent = true })
-map('n', '<space>fi', '<cmd>Trouble diagnostics toggle focus=true<cr>', { silent = true })
-map('n', '<C-d>d', '<Plug>(coc-definition)', { silent = true, nowait = true })
-map('n', '<C-d>i', '<Plug>(coc-type-definition)', { silent = true, nowait = true })
-map('n', '<C-w>', '<Plug>(coc-references)', { silent = true, nowait = true })
+map('n', '<space>w', function() vim.lsp.buf.hover(lsp.hover_opts) end, { silent = true, desc = "Show documentation" })
+map('n', '<space>ca', vim.lsp.buf.code_action, { silent = true, desc = "Code actions" })
+map('x', '<space>ca', vim.lsp.buf.code_action, { silent = true, desc = "Code actions" })
+map('n', '<space>fi', '<cmd>Trouble diagnostics toggle focus=true<cr>', { silent = true, desc = "Toggle diagnostics" })
+-- map('n', '<space>fi', '<cmd>Telescope diagnostics<cr>', { silent = true, desc = "Toggle diagnostics" })
+map('n', '<C-d>d', vim.lsp.buf.definition, { silent = true, nowait = true, desc = "Go to definition" })
+map('n', '<C-d>i', vim.lsp.buf.type_definition, { silent = true, nowait = true, desc = "Go to type definition" })
+map('n', '<C-w>', vim.lsp.buf.references, { silent = true, nowait = true, desc = "Show references" })
+map('n', '<space>fo', vim.lsp.buf.format, { silent = true, nowait = true, desc = "Format code" })
 
 -- ==================== Flutter ====================
-map('n', '<space>fr', '<cmd>CocCommand flutter.run<cr>', { silent = true })
-map('n', '<space>fq', '<cmd>CocCommand flutter.dev.quit<cr>', { silent = true })
-map('n', '<space>tou', '<cmd>CocCommand flutter.toggleOutline<cr>', { silent = true })
-map('n', '<space>fmo', '<cmd>CocCommand flutter.devices<cr>', { silent = true })
-map('n', '<space>ro', '<cmd>CocCommand flutter.dev.hotReload<cr>', { silent = true })
-map('n', '<space>re', '<cmd>CocCommand flutter.dev.hotRestart<cr>', { silent = true })
-map('n', '<space>sp', '<cmd>CocCommand flutter.lsp.restart<cr>', { silent = true })
-map('n', '<space>op', '<cmd>CocCommand flutter.dev.openDevToolsProfiler<cr>', { silent = true })
-map('n', '<space>fn', '<cmd>CocCommand workspace.renameCurrentFile<cr>', { silent = true })
-map('n', '<space>eg', '<cmd>CocCommand flutter.pub.get<cr>', { silent = true })
-map('n', '<space>co', '<cmd>CocCommand flutter.dev.openDevLog<cr>', { silent = true })
-map('n', '<space>cl', '<cmd>CocCommand flutter.dev.clearDevLog<cr>', { silent = true })
+map('n', '<space>fr', '<cmd>FlutterRun<cr>', { silent = true, nowait = true })
+map('n', '<space>fq', '<cmd>FlutterQuit<cr>', { silent = true, nowait = true })
+map('n', '<space>tou', '<cmd>FlutterOutlineToggle<cr>', { silent = true, nowait = true })
+map('n', '<space>fmo', '<cmd>FlutterDevices<cr>', { silent = true, nowait = true })
+map('n', '<space>ro', '<cmd>FlutterHotReload<cr>', { silent = true, nowait = true })
+map('n', '<space>re', '<cmd>FlutterRestart<cr>', { silent = true, nowait = true })
+map('n', '<space>sp', '<cmd>FlutterSuper<cr>', { silent = true, nowait = true })
+map('n', '<space>op', '<cmd>FlutterDevTools<cr>', { silent = true, nowait = true })
+map('n', '<space>fn', vim.lsp.buf.rename, { silent = true, nowait = true })
+map('n', '<space>eg', '<cmd>FlutterPubGet<cr>', { silent = true, nowait = true })
+map('n', '<space>co', '<cmd>FlutterLog<cr>', { silent = true, nowait = true })
+map('n', '<space>cl', '<cmd>FlutterClearLog<cr>', { silent = true, nowait = true })
+
 
 -- ==================== Insert Mode Mappings ====================
 map('i', '<C-n>', '<nop>')
