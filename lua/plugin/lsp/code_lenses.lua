@@ -19,6 +19,7 @@ function M.setup()
         return " " .. latest_author .. (count - 1 == 0 and "" or (" + " .. count - 1))
       end,
     },
+    { LspLens = { link = "Comment" } },
     ignore_filetype = {
       -- "prisma",
     },
