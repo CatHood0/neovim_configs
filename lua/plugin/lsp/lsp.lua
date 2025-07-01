@@ -1,16 +1,18 @@
 local M = {}
 local utils = require("plugin.lsp.utils")
+local code_lens = require("plugin.lsp.code_lenses")
 local flutter_setup = require("plugin.lsp.flutter-tools")
 local diagnostics = require("plugin.lsp.lsp_diagnostics_configs")
 local servers = require("plugin.lsp.languages")
 local lspconfig = require("lspconfig")
 local default_capabilities = require("plugin.lsp.capabilities")
 
+--- setup all the LSP used by these configurations
 function M.setup()
   local capabilities = default_capabilities.get_capabilities()
-  -- ======================== JSON ==========================
-  M.configLanguages(capabilities)
+  M.config_lsp_langs(capabilities)
   diagnostics.setup_config()
+  code_lens.setup()
 
   lspconfig.jsonls.setup({ capabilities = capabilities })
   lspconfig.clangd.setup({ capabilities = capabilities })
@@ -26,11 +28,32 @@ function M.setup()
   vim.lsp.enable(servers.languages)
 end
 
-function M.configLanguages(capabilities)
+function M.config_lsp_langs(capabilities)
   vim.lsp.config('rust_analyzer', {
     capabilities = capabilities,
     settings = {
-      ['rust-analyzer'] = {},
+      ['rust-analyzer'] = {
+        checkOnSave = true,
+        check = {
+          features = "all"
+        },
+        cargo = {
+          buildScripts = {
+            rebuildOnSave = true
+          }
+        },
+        joinLines = {
+          joinElseIf = true
+        },
+        updates = {
+          checkOnStartup = true
+        },
+        completion = {
+          postfix = {
+            enable = true
+          }
+        }
+      },
     },
   })
   vim.lsp.config('gopls', {
@@ -42,6 +65,9 @@ function M.configLanguages(capabilities)
         },
         staticcheck = true,
         gofumpt = true,
+        codelens = {
+          enable = true,
+        },
       },
     },
   })
@@ -55,7 +81,10 @@ function M.configLanguages(capabilities)
           library = vim.env.VIMRUNTIME,
           checkThirdParty = false,
         },
-        telemetry = { enable = false }
+        telemetry = { enable = false },
+        codelens = {
+          enable = true,
+        },
       }
     }
   })
@@ -78,9 +107,14 @@ function M.configLanguages(capabilities)
   })
 
   vim.lsp.config('ts_ls', {
-    filetypes = {
-      "javascript",
-      "typescript",
+    settings = {
+      filetypes = {
+        "javascript",
+        "typescript",
+      },
+      codelens = {
+        enable = true,
+      },
     },
   })
 end

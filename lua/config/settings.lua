@@ -1,7 +1,6 @@
 -- ==================== UI/Visual ====================
 vim.opt.number = true
 vim.opt.cursorline = true
-vim.opt.fileformat= "dos"
 vim.opt.scrolloff = 10
 vim.opt.showcmd = true
 vim.opt.showtabline = 2 -- always show tabs
@@ -13,6 +12,7 @@ vim.cmd("syntax on")
 vim.opt.background = "dark" -- or light if you want light mode
 vim.opt.laststatus = 2
 vim.opt.signcolumn = "yes"
+vim.opt.textwidth = 200
 
 -- ==================== Text/Editing ====================
 vim.opt.wrap = true
@@ -47,6 +47,7 @@ vim.opt.sessionoptions:append({ "winpos", "terminal", "folds" })
 vim.opt.history = 1500 -- Remember 1500 lines
 vim.opt.clipboard:append("unnamedplus")
 vim.opt.mouse = "a"
+vim.o.mousemoveevent = true
 vim.opt.encoding = "utf-8"
 vim.opt.updatetime = 300 -- Default is 4000 MS instead 300
 vim.opt.shortmess:append("c")

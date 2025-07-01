@@ -51,8 +51,10 @@ require('core.winbar.nbreadcrumbs').setup({
 
 require('plugin.themes').theme()
 
+vim.api.nvim_create_user_command("SetDebug", function() vim.lsp.set_log_level("debug") end, {})
+vim.api.nvim_create_user_command("SetWarnings", function() vim.lsp.set_log_level("warn") end, {})
+vim.api.nvim_create_user_command("SetOff", function() vim.lsp.set_log_level("off") end, {})
+
 vim.cmd([[
   autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
-  autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-  autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
 ]])

@@ -1,5 +1,6 @@
 local map = vim.keymap.set
 local lsp = require('plugin.lsp.lsp')
+local sorted_actions = require('core.code_action.native_sorted_code_actions')
 
 -- ==================== Window Navigation ====================
 map('n', '<c-k>', '<cmd>wincmd k<cr>', { silent = true })
@@ -104,9 +105,12 @@ map('v', 'n', '<nop>')
 map('n', '<S-+>', '<nop>')
 
 -- ==================== COC Mappings ====================
-map('n', '<space>w', function() vim.lsp.buf.hover(lsp.hover_opts) end, { silent = true, desc = "Show documentation" })
-map('n', '<space>ca', vim.lsp.buf.code_action, { silent = true, desc = "Code actions" })
-map('x', '<space>ca', vim.lsp.buf.code_action, { silent = true, desc = "Code actions" })
+-- map('n', '<space>w', function() vim.lsp.buf.hover(lsp.hover_opts) end, { silent = true, desc = "Show documentation" })
+-- Setup keymaps
+map("n", "<space>w", require("hover").hover, { desc = "hover.nvim" })
+map('n', '<MouseMove>', require('hover').hover_mouse, { desc = "hover.nvim (mouse)" })
+map('n', '<space>ca', sorted_actions.code_action, { silent = true, desc = "Code actions" })
+map('x', '<space>ca', sorted_actions.code_action, { silent = true, desc = "Code actions" })
 map('n', '<space>fi', '<cmd>Trouble diagnostics toggle focus=true<cr>', { silent = true, desc = "Toggle diagnostics" })
 -- map('n', '<space>fi', '<cmd>Telescope diagnostics<cr>', { silent = true, desc = "Toggle diagnostics" })
 map('n', '<C-d>d', vim.lsp.buf.definition, { silent = true, nowait = true, desc = "Go to definition" })

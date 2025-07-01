@@ -24,12 +24,10 @@ function M.setup(user_config)
     local winbar = nativeWinbar
 
     for _, event in ipairs(shared_state.config.update_events) do
-      if event ~= 'CocDiagnosticChange' or event == 'CocDiagnosticChange' and vim.g.coc_service_initialized == 1 then
-        vim.api.nvim_create_autocmd(event, {
-          group = group,
-          callback = winbar.update_winbar
-        })
-      end
+      vim.api.nvim_create_autocmd(event, {
+        group = group,
+        callback = winbar.update_winbar
+      })
     end
 
     vim.api.nvim_create_user_command("WinbarToggle", function()

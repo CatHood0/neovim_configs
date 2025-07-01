@@ -7,7 +7,7 @@
 export PATH="$PATH":"/opt/nvim/bin"
 // and you need to have these libraries installed already
 // to avoid issues with the clipboard and more
-sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build fzf ripgrep
+sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build fzf ripgrep fd-find luarocks
 ```
 
 ## Language requirements
@@ -97,19 +97,20 @@ sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build 
     ```
 * Python3
     ```dart
-        /// I'll assume that you have Nodejs and Npm
-        npm install --python=python3
-        // or
-        npm i python3 //-g
+        // python3 or python3.12 or major
+        // choose the version that you want
+        //
+        // at this point, i prefer python3
+        npm i -g python3 //-g
         npm config set python3 /usr/bin/python3
 
-        /// Run
+        /// optional command
         python3 -m ensurepip --upgrade
         python3 -m pip install --user --upgrade pynvim
 
         /// you should have installed python3
         /// and you need to have this var in your .bashrc or .zshrc
-        export PATH="$PATH":"/usr/bin/python3"
+        export PATH="$PATH":"/usr/bin/python<version>"
     ```
 * Flutter
     If you're facing issues with linux not recognizing your phone
@@ -136,6 +137,11 @@ sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build 
         path+=${ZDOTDIR:-~}/.zsh_functions
     ```
 * Rust (standard installation)
+    ```dart
+      // ensure that you have fontconfig-devel
+      // installed on your linux distro
+      // or install libfontconfig1-dev
+    ```
 
 ## Most new version
 
