@@ -1,5 +1,5 @@
 require("mini.cursorword").setup()
---[[
+
 require('smear_cursor').setup({
   cursor_color = '#ff8800',
   transparent_bg_fallback_color = "#303030",
@@ -23,4 +23,3 @@ require('smear_cursor').setup({
   trailing_stiffness_insert_mode = 0.6, -- 0.4      [0, 1]
   distance_stop_animating = 0.5,        -- 0.1      > 0
 })
-]]

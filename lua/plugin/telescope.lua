@@ -1,6 +1,7 @@
 local telescope = require('telescope')
 telescope.load_extension("notify")
 telescope.load_extension("flutter")
+telescope.load_extension('media_files')
 telescope.setup {
   extensions_list = { "themes", "terms", "fzf" },
   extensions = {
@@ -33,9 +34,33 @@ telescope.setup {
     initial_mode = "insert",
     selection_strategy = "reset",
     sorting_strategy = "ascending",
-    layout_strategy = "horizontal",   -- horizontal, allows preview
+    layout_strategy = "horizontal", -- horizontal, allows preview
     preview = {
-      treesitter = true
+      treesitter = true,
+      mime_hook = function(filepath, bufnr, opts)
+        local is_image = function(filepath)
+          local image_extensions = { 'png', 'jpg', 'webp', 'jpeg' } -- Supported image formats
+          local split_path = vim.split(filepath:lower(), '.', { plain = true })
+          local extension = split_path[#split_path]
+          return vim.tbl_contains(image_extensions, extension)
+        end
+        if is_image(filepath) then
+          local term = vim.api.nvim_open_term(bufnr, {})
+          local function send_output(_, data, _)
+            for _, d in ipairs(data) do
+              vim.api.nvim_chan_send(term, d .. '\r\n')
+            end
+          end
+          vim.fn.jobstart({ 'catimg', filepath },
+            {
+              on_stdout = send_output,
+              stdout_buffered = true,
+              pty = true
+            })
+        else
+          require("telescope.previewers.utils").set_preview_message(bufnr, opts.winid, "Binary cannot be previewed")
+        end
+      end,
     },
     layout_config = {
       prompt_position = "top",

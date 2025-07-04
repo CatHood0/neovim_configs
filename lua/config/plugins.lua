@@ -16,6 +16,11 @@ return {
   },
 
   -- 2. USER INTERFACE AND THEMES
+  {
+    "3rd/image.nvim",
+    event = "VeryLazy",
+  },
+  { 'nvim-telescope/telescope-media-files.nvim', dependencies = 'nvim-lua/popup.nvim' },
   -- Color schemes
   { 'ellisonleao/gruvbox.nvim' },
   { 'rose-pine/neovim',             name = 'rose-pine' },

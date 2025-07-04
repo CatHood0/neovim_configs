@@ -118,6 +118,14 @@ function M.on_code_action_results(results, opts)
 
   -- ===== Sort actions =====
   table.sort(actions, function(a, b)
+    if a.action.isPreferred then
+      return true
+    end
+
+    if b.action.isPreferred then
+      return false
+    end
+
     local kind_a = a.action.kind or ""
     local kind_b = b.action.kind or ""
     if kind_a ~= kind_b then

@@ -4,18 +4,27 @@ local SymbolKind = vim.lsp.protocol.SymbolKind
 function M.setup()
   require 'lsp-lens'.setup({
     enable = true,
-    include_declaration = true, -- Reference include declaration
+    include_declaration = false, -- Reference include declaration
     sections = {                -- Enable / Disable specific request, formatter example looks 'Format Requests'
       definition = function(count)
-        return "Definiciones: " .. count
+        if count <= 1 then
+          return ""
+        end
+        return "Definitions: " .. count
       end,
       references = function(count)
-        return "Referencias: " .. count
+        return "References: " .. count
       end,
       implements = function(count)
-        return "Implementaciones: " .. count
+        if count < 1 then
+          return ""
+        end
+        return "Implementations: " .. count
       end,
       git_authors = function(latest_author, count)
+        if count < 1 then
+          return ""
+        end
         return " " .. latest_author .. (count - 1 == 0 and "" or (" + " .. count - 1))
       end,
     },
