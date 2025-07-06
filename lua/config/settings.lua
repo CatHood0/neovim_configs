@@ -1,14 +1,14 @@
 -- ==================== UI/Visual ====================
 vim.opt.number = true
 vim.opt.cursorline = true
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 20
 vim.opt.showcmd = true
 vim.opt.showtabline = 2 -- always show tabs
 vim.opt.colorcolumn = "120"
 vim.opt.textwidth = 300
 vim.opt.hlsearch = true
 vim.opt.pumheight = 0
-vim.cmd("syntax on")
+-- vim.cmd("syntax on")
 vim.opt.background = "dark" -- or light if you want light mode
 vim.opt.laststatus = 2
 vim.opt.signcolumn = "yes"
