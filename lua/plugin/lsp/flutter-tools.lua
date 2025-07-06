@@ -50,8 +50,8 @@ function M.setup(capabilties)
     },
     closing_tags = {
       highlight = "Comment", -- highlight for the closing tag
-      prefix = "» ",          -- character to use for close tag e.g. > Widget
-      priority = 10,          -- priority of virtual text in current line
+      prefix = "» ",         -- character to use for close tag e.g. > Widget
+      priority = 10,         -- priority of virtual text in current line
       -- consider to configure this when there is a possibility of multiple virtual text items in one line
       -- see `priority` option in |:help nvim_buf_set_extmark| for more info
       enabled = true -- set to false to disable
@@ -82,7 +82,13 @@ function M.setup(capabilties)
         virtual_text = true, -- show the highlight using virtual text
         virtual_text_str = "■", -- the virtual text character to highlight
       },
-      on_attach = nil,
+      on_attach = function(client, bufnr)
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        client.server_capabilities.inlayHintProvider = {
+          resolveProvider = true,
+          workDoneProgress = true,
+        }
+      end,
       capabilities = capabilties, -- e.g. lsp_status capabilities
       settings = {
         showTodos = true,

@@ -1,7 +1,6 @@
 # My Neovim configs
 
 ![Neovim image](https://github.com/user-attachments/assets/56c51452-14da-409c-aaf4-c9d67846d182)
-![Image](../nvim/imagen.png)
 
 ```dart
 // here should be nvim binary installation 
@@ -142,6 +141,9 @@ sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build 
       // ensure that you have fontconfig-devel
       // installed on your linux distro
       // or install libfontconfig1-dev
+      //
+      // then, add the rust-analyzer with rustup
+      rustup component add rust-analyzer
     ```
 
 ## Most new version

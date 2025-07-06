@@ -58,26 +58,15 @@ map('n', '<space>qd', '<cmd>SessionDelete<cr>', { silent = true })
 map('n', '<C-a>', '<cmd>Neotree toggle<cr>', { silent = true })
 
 -- ==================== Line Movement ====================
--- Idk exactly why, mapping these keys using vim.api.keyset
--- applies them, but, them not work as i expect
---map('n', '<S-j>', '<cmd>MoveLine 1<cr>', { silent = true })
---map('n', '<S-k>', '<cmd>MoveLine -1<cr>', { silent = true })
---map('n', '<S-l>', '<cmd>MoveHChar 1<cr>', { silent = true })
---map('n', '<S-h>', '<cmd>MoveHChar -1<cr>', { silent = true })
---map('v', '<S-h>', '<cmd>MoveHBlock -1<cr>', { silent = true })
---map('x', '<S-j>', '<cmd>MoveBlock 1<cr>', { silent = true })
---map('x', '<S-k>', '<cmd>MoveBlock -1<cr>', { silent = true })
---map('v', '<S-l>', '<cmd>MoveHBlock 1<cr>', { silent = true })
--- Only using vimscripting makes them works exactly as they should
 vim.cmd([[
-nnoremap <silent> <S-j> :MoveLine 1<CR>
-nnoremap <silent> <S-k> :MoveLine -1<CR>
-nnoremap <silent> <S-l> :MoveHChar 1<CR>
-nnoremap <silent> <S-h> :MoveHChar -1<CR>
-vnoremap <silent> <S-h> :MoveHBlock -1<CR>
-xnoremap <silent> <S-j> :MoveBlock 1<CR>
-xnoremap <silent> <S-k> :MoveBlock -1<CR>
-vnoremap <silent> <S-l> :MoveHBlock 1<CR>
+  nnoremap <silent> <S-j> :MoveLine 1<CR>
+  nnoremap <silent> <S-k> :MoveLine -1<CR>
+  nnoremap <silent> <S-l> :MoveHChar 1<CR>
+  nnoremap <silent> <S-h> :MoveHChar -1<CR>
+  vnoremap <silent> <S-h> :MoveHBlock -1<CR>
+  xnoremap <silent> <S-j> :MoveBlock 1<CR>
+  xnoremap <silent> <S-k> :MoveBlock -1<CR>
+  vnoremap <silent> <S-l> :MoveHBlock 1<CR>
 ]])
 
 -- =================== Notifications ===================
@@ -112,11 +101,11 @@ map('n', '<MouseMove>', require('hover').hover_mouse, { desc = "hover.nvim (mous
 map('n', '<space>ca', sorted_actions.code_action, { silent = true, desc = "Code actions" })
 map('x', '<space>ca', sorted_actions.code_action, { silent = true, desc = "Code actions" })
 map('n', '<space>fi', '<cmd>Trouble diagnostics toggle focus=true<cr>', { silent = true, desc = "Toggle diagnostics" })
--- map('n', '<space>fi', '<cmd>Telescope diagnostics<cr>', { silent = true, desc = "Toggle diagnostics" })
 map('n', '<C-d>d', vim.lsp.buf.definition, { silent = true, nowait = true, desc = "Go to definition" })
 map('n', '<C-d>i', vim.lsp.buf.type_definition, { silent = true, nowait = true, desc = "Go to type definition" })
 map('n', '<C-w>', vim.lsp.buf.references, { silent = true, nowait = true, desc = "Show references" })
 map('n', '<space>fo', vim.lsp.buf.format, { silent = true, nowait = true, desc = "Format code" })
+map('n', '<space>re', vim.lsp.buf.rename, { silent = true, nowait = true, desc = "Rename all references to the symbol under the cursor" })
 
 -- ==================== Flutter ====================
 map('n', '<space>fr', '<cmd>FlutterRun<cr>', { silent = true, nowait = true })
@@ -124,10 +113,9 @@ map('n', '<space>fq', '<cmd>FlutterQuit<cr>', { silent = true, nowait = true })
 map('n', '<space>tou', '<cmd>FlutterOutlineToggle<cr>', { silent = true, nowait = true })
 map('n', '<space>fmo', '<cmd>FlutterDevices<cr>', { silent = true, nowait = true })
 map('n', '<space>ro', '<cmd>FlutterHotReload<cr>', { silent = true, nowait = true })
-map('n', '<space>re', '<cmd>FlutterRestart<cr>', { silent = true, nowait = true })
+map('n', '<space>fre', '<cmd>FlutterRestart<cr>', { silent = true, nowait = true })
 map('n', '<space>sp', '<cmd>FlutterSuper<cr>', { silent = true, nowait = true })
 map('n', '<space>op', '<cmd>FlutterDevTools<cr>', { silent = true, nowait = true })
-map('n', '<space>fn', vim.lsp.buf.rename, { silent = true, nowait = true })
 map('n', '<space>eg', '<cmd>FlutterPubGet<cr>', { silent = true, nowait = true })
 map('n', '<space>co', '<cmd>FlutterLog<cr>', { silent = true, nowait = true })
 map('n', '<space>cl', '<cmd>FlutterClearLog<cr>', { silent = true, nowait = true })

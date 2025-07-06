@@ -29,13 +29,28 @@ function M.setup()
 end
 
 function M.config_lsp_langs(capabilities)
+  --- Curious option of the Config class
+  --- Predicate used to decide if a client should be re-used. Used on all
+  --- running clients. The default implementation re-uses a client if name and
+  --- root_dir matches.
+  --- reuse_client? fun(client: vim.lsp.Client, config: vim.lsp.ClientConfig): boolean
   vim.lsp.config('rust_analyzer', {
     capabilities = capabilities,
+    on_attach = function(client, bufnr)
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    end,
     settings = {
       ['rust-analyzer'] = {
         checkOnSave = true,
         check = {
           features = "all"
+        },
+        files = {
+          exclude = {
+            "~/",
+            "~/.cargo/**",
+            "~/.rustup/**"
+          },
         },
         cargo = {
           buildScripts = {
@@ -45,9 +60,6 @@ function M.config_lsp_langs(capabilities)
         joinLines = {
           joinElseIf = true
         },
-        updates = {
-          checkOnStartup = true
-        },
         completion = {
           postfix = {
             enable = true
@@ -56,8 +68,26 @@ function M.config_lsp_langs(capabilities)
       },
     },
   })
+
+  vim.lsp.config("clangd", {
+    settings = {
+      clangd = {
+        InlayHints = {
+          Designators = true,
+          Enabled = true,
+          ParameterNames = true,
+          DeducedTypes = true,
+        },
+        fallbackFlags = { "-std=c++20" },
+      },
+    },
+  })
+
   vim.lsp.config('gopls', {
     capabilities = capabilities,
+    on_attach = function(client, bufnr)
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    end,
     settings = {
       gopls = {
         analyses = {
@@ -65,6 +95,15 @@ function M.config_lsp_langs(capabilities)
         },
         staticcheck = true,
         gofumpt = true,
+        hints = {
+          rangeVariableTypes = true,
+          parameterNames = true,
+          constantValues = true,
+          assignVariableTypes = true,
+          compositeLiteralFields = true,
+          compositeLiteralTypes = true,
+          functionTypeParameters = true,
+        },
         codelens = {
           enable = true,
         },
@@ -73,13 +112,21 @@ function M.config_lsp_langs(capabilities)
   })
   vim.lsp.config('lua_ls', {
     capabilities = capabilities,
+    on_attach = function(client, bufnr)
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    end,
     settings = {
-      ['Lua'] = {
+      Lua = {
         runtime = { version = 'LuaJIT' },
         diagnostics = { globals = { 'vim' } },
         workspace = {
           library = vim.env.VIMRUNTIME,
           checkThirdParty = false,
+        },
+        hint = {
+          enable = true,
+          arrayIndex = "Enable",
+          paramName = "All"
         },
         telemetry = { enable = false },
         codelens = {
@@ -91,6 +138,16 @@ function M.config_lsp_langs(capabilities)
 
   vim.lsp.config('cssls', {
     capabilities = capabilities,
+    settings = {
+      css = {
+        inlayHints = {
+          enable = true,
+          showParameterNames = true,
+          parameterHintsPrefix = "<- ",
+          otherHintsPrefix = "=> ",
+        },
+      },
+    },
   })
 
   vim.lsp.config('dockerls', {
@@ -102,18 +159,33 @@ function M.config_lsp_langs(capabilities)
             ignoreMultilineInstructions = true,
           },
         },
+
+        inlayHints = {
+          enable = true,
+          showParameterNames = true,
+          parameterHintsPrefix = "<- ",
+          otherHintsPrefix = "=> ",
+        },
       }
     }
   })
 
   vim.lsp.config('ts_ls', {
     settings = {
-      filetypes = {
-        "javascript",
-        "typescript",
-      },
-      codelens = {
-        enable = true,
+      ['Ts'] = {
+        filetypes = {
+          "javascript",
+          "typescript",
+        },
+        codelens = {
+          enable = true,
+        },
+        inlayHints = {
+          enable = true,
+          showParameterNames = true,
+          parameterHintsPrefix = "<- ",
+          otherHintsPrefix = "=> ",
+        },
       },
     },
   })
