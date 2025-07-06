@@ -77,6 +77,10 @@ sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build 
         // To enable LSP commands
         // execute:
         sudo apt install gopls
+        // so, after install gopls, go to your $HOME path
+        // and execute this (get all the important stuff
+        // of go that you need)
+        go install golang.org/x/tools/gopls@latest
         //
         // You probably, after the go installation 
         // will need to have these vars in your .bashrc or .zshrc

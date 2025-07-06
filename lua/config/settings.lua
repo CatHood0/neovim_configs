@@ -13,6 +13,16 @@ vim.opt.background = "dark" -- or light if you want light mode
 vim.opt.laststatus = 2
 vim.opt.signcolumn = "yes"
 vim.opt.textwidth = 200
+vim.opt.fillchars = { diff = '╱' }
+vim.opt.diffopt = {
+  'internal',
+  'filler',
+  'closeoff',
+  'context:12',
+  'algorithm:histogram',
+  'linematch:200',
+  'indent-heuristic',
+}
 
 -- ==================== Text/Editing ====================
 vim.opt.wrap = true
@@ -60,13 +70,6 @@ vim.opt.wildignore = "*.jpg,*.png,*.gif,*.pdf,*.pyc,*.flv,*.img,*.xlsx,*.psd,*.j
 -- ==================== Plugin Configurations ====================
 vim.g.netrw_browsex_viewer = "chrome"
 vim.g.mapleader = ","
-vim.g.barbar_auto_setup = false
-vim.g.coc_global_extensions = {
-  'coc-json', 'coc-css', 'coc-html', 'coc-clangd', 'coc-eslint',
-  'coc-flutter-tools', 'coc-tsserver', 'coc-go', 'coc-git',
-  'coc-rust-analyzer', 'coc-java', 'coc-vimlsp', 'coc-lua',
-  'coc-golines', 'coc-markdownlint'
-}
 vim.g.python3_host_prog = '/usr/bin/python3'
 vim.g.loaded_perl_provider = 0 -- disable perl
 vim.g.UltiSnipsSnippetDirectories = {
@@ -74,7 +77,7 @@ vim.g.UltiSnipsSnippetDirectories = {
   vim.env.HOME .. '/.config/nvim/ultisnips/dart.snippets',
   'ultisnips'
 }
-vim.g.palenight_terminal_italics = 1      -- To configure lightline
+vim.g.palenight_terminal_italics = 1        -- To configure lightline
 vim.g.onedark_config = { style = 'darker' } -- One dark config
 
 -- Dart settings

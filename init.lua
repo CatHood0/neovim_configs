@@ -39,9 +39,6 @@ require('plugin.tmux')
 require('plugin.toggleterm')
 require('plugin.treesitter')
 require('plugin.lspkind')
--- Just use this plugin when you have kitty terminal
--- and imagemagick and libmagickwand-dev installed
-require('plugin.image')
 require('plugin.lsp.lsp').setup()
 
 -- Load core
