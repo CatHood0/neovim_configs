@@ -74,6 +74,10 @@ sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build 
     ```dart
         // Visit: https://go.dev/doc/install
         //
+        // To enable LSP commands
+        // execute:
+        sudo apt install gopls
+        //
         // You probably, after the go installation 
         // will need to have these vars in your .bashrc or .zshrc
         export PATH="$PATH":"$HOME/go/bin"
