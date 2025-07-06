@@ -174,6 +174,9 @@ return {
       'rafamadriz/friendly-snippets'
     },
   },
+
+  { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },
+
   { 'mfussenegger/nvim-jdtls' },
   -- required for nvim-jdtls
   -- see the java section in the README

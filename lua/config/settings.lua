@@ -1,11 +1,16 @@
+function _G.line_fold()
+  local line = vim.fn.getline(vim.v.foldstart)
+  return line
+end
+
 -- ==================== UI/Visual ====================
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.scrolloff = 20
 vim.opt.showcmd = true
-vim.opt.showtabline = 2 -- always show tabs
+-- allow to show bufferline
+vim.opt.showtabline = 2
 vim.opt.colorcolumn = "120"
-vim.opt.textwidth = 300
 vim.opt.hlsearch = true
 vim.opt.pumheight = 0
 -- vim.cmd("syntax on")
@@ -13,7 +18,6 @@ vim.opt.background = "dark" -- or light if you want light mode
 vim.opt.laststatus = 2
 vim.opt.signcolumn = "yes"
 vim.opt.textwidth = 200
-vim.opt.fillchars = { diff = '╱' }
 vim.opt.diffopt = {
   'internal',
   'filler',
@@ -23,6 +27,32 @@ vim.opt.diffopt = {
   'linematch:200',
   'indent-heuristic',
 }
+
+-- ==================== Folding =====================
+vim.o.foldenable = true
+vim.o.foldlevel = 99
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- Official documentation:
+--
+-- 'foldcolumn' is a number, which sets the width for a column on the side of the
+-- window to indicate folds.  When it is zero, there is no foldcolumn.  A normal
+-- value is auto:9. The maximum is 9.
+vim.o.foldcolumn = 'auto:9'
+vim.o.foldtext = ""
+vim.o.foldtext = "v:lua.line_fold()"
+vim.opt.fillchars = {
+  foldopen = "",
+  foldclose = "",
+  foldsep = "│",
+  eob = " ",
+  fold = " ",
+  diff = '╱',
+}
+vim.cmd([[
+    highlight Folded guifg=#7aa2f7 guibg=NONE
+    highlight FoldVirtual guifg=#e0af68 gui=bold
+]])
 
 -- ==================== Text/Editing ====================
 vim.opt.wrap = true
@@ -55,7 +85,7 @@ vim.opt.sessionoptions:append({ "winpos", "terminal", "folds" })
 
 -- ==================== Performance/Misc ====================
 vim.opt.history = 1500 -- Remember 1500 lines
-vim.opt.clipboard:append("unnamedplus")
+vim.opt.clipboard = "unnamedplus"
 vim.opt.mouse = "a"
 vim.o.mousemoveevent = true
 vim.opt.encoding = "utf-8"

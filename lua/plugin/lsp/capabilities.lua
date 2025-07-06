@@ -17,6 +17,13 @@ function M.get_capabilities()
     properties = { "documentation", "detail", "additionalTextEdits" },
   }
 
+  -- Configure folding capabilities that aren't sended
+  -- by default (useful for folding)
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+  }
+
   return cmp_lsp.default_capabilities(capabilities) or capabilities
 end
 return M
