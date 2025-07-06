@@ -2,6 +2,7 @@ local M = {}
 local utils = require("plugin.lsp.utils")
 local code_lens = require("plugin.lsp.code_lenses")
 local flutter_setup = require("plugin.lsp.flutter-tools")
+local cmake_setup = require("plugin.lsp.cmake-tools")
 local diagnostics = require("plugin.lsp.lsp_diagnostics_configs")
 local servers = require("plugin.lsp.languages")
 local lspconfig = require("lspconfig")
@@ -23,6 +24,7 @@ function M.setup()
   require('plugin.jdtls')
 
   flutter_setup.setup(capabilities)
+  cmake_setup.setup()
 
   utils.create_autocmds()
   vim.lsp.enable(servers.languages)

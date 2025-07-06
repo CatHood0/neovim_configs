@@ -59,7 +59,7 @@ vim.opt.clipboard:append("unnamedplus")
 vim.opt.mouse = "a"
 vim.o.mousemoveevent = true
 vim.opt.encoding = "utf-8"
-vim.opt.updatetime = 300 -- Default is 4000 MS instead 300
+vim.opt.updatetime = 300
 vim.opt.shortmess:append("c")
 
 -- ==================== Wildmenu/Completion ====================

@@ -23,7 +23,7 @@ return {
   { 'nvim-telescope/telescope-media-files.nvim', dependencies = 'nvim-lua/popup.nvim' },
   -- Color schemes
   { 'ellisonleao/gruvbox.nvim' },
-  { 'rose-pine/neovim',             name = 'rose-pine' },
+  { 'rose-pine/neovim',                          name = 'rose-pine' },
   { 'drewtempelmeyer/palenight.vim' },
   { 'navarasu/onedark.nvim' },
   { 'projekt0n/github-nvim-theme' },
@@ -196,6 +196,7 @@ return {
     },
     config = true,
   },
+  { 'Civitasv/cmake-tools.nvim',  opts = {} },
   {
     "folke/trouble.nvim",
     opts = {}, -- for default options, refer to the configuration section for custom setup.

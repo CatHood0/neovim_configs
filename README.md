@@ -81,6 +81,8 @@ sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build 
         // and execute this (get all the important stuff
         // of go that you need)
         go install golang.org/x/tools/gopls@latest
+        // and the docs
+        go get -u github.com/zmb3/gogetdoc
         //
         // You probably, after the go installation 
         // will need to have these vars in your .bashrc or .zshrc

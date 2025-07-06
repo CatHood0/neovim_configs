@@ -93,7 +93,9 @@ map('n', '<C-q>v', '<cmd>split<cr>')
 map('v', 'n', '<nop>')
 map('n', '<S-+>', '<nop>')
 
--- ==================== COC Mappings ====================
+-- ==================== LSP Mappings ====================
+-- This original map works good, but, does not show diagnostics when required.
+-- Probably it needs more configuration to allow a native solution
 -- map('n', '<space>w', function() vim.lsp.buf.hover(lsp.hover_opts) end, { silent = true, desc = "Show documentation" })
 -- Setup keymaps
 map("n", "<space>w", require("hover").hover, { desc = "hover.nvim" })
