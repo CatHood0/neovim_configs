@@ -1,3 +1,20 @@
+--- Fix an issue with the native neovim implementation
+---
+--- adding this as the source of the diff's, then
+--- avoid the error: "Vim:E903: Too many files '/usr/bin/git'"
+--- @return table? with the changes
+local function diff_source()
+  local gitsigns = vim.b.gitsigns_status_dict
+  if gitsigns then
+    return {
+      added = gitsigns.added,
+      modified = gitsigns.changed,
+      removed = gitsigns.removed
+    }
+  end
+  return nil
+end
+
 local colors = {
   blue       = '#80a0ff',
   cyan       = '#79dac8',
@@ -36,13 +53,10 @@ require('lualine').setup {
     section_separators = { left = '', right = '' },
     component_separators = { left = '', right = '' },
   },
-  always_divide_middle = true, -- When set to true, left sections i.e. 'a','b' and 'c'
-  -- can't take over the entire statusline even
-  -- if neither of 'x', 'y' or 'z' are present.
+  always_divide_middle = true,
   always_show_tabline = true,
-  globalstatus = false, -- enable global statusline (have a single statusline
-  -- at bottom of neovim instead of one for  every window).
-  -- This feature is only available in neovim 0.7 and higher.
+  -- Fix also the issue with having too much windows with lualine
+  globalstatus = vim.go.laststatus == 3,
   extensions = { 'nvim-tree', 'neo-tree', 'fugitive' },
   sections = {
     lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
@@ -56,6 +70,7 @@ require('lualine').setup {
       {
         'diff',
         symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
+        source = diff_source,
         diff_color = {
           added = { fg = colors.green },
           modified = { fg = colors.orange },
@@ -69,10 +84,20 @@ require('lualine').setup {
         separator = { left = '', right = '' },
         right_padding = 3,
       },
-      'encoding', 'filetype'
+      'encoding',
+      'filetype',
+      {
+        'fileformat',
+        symbols = {
+          unix = 'LF',
+          dos = 'CRLF',
+          mac = 'CR',
+        },
+      },
+      'lsp_status',
     },
-    lualine_y = { 'progress', 'lsp_status' }, -- , 'codeium#GetStatusString' },
-    lualine_z = { 'selectioncount', 'location' }
+    lualine_y = { 'progress' }, -- , 'codeium#GetStatusString' },
+    lualine_z = { 'selectioncount', 'location', }
   },
   inactive_sections = {
     lualine_a = {},
@@ -96,7 +121,7 @@ require('lualine').setup {
         separator = { left = '', right = '' },
         right_padding = 3,
       },
-      'location'
+      'location',
     },
     lualine_y = {},
     lualine_z = {}
