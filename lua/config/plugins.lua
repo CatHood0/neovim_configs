@@ -175,8 +175,6 @@ return {
     },
   },
 
-  { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },
-
   { 'mfussenegger/nvim-jdtls' },
   -- required for nvim-jdtls
   -- see the java section in the README
@@ -230,7 +228,6 @@ return {
     end
   },
   { 'sindrets/diffview.nvim' },
-  { 'mhinz/vim-signify' },
 
   -- 6. TEXT AND CODE EDITING
   -- Pairs and surrounds

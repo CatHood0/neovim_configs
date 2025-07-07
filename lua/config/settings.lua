@@ -34,11 +34,6 @@ vim.o.foldenable = true
 vim.o.foldlevel = 99
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
--- Official documentation:
---
--- 'foldcolumn' is a number, which sets the width for a column on the side of the
--- window to indicate folds.  When it is zero, there is no foldcolumn.  A normal
--- value is auto:9. The maximum is 9.
 vim.o.foldcolumn = 'auto:9'
 vim.o.foldtext = ""
 vim.o.foldtext = "v:lua.line_fold()"
@@ -113,7 +108,7 @@ vim.g.onedark_config = { style = 'darker' } -- One dark config
 
 -- Dart settings
 vim.g.dart_format_on_save = 0 -- Pass "1" if you want automatic format on save current buffer
-vim.g.dartfmt_options = { '--fix', '--line-length 90' }
+vim.g.dartfmt_options = { '--fix', '--line-length 75' }
 vim.g.dart_style_guide = 2
 
 -- LSC settings

@@ -7,7 +7,6 @@ local diagnostics = require("plugin.lsp.lsp_diagnostics_configs")
 local servers = require("plugin.lsp.languages")
 local lspconfig = require("lspconfig")
 local default_capabilities = require("plugin.lsp.capabilities")
-local ufo = require('ufo')
 
 --- setup all the LSP used by these configurations
 function M.setup()
