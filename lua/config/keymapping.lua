@@ -12,7 +12,7 @@ map('n', '<c-u>', '<nop>', { silent = true })
 
 -- ==================== Window Resizing ====================
 map('n', '<space>k', function()
-    require("tmux").resize_bottom()
+  require("tmux").resize_bottom()
 end, {
   silent = true,
   desc = "Decrease win size to bottom"
@@ -45,20 +45,25 @@ vim.keymap.set("n", "zz", function() vim.cmd("normal! za") end, {
   silent = true,
   desc = "Toggle fold under cursor"
 })
-vim.keymap.set("n", "zm", function() vim.cmd("normal! zM") end, {
+vim.keymap.set("n", "<TAB>", function() vim.cmd("normal! za") end, {
+  silent = true,
+  desc = "Toggle fold under cursor"
+})
+
+vim.keymap.set("n", "zo", function() vim.cmd("normal! zM") end, {
   silent = true,
   desc = "Close all folds"
 })
-vim.keymap.set("n", "zr", function() vim.cmd("normal! zR") end, {
+vim.keymap.set("n", "zm", function() vim.cmd("normal! zR") end, {
   silent = true,
   desc = "Open all folds"
 })
 
 -- ==================== Testing ====================
--- map('n', '<leader>t', '<cmd>TestNearest<cr>', { silent = true })
--- map('n', '<leader>T', '<cmd>TestFile<cr>', { silent = true })
+map('n', '<leader>t', '<cmd>TestFile<cr>', { silent = true, nowait = false })
+-- map('n', '<leader>tn', '<cmd>TestNearest<cr>', { silent = true, nowait = true })
 -- map('n', '<leader>a', '<cmd>TestSuite<cr>', { silent = true })
--- map('n', '<leader>l', '<cmd>TestLast<cr>', { silent = true })
+map('n', '<leader>l', '<cmd>TestLast<cr>', { silent = true })
 
 -- ==================== Debugging ====================
 -- nvim-dap
