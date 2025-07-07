@@ -6,7 +6,8 @@ end
 -- ==================== UI/Visual ====================
 vim.opt.number = true
 vim.opt.cursorline = true
-vim.opt.scrolloff = 20
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
 vim.opt.showcmd = true
 -- allow to show bufferline
 vim.opt.showtabline = 2
