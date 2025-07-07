@@ -48,7 +48,6 @@ require('lualine').setup {
       {
         'diff',
         symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
-        -- source = diff_source,
         diff_color = {
           added = { fg = colors.green },
           modified = { fg = colors.orange },
