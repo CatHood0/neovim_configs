@@ -12,6 +12,9 @@ function M.get_capabilities()
     dataSupport = true,
     relatedInformation = true,
   }
+  capabilities.textDocument.colorProvider = {
+    dynamicRegistration = true,
+  }
   -- @see: https://github.com/hrsh7th/nvim-compe#how-to-use-lsp-snippet
   capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = { "documentation", "detail", "additionalTextEdits" },
@@ -26,4 +29,5 @@ function M.get_capabilities()
 
   return cmp_lsp.default_capabilities(capabilities) or capabilities
 end
+
 return M

@@ -143,7 +143,7 @@ map('n', '<space>fi', '<cmd>Trouble diagnostics toggle focus=true<cr>', { silent
 map('n', '<C-d>d', vim.lsp.buf.definition, { silent = true, nowait = true, desc = "Go to definition" })
 map('n', '<C-d>i', vim.lsp.buf.type_definition, { silent = true, nowait = true, desc = "Go to type definition" })
 map('n', '<C-w>', vim.lsp.buf.references, { silent = true, nowait = true, desc = "Show references" })
-map('n', '<space>fo', vim.lsp.buf.format, { silent = true, nowait = true, desc = "Format code" })
+map('n', '<space>fo', function() vim.lsp.buf.format({ timeout_ms = 2000 }) end, { silent = true, nowait = true, desc = "Format code" })
 map('n', '<space>re', vim.lsp.buf.rename,
   { silent = true, nowait = true, desc = "Rename all references to the symbol under the cursor" })
 

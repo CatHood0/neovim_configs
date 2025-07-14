@@ -23,7 +23,11 @@ function M.setup_config()
         [vim.diagnostic.severity.HINT]  = "DiagnosticSignHint",
       },
     },
-    virtual_text = true,
+    virtual_text = {
+      source = true,
+      current_line = false,
+      spacing = 1,
+    },
     underline = true,
     float = {
       show_header = false,
@@ -32,8 +36,9 @@ function M.setup_config()
       update_in_insert = true,
       severity_sort = true,
     },
-    update_in_insert = false,
+    update_in_insert = true,
     severity_sort = true,
   })
 end
+
 return M

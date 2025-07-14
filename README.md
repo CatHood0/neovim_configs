@@ -64,7 +64,9 @@ sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build 
         // https://nodejs.org/en/download
 
         // then install typescript globaly
-        npm install -g typescript typescript-language-server
+        sudo npm i -g typescript typescript-language-server
+        sudo npm i -g tailwindcss-language-server
+        sudo npm install -g prettier eslint
 
         // At this point, just at these vars into your .bashrc or .zshrc
         export PATH="$PATH":"$HOME/.nvm/versions/node/v22.14.0/bin/typescript-language-server"
@@ -95,11 +97,12 @@ sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build 
         //
         // for linux, we use
         //
-        // sudo apt-get install clangd-15
+        sudo apt-get install clangd-15
         //
         // This will install clangd as /usr/bin/clangd-15. Make it the default clangd:
         //
-        // sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-15 100
+        sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-15 100
+        sudo apt-get install clang-format cpplint
 
         // Put the path of the clangd into your .bashrc or .zshrc
         export PATH="$PATH":"/usr/bin/clangd-15"
@@ -152,6 +155,7 @@ sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build 
       // installed on your linux distro
       // or install libfontconfig1-dev
       //
+      rustup component add rustfmt clippy
       // then, add the rust-analyzer with rustup
       rustup component add rust-analyzer
     ```

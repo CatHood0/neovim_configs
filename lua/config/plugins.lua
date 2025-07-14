@@ -20,6 +20,11 @@ return {
     "3rd/image.nvim",
     event = "VeryLazy",
   },
+  { "SmiteshP/nvim-navic" },
+  {
+    'catgoose/nvim-colorizer.lua',
+    event = "VeryLazy",
+  },
   { 'nvim-telescope/telescope-media-files.nvim', dependencies = 'nvim-lua/popup.nvim' },
   -- Color schemes
   { 'ellisonleao/gruvbox.nvim' },
@@ -171,9 +176,12 @@ return {
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
       'saadparwaiz1/cmp_luasnip',
-      'rafamadriz/friendly-snippets'
+      'rafamadriz/friendly-snippets',
+      'windwp/nvim-ts-autotag',
+      { 'roobert/tailwindcss-colorizer-cmp.nvim' },
     },
   },
+
 
   { 'mfussenegger/nvim-jdtls' },
   -- required for nvim-jdtls

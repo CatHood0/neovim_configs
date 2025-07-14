@@ -6,7 +6,7 @@ bufferline.setup {
       delay = 200,
       reveal = { 'close' }
     },
-    diagnostics = "coc", -- | "nvim_lsp"
+    diagnostics = "nvim_lsp", -- | "nvim_lsp"
     mode = "buffers", -- set to "tabs" to only show tabpages instead
     themable = true, -- | false, -- allows highlight groups to be overriden i.e. sets highlights as default
     numbers = "ordinal", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
@@ -16,7 +16,7 @@ bufferline.setup {
     middle_mouse_command = nil, -- can be a string | function, | false see "Mouse actions"
     indicator = {
       icon = '▎', -- this should be omitted if indicator style is not 'icon'
-      style = 'none', -- | 'underline' | 'none',
+      style = 'underline', -- | 'underline' | 'none',
     },
     buffer_close_icon = '󰅖',
     modified_icon = '● ',

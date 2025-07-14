@@ -1,5 +1,6 @@
 local M = {}
 local utils = require("plugin.lsp.utils")
+local lsp_utils = require 'lspconfig.util'
 local code_lens = require("plugin.lsp.code_lenses")
 local flutter_setup = require("plugin.lsp.flutter-tools")
 local cmake_setup = require("plugin.lsp.cmake-tools")
@@ -11,23 +12,45 @@ local default_capabilities = require("plugin.lsp.capabilities")
 --- setup all the LSP used by these configurations
 function M.setup()
   local capabilities = default_capabilities.get_capabilities()
+  vim.lsp.enable(servers.languages)
   M.config_lsp_langs(capabilities)
   diagnostics.setup_config()
   code_lens.setup()
 
-  lspconfig.jsonls.setup({ capabilities = capabilities })
-  lspconfig.clangd.setup({ capabilities = capabilities })
-  lspconfig.lua_ls.setup({ capabilities = capabilities })
-  lspconfig.gopls.setup({ capabilities = capabilities })
-  lspconfig.rust_analyzer.setup({ capabilities = capabilities })
-  lspconfig.jdtls.setup({ capabilities = capabilities })
+  -- lspconfig.jsonls.setup({ capabilities = capabilities })
+  -- lspconfig.clangd.setup({ capabilities = capabilities })
+  -- lspconfig.lua_ls.setup({ capabilities = capabilities })
+  -- lspconfig.gopls.setup({ capabilities = capabilities })
+  -- lspconfig.rust_analyzer.setup({ capabilities = capabilities })
+  -- lspconfig.cssls.setup({})
+  lspconfig.tailwindcss.setup({
+    settings = {
+      tailwindCSS = {
+        experimental = {
+          classRegex = {
+            "tw`([^`]*)",           -- Ej: tw`text-red-500`
+            "className=\"([^\"]*)", -- HTML/JSX
+            "class:\\s*\"([^\"]*)", -- Clases dinámicas
+            "classList=\\s*\"([^\"]*)",
+            "cn\\(([^)]*)\\)",      -- Soporte para librerías como `classnames`
+          },
+        },
+        emmetCompletions = true, -- Habilita autocompletado tipo Emmet
+      },
+    },
+    filetypes = {
+      "html", "javascript", "javascriptreact", "typescript", "typescriptreact",
+      "svelte", "vue", "astro", "php", "blade", "twig", "markdown", "mdx"
+    },
+  })
+  -- lspconfig.ts_ls.setup({ capabilities = capabilities })
+  -- lspconfig.jdtls.setup({ capabilities = capabilities })
   require('plugin.jdtls')
 
   flutter_setup.setup(capabilities)
   cmake_setup.setup()
 
   utils.create_autocmds()
-  vim.lsp.enable(servers.languages)
 end
 
 function M.config_lsp_langs(capabilities)
@@ -161,35 +184,8 @@ function M.config_lsp_langs(capabilities)
             ignoreMultilineInstructions = true,
           },
         },
-
-        inlayHints = {
-          enable = true,
-          showParameterNames = true,
-          parameterHintsPrefix = "<- ",
-          otherHintsPrefix = "=> ",
-        },
       }
     }
-  })
-
-  vim.lsp.config('ts_ls', {
-    settings = {
-      ['Ts'] = {
-        filetypes = {
-          "javascript",
-          "typescript",
-        },
-        codelens = {
-          enable = true,
-        },
-        inlayHints = {
-          enable = true,
-          showParameterNames = true,
-          parameterHintsPrefix = "<- ",
-          otherHintsPrefix = "=> ",
-        },
-      },
-    },
   })
 end
 

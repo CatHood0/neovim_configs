@@ -98,6 +98,38 @@ function M.define_hl_groups()
     fg = shared_state.config.file_icon.color,
   })
 
+  vim.defer_fn(function()
+    vim.api.nvim_set_hl(0, "NavicIconsFile", { fg = "#FFD700" })
+    vim.api.nvim_set_hl(0, "NavicIconsModule", { fg = "#4EC9B0" })
+    vim.api.nvim_set_hl(0, "NavicIconsNamespace", { fg = "#569CD6" })
+    vim.api.nvim_set_hl(0, "NavicIconsPackage", { fg = "#C586C0" })
+    vim.api.nvim_set_hl(0, "NavicIconsClass", { fg = "#4EC9B0" })
+    vim.api.nvim_set_hl(0, "NavicIconsMethod", { fg = "#DCDCAA" })
+    vim.api.nvim_set_hl(0, "NavicIconsProperty", { fg = "#9CDCFE" })
+    vim.api.nvim_set_hl(0, "NavicIconsField", { fg = "#9CDCFE" })
+    vim.api.nvim_set_hl(0, "NavicIconsConstructor", { fg = "#DCDCAA" })
+    vim.api.nvim_set_hl(0, "NavicIconsEnum", { fg = "#4EC9B0" })
+    vim.api.nvim_set_hl(0, "NavicIconsInterface", { fg = "#4EC9B0" })
+    vim.api.nvim_set_hl(0, "NavicIconsFunction", { fg = "#DCDCAA" })
+    vim.api.nvim_set_hl(0, "NavicIconsVariable", { fg = "#9CDCFE" })
+    vim.api.nvim_set_hl(0, "NavicIconsConstant", { fg = "#4FC1FF" })
+    vim.api.nvim_set_hl(0, "NavicIconsString", { fg = "#CE9178" })
+    vim.api.nvim_set_hl(0, "NavicIconsNumber", { fg = "#B5CEA8" })
+    vim.api.nvim_set_hl(0, "NavicIconsBoolean", { fg = "#569CD6" })
+    vim.api.nvim_set_hl(0, "NavicIconsArray", { fg = "#B5CEA8" })
+    vim.api.nvim_set_hl(0, "NavicIconsObject", { fg = "#4EC9B0" })
+    vim.api.nvim_set_hl(0, "NavicIconsKey", { fg = "#9CDCFE" })
+    vim.api.nvim_set_hl(0, "NavicIconsNull", { fg = "#569CD6" })
+    vim.api.nvim_set_hl(0, "NavicIconsEnumMember", { fg = "#4EC9B0" })
+    vim.api.nvim_set_hl(0, "NavicIconsStruct", { fg = "#4EC9B0" })
+    vim.api.nvim_set_hl(0, "NavicIconsEvent", { fg = "#D7BA7D" })
+    vim.api.nvim_set_hl(0, "NavicIconsOperator", { fg = "#D4D4D4" })
+    vim.api.nvim_set_hl(0, "NavicIconsTypeParameter", { fg = "#4EC9B0" })
+
+    vim.api.nvim_set_hl(0, "NavicText", { fg = "#cad3f5" })
+    vim.api.nvim_set_hl(0, "NavicSeparator", { fg = "#808080" })
+  end, 3000)
+
   shared_state.state.hl_groups_defined = true
 end
 

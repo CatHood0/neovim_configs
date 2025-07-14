@@ -2,6 +2,7 @@ local M = {}
 
 local utils = require("core.winbar.utils")
 local shared_state = require('core.winbar.state')
+local navic = require("nvim-navic")
 
 function M.update_winbar()
   vim.schedule(function()
@@ -27,7 +28,7 @@ function M.update_winbar()
       end
     end
 
-    local new_winbar, full_path = M.generate_winbar()
+    local new_winbar, full_path = M.generate_winbar(nil, buf)
 
     --[[print(vim.inspect({
       current_buffer = buf - 1,
@@ -94,8 +95,9 @@ end
 
 ---Winbar str generator
 ---@param mode string?
+---@param buf integer
 ---@return string?, string?
-function M.generate_winbar(mode)
+function M.generate_winbar(mode, buf)
   if not shared_state.config.enabled then return "" end
   shared_state.state.current_path = ""
 
@@ -119,9 +121,10 @@ function M.generate_winbar(mode)
   local partBreak = false
   if shared_state.config.depth and shared_state.config.depth.limit and #parts > shared_state.config.depth.limit then
     partBreak = true
-    local unpacked = unpack(parts, #parts - shared_state.config.depth.limit + 1)
-    parts = { "…", unpacked }
-    curPartPath = vim.fs.joinpath("~/", table.concat(unpacked, ""))
+    local start_idx = #parts - shared_state.config.depth.limit + 1
+    local sub_parts = { unpack(parts, start_idx, #parts) }
+    parts = vim.list_extend({ "…" }, sub_parts)
+    curPartPath = vim.fs.joinpath("~/", table.concat(sub_parts, "/"))
   end
 
   local winbar_parts = {}
@@ -146,6 +149,15 @@ function M.generate_winbar(mode)
             string.format("%%#%s#%s", shared_state.config.separator_hl_color, " " .. shared_state.config.separator .. " "))
         end
       end
+    end
+  end
+
+  if (navic.is_available(buf)) then
+    local locationStr = navic.get_location({}, buf)
+    if locationStr then
+      table.insert(winbar_parts,
+        string.format("%%#%s#%s", shared_state.config.separator_hl_color, " " .. shared_state.config.separator .. " "))
+      table.insert(winbar_parts, locationStr)
     end
   end
 

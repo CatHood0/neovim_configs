@@ -24,11 +24,13 @@ require('plugin.autossesion')
 require('plugin.bufferline')
 require('plugin.cmp')
 require('plugin.cursors')
+require('plugin.colorizer')
 require('plugin.dap')
 require('plugin.dashboard')
 require('plugin.gitsigns')
 require('plugin.indent_line')
 require('plugin.lualine')
+require('plugin.nvim_ts_autotag')
 require('plugin.neotree')
 require('plugin.neogit')
 require('plugin.noice')
@@ -47,6 +49,10 @@ require('core.winbar.nbreadcrumbs').setup({
   enabled = true,
   separator = "»",
   show_diagnostic = true,
+  depth = {
+    separator = "|",
+    limit = 3,
+  },
   icons_provider = 'nvim-web-devicons',
 })
 

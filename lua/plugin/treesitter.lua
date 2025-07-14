@@ -21,20 +21,31 @@ require("nvim-treesitter.configs").setup({
     'gosum',
     'json',
     'markdown',
+    'markdown_inline',
     'tsx',
     'java',
+    "toml",
+    "fish",
+    "php",
+    "yaml",
   },
   sync_install = true,
   endwise = {
     enable = true,
   },
-  highlight = { enable = true },
   rainbow = {
     enable = true,
   },
-  indent = {
-    enable = false,
+  highlight = {
+    enable = true,
     disable = {},
+  },
+  indent = {
+    enable = true,
+    disable = {},
+  },
+  autotag = {
+    enable = true,
   },
   move = {
     enable = true,

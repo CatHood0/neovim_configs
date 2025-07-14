@@ -2,7 +2,18 @@ local cmp = require('cmp')
 
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
+local tailwind_formatter = require('tailwindcss-colorizer-cmp')
 require("luasnip.loaders.from_vscode").lazy_load()
+
+local symbols_formatter = lspkind.cmp_format({
+  mode = "symbol_text",
+  maxwidth = 40,
+  ellipsis_char = "...",
+  show_labelDetails = true,
+  symbol_map = {
+    Copilot = "",
+  },
+})
 
 cmp.setup({
   event = { "InsertEnter", "CmdlineEnter" },
@@ -10,15 +21,15 @@ cmp.setup({
   -- the suggestion floating menu UI configs
   window = {
     completion = cmp.config.window.bordered({
-      border = 'single', -- 'single', 'double', 'rounded', 'none'
+      border = 'rounded', -- 'single', 'double', 'rounded', 'none'
       winhighlight = 'FloatBorder:FloatBorder,Normal:CmpPmenu',
       scrollbar = true,
-      max_width = 80,
+      max_width = 50,
       max_height = 20,
       side_padding = 1,
     }),
     documentation = cmp.config.window.bordered({
-      border = 'single', -- 'single', 'double', 'rounded', 'none'
+      border = 'rounded', -- 'single', 'double', 'rounded', 'none'
       winhighlight = 'FloatBorder:FloatBorder,Normal:CmpPmenu',
       scrollbar = true,
       max_width = 80,
@@ -32,8 +43,8 @@ cmp.setup({
     end,
   },
   mapping = {
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-n>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-p>'] = cmp.mapping.scroll_docs(4),
     ['<C-space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm {
@@ -54,15 +65,12 @@ cmp.setup({
   },
   formatting = {
     expandable_indicator = true,
-    format = lspkind.cmp_format({
-      mode = "symbol_text",
-      maxwidth = 70,
-      ellipsis_char = "...",
-      show_labelDetails = true, -- show labelDetails in menu. Disabled by default
-      symbol_map = {
-        Copilot = "",
-      },
-    }),
+    fields = { 'abbr', 'kind', 'menu' },
+    format = function(entry, item)
+      local effective_format = symbols_formatter(entry, item)
+      local colored_item = tailwind_formatter.formatter(entry, effective_format)
+      return colored_item
+    end
   },
 })
 
