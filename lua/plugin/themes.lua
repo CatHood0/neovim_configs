@@ -225,9 +225,9 @@ require("catppuccin").setup({
     keywords = {},
     strings = { "italic" },
     variables = {},
-    numbers = { "bold" },
+    numbers = { "bold", "italic" },
     booleans = { "bold" },
-    properties = {},
+    properties = { "italic", "bold" },
     types = { "bold" },
     operators = {},
     -- miscs = {}, -- Uncomment to turn off hard-coded styles
@@ -241,6 +241,7 @@ require("catppuccin").setup({
     nvimtree = true,
     treesitter = true,
     notify = true,
+    bufferline = true,
     barbar = true,
     mini = {
       enabled = true,
