@@ -32,7 +32,7 @@ cmp.setup({
       border = 'rounded', -- 'single', 'double', 'rounded', 'none'
       winhighlight = 'FloatBorder:FloatBorder,Normal:CmpPmenu',
       scrollbar = true,
-      max_width = 80,
+      max_width = 50,
       max_height = 20,
       side_padding = 1,
     }),

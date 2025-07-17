@@ -50,7 +50,7 @@ require('core.winbar.nbreadcrumbs').setup({
   separator = "»",
   show_diagnostic = true,
   depth = {
-    separator = "|",
+    separator = "",
     limit = 3,
   },
   icons_provider = 'nvim-web-devicons',

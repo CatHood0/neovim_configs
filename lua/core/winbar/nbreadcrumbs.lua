@@ -7,6 +7,12 @@ local nativeWinbar = require('core.winbar.native_winbar')
 local shared_state = require('core.winbar.state')
 local navic = require("nvim-navic")
 
+local CursorEvents = {
+  "CursorMovedI",
+  "CursorMoved",
+  "CursorHold",
+}
+
 ---@param user_config WinbarOpts
 function M.setup(user_config)
   shared_state.config = vim.tbl_deep_extend("force", winbar_opts, user_config or {})
@@ -41,22 +47,24 @@ function M.setup(user_config)
     for _, event in ipairs(shared_state.config.update_events) do
       vim.api.nvim_create_autocmd(event, {
         group = group,
-        callback = winbar.update_winbar
+        callback = CursorEvents[event] ~= nil and function()
+          winbar.update_winbar(true)
+        end or winbar.update_winbar
       })
     end
 
     vim.api.nvim_create_user_command("WinbarToggle", function()
       shared_state.config.enabled = not shared_state.config.enabled
-      winbar.update_winbar()
+      winbar.update_winbar(true)
       vim.notify("Winbar " .. (shared_state.config.enabled and "enabled" or "disabled"))
     end, {})
 
     vim.api.nvim_create_user_command("WinbarRefresh", function()
-      winbar.update_winbar()
+      winbar.update_winbar(true)
       vim.notify("Winbar refreshed")
     end, {})
 
-    winbar.update_winbar()
+    winbar.update_winbar(false)
   end
 end
 

@@ -1,11 +1,12 @@
 ---@class WinbarOpts
 ---@field enabled boolean? Enable/disable the winbar
+---@field lsp_enabled boolean? Enable/disable the lsp support into the winbar
 ---@field icons boolean? Show icons for file and folder names
----@field icons_provider string? Set the provider of the icons. Supported: [nvim-web-devicons, mini-icons] 
+---@field icons_provider string? Set the provider of the icons. Supported: [nvim-web-devicons, mini-icons]
 ---@field separator string Separator? between path elements (e.g., ">")
 ---@field folder_hl_group string? Highlight group for folders
----@field file_hl_color string? Highlight group for current file
 ---@field separator_hl_color string? Highlight group for separators
+---@field file_hl_color string? Highlight group for current file
 ---@field show_diagnostic boolean? Show diagnostic icons in winbar
 ---@field update_in_insert boolean? Update winbar in insert mode
 ---@field exclude_winbar_from string[]? Buffer types where winbar is disabled
@@ -29,6 +30,7 @@
 local winbar_opts = {
   enabled = true,
   icons = true,
+  lsp_enabled = true,
   separator = ">",
   icons_provider = nil,
   folder_hl_group = "Normal",
@@ -55,10 +57,15 @@ local winbar_opts = {
   },
 
   update_events = {
-    "BufEnter",          -- When entering a buffer
-    "BufLeave",          -- When leaving a buffer
-    "DirChanged",        -- When changing directories
-    "CursorMoved",       -- When moving the cursor
+    "BufEnter",    -- When entering a buffer
+    "BufLeave",    -- When leaving a buffer
+    "DirChanged",  -- When changing directories
+    "CursorMoved", -- When moving the cursor
+    "CursorMovedI",
+    "CursorHold",
+    "LspAttach",
+    "LspDetach",
+    "LspProgress",
     "WinEnter",          -- When entering in a new window
     "WinLeave",          -- When leaving a window
     "InsertLeave",       -- When leaving insert mode

@@ -3,8 +3,13 @@ local M = {}
 local utils = require("core.winbar.utils")
 local shared_state = require('core.winbar.state')
 local navic = require("nvim-navic")
+local whitespace = " "
 
-function M.update_winbar()
+---@param shouldForceGeneration? boolean
+function M.update_winbar(shouldForceGeneration)
+  if shouldForceGeneration == nil then
+    shouldForceGeneration = false
+  end
   vim.schedule(function()
     if vim.api.nvim_get_mode().mode == 'i' and not shared_state.config.update_in_insert then
       return
@@ -30,14 +35,6 @@ function M.update_winbar()
 
     local new_winbar, full_path = M.generate_winbar(nil, buf)
 
-    --[[print(vim.inspect({
-      current_buffer = buf - 1,
-      win = win,
-      ---@diagnostic disable-next-line: param-type-mismatch
-      args = new_winbar == nil and " " or string.sub(new_winbar, 60, nil),
-    }))
-    ]] --
-
     -- Get the current winbar of the window
     ---@diagnostic disable-next-line: deprecated
     local current_visible_winbar = vim.api.nvim_win_get_option(win, 'winbar') or ''
@@ -46,9 +43,11 @@ function M.update_winbar()
     -- 1. The content is different from the cached one
     -- 2. The winbar is empty
     -- 3. The winbar is different from the new generated one
-    if not shared_state.state.buffers[buf] or new_winbar ~= shared_state.state.buffers[buf].winbar or
-        current_visible_winbar == '' or
-        current_visible_winbar ~= new_winbar then
+    if shouldForceGeneration or
+        (not shared_state.state.buffers[buf] or
+          new_winbar ~= shared_state.state.buffers[buf].winbar or
+          current_visible_winbar == '' or
+          current_visible_winbar ~= new_winbar) then
       shared_state.state.buffers[buf] = {}
       shared_state.state.buffers[buf].winbar = new_winbar
       shared_state.state.buffers[buf].path = full_path
@@ -137,9 +136,14 @@ function M.generate_winbar(mode, buf)
     table.insert(winbar_parts, element)
     if partBreak then
       partBreak = false
+      local shouldAddWhitespaces = shared_state.config.depth.separator ~= nil or
+          shared_state.config.depth.separator == ""
+      local effectiveLimitSeparator = whitespace .. shared_state.config.depth.separator .. whitespace
       table.insert(winbar_parts,
         string.format("%%#%s#%s", shared_state.config.separator_hl_color,
-          "…  " .. (shared_state.config.depth.separator ~= nil and shared_state.config.depth.separator or "") .. "  "))
+          "…" .. (shouldAddWhitespaces and effectiveLimitSeparator or "")
+        )
+      )
     else
       if i < #parts then
         if mode ~= nil and type(mode) == "string" then
@@ -152,9 +156,9 @@ function M.generate_winbar(mode, buf)
     end
   end
 
-  if (navic.is_available(buf)) then
+  if shared_state.config.lsp_enabled and (navic.is_available(buf)) then
     local locationStr = navic.get_location({}, buf)
-    if locationStr then
+    if locationStr and string.len(locationStr) >= 1 then
       table.insert(winbar_parts,
         string.format("%%#%s#%s", shared_state.config.separator_hl_color, " " .. shared_state.config.separator .. " "))
       table.insert(winbar_parts, locationStr)

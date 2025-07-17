@@ -5,6 +5,14 @@ function M.get_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.workspace.configuration = true
   capabilities.workspace.workspaceEdit.documentChanges = true
+  capabilities.workspace.inlayHint = {
+    refreshSupport = true,
+  }
+  capabilities.workspace.didChangeWatchedFiles = {
+    dynamicRegistration = true,
+    relativePatternSupport = true,
+  }
+
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.diagnostic = {
     dynamicRegistration = true,

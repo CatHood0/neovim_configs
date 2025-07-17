@@ -17,12 +17,6 @@ function M.setup()
   diagnostics.setup_config()
   code_lens.setup()
 
-  -- lspconfig.jsonls.setup({ capabilities = capabilities })
-  -- lspconfig.clangd.setup({ capabilities = capabilities })
-  -- lspconfig.lua_ls.setup({ capabilities = capabilities })
-  -- lspconfig.gopls.setup({ capabilities = capabilities })
-  -- lspconfig.rust_analyzer.setup({ capabilities = capabilities })
-  -- lspconfig.cssls.setup({})
   lspconfig.tailwindcss.setup({
     settings = {
       tailwindCSS = {
@@ -43,8 +37,6 @@ function M.setup()
       "svelte", "vue", "astro", "php", "blade", "twig", "markdown", "mdx"
     },
   })
-  -- lspconfig.ts_ls.setup({ capabilities = capabilities })
-  -- lspconfig.jdtls.setup({ capabilities = capabilities })
   require('plugin.jdtls')
 
   flutter_setup.setup(capabilities)
@@ -191,8 +183,8 @@ end
 
 M.hover_opts = {
   border = 'rounded',
-  max_width = 80,
-  max_height = 30,
+  max_width = 45,
+  max_height = 20,
   anchor_bias = 'below', --Determines where put the popup: | above | below | auto |
 }
 

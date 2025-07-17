@@ -4,6 +4,8 @@ function _G.line_fold()
 end
 
 -- ==================== UI/Visual ====================
+vim.o.mousemoveevent = true
+vim.o.relativenumber = true
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.scrolloff = 8
