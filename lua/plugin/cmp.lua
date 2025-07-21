@@ -91,6 +91,14 @@ cmp.setup.cmdline(':', {
   matching = { disallow_symbol_nonprefix_matching = false }
 })
 
+cmp.setup.filetype({ "dap-repl", "dapui_watches" }, {
+  sources = cmp.config.sources({
+    { name = "dap" },
+  }, {
+    { name = "buffer" },
+  }),
+})
+
 -- Deshabilitar autocompletado en ciertos tipos de buffers
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'TelescopePrompt', 'neo-tree', 'qf' },

@@ -2,6 +2,7 @@ local M = {}
 local utils = require("plugin.lsp.utils")
 local lsp_utils = require 'lspconfig.util'
 local code_lens = require("plugin.lsp.code_lenses")
+local debugger = require("plugin.lsp.debugger")
 local flutter_setup = require("plugin.lsp.flutter-tools")
 local cmake_setup = require("plugin.lsp.cmake-tools")
 local diagnostics = require("plugin.lsp.lsp_diagnostics_configs")
@@ -16,6 +17,7 @@ function M.setup()
   M.config_lsp_langs(capabilities)
   diagnostics.setup_config()
   code_lens.setup()
+  debugger.setup()
 
   lspconfig.tailwindcss.setup({
     settings = {
@@ -37,6 +39,7 @@ function M.setup()
       "svelte", "vue", "astro", "php", "blade", "twig", "markdown", "mdx"
     },
   })
+  lspconfig.jsonls.setup({ capabilities = capabilities })
   require('plugin.jdtls')
 
   flutter_setup.setup(capabilities)

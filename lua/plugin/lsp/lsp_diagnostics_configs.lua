@@ -1,6 +1,6 @@
 local M = {}
-
 function M.setup_config()
+  vim.highlight.priorities.semantic_tokens = 95 -- Or any number lower than 100, treesitter's priority level
   vim.diagnostic.config({
     signs = {
       enable = true,

@@ -16,7 +16,7 @@ vim.opt.showtabline = 2
 vim.opt.colorcolumn = "120"
 vim.opt.hlsearch = true
 vim.opt.pumheight = 0
--- vim.cmd("syntax on")
+vim.cmd("syntax on")
 vim.opt.background = "dark" -- or light if you want light mode
 vim.opt.laststatus = 2
 vim.opt.signcolumn = "yes"
@@ -56,7 +56,7 @@ vim.cmd([[
 vim.opt.wrap = true
 vim.opt.expandtab = true
 vim.opt.autoindent = true
-vim.opt.smartindent = false -- make indenting smarter again
+vim.opt.smartindent = true
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
@@ -70,6 +70,7 @@ vim.opt.smartcase = true -- smart case
 vim.opt.incsearch = true
 
 -- ==================== Files/Backups ====================
+vim.o.sessionoptions = ""
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undofile = true
@@ -79,7 +80,18 @@ vim.opt.hidden = true
 -- ==================== Window Management ====================
 vim.opt.splitbelow = true -- force all horizontal splits to go below current window
 vim.opt.splitright = true -- force all vertical splits to go to the right of current window
-vim.opt.sessionoptions:append({ "winpos", "terminal", "folds" })
+vim.opt.sessionoptions:append({
+  "blank",
+  "buffers",
+  "curdir",
+  "folds",
+  "help",
+  "tabpages",
+  "winsize",
+  "winpos",
+  "terminal",
+  "localoptions",
+})
 
 -- ==================== Performance/Misc ====================
 vim.opt.history = 1500 -- Remember 1500 lines

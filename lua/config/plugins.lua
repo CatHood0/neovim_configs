@@ -50,12 +50,7 @@ return {
       --  require('lualine').setup()
     end
   },
-  {
-    'nvimdev/dashboard-nvim',
-    config = function()
-      -- require('dashboard').setup()
-    end
-  },
+  { "goolord/alpha-nvim" },
   { 'nvim-tree/nvim-web-devicons' },
   { 'echasnovski/mini.nvim',      version = '*' },
   { 'MunifTanjim/nui.nvim' },
@@ -205,7 +200,17 @@ return {
   { 'natebosch/dartlang-snippets' },
 
   -- Debugging
-  { 'mfussenegger/nvim-dap' },
+  {
+    'mfussenegger/nvim-dap',
+    dependencies = {
+      'theHamsta/nvim-dap-virtual-text',
+      "rcarriga/nvim-dap-ui",
+      "nvim-neotest/nvim-nio",
+      "nvim-telescope/telescope-dap.nvim",
+      "rcarriga/cmp-dap",
+      "Weissle/persistent-breakpoints.nvim",
+    },
+  },
 
   -- 5. VERSION CONTROL (GIT)
   {
