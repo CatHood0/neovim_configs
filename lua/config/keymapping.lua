@@ -83,7 +83,7 @@ map('n', '<F8>', function()
 end, { silent = true, desc = "Ends dap debugging process" })
 map('n', '<leader>b',
   function()
-    require('persistent-breakpoints.api').set_conditional_breakpoint(vim.fn.input 'Breakpoint condition: ')
+    require('persistent-breakpoints.api').set_conditional_breakpoint()
   end,
   {
     silent = true,

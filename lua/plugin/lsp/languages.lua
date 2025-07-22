@@ -5,6 +5,7 @@ return {
     "clangd",
     "rust_analyzer",
     "jsonls",
+    "html",
     "ts_ls",
     "tailwindcss",
     'cssls',

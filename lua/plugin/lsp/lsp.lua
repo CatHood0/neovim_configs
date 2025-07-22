@@ -170,6 +170,18 @@ function M.config_lsp_langs(capabilities)
     },
   })
 
+  vim.lsp.config('html', {
+    capabilities = capabilities,
+    on_attach = function(client, bufnr)
+      vim.api.nvim_create_autocmd({ 'InsertLeavePre', 'TextChanged', 'TextChangedP' }, {
+        pattern = '*',
+        callback = function()
+          vim.cmd('silent! write')
+        end
+      })
+    end
+  })
+
   vim.lsp.config('dockerls', {
     capabilities = capabilities,
     settings = {

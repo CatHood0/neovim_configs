@@ -36,7 +36,7 @@ sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build 
     ```dart
         npm install -g dockerfile-language-server-nodejs
     ```
-* Json:
+* Json, HTML, CSS:
     ```dart
         // run this
         npm i -g vscode-langservers-extracted

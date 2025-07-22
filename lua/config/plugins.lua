@@ -176,6 +176,8 @@ return {
     end,
     opts = {}
   },
+
+  { 'brianhuster/live-preview.nvim' },
   { 'neovim/nvim-lspconfig' },
   { 'onsails/lspkind.nvim' },
   -- Show virtual lines lenses
