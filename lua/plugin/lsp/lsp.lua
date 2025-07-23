@@ -1,14 +1,14 @@
 local M = {}
-local utils = require("plugin.lsp.utils")
-local lsp_utils = require 'lspconfig.util'
-local code_lens = require("plugin.lsp.code_lenses")
-local debugger = require("plugin.lsp.debugger")
-local flutter_setup = require("plugin.lsp.flutter-tools")
-local cmake_setup = require("plugin.lsp.cmake-tools")
-local diagnostics = require("plugin.lsp.lsp_diagnostics_configs")
-local servers = require("plugin.lsp.languages")
+local utils = require("plugin.lsp.utils.utils")
+local code_lens = require("plugin.lsp.tools.code_lenses")
+local debugger = require("plugin.lsp.configs.debugger")
+local flutter_setup = require("plugin.lsp.tools.flutter-tools")
+local cmake_setup = require("plugin.lsp.tools.cmake-tools")
+local diagnostics = require("plugin.lsp.configs.lsp_diagnostics_configs")
+local servers = require("plugin.lsp.configs.languages")
 local lspconfig = require("lspconfig")
-local default_capabilities = require("plugin.lsp.capabilities")
+local lsp_utils = require('lspconfig.util')
+local default_capabilities = require("plugin.lsp.configs.capabilities")
 
 --- setup all the LSP used by these configurations
 function M.setup()

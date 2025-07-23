@@ -177,7 +177,18 @@ return {
     opts = {}
   },
 
-  { 'brianhuster/live-preview.nvim' },
+  {
+    'brianhuster/live-preview.nvim',
+    config = function()
+      require('livepreview.config').set({
+        port = 8080,
+        browser = 'app:zen_browser.zen',
+        dynamic_root = true,
+        sync_scroll = true,
+        picker = "telescope",
+      })
+    end
+  },
   { 'neovim/nvim-lspconfig' },
   { 'onsails/lspkind.nvim' },
   -- Show virtual lines lenses

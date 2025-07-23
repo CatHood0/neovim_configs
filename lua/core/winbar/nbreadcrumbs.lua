@@ -27,7 +27,7 @@ function M.setup(user_config)
   utils.setup_provider()
   if shared_state.config.enabled then
     navic.setup({
-      icons = require('plugin.lsp.lsp_symbols').symbols,
+      icons = require('plugin.lsp.utils.lsp_symbols').symbols,
       highlight = true,
       separator = " " .. shared_state.config.separator .. " ",
       depth_limit = 0,

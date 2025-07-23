@@ -10,5 +10,5 @@ require('lspkind').init({
   --
   -- default: 'default'
   preset = 'codicons',
-  symbol_map = require("plugin.lsp.lsp_symbols").symbols,
+  symbol_map = require("plugin.lsp.utils.lsp_symbols").symbols,
 })
