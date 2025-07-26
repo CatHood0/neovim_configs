@@ -10,6 +10,22 @@ export PATH="$PATH":"/opt/nvim/bin"
 sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build fzf ripgrep fd-find luarocks
 ```
 
+For running Desktop enviroment
+
+```dart
+// set path for clang
+which clang++
+// and, with the path printed
+export CXX=/path/to/clang++
+```
+
+For running Desktop that requires GTK3
+```dart
+// if you have issues with gtk3,
+// just run
+sudo apt install libgtk-3-dev
+```
+
 ## Language requirements
 
 ## Using mason

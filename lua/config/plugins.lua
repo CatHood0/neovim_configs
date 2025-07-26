@@ -136,7 +136,9 @@ return {
     config = function()
       require("hover").setup {
         init = function()
-          -- Require providers
+          -- Require pr
+          -- require('hover.providers.gh')
+          -- require('hover.providers.gh_user')
           require("hover.providers.lsp")
           -- require('hover.providers.dap')
           require('hover.providers.diagnostic')
@@ -160,7 +162,7 @@ return {
       'hrsh7th/cmp-cmdline',
       'saadparwaiz1/cmp_luasnip',
       'rafamadriz/friendly-snippets',
-      'windwp/nvim-ts-autotag',
+      'tronikelis/ts-autotag.nvim',
       { 'roobert/tailwindcss-colorizer-cmp.nvim' },
     },
   },
@@ -175,19 +177,6 @@ return {
       require("mason").setup()
     end,
     opts = {}
-  },
-
-  {
-    'brianhuster/live-preview.nvim',
-    config = function()
-      require('livepreview.config').set({
-        port = 8080,
-        browser = 'app:zen_browser.zen',
-        dynamic_root = true,
-        sync_scroll = true,
-        picker = "telescope",
-      })
-    end
   },
   { 'neovim/nvim-lspconfig' },
   { 'onsails/lspkind.nvim' },

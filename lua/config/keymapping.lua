@@ -64,6 +64,8 @@ map('n', '<leader>g', '<cmd>TestFile<cr>', { silent = true, nowait = false })
 -- map('n', '<leader>tn', '<cmd>TestNearest<cr>', { silent = true, nowait = true })
 -- map('n', '<leader>a', '<cmd>TestSuite<cr>', { silent = true })
 map('n', '<leader>l', '<cmd>TestLast<cr>', { silent = true })
+map("n", "<leader>ls", '<cmd>LiveServerStart<cr>', { silent = true, desc = 'Server: Toggle Live Server' })
+map("n", "<leader>lc", '<cmd>LiveServerClose<cr>', { silent = true, desc = 'Server: Close Live Server' })
 
 -- ==================== Debugging ====================
 -- nvim-dap

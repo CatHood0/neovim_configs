@@ -20,6 +20,9 @@ function M.setup()
   debugger.setup()
 
   lspconfig.tailwindcss.setup({
+    on_attach = function(client, bufnr)
+      require('plugin.colorizer')
+    end,
     settings = {
       tailwindCSS = {
         experimental = {
@@ -58,6 +61,7 @@ function M.config_lsp_langs(capabilities)
     capabilities = capabilities,
     on_attach = function(client, bufnr)
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      require('plugin.colorizer')
     end,
     settings = {
       ['rust-analyzer'] = {
@@ -90,6 +94,9 @@ function M.config_lsp_langs(capabilities)
   })
 
   vim.lsp.config("clangd", {
+    on_attach = function(client, bufnr)
+      require('plugin.colorizer')
+    end,
     settings = {
       clangd = {
         InlayHints = {
@@ -134,6 +141,7 @@ function M.config_lsp_langs(capabilities)
     capabilities = capabilities,
     on_attach = function(client, bufnr)
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      require('plugin.colorizer')
     end,
     settings = {
       Lua = {
@@ -157,6 +165,10 @@ function M.config_lsp_langs(capabilities)
   })
 
   vim.lsp.config('cssls', {
+    on_attach = function(client, bufnr)
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      require('plugin.colorizer')
+    end,
     capabilities = capabilities,
     settings = {
       css = {
@@ -172,14 +184,6 @@ function M.config_lsp_langs(capabilities)
 
   vim.lsp.config('html', {
     capabilities = capabilities,
-    on_attach = function(client, bufnr)
-      vim.api.nvim_create_autocmd({ 'InsertLeavePre', 'TextChanged', 'TextChangedP' }, {
-        pattern = '*',
-        callback = function()
-          vim.cmd('silent! write')
-        end
-      })
-    end
   })
 
   vim.lsp.config('dockerls', {

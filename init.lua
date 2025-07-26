@@ -24,11 +24,13 @@ require('plugin.autossesion')
 require('plugin.bufferline')
 require('plugin.cmp')
 require('plugin.cursors')
-require('plugin.colorizer')
 require('plugin.gitsigns')
 require('plugin.indent_line')
 require('plugin.lualine')
-require('plugin.nvim_ts_autotag')
+require('plugin.ts_autotag')
+-- Just use this plugin when you have kitty terminal
+-- and imagemagick and libmagickwand-dev installed
+require('plugin.image')
 require('plugin.neotree')
 require('plugin.neogit')
 require('plugin.noice')
@@ -43,6 +45,7 @@ require('plugin.simple_dashboard')
 require('plugin.lspkind')
 require('plugin.lsp.lsp').setup()
 require('plugin.persistent_breakpoints')
+require('core.live_server.live_server')
 
 -- Load core
 require('core.winbar.nbreadcrumbs').setup({
