@@ -96,17 +96,18 @@ map('n', '<F7>', require('dapui').toggle, { silent = true, desc = 'Debug: See la
 
 
 -- ==================== File Operations ====================
--- map('n', '<C>', '<cmd>qa!<cr>', { silent = true, desc = "Force quit of neovim" })
-map('n', '<C-s>', '<cmd>wall<cr>', { silent = true, desc = "Save all workspace files" })
-map('n', '<C-s>a', '<cmd>wqall<cr>', { silent = true, desc = "Save all and quit of neovim" })
-map('n', '<space>qq', '<cmd>Format<cr><cmd>wqall<cr><cmd>SessionSave<cr>',
+map('n', '<C-s>', '<cmd>w!<cr>', { silent = true, desc = "Save all workspace files" })
+map('n', '<C-s>a', '<cmd>wall<cr>', { silent = true, desc = "Save all and quit of neovim" })
+map('n', '<space>qq', '<cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<cr><cmd>SessionSave<cr><cmd>wqall<cr>',
   { silent = true, desc = "Format file, Save and quit storing the session" })
 
 -- ==================== Buffer Management ====================
 -- Bufferline
 map('n', '<space>m', '<cmd>BufferLineCycleNext<cr>', { silent = true, desc = "Focus the view on the next buffer" })
 map('n', '<space>n', '<cmd>BufferLineCyclePrev<cr>', { silent = true, desc = "Focus the view on the previous buffer" })
-map('n', '<space>d', '<cmd>bdelete!<cr>', { silent = true })
+map('n', '<Space>d', function()
+  vim.api.nvim_command('bp|sp|bn|bd!')
+end, { silent = true })
 map('n', '<space>vc', '<cmd>BufferLineTogglePin<cr>', { silent = true, desc = "Deletes current buffer" })
 map('n', '<space>vm', '<cmd>BufferLineMoveNext<cr>', { silent = true, desc = "Moves the buffer to the next index" })
 map('n', '<space>vn', '<cmd>BufferLineMovePrev<cr>', { silent = true, desc = "Moves the buffer to the previous index" })
@@ -114,14 +115,26 @@ map('n', '<space>vn', '<cmd>BufferLineMovePrev<cr>', { silent = true, desc = "Mo
 -- ==================== Search/Finding ====================
 -- Telescope
 map('n', '<C-p>', function()
-  require('telescope.builtin').find_files({ find_command = { 'rg', '--files', '-g', '!.git' } })
+  require('telescope.builtin').find_files({
+    find_command = {
+      'rg',
+      '--files',
+      '-g',
+      '!.git', -- Pass '-w' flag to ripgrep for whole-word matching
+    }
+  })
 end, { silent = true, desc = "Open search files popup" })
 map('n', '<C-f>', function()
   require('telescope.builtin').current_buffer_fuzzy_find({
-    sorter = require('telescope.sorters').get_fzy_sorter({})
+    sorter = require('telescope.sorters').get_fzy_sorter({}),
   })
 end, { silent = true, desc = "Open local text search popup" })
-map('n', '<leader>f', '<cmd>lua require("telescope.builtin").live_grep()<cr>',
+map('n', '<leader>f', function()
+    require("telescope.builtin").live_grep({
+      -- Pass '-w' flag to ripgrep for whole-word matching
+      -- additional_args = { '-w' },
+    })
+  end,
   { silent = true, desc = "Open global text search popup" })
 
 -- ==================== Sessions ====================

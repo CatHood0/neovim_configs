@@ -36,8 +36,8 @@ telescope.setup {
       "--ignore-file=" .. vim.fn.expand("$HOME") .. "/.fdignore"
     },
     find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },
-    prompt_prefix = " ",
-    --prompt_prefix = "🔍, ",
+    -- prompt_prefix = " ",
+    prompt_prefix = "🔍",
     selection_caret = " ",
     entry_prefix = "  ",
     initial_mode = "insert",

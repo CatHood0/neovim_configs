@@ -17,6 +17,11 @@ return {
 
   -- 2. USER INTERFACE AND THEMES
   {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {}
+  },
+  {
     "3rd/image.nvim",
     event = "VeryLazy",
   },
@@ -180,8 +185,15 @@ return {
   },
   { 'neovim/nvim-lspconfig' },
   { 'onsails/lspkind.nvim' },
+  {
+    "zeioth/garbage-day.nvim",
+    dependencies = "neovim/nvim-lspconfig",
+    event = "VeryLazy",
+  },
   -- Show virtual lines lenses
   { 'VidocqH/lsp-lens.nvim' },
+  -- Show hover on CursorHold
+  { "soulis-1256/eagle.nvim" },
   {
     'akinsho/flutter-tools.nvim',
     dependencies = {

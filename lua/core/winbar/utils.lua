@@ -127,7 +127,7 @@ function M.define_hl_groups()
     vim.api.nvim_set_hl(0, "NavicIconsTypeParameter", { fg = "#4EC9B0" })
 
     vim.api.nvim_set_hl(0, "NavicText", { fg = "#cad3f5" })
-    vim.api.nvim_set_hl(0, "NavicSeparator", { fg = "#808080" })
+    vim.api.nvim_set_hl(0, "NavicSeparator", { fg = "#939ab8" })
   end, 3000)
 
   shared_state.state.hl_groups_defined = true

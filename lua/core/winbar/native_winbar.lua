@@ -1,11 +1,14 @@
 local M = {}
 
+require("core.utils.strings_splitter")
 local utils = require("core.winbar.utils")
 local shared_state = require('core.winbar.state')
 local navic = require("nvim-navic")
 local whitespace = " "
+local truncate_indicator = "…"
 
 ---@param shouldForceGeneration? boolean
+---@return string?
 function M.update_winbar(shouldForceGeneration)
   if shouldForceGeneration == nil then
     shouldForceGeneration = false
@@ -37,7 +40,7 @@ function M.update_winbar(shouldForceGeneration)
 
     -- Get the current winbar of the window
     ---@diagnostic disable-next-line: deprecated
-    local current_visible_winbar = vim.api.nvim_win_get_option(win, 'winbar') or ''
+    local current_visible_winbar = vim.api.nvim_win_get_option(win, 'winbar')
 
     -- Update if:
     -- 1. The content is different from the cached one
@@ -52,7 +55,7 @@ function M.update_winbar(shouldForceGeneration)
       shared_state.state.buffers[buf].winbar = new_winbar
       shared_state.state.buffers[buf].path = full_path
       ---@diagnostic disable-next-line: deprecated
-      vim.api.nvim_win_set_option(win, 'winbar', new_winbar or '')
+      vim.api.nvim_win_set_option(win, 'winbar', new_winbar)
     end
   end)
 end
@@ -122,7 +125,7 @@ function M.generate_winbar(mode, buf)
     partBreak = true
     local start_idx = #parts - shared_state.config.depth.limit + 1
     local sub_parts = { unpack(parts, start_idx, #parts) }
-    parts = vim.list_extend({ "…" }, sub_parts)
+    parts = vim.list_extend({ truncate_indicator }, sub_parts)
     curPartPath = vim.fs.joinpath("~/", table.concat(sub_parts, "/"))
   end
 
@@ -156,13 +159,30 @@ function M.generate_winbar(mode, buf)
     end
   end
 
+  -- If there is just one element, probably is just the
+  -- file name, and we are opening a file at root of project
+  if #winbar_parts == 1 then
+    table.remove(winbar_parts, 1)
+  end
+
   if shared_state.config.lsp_enabled and (navic.is_available(buf)) then
     local locationStr = navic.get_location({}, buf)
-    if locationStr and string.len(locationStr) >= 1 then
-      table.insert(winbar_parts,
-        string.format("%%#%s#%s", shared_state.config.separator_hl_color, " " .. shared_state.config.separator .. " "))
-      table.insert(winbar_parts, locationStr)
+    if locationStr then
+      if #winbar_parts > 0 then
+        table.insert(winbar_parts,
+          string.format("%%#%s#%s", shared_state.config.separator_hl_color, " " .. shared_state.config.separator .. " "))
+      end
+      if string.len(locationStr) >= 1 then
+        table.insert(winbar_parts, locationStr)
+      else
+        table.insert(winbar_parts,
+          string.format("%%#%s#%s", shared_state.config.separator_hl_color, "" .. truncate_indicator .. " "))
+      end
     end
+  end
+
+  if #winbar_parts < 1 then
+    return nil
   end
 
   return "  " .. table.concat(winbar_parts, ""), file_path

@@ -13,7 +13,7 @@ function M.get_command()
     vim.fn.shellescape("/" .. file_name)
   )
 
-  if not current_file:match("%.html$") then
+  if current_file:match("index.html$") or not current_file:match("%.html$") then
     command = string.format("npx live-server")
   end
 
