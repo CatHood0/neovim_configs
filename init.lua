@@ -43,12 +43,13 @@ require('plugin.tmux')
 require('plugin.toggleterm')
 require('plugin.treesitter')
 require('plugin.simple_dashboard')
+require('plugin.statuscol')
 require('plugin.lspkind')
 require('plugin.lsp.lsp').setup()
 require('plugin.persistent_breakpoints')
-require('core.live_server.live_server')
 
--- Load core
+require('core.live_server.live_server')
+-- Load corese
 require('core.winbar.nbreadcrumbs').setup({
   enabled = true,
   separator = "»",

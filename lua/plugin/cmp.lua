@@ -1,4 +1,5 @@
 local cmp = require('cmp')
+local compare = require('cmp.config.compare')
 
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
@@ -8,6 +9,7 @@ require("luasnip.loaders.from_vscode").lazy_load()
 local symbols_formatter = lspkind.cmp_format({
   mode = "symbol_text",
   maxwidth = 40,
+  max_width = 40,
   ellipsis_char = "...",
   show_labelDetails = true,
   symbol_map = {
@@ -18,11 +20,24 @@ local symbols_formatter = lspkind.cmp_format({
 cmp.setup({
   event = { "InsertEnter", "CmdlineEnter" },
   completion = { completeopt = "menu,menuone,noselect,noinsert" },
+  sorting = {
+    comparators = {
+      compare.score,
+      compare.recently_used,
+      compare.kind,
+      compare.offset,
+      compare.exact,
+      compare.locality,
+      compare.sort_text,
+      compare.length,
+      compare.order,
+    },
+  },
   -- the suggestion floating menu UI configs
   window = {
     completion = cmp.config.window.bordered({
-      border = 'rounded', -- 'single', 'double', 'rounded', 'none'
-      winhighlight = 'FloatBorder:FloatBorder,Normal:CmpPmenu',
+      border = 'none', -- 'single', 'double', 'rounded', 'none'
+      winhighlight = 'FloatBorder:Pmenu,Normal:Pmenu,CursorLine:PmenuSel',
       scrollbar = true,
       max_width = 50,
       max_height = 20,

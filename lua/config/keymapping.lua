@@ -166,6 +166,7 @@ map('n', '<space>pc', '<cmd>DiffviewClose<cr>', { silent = true, desc = "Close d
 map('n', '<space>ph', '<cmd>DiffviewFileHistory<cr>',
   { silent = true, desc = "Open history of the differences of the file" })
 map('n', '<space>gi', '<cmd>Neogit<cr>', { silent = true, desc = "Open Neogit popup" })
+map('n', '<space>pu', vim.cmd.UndotreeToggle)
 
 -- ==================== LSP Mappings ====================
 -- This original map works good, but, does not show diagnostics when required.

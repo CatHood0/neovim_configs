@@ -166,8 +166,8 @@ function M.config_lsp_langs(capabilities)
 
   vim.lsp.config('cssls', {
     on_attach = function(client, bufnr)
-      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
       require('plugin.colorizer')
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end,
     capabilities = capabilities,
     settings = {
@@ -184,10 +184,16 @@ function M.config_lsp_langs(capabilities)
 
   vim.lsp.config('html', {
     capabilities = capabilities,
+    on_attach = function(client, bufnr)
+      require('plugin.colorizer')
+    end,
   })
 
   vim.lsp.config('dockerls', {
     capabilities = capabilities,
+    on_attach = function(client, bufnr)
+      require('plugin.colorizer')
+    end,
     settings = {
       docker = {
         languageserver = {

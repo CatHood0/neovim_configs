@@ -33,11 +33,11 @@ vim.opt.diffopt = {
 
 -- ==================== Folding =====================
 vim.o.foldenable = true
-vim.o.foldlevel = 99
+vim.o.foldlevel = 99999
+vim.o.foldlevelstart = 99999
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldcolumn = 'auto:9'
-vim.o.foldtext = ""
 vim.o.foldtext = "v:lua.line_fold()"
 vim.opt.fillchars = {
   foldopen = "",
@@ -130,3 +130,10 @@ vim.g.dart_style_guide = 2
 -- LSC settings
 vim.g.lsc_auto_map = true
 vim.g.auto_session_root_dir = "~/.nvim_sessions"
+
+-- UNDOTREE
+vim.g.undotree_TreeNodeShape = '*'
+vim.g.undotree_SignAdded = "🞟"
+vim.g.undotree_SignChanged = "≈"
+vim.g.undotree_SignDeleted = "⊖"
+vim.g.undotree_SignDeletedEnd = "⤵"

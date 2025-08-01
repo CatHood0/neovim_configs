@@ -16,6 +16,9 @@ return {
   },
 
   -- 2. USER INTERFACE AND THEMES
+  -- This fix an issue with the foldColumn
+  { 'mbbill/undotree' },
+  { 'luukvbaal/statuscol.nvim' },
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
