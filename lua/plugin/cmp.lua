@@ -40,7 +40,7 @@ cmp.setup({
       winhighlight = 'FloatBorder:Pmenu,Normal:Pmenu,CursorLine:PmenuSel',
       scrollbar = true,
       max_width = 50,
-      max_height = 20,
+      max_height = 5,
       side_padding = 1,
     }),
     documentation = cmp.config.window.bordered({
