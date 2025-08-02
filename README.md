@@ -175,10 +175,3 @@ sudo apt install libgtk-3-dev
       // then, add the rust-analyzer with rustup
       rustup component add rust-analyzer
     ```
-
-## Most new version
-
-* Support for native winbar
-* Support for native diagnostics (just parsing them to `vim.diagnostic`)
-* Support for diagnostics preview in Neotree
-* Improved diagnostics API and UI
