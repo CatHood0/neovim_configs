@@ -1,6 +1,6 @@
 # My Neovim configs
 
-![Neovim image](https://github.com/user-attachments/assets/56c51452-14da-409c-aaf4-c9d67846d182)
+![Neovim image](./assets/example.png)
 
 ```dart
 // here should be nvim binary installation 
