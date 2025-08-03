@@ -35,6 +35,8 @@ neotree.setup({
       show_hidden_count = true,
       never_show = {
         '.DS_Store',
+        '.vscode',
+        '.idea'
       },
     },
     follow_current_file = {
@@ -106,13 +108,13 @@ neotree.setup({
   sort_case_insensitive = true,                                      -- used when sorting files and directories in the tree
   sort_function = nil,                                               -- use a custom function for sorting files and directories in the tree
   source_selector = {
-    winbar = true, -- removes the header bar
-    statusline = true,
+    winbar = false,                                                   -- removes the header bar
+    statusline = false,
     content_layout = "center",
-    highlight_tab = "NeoTreeTabInactive",                   -- string
-    highlight_tab_active = "NeoTreeTabActive",              -- string
-    highlight_background = "NeoTreeTabInactive",            -- string
-    highlight_separator = "ActiveWindow",                   -- string
+    highlight_tab = "NeoTreeTabInactive",                     -- string
+    highlight_tab_active = "NeoTreeTabActive",                -- string
+    highlight_background = "NeoTreeTabInactive",              -- string
+    highlight_separator = "ActiveWindow",                     -- string
     highlight_separator_active = "NeoTreeTabSeparatorActive", -- string
   },
   renderers = {
@@ -133,7 +135,7 @@ neotree.setup({
     },
     indent = {
       indent_size = 2,
-      padding = 1, -- extra padding on left hand side
+      padding = 2, -- extra padding on left hand side
       with_markers = true,
       indent_marker = "│",
       last_indent_marker = "└",
@@ -195,15 +197,15 @@ neotree.setup({
     },
     type = {
       enabled = true,
-      required_width = 122,       -- min width of window required to show this column
+      required_width = 122, -- min width of window required to show this column
     },
     last_modified = {
       enabled = true,
-      required_width = 88,       -- min width of window required to show this column
+      required_width = 88, -- min width of window required to show this column
     },
     created = {
       enabled = true,
-      required_width = 110,       -- min width of window required to show this column
+      required_width = 110, -- min width of window required to show this column
     },
     symlink_target = {
       enabled = false,
@@ -232,17 +234,17 @@ neotree.setup({
       ["a"] = {
         "add",
         config = {
-          show_path = "none"       -- "none", "relative", "absolute"
+          show_path = "none" -- "none", "relative", "absolute"
         }
       },
-      ["A"] = "add_directory",       -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
+      ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
       ["<del>"] = "delete",
       ["re"] = "rename",
       ["y"] = "copy_to_clipboard",
       ["x"] = "cut_to_clipboard",
       ["p"] = "paste_from_clipboard",
-      ["c"] = "copy",       -- takes text input for destination, also accepts the optional config.show_path option like "add":
-      ["m"] = "move",       -- takes text input for destination, also accepts the optional config.show_path option like "add".
+      ["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
+      ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
       ["q"] = "close_window",
       ["R"] = "refresh",
       ["?"] = "show_help",

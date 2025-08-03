@@ -159,12 +159,6 @@ function M.generate_winbar(mode, buf)
     end
   end
 
-  -- If there is just one element, probably is just the
-  -- file name, and we are opening a file at root of project
-  if #winbar_parts == 1 then
-    table.remove(winbar_parts, 1)
-  end
-
   if shared_state.config.lsp_enabled and (navic.is_available(buf)) then
     local locationStr = navic.get_location({}, buf)
     if locationStr then

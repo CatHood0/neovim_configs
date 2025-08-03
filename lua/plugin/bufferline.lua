@@ -3,15 +3,27 @@ bufferline.setup {
   options = {
     hover = {
       enabled = true,
-      delay = 200,
+      delay = 10,
       reveal = { 'close' }
     },
+    offsets = {
+      {
+        filetype = "neo-tree",
+        text = "File Explorer",
+        highlight = "Directory",
+        separator = false -- use a "true" to enable the default, or set your own character
+      }
+    },
     diagnostics = "nvim_lsp", -- | "nvim_lsp"
-    mode = "buffers", -- set to "tabs" to only show tabpages instead
-    themable = true, -- | false, -- allows highlight groups to be overriden i.e. sets highlights as default
-    numbers = "ordinal", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
-    close_command = "bdelete! %d", -- can be a string | function, | false see "Mouse actions"
-    right_mouse_command = "bdelete! %d", -- can be a string | function | false, see "Mouse actions"
+    mode = "buffers",         -- set to "tabs" to only show tabpages instead
+    themable = true,          -- | false, -- allows highlight groups to be overriden i.e. sets highlights as default
+    numbers = "ordinal",      -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
+    close_command = function()
+      vim.api.nvim_command('bp|sp|bn|bd!')
+    end, -- can be a string | function, | false see "Mouse actions"
+    right_mouse_command = function()
+      vim.api.nvim_command('bp|sp|bn|bd!')
+    end, -- can be a string | function | false, see "Mouse actions"
     left_mouse_command = "buffer %d", -- can be a string | function, | false see "Mouse actions"
     middle_mouse_command = nil, -- can be a string | function, | false see "Mouse actions"
     indicator = {
