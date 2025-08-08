@@ -31,7 +31,8 @@ function M.setup()
     },
     { LspLens = { link = "Comment" } },
     ignore_filetype = {
-      -- "prisma",
+      'css',
+      'html',
     },
     -- Target Symbol Kinds to show lens information
     target_symbol_kinds = { SymbolKind.Function, SymbolKind.Method, SymbolKind.Interface, SymbolKind.Class },

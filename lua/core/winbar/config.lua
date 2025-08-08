@@ -4,6 +4,7 @@
 ---@field icons boolean? Show icons for file and folder names
 ---@field icons_provider string? Set the provider of the icons. Supported: [nvim-web-devicons, mini-icons]
 ---@field separator string Separator? between path elements (e.g., ">")
+---@field max_string_length number? The max length that can be used by the folder and file names 
 ---@field folder_hl_group string? Highlight group for folders
 ---@field separator_hl_color string? Highlight group for separators
 ---@field file_hl_color string? Highlight group for current file
@@ -40,11 +41,12 @@ local winbar_opts = {
   update_in_insert = true,
 
   exclude_winbar_from = {
+    "nofile",          -- Buffers not associated with a file
     "bin",             -- Binary buffers
     "help",            -- Help windows
-    "nofile",          -- Buffers not associated with a file
     "neo-tree",        -- neo-tree plugin
-    "NvimTree",        -- NvimTree plugin
+    "nvim-tree",       -- NvimTree plugin
+    "NvimTree",       -- NvimTree plugin
     "TelescopePrompt", -- Telescope prompt
     "quickfix",        -- Quickfix window
     "noice",           -- noice.nvim plugin
@@ -63,6 +65,8 @@ local winbar_opts = {
     "CursorMoved", -- When moving the cursor
     "CursorMovedI",
     "CursorHold",
+    "TextChangedI",
+    "TextChanged",
     "LspAttach",
     "LspDetach",
     "LspProgress",

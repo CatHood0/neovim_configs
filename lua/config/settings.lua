@@ -32,25 +32,25 @@ vim.opt.diffopt = {
 }
 
 -- ==================== Folding =====================
-vim.o.foldenable = true
-vim.o.foldlevel = 99999
-vim.o.foldlevelstart = 99999
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.o.foldcolumn = 'auto:9'
-vim.o.foldtext = "v:lua.line_fold()"
-vim.opt.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  foldsep = "│",
-  eob = " ",
-  fold = " ",
-  diff = '╱',
-}
-vim.cmd([[
-    highlight Folded guifg=#7aa2f7 guibg=NONE
-    highlight FoldVirtual guifg=#e0af68 gui=bold
-]])
+-- vim.o.foldenable = false
+-- vim.o.foldlevel = 99999
+-- vim.o.foldlevelstart = 99999
+-- vim.o.foldmethod = "expr"
+-- vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.o.foldcolumn = '0'
+-- vim.o.foldtext = "v:lua.line_fold()"
+-- vim.opt.fillchars = {
+--   foldopen = "",
+--   foldclose = "",
+--   foldsep = " ",
+--   eob = " ",
+--   fold = " ",
+--   diff = '╱',
+-- }
+-- vim.cmd([[
+--     highlight Folded guifg=#7aa2f7 guibg=NONE
+--     highlight FoldVirtual guifg=#e0af68 gui=bold
+-- ]])
 
 -- ==================== Text/Editing ====================
 vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"

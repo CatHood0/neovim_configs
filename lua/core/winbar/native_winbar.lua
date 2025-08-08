@@ -6,6 +6,8 @@ local shared_state = require('core.winbar.state')
 local navic = require("nvim-navic")
 local whitespace = " "
 local truncate_indicator = "…"
+---@type string|number
+local file_part_separator = "[^/]+";
 
 ---@param shouldForceGeneration? boolean
 ---@return string?
@@ -54,13 +56,19 @@ function M.update_winbar(shouldForceGeneration)
       shared_state.state.buffers[buf] = {}
       shared_state.state.buffers[buf].winbar = new_winbar
       shared_state.state.buffers[buf].path = full_path
-      ---@diagnostic disable-next-line: deprecated
-      vim.api.nvim_win_set_option(win, 'winbar', new_winbar)
+      vim.api.nvim_set_option_value("winbar", new_winbar, {
+        win = win,
+      })
     end
   end)
 end
 
--- Format every each element by its own way
+--- Format every each element by its own way
+---@param part string
+---@param ext string?
+---@param is_file boolean
+---@param is_part_break boolean
+---@param mode string?
 function M.format_element(part, ext, is_file, is_last, is_part_break, mode)
   if is_part_break and not is_file then return "" end
   if shared_state.config.on_format_element then
@@ -108,7 +116,7 @@ function M.generate_winbar(mode, buf)
 
   local parts = {}
   local curPartPath = ""
-  for part in file_path:gmatch("[^/]+") do
+  for part in file_path:gmatch(file_part_separator) do
     table.insert(parts, part)
   end
 
@@ -135,7 +143,33 @@ function M.generate_winbar(mode, buf)
     shared_state.state.current_path = shared_state.state.current_path .. (i > 1 and "/" or "") .. part
     local is_file = (i == #parts)
     local ext = part:match(".+%.(.*)$") or ""
-    local element = M.format_element(part, ext, is_file, i == #parts, partBreak, mode)
+    local element = truncate_indicator
+    if shared_state.config.max_string_length and
+        shared_state.config.max_string_length >= 2 and
+        #part > shared_state.config.max_string_length then
+      local effectivePart = string.sub(part, 1, shared_state.config.max_string_length) ..
+          truncate_indicator ..
+          (is_file and "." .. ext or "")
+
+      element = M.format_element(
+        effectivePart,
+        ext,
+        is_file,
+        i == #parts,
+        partBreak,
+        mode
+      )
+    else
+      element = M.format_element(
+        part,
+        ext,
+        is_file,
+        i == #parts,
+        partBreak,
+        mode
+      )
+    end
+
     table.insert(winbar_parts, element)
     if partBreak then
       partBreak = false
@@ -144,7 +178,7 @@ function M.generate_winbar(mode, buf)
       local effectiveLimitSeparator = whitespace .. shared_state.config.depth.separator .. whitespace
       table.insert(winbar_parts,
         string.format("%%#%s#%s", shared_state.config.separator_hl_color,
-          "…" .. (shouldAddWhitespaces and effectiveLimitSeparator or "")
+          truncate_indicator .. (shouldAddWhitespaces and effectiveLimitSeparator or "")
         )
       )
     else

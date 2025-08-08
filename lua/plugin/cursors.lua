@@ -1,5 +1,7 @@
+-- Cursor highlighting
 require("mini.cursorword").setup()
 
+-- Smooth animated cursor
 require('smear_cursor').setup({
   -- Smear cursor color. Defaults to Cursor GUI color if not set.
   -- Set to "none" to match the text color at the target cursor position.

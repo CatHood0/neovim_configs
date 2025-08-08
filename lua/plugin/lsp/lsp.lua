@@ -18,11 +18,9 @@ function M.setup()
   diagnostics.setup_config()
   code_lens.setup()
   debugger.setup()
+  require('plugin.colorizer')
 
   lspconfig.tailwindcss.setup({
-    on_attach = function(client, bufnr)
-      require('plugin.colorizer')
-    end,
     settings = {
       tailwindCSS = {
         experimental = {
@@ -43,7 +41,7 @@ function M.setup()
     },
   })
   lspconfig.jsonls.setup({ capabilities = capabilities })
-  require('plugin.jdtls')
+  -- require('plugin.jdtls')
 
   flutter_setup.setup(capabilities)
   cmake_setup.setup()
@@ -61,7 +59,6 @@ function M.config_lsp_langs(capabilities)
     capabilities = capabilities,
     on_attach = function(client, bufnr)
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-      require('plugin.colorizer')
     end,
     settings = {
       ['rust-analyzer'] = {
@@ -94,9 +91,6 @@ function M.config_lsp_langs(capabilities)
   })
 
   vim.lsp.config("clangd", {
-    on_attach = function(client, bufnr)
-      require('plugin.colorizer')
-    end,
     settings = {
       clangd = {
         InlayHints = {
@@ -141,7 +135,6 @@ function M.config_lsp_langs(capabilities)
     capabilities = capabilities,
     on_attach = function(client, bufnr)
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-      require('plugin.colorizer')
     end,
     settings = {
       Lua = {
@@ -166,7 +159,6 @@ function M.config_lsp_langs(capabilities)
 
   vim.lsp.config('cssls', {
     on_attach = function(client, bufnr)
-      require('plugin.colorizer')
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end,
     capabilities = capabilities,
@@ -184,16 +176,10 @@ function M.config_lsp_langs(capabilities)
 
   vim.lsp.config('html', {
     capabilities = capabilities,
-    on_attach = function(client, bufnr)
-      require('plugin.colorizer')
-    end,
   })
 
   vim.lsp.config('dockerls', {
     capabilities = capabilities,
-    on_attach = function(client, bufnr)
-      require('plugin.colorizer')
-    end,
     settings = {
       docker = {
         languageserver = {

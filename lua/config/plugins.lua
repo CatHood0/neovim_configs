@@ -286,9 +286,11 @@ return {
       })
     end
   },
-  { 'mg979/vim-visual-multi' },
 
   -- Cursor and editing UI
+  { 'mg979/vim-visual-multi', },
+
+  -- Cursor highlighting 
   {
     'echasnovski/mini.cursorword',
     branch = 'stable',

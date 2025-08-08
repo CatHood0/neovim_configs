@@ -1,5 +1,19 @@
 require("colorizer").setup({
-  filetypes = { "*" },      -- Filetype options.  Accepts table like `user_default_options`
+  filetypes = {
+    "css",
+    "cpp",
+    "c",
+    "rs",
+    "ts",
+    "js",
+    "html",
+    "tsx",
+    "jsx",
+    "go",
+    "mod",
+    "txt",
+    "lua",
+  },                        -- Filetype options.  Accepts table like `user_default_options`
   buftypes = {},            -- Buftype options.  Accepts table like `user_default_options`
   -- Boolean | List of usercommands to enable.  See User commands section.
   user_commands = true,     -- Enable all or some usercommands
@@ -44,7 +58,7 @@ require("colorizer").setup({
     virtualtext_mode = "foreground",
     -- update color values even if buffer is not focused
     -- example use: cmp_menu, cmp_docs
-    always_update = false,
+    always_update = true,
     -- hooks to invert control of colorizer
     hooks = {
       -- called before line parsing.  Accepts boolean or function that returns boolean

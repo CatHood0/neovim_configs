@@ -16,7 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup(require('config.plugins'))
 
 require('config.settings')
-require('config.keymapping')
 
 -- Load plugin configurations
 require('plugin.autopair')
@@ -53,6 +52,7 @@ require('core.live_server.live_server')
 require('core.winbar.nbreadcrumbs').setup({
   enabled = true,
   separator = "»",
+  max_string_length = 13,
   show_diagnostic = true,
   depth = {
     separator = "",
@@ -62,6 +62,7 @@ require('core.winbar.nbreadcrumbs').setup({
 })
 
 require('plugin.themes').theme()
+require('config.keymapping')
 
 vim.api.nvim_create_user_command("SetDebug", function() vim.lsp.set_log_level("debug") end, {})
 vim.api.nvim_create_user_command("SetWarnings", function() vim.lsp.set_log_level("warn") end, {})
