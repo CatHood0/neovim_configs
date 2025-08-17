@@ -11,13 +11,13 @@ map('n', 'n', '<nop>', { silent = true })
 map('n', '<c-u>', '<nop>', { silent = true })
 
 -- ==================== Window Resizing ====================
-map('n', '<space>k', function()
+map('n', '<space>j', function()
   require("tmux").resize_bottom()
 end, {
   silent = true,
   desc = "Decrease win size to bottom"
 })
-map('n', '<space>j', function()
+map('n', '<space>k', function()
   require("tmux").resize_top()
 end, {
   silent = true,
@@ -66,6 +66,9 @@ map('n', '<leader>g', '<cmd>TestFile<cr>', { silent = true, nowait = false })
 map('n', '<leader>l', '<cmd>TestLast<cr>', { silent = true })
 map("n", "<leader>ls", '<cmd>LiveServerStart<cr>', { silent = true, desc = 'Server: Toggle Live Server' })
 map("n", "<leader>lc", '<cmd>LiveServerClose<cr>', { silent = true, desc = 'Server: Close Live Server' })
+map("n", "<leader>nt", '<cmd>Neotest run file<cr>', { silent = true, desc = 'Neotest: Run file tests' })
+map("n", "<leader>nn", '<cmd>Neotest stop<cr>', { silent = true, desc = 'Neotest: Stop running of test' })
+map("n", "<leader>ns", '<cmd>Neotest summary<cr>', { silent = true, desc = 'Neotest: Toggle summary' })
 
 -- ==================== Debugging ====================
 -- nvim-dap

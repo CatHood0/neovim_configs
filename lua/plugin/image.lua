@@ -9,9 +9,7 @@ require("image").setup({
     "*.png",
     "*.jpg",
     "*.jpeg",
-    "*.gif",
     "*.webp",
-    "*.svg"
   },
   window_overlap_clear_enabled = false,
   window_overlap_clear_ft_ignore = {

@@ -209,7 +209,8 @@ return {
   {
     "folke/trouble.nvim",
     opts = {}, -- for default options, refer to the configuration section for custom setup.
-    cmd = "Trouble"
+    event = 'VeryLazy',
+    cmd = "Trouble",
   },
 
   -- Snippets
@@ -227,6 +228,28 @@ return {
       "rcarriga/cmp-dap",
       "Weissle/persistent-breakpoints.nvim",
     },
+  },
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      {
+        "sidlatau/neotest-dart",
+        lazy = false,
+      },
+    },
+    config = function()
+      require('neotest').setup({
+        adapters = {
+          require('neotest-dart') {
+            command = 'flutter',
+            use_lsp = true,
+          }
+        }
+      })
+    end
   },
 
   -- 5. VERSION CONTROL (GIT)
@@ -290,7 +313,7 @@ return {
   -- Cursor and editing UI
   { 'mg979/vim-visual-multi', },
 
-  -- Cursor highlighting 
+  -- Cursor highlighting
   {
     'echasnovski/mini.cursorword',
     branch = 'stable',

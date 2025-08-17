@@ -143,11 +143,12 @@ function M.generate_winbar(mode, buf)
     shared_state.state.current_path = shared_state.state.current_path .. (i > 1 and "/" or "") .. part
     local is_file = (i == #parts)
     local ext = part:match(".+%.(.*)$") or ""
+    local filename = is_file and part:match("(.+)%..*$") or part
     local element = truncate_indicator
     if shared_state.config.max_string_length and
         shared_state.config.max_string_length >= 2 and
-        #part > shared_state.config.max_string_length then
-      local effectivePart = string.sub(part, 1, shared_state.config.max_string_length) ..
+        #filename > shared_state.config.max_string_length then
+      local effectivePart = string.sub(filename, 1, shared_state.config.max_string_length) ..
           truncate_indicator ..
           (is_file and "." .. ext or "")
 
