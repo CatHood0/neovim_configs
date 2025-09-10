@@ -11,9 +11,9 @@ local symbols_formatter = lspkind.cmp_format({
   maxwidth = 40,
   max_width = 40,
   ellipsis_char = "...",
-  show_labelDetails = true,
+  show_labelDetails = false,
   symbol_map = {
-    Copilot = "",
+    Copilot = "  ",
   },
 })
 
@@ -22,15 +22,15 @@ cmp.setup({
   completion = { completeopt = "menu,menuone,noselect,noinsert" },
   sorting = {
     comparators = {
-      compare.score,
-      compare.recently_used,
-      compare.kind,
-      compare.offset,
       compare.exact,
+      compare.score,
+      compare.offset,
       compare.locality,
       compare.sort_text,
       compare.length,
       compare.order,
+      compare.kind,
+      compare.recently_used,
     },
   },
   -- the suggestion floating menu UI configs
@@ -45,7 +45,8 @@ cmp.setup({
     }),
     documentation = cmp.config.window.bordered({
       border = 'rounded', -- 'single', 'double', 'rounded', 'none'
-      winhighlight = 'FloatBorder:FloatBorder,Normal:CmpPmenu',
+      -- winhighlight = 'FloatBorder:FloatBorder,Normal:CmpPmenu',
+      winhighlight = 'FloatBorder:Pmenu,Normal:Pmenu,CursorLine:PmenuSel',
       scrollbar = true,
       max_width = 50,
       max_height = 20,
@@ -73,10 +74,10 @@ cmp.setup({
   },
   -- sources for autocompletion
   sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-    { name = "buffer" },
-    { name = "path" },
+    { name = 'nvim_lsp', priority = 1000 },
+    { name = 'luasnip',  priority = 750 },
+    { name = "buffer",   priority = 500 },
+    { name = "path",     priority = 250 },
   },
   formatting = {
     expandable_indicator = true,
@@ -84,6 +85,7 @@ cmp.setup({
     format = function(entry, item)
       local effective_format = symbols_formatter(entry, item)
       local colored_item = tailwind_formatter.formatter(entry, effective_format)
+      colored_item.kind = colored_item.kind .. " "
       return colored_item
     end
   },

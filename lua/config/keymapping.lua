@@ -41,23 +41,23 @@ map('n', '<C-q>', '<cmd>vsplit<cr>', { silent = true, desc = "Open a new vertica
 map('n', '<C-q>v', '<cmd>split<cr>', { silent = true, desc = "Open a new horizontal window" })
 
 -- ==================== Folding keymapping ====================
-vim.keymap.set("n", "zz", function() vim.cmd("normal! za") end, {
-  silent = true,
-  desc = "Toggle fold under cursor"
-})
-vim.keymap.set("n", "<TAB>", function() vim.cmd("normal! za") end, {
-  silent = true,
-  desc = "Toggle fold under cursor"
-})
-
-vim.keymap.set("n", "zo", function() vim.cmd("normal! zM") end, {
-  silent = true,
-  desc = "Close all folds"
-})
-vim.keymap.set("n", "zm", function() vim.cmd("normal! zR") end, {
-  silent = true,
-  desc = "Open all folds"
-})
+-- vim.keymap.set("n", "zz", function() vim.cmd("normal za") end, {
+--   silent = true,
+--   desc = "Toggle fold under cursor"
+-- })
+-- vim.keymap.set("n", "<TAB>", function() vim.cmd("normal za") end, {
+--   silent = true,
+--   desc = "Toggle fold under cursor"
+-- })
+--
+-- vim.keymap.set("n", "zo", function() vim.cmd("normal zM") end, {
+--   silent = true,
+--   desc = "Close all folds"
+-- })
+-- vim.keymap.set("n", "zm", function() vim.cmd("normal zR") end, {
+--   silent = true,
+--   desc = "Open all folds"
+-- })
 
 -- ==================== Testing ====================
 map('n', '<leader>g', '<cmd>TestFile<cr>', { silent = true, nowait = false })

@@ -83,7 +83,7 @@ require("gruvbox").setup({
   invert_tabline = false,
   invert_intend_guides = false,
   inverse = false,   -- invert background for search, diffs, statuslines and errors
-  contrast = "hard", -- can be "hard", "soft" or empty string
+  contrast = "soft", -- can be "hard", "soft" or empty string
   palette_overrides = {},
   overrides = {},
   dim_inactive = false,
@@ -253,19 +253,21 @@ require("catppuccin").setup({
 local M = {}
 
 function M.theme()
+  vim.opt.background = "dark" -- set this to dark or light
   --  Must be after setup since the options wont be applied
   vim.cmd([[
-    colorscheme catppuccin
+    colorscheme gruvbox
   ]])
+  -- colorscheme catppuccin
   -- colorscheme catppuccin-latte
   -- colorscheme catppuccin-frappe
   -- colorscheme catppuccin-macchiato
   -- colorscheme catppuccin-mocha
+  -- colorscheme oxocarbon
   -- colorscheme rose-pine-moon
   -- colorscheme rose-pine-main
   -- colorscheme rose-pine-moon
   -- colorscheme rose-pine-dawn
-  -- colorscheme gruvbox
   -- colorscheme srcery --  most similar to gruvbox
   -- colorscheme onedark
   -- colorscheme kanagawa-wave

@@ -67,8 +67,7 @@ require("ibl").setup {
   -- avoid adding indent option, since adding this
   -- removes the dynamic colors of every indent line scope
   whitespace = {
-    -- highlight = backgroundHighlight,
-    remove_blankline_trail = false,
+    remove_blankline_trail = true,
   },
   scope = { enabled = true, highlight = highlight },
 }

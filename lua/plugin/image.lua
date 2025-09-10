@@ -41,7 +41,7 @@ require("image").setup({
     html = {
       only_render_image_at_cursor = true,
       clear_in_insert_mode = true,
-      enabled = true,
+      enabled = false,
     },
     css = {
       enabled = true,

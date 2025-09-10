@@ -1,13 +1,7 @@
 return {
   -- 1. BASIC CONFIGURATION AND ESSENTIALS
   { 'tpope/vim-sensible' },
-  {
-    'akinsho/bufferline.nvim',
-    dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function()
-      -- require('bufferline').setup()
-    end
-  },
+  { 'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
   {
     'stevearc/dressing.nvim',
     config = function()
@@ -16,8 +10,38 @@ return {
   },
 
   -- 2. USER INTERFACE AND THEMES
-  -- This fix an issue with the foldColumn
+  { "nyoom-engineering/oxocarbon.nvim" },
+  {
+    'mcauley-penney/visual-whitespace.nvim',
+    config = true,
+    event = "ModeChanged *:[vV\22]", -- optionally, lazy load on entering visual mode
+    opts = {
+      enabled = true,
+      highlight = { link = "Visual", default = true },
+      match_types = {
+        space = true,
+        tab = true,
+        nbsp = true,
+        lead = false,
+        trail = false,
+      },
+      list_chars = {
+        space = "·",
+        tab = "↦",
+        nbsp = "␣",
+        lead = "‹",
+        trail = "›",
+      },
+      fileformat_chars = {
+        unix = "↲",
+        mac = "←",
+        dos = "↙",
+      },
+      ignore = { filetypes = {}, buftypes = {} },
+    }
+  },
   { 'mbbill/undotree' },
+  -- This fix an issue with the foldColumn
   { 'luukvbaal/statuscol.nvim' },
   {
     "folke/todo-comments.nvim",
