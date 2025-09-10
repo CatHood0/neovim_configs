@@ -145,8 +145,8 @@ sudo apt install libgtk-3-dev
     If you're facing issues with linux not recognizing your phone
     check these sites:
 
-    1. https://askubuntu.com/questions/863587/adb-device-list-doesnt-show-phone
-    2. https://stackoverflow.com/questions/77925533/android-adb-no-permissions-for-device
+    1. [adb-device-list-doesnt-show-phone](https://askubuntu.com/questions/863587/adb-device-list-doesnt-show-phone)
+    2. [android-adb-no-permissions-for-device](https://stackoverflow.com/questions/77925533/android-adb-no-permissions-for-device)
     ```dart
         // Where should be installed flutter:
         '~/development/flutter/bin/flutter'
