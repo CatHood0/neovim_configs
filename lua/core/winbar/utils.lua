@@ -110,7 +110,7 @@ function M.define_hl_groups()
     vim.api.nvim_set_hl(0, "NavicIconsConstructor", { fg = "#DCDCAA" })
     vim.api.nvim_set_hl(0, "NavicIconsEnum", { fg = "#4EC9B0" })
     vim.api.nvim_set_hl(0, "NavicIconsInterface", { fg = "#4EC9B0" })
-    vim.api.nvim_set_hl(0, "NavicIconsFunction", { fg = "#DCDCAA" })
+    vim.api.nvim_set_hl(0, "NavicIconsFunction", { fg = "#C586C0" })
     vim.api.nvim_set_hl(0, "NavicIconsVariable", { fg = "#9CDCFE" })
     vim.api.nvim_set_hl(0, "NavicIconsConstant", { fg = "#4FC1FF" })
     vim.api.nvim_set_hl(0, "NavicIconsString", { fg = "#CE9178" })
@@ -126,8 +126,12 @@ function M.define_hl_groups()
     vim.api.nvim_set_hl(0, "NavicIconsOperator", { fg = "#D4D4D4" })
     vim.api.nvim_set_hl(0, "NavicIconsTypeParameter", { fg = "#4EC9B0" })
 
-    vim.api.nvim_set_hl(0, "NavicText", { fg = "#cad3f5" })
-    vim.api.nvim_set_hl(0, "NavicSeparator", { fg = "#939ab8" })
+    -- for paletnight
+    -- vim.api.nvim_set_hl(0, "NavicText", { fg = "#cad3f5" })
+    -- vim.api.nvim_set_hl(0, "NavicSeparator", { fg = "#939ab8" })
+    -- gruvbox
+    vim.api.nvim_set_hl(0, "NavicText", { fg = "#ebdbb2" })
+    vim.api.nvim_set_hl(0, "NavicSeparator", { fg = "#928374" })
   end, 3000)
 
   shared_state.state.hl_groups_defined = true

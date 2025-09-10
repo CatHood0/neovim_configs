@@ -172,23 +172,24 @@ function M.generate_winbar(mode, buf)
     end
 
     table.insert(winbar_parts, element)
+    local effectiveLimitSeparator = whitespace .. shared_state.config.separator .. whitespace
     if partBreak then
       partBreak = false
+      local effectiveDepthLimitSeparator = whitespace .. shared_state.config.depth.separator .. whitespace
       local shouldAddWhitespaces = shared_state.config.depth.separator ~= nil or
           shared_state.config.depth.separator == ""
-      local effectiveLimitSeparator = whitespace .. shared_state.config.depth.separator .. whitespace
       table.insert(winbar_parts,
         string.format("%%#%s#%s", shared_state.config.separator_hl_color,
-          truncate_indicator .. (shouldAddWhitespaces and effectiveLimitSeparator or "")
+          truncate_indicator .. (shouldAddWhitespaces and effectiveDepthLimitSeparator or "")
         )
       )
     else
       if i < #parts then
         if mode ~= nil and type(mode) == "string" then
-          table.insert(winbar_parts, string.format("%%#%s#%s", mode, " " .. shared_state.config.separator .. " "))
+          table.insert(winbar_parts, string.format("%%#%s#%s", mode, effectiveLimitSeparator))
         else
           table.insert(winbar_parts,
-            string.format("%%#%s#%s", shared_state.config.separator_hl_color, " " .. shared_state.config.separator .. " "))
+            string.format("%%#%s#%s", shared_state.config.separator_hl_color, effectiveLimitSeparator))
         end
       end
     end
@@ -199,13 +200,14 @@ function M.generate_winbar(mode, buf)
     if locationStr then
       if #winbar_parts > 0 then
         table.insert(winbar_parts,
-          string.format("%%#%s#%s", shared_state.config.separator_hl_color, " " .. shared_state.config.separator .. " "))
+          string.format("%%#%s#%s", shared_state.config.separator_hl_color,
+            whitespace .. shared_state.config.separator .. whitespace))
       end
       if string.len(locationStr) >= 1 then
         table.insert(winbar_parts, locationStr)
       else
         table.insert(winbar_parts,
-          string.format("%%#%s#%s", shared_state.config.separator_hl_color, "" .. truncate_indicator .. " "))
+          string.format("%%#%s#%s", shared_state.config.separator_hl_color, "" .. truncate_indicator .. whitespace))
       end
     end
   end

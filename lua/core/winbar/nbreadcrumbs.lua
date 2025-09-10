@@ -29,7 +29,7 @@ function M.setup(user_config)
     navic.setup({
       icons = require('plugin.lsp.utils.lsp_symbols').symbols,
       highlight = true,
-      separator = " " .. shared_state.config.separator .. " ",
+      separator = " " .. shared_state.config.separator,
       depth_limit = 0,
       depth_limit_indicator = "..",
       safe_output = true,
