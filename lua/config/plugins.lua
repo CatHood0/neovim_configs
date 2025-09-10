@@ -232,7 +232,7 @@ return {
   { 'Civitasv/cmake-tools.nvim',  opts = {} },
   {
     "folke/trouble.nvim",
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    opts = require('core.trouble.trouble_opts'),
     event = 'VeryLazy',
     cmd = "Trouble",
   },
