@@ -202,6 +202,64 @@ map('n', '<space>eg', '<cmd>FlutterPubGet<cr>', { silent = true, nowait = true }
 map('n', '<space>co', '<cmd>FlutterLog<cr>', { silent = true, nowait = true })
 map('n', '<space>cl', '<cmd>FlutterClearLog<cr>', { silent = true, nowait = true })
 
+-- ==================== C++ or C ====================
+map('n', '<leader>cd', '<cmd>CMakeClean<cr>',
+  {
+    silent = true,
+    nowait = true,
+    desc = "Run C++ project in Debug Mode",
+  }
+)
+map('n', '<leader>cs', '<cmd>CMakeSettings<cr>',
+  {
+    silent = true,
+    nowait = true,
+    desc = "Opens the current settings of the project",
+  }
+)
+map('n', '<leader>ct', '<cmd>CMakeRunTest<cr>',
+  {
+    silent = true,
+    nowait = true,
+    desc = "Run Tests from C++ project",
+  }
+)
+map('n', '<leader>cl', '<cmd>CMakeClean<cr>',
+  {
+    silent = true,
+    nowait = true,
+    desc = "Install all the dependencies in CMakeLists.txt",
+  }
+)
+map('n', '<leader>ci', '<cmd>CMakeInstall<cr>',
+  {
+    silent = true,
+    nowait = true,
+    desc = "Install all the dependencies in CMakeLists.txt",
+  }
+)
+map('n', '<leader>cg', '<cmd>CMakeBuild<cr>',
+  {
+    silent = true,
+    nowait = true,
+    desc = "Generate compile_commands.json",
+  }
+)
+map('n', '<leader>cb', '<cmd>CMakeBuild<cr>',
+  {
+    silent = true,
+    nowait = true,
+    desc = "Build C++ project using CMAKE",
+  }
+)
+map('n', '<leader>cr', '<cmd>CMakeRun<cr>',
+  {
+    silent = true,
+    nowait = true,
+    desc = "Run C++ project using CMAKE",
+  }
+)
+
 
 -- ==================== Insert Mode Mappings ====================
 map('i', '<C-n>', '<nop>')

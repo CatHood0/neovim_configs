@@ -90,6 +90,30 @@ function M.config_lsp_langs(capabilities)
     },
   })
 
+  require('lspconfig').yamlls.setup {
+    settings = {
+      yaml = {
+        schemaStore = {
+          -- You must disable built-in schemaStore support if you want to use
+          -- this plugin and its advanced options like `ignore`.
+          enable = false,
+          -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+          url = "",
+        },
+        schemas = require('schemastore').yaml.schemas(),
+      },
+    },
+  }
+
+  require('lspconfig').jsonls.setup {
+    settings = {
+      json = {
+        schemas = require('schemastore').json.schemas(),
+        validate = { enable = true },
+      },
+    },
+  }
+
   vim.lsp.config("clangd", {
     settings = {
       clangd = {
@@ -105,7 +129,6 @@ function M.config_lsp_langs(capabilities)
   })
 
   vim.lsp.config('gopls', {
-    capabilities = capabilities,
     on_attach = function(client, bufnr)
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end,
@@ -114,23 +137,10 @@ function M.config_lsp_langs(capabilities)
         analyses = {
           unusedparams = true,
         },
-        staticcheck = true,
-        gofumpt = true,
-        hints = {
-          rangeVariableTypes = true,
-          parameterNames = true,
-          constantValues = true,
-          assignVariableTypes = true,
-          compositeLiteralFields = true,
-          compositeLiteralTypes = true,
-          functionTypeParameters = true,
-        },
-        codelens = {
-          enable = true,
-        },
       },
     },
   })
+
   vim.lsp.config('lua_ls', {
     capabilities = capabilities,
     on_attach = function(client, bufnr)

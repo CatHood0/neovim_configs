@@ -51,11 +51,18 @@ sudo apt install libgtk-3-dev
 * Docker:
     ```dart
         npm install -g dockerfile-language-server-nodejs
+        npm install @microsoft/compose-language-service
+        go install github.com/docker/docker-language-server/cmd/docker-language-server@latest
+        // for yaml
+        npm install -g yaml-language-server
     ```
 * Json, HTML, CSS:
     ```dart
         // run this
         npm i -g vscode-langservers-extracted
+        // Language server for autocompletion and go-to-definition functionality for CSS modules.
+        // and CSS variables autocompletion and go-to-definition
+        sudo npm install -g cssmodules-language-server css-variables-language-server
     ```
 * Java:
     You need to that we use `jdtls` [docs](https://github.com/mfussenegger/nvim-jdtls?tab=readme-ov-file)
@@ -72,7 +79,10 @@ sudo apt install libgtk-3-dev
       export JAVA_HOME="/usr/lib/jvm/jdk-21"
       export PATH="$PATH":"$JAVA_HOME/bin"
     ```
-
+* Nginx
+    ```dart
+       pip install -U nginx-language-server
+    ```
 * Node and typescript
     ```dart
         // First at all install Nodejs and Npm
@@ -83,6 +93,9 @@ sudo apt install libgtk-3-dev
         sudo npm i -g typescript typescript-language-server
         sudo npm i -g tailwindcss-language-server
         sudo npm install -g prettier eslint
+        // for astro
+        // npm install -g @astrojs/language-server
+        // vim.lsp.enable('astro')
 
         // At this point, just at these vars into your .bashrc or .zshrc
         export PATH="$PATH":"$HOME/.nvm/versions/node/v22.14.0/bin/typescript-language-server"

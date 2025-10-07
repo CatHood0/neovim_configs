@@ -11,6 +11,25 @@ return {
 
   -- 2. USER INTERFACE AND THEMES
   { "nyoom-engineering/oxocarbon.nvim" },
+  { "tiagovla/tokyodark.nvim" },
+  {
+    "Isrothy/neominimap.nvim",
+    version = "v3.x.x",
+    lazy = false,
+    init = function()
+      vim.opt.wrap = false
+      vim.opt.sidescrolloff = 36 -- Set a large value
+      vim.g.neominimap = {
+        auto_enable = true,
+        click = {
+          -- Enable mouse click on the minimap
+          enabled = true, ---@type boolean
+          -- Automatically switch focus to the minimap when clicked
+          auto_switch_focus = true, ---@type boolean
+        },
+      }
+    end,
+  },
   {
     'mcauley-penney/visual-whitespace.nvim',
     config = true,
@@ -211,6 +230,8 @@ return {
     opts = {}
   },
   { 'neovim/nvim-lspconfig' },
+  -- we use schemas for jsonls and yamlls
+  { 'b0o/schemastore.nvim' },
   { 'onsails/lspkind.nvim' },
   {
     "zeioth/garbage-day.nvim",

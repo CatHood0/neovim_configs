@@ -256,10 +256,11 @@ function M.theme()
   vim.opt.background = "dark" -- set this to dark or light
   --  Must be after setup since the options wont be applied
   vim.cmd([[
-    colorscheme gruvbox
+    colorscheme github_dark_default
   ]])
-  -- colorscheme catppuccin
+  -- colorscheme gruvbox
   -- colorscheme catppuccin-latte
+  -- colorscheme catppuccin
   -- colorscheme catppuccin-frappe
   -- colorscheme catppuccin-macchiato
   -- colorscheme catppuccin-mocha
@@ -269,14 +270,15 @@ function M.theme()
   -- colorscheme rose-pine-moon
   -- colorscheme rose-pine-dawn
   -- colorscheme srcery --  most similar to gruvbox
+  -- colorscheme retrobox
   -- colorscheme onedark
+  -- colorscheme tokyodark 
   -- colorscheme kanagawa-wave
   -- colorscheme kanagawa-dragon
   -- colorscheme kanagawa-lotus
   -- colorscheme kanagawa
   -- colorscheme palenight
   -- colorscheme github_dark
-  -- colorscheme github_dark_default
   -- colorscheme github_dark_dimmed
   -- colorscheme github_dark_high_contrast
   -- colorscheme github_dark_colorblind
