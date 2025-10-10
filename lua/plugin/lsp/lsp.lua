@@ -90,7 +90,7 @@ function M.config_lsp_langs(capabilities)
     },
   })
 
-  require('lspconfig').yamlls.setup {
+  vim.lsp.config("yamlls", {
     settings = {
       yaml = {
         schemaStore = {
@@ -103,16 +103,16 @@ function M.config_lsp_langs(capabilities)
         schemas = require('schemastore').yaml.schemas(),
       },
     },
-  }
+  })
 
-  require('lspconfig').jsonls.setup {
+  vim.lsp.config("jsonls", {
     settings = {
       json = {
         schemas = require('schemastore').json.schemas(),
         validate = { enable = true },
       },
     },
-  }
+  })
 
   vim.lsp.config("clangd", {
     settings = {
@@ -129,14 +129,26 @@ function M.config_lsp_langs(capabilities)
   })
 
   vim.lsp.config('gopls', {
+    capabilities = capabilities,
     on_attach = function(client, bufnr)
-      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      -- Enable completion triggered by <c-x><c-o>
+      vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+      -- Your key mappings here
+      local opts = { noremap = true, silent = true, buffer = bufnr }
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     end,
     settings = {
       gopls = {
         analyses = {
           unusedparams = true,
         },
+        staticcheck = true,        -- Enables Staticcheck analyzers
+        completeUnimported = true, -- Suggests unimported packages
+        usePlaceholders = true,
+        -- Hint: You can add more build flags here if needed, for example:
+        -- buildFlags = {"-tags=yourotherengine"}
       },
     },
   })
