@@ -63,6 +63,7 @@ require('core.winbar.nbreadcrumbs').setup({
 
 require('plugin.themes').theme()
 require('config.keymapping')
+vim.lsp.set_log_level("debug")
 
 vim.api.nvim_create_user_command("SetDebug", function() vim.lsp.set_log_level("debug") end, {})
 vim.api.nvim_create_user_command("SetWarnings", function() vim.lsp.set_log_level("warn") end, {})

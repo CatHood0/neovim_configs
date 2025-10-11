@@ -13,12 +13,12 @@ local default_capabilities = require("plugin.lsp.configs.capabilities")
 --- setup all the LSP used by these configurations
 function M.setup()
   local capabilities = default_capabilities.get_capabilities()
-  vim.lsp.enable(servers.languages)
   M.config_lsp_langs(capabilities)
   diagnostics.setup_config()
   code_lens.setup()
   debugger.setup()
   require('plugin.colorizer')
+  vim.lsp.enable(servers.languages)
 
   lspconfig.tailwindcss.setup({
     settings = {
@@ -40,7 +40,6 @@ function M.setup()
       "svelte", "vue", "astro", "php", "blade", "twig", "markdown", "mdx"
     },
   })
-  lspconfig.jsonls.setup({ capabilities = capabilities })
   -- require('plugin.jdtls')
 
   flutter_setup.setup(capabilities)
@@ -129,26 +128,42 @@ function M.config_lsp_langs(capabilities)
   })
 
   vim.lsp.config('gopls', {
-    capabilities = capabilities,
-    on_attach = function(client, bufnr)
-      -- Enable completion triggered by <c-x><c-o>
-      vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-      -- Your key mappings here
-      local opts = { noremap = true, silent = true, buffer = bufnr }
-      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    end,
     settings = {
       gopls = {
+        -- Análisis estáticos potentes
         analyses = {
           unusedparams = true,
+          unreachable = true,
+          unusedvariable = true,
+          unusedwrite = true,
+          nilness = true,
+          shadow = true,
+          -- Habilita más analizadores según necesites
         },
-        staticcheck = true,        -- Enables Staticcheck analyzers
-        completeUnimported = true, -- Suggests unimported packages
-        usePlaceholders = true,
-        -- Hint: You can add more build flags here if needed, for example:
-        -- buildFlags = {"-tags=yourotherengine"}
+        staticcheck = true,        -- Activa el conjunto de analizadores de Staticcheck
+        completeUnimported = true, -- Sugiere paquetes no importados
+        usePlaceholders = true,    -- Usa marcadores de posición en autocompletado
+        gofumpt = true,            -- Formateador más estricto
+        codelenses = {
+          generate = true,         -- Muestra lentes de código para `go generate`
+          gc_details = true,
+          regenerate_cgo = true,
+          run_govulncheck = true,
+          test = true,
+          tidy = true,
+          upgrade_dependency = true,
+          vendor = true,
+        },
+        -- Configuración de hints en el código
+        hints = {
+          assignVariableTypes = true,
+          compositeLiteralFields = true,
+          compositeLiteralTypes = true,
+          constantValues = true,
+          functionTypeParameters = true,
+          parameterNames = true,
+          rangeVariableTypes = true,
+        },
       },
     },
   })

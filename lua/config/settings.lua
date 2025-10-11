@@ -10,7 +10,6 @@ vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
-vim.opt.showcmd = true
 -- allow to show bufferline
 vim.opt.showtabline = 2
 vim.opt.colorcolumn = "120"
@@ -80,6 +79,13 @@ vim.opt.writebackup = false
 vim.opt.hidden = true
 
 -- ==================== Window Management ====================
+vim.o.list = true
+vim.o.listchars = "tab:» ,trail:·,nbsp:␣"
+vim.o.lcs = vim.o.listchars
+vim.wo.listchars = vim.o.listchars
+vim.wo.lcs = vim.wo.listchars
+vim.go.listchars = vim.o.listchars
+vim.go.lcs = vim.go.listchars
 vim.opt.splitbelow = true -- force all horizontal splits to go below current window
 vim.opt.splitright = true -- force all vertical splits to go to the right of current window
 vim.opt.sessionoptions:append({

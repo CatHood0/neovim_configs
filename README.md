@@ -111,7 +111,21 @@ sudo apt install libgtk-3-dev
         // so, after install gopls, go to your $HOME path
         // and execute this (get all the important stuff
         // of go that you need)
+
         go install golang.org/x/tools/gopls@latest
+        // these servers allow the warnings, suggestion and imports
+        go install github.com/nametake/golangci-lint-langserver@latest
+        go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+        go install github.com/josharian/impl@latest
+        // go to ~/go/bin
+        // and copy all installed (golangci and gopls)
+        // to usr/bin
+        //
+        // sudo cp gopls /usr/bin
+        // sudo cp golangci-lint /usr/bin
+        // sudo cp golangci-lint-langserver /usr/bin
+        //
+        //
         // and the docs
         go get -u github.com/zmb3/gogetdoc
         //

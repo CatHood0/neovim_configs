@@ -12,6 +12,7 @@ return {
     'css_variables',
     'cssmodules_ls',
     'gopls',
+    'golangci_lint_ls',
     'dockerls',
     'nginx_language_server',
     'docker_language_server',
