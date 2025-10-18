@@ -79,7 +79,7 @@ vim.opt.writebackup = false
 vim.opt.hidden = true
 
 -- ==================== Window Management ====================
-vim.o.list = true
+vim.o.list = false
 vim.o.listchars = "tab:» ,trail:·,nbsp:␣"
 vim.o.lcs = vim.o.listchars
 vim.wo.listchars = vim.o.listchars

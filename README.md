@@ -10,6 +10,10 @@ export PATH="$PATH":"/opt/nvim/bin"
 sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build fzf ripgrep fd-find luarocks
 ```
 
+## Instructions to configure AI
+
+[gemini-cli](https://github.com/google-gemini/gemini-cli/blob/main/docs/get-started/authentication.md#persisting-environment-variables)
+
 For running Desktop enviroment
 
 ```dart
@@ -51,7 +55,7 @@ sudo apt install libgtk-3-dev
 * Docker:
     ```dart
         npm install -g dockerfile-language-server-nodejs
-        npm install @microsoft/compose-language-service
+        npm install -g @microsoft/compose-language-service
         go install github.com/docker/docker-language-server/cmd/docker-language-server@latest
         // for yaml
         npm install -g yaml-language-server

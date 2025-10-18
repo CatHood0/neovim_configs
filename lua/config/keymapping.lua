@@ -103,6 +103,9 @@ map('n', '<C-s>', '<cmd>w!<cr>', { silent = true, desc = "Save all workspace fil
 map('n', '<C-s>a', '<cmd>wall<cr>', { silent = true, desc = "Save all and quit of neovim" })
 map('n', '<space>qq', '<cmd>lua vim.lsp.buf.format({ timeout_ms = 2000 })<cr><cmd>SessionSave<cr><cmd>wqall<cr>',
   { silent = true, desc = "Format file, Save and quit storing the session" })
+map('n', '<leader>gt', function()
+  require("codecompanion").toggle({})
+end, { silent = true, desc = 'Toggles the AI chat buffer' })
 
 -- ==================== Buffer Management ====================
 -- Bufferline
@@ -111,6 +114,7 @@ map('n', '<space>n', '<cmd>BufferLineCyclePrev<cr>', { silent = true, desc = "Fo
 map('n', '<Space>d', function()
   vim.api.nvim_command('bp|sp|bn|bd!')
 end, { silent = true })
+
 map('n', '<space>vc', '<cmd>BufferLineTogglePin<cr>', { silent = true, desc = "Deletes current buffer" })
 map('n', '<space>vm', '<cmd>BufferLineMoveNext<cr>', { silent = true, desc = "Moves the buffer to the next index" })
 map('n', '<space>vn', '<cmd>BufferLineMovePrev<cr>', { silent = true, desc = "Moves the buffer to the previous index" })

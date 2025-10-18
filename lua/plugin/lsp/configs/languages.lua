@@ -13,6 +13,7 @@ return {
     'cssmodules_ls',
     'gopls',
     'golangci_lint_ls',
+    "jsonls",
     'dockerls',
     'nginx_language_server',
     'docker_language_server',

@@ -7,7 +7,7 @@ local tailwind_formatter = require('tailwindcss-colorizer-cmp')
 require("luasnip.loaders.from_vscode").lazy_load()
 
 local symbols_formatter = lspkind.cmp_format({
-  mode = "symbol_text",
+  mode = "symbol",
   maxwidth = 40,
   max_width = 40,
   ellipsis_char = "...",
@@ -26,8 +26,8 @@ cmp.setup({
       compare.score,
       compare.offset,
       compare.locality,
-      compare.sort_text,
       compare.length,
+      compare.sort_text,
       compare.order,
       compare.kind,
       compare.recently_used,
@@ -74,6 +74,9 @@ cmp.setup({
   },
   -- sources for autocompletion
   sources = {
+    per_filetype = {
+      codecompanion = { "codecompanion" },
+    },
     { name = 'nvim_lsp', priority = 1000 },
     { name = 'luasnip',  priority = 750 },
     { name = "buffer",   priority = 500 },
@@ -81,7 +84,7 @@ cmp.setup({
   },
   formatting = {
     expandable_indicator = true,
-    fields = { 'abbr', 'kind', 'menu' },
+    fields = { 'kind', 'abbr', 'menu' },
     format = function(entry, item)
       local effective_format = symbols_formatter(entry, item)
       local colored_item = tailwind_formatter.formatter(entry, effective_format)

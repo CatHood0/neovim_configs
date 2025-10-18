@@ -18,34 +18,15 @@ function M.setup()
   code_lens.setup()
   debugger.setup()
   require('plugin.colorizer')
-  vim.lsp.enable(servers.languages)
 
-  lspconfig.tailwindcss.setup({
-    settings = {
-      tailwindCSS = {
-        experimental = {
-          classRegex = {
-            "tw`([^`]*)",           -- Ej: tw`text-red-500`
-            "className=\"([^\"]*)", -- HTML/JSX
-            "class:\\s*\"([^\"]*)", -- Clases dinámicas
-            "classList=\\s*\"([^\"]*)",
-            "cn\\(([^)]*)\\)",      -- Soporte para librerías como `classnames`
-          },
-        },
-        emmetCompletions = true, -- Habilita autocompletado tipo Emmet
-      },
-    },
-    filetypes = {
-      "html", "javascript", "javascriptreact", "typescript", "typescriptreact",
-      "svelte", "vue", "astro", "php", "blade", "twig", "markdown", "mdx"
-    },
-  })
+
   -- require('plugin.jdtls')
 
   flutter_setup.setup(capabilities)
   cmake_setup.setup()
 
   utils.create_autocmds()
+  vim.lsp.enable(servers.languages)
 end
 
 function M.config_lsp_langs(capabilities)
@@ -89,9 +70,38 @@ function M.config_lsp_langs(capabilities)
     },
   })
 
-  vim.lsp.config("yamlls", {
+  vim.lsp.config("tailwindcss", {
+    capabilities = capabilities,
     settings = {
-      yaml = {
+      tailwindCSS = {
+        experimental = {
+          classRegex = {
+            "tw`([^`]*)",           -- Ej: tw`text-red-500`
+            "className=\"([^\"]*)", -- HTML/JSX
+            "class:\\s*\"([^\"]*)", -- Clases dinámicas
+            "classList=\\s*\"([^\"]*)",
+            "cn\\(([^)]*)\\)",      -- Soporte para librerías como `classnames`
+          },
+        },
+        emmetCompletions = true, -- Habilita autocompletado tipo Emmet
+      },
+    },
+    filetypes = {
+      "html", "javascript", "javascriptreact", "typescript", "typescriptreact",
+      "svelte", "vue", "astro", "php", "blade", "twig", "markdown", "mdx"
+    },
+  })
+
+  vim.lsp.config("yamlls", {
+    capabilities = capabilities,
+    on_attach = function(client, bufnr)
+      client.server_capabilities.documentFormattingProvider = true
+    end,
+    settings = {
+      yamlls = {
+        format = {
+          enable = true, -- Enable formatting
+        },
         schemaStore = {
           -- You must disable built-in schemaStore support if you want to use
           -- this plugin and its advanced options like `ignore`.
@@ -105,8 +115,9 @@ function M.config_lsp_langs(capabilities)
   })
 
   vim.lsp.config("jsonls", {
+    capabilities = capabilities,
     settings = {
-      json = {
+      jsonls = {
         schemas = require('schemastore').json.schemas(),
         validate = { enable = true },
       },
@@ -142,10 +153,10 @@ function M.config_lsp_langs(capabilities)
         },
         staticcheck = true,        -- Activa el conjunto de analizadores de Staticcheck
         completeUnimported = true, -- Sugiere paquetes no importados
-        usePlaceholders = true,    -- Usa marcadores de posición en autocompletado
-        gofumpt = true,            -- Formateador más estricto
+        usePlaceholders = false,
+        gofumpt = false,           -- Formateador más estricto
         codelenses = {
-          generate = true,         -- Muestra lentes de código para `go generate`
+          generate = true,
           gc_details = true,
           regenerate_cgo = true,
           run_govulncheck = true,
@@ -154,7 +165,6 @@ function M.config_lsp_langs(capabilities)
           upgrade_dependency = true,
           vendor = true,
         },
-        -- Configuración de hints en el código
         hints = {
           assignVariableTypes = true,
           compositeLiteralFields = true,

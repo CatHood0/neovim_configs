@@ -37,10 +37,10 @@ function M.get_capabilities()
       }
     }
   }
-
+  local prot = vim.lsp.protocol.make_client_capabilities()
   return vim.tbl_deep_extend('force',
     cmp_lsp.default_capabilities(),
-    vim.lsp.protocol.make_client_capabilities(),
+    prot,
     custom_capabilities
   )
 end

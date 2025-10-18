@@ -1,7 +1,10 @@
 return {
   -- 1. BASIC CONFIGURATION AND ESSENTIALS
   { 'tpope/vim-sensible' },
-  { 'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
+  {
+    'akinsho/bufferline.nvim',
+    dependencies = 'nvim-tree/nvim-web-devicons'
+  },
   {
     'stevearc/dressing.nvim',
     config = function()
@@ -20,7 +23,7 @@ return {
       vim.opt.wrap = false
       vim.opt.sidescrolloff = 36 -- Set a large value
       vim.g.neominimap = {
-        auto_enable = true,
+        auto_enable = false,
         click = {
           -- Enable mouse click on the minimap
           enabled = true, ---@type boolean
@@ -163,6 +166,73 @@ return {
     }
   },
 
+  {
+    "OXY2DEV/markview.nvim",
+    lazy = false,
+    opts = {
+      preview = {
+        filetypes = { "markdown", "codecompanion" },
+        ignore_buftypes = {},
+      },
+    },
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown", "codecompanion" }
+  },
+  -- requires run: TSInstall markdown markdown_inline
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("codecompanion").setup({
+        adapters = {
+          acp = {
+            gemini_cli = function()
+              return require("codecompanion.adapters").extend("gemini_cli", {
+                defaults = {
+                  auth_method = "gemini-api-key",
+                },
+                env = {
+                  GEMINI_API_KEY = "GEMINI_API_KEY",
+                },
+              })
+            end,
+            copilot = function()
+              return require("codecompanion.adapters").extend("gemini_cli", {
+                defaults = {
+                  auth_method = "gemini-api-key",
+                },
+                env = {
+                  GEMINI_API_KEY = "GEMINI_API_KEY",
+                },
+              })
+            end,
+          },
+        },
+      })
+    end,
+    opts = {
+      language = "Spanish",
+      strategies = {
+        chat = {
+          adapter = "gemini_cli",
+          model = "gemini-2.5-pro"
+        },
+      },
+      inline = {
+        adapter = "gemini_cli",
+      },
+      opts = {
+        log_level = "DEBUG", -- or "TRACE"
+      },
+    },
+  },
+
+
   -- Window management
   {
     'aserowy/tmux.nvim',
@@ -274,12 +344,20 @@ return {
       "Weissle/persistent-breakpoints.nvim",
     },
   },
+  -- language injection
+  { "TheNoeTrevino/roids.nvim", },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-context"
+    },
+    lazy = false,
+  },
   {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
       {
         "sidlatau/neotest-dart",
         lazy = false,
