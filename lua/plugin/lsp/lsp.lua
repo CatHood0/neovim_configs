@@ -17,16 +17,12 @@ function M.setup()
   diagnostics.setup_config()
   code_lens.setup()
   debugger.setup()
-  require('plugin.colorizer')
-
-
-  -- require('plugin.jdtls')
-
   flutter_setup.setup(capabilities)
   cmake_setup.setup()
 
   utils.create_autocmds()
   vim.lsp.enable(servers.languages)
+  require('plugin.colorizer')
 end
 
 function M.config_lsp_langs(capabilities)

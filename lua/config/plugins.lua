@@ -131,6 +131,15 @@ return {
       -- require('neo-tree').setup()
     end
   },
+  {
+    'ms-jpq/chadtree',
+    branch = 'chad',
+    build = 'python3 -m chadtree deps',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('plugin.chadtree')
+    end
+  },
   { 'ryanoasis/vim-devicons' },
 
   -- Search tools
@@ -165,7 +174,15 @@ return {
       'junegunn/fzf'
     }
   },
-
+  {
+    "echasnovski/mini.diff",
+    config = function()
+      local diff = require("mini.diff")
+      diff.setup({
+        source = diff.gen_source.none(),
+      })
+    end,
+  },
   {
     "OXY2DEV/markview.nvim",
     lazy = false,
@@ -176,11 +193,6 @@ return {
       },
     },
   },
-  {
-    "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown", "codecompanion" }
-  },
-  -- requires run: TSInstall markdown markdown_inline
   {
     "olimorris/codecompanion.nvim",
     dependencies = {
@@ -255,7 +267,7 @@ return {
   {
     "lewis6991/hover.nvim",
     config = function()
-      require("hover").setup {
+      require("hover").setup({
         init = function()
           -- Require pr
           -- require('hover.providers.gh')
@@ -268,9 +280,12 @@ return {
         preview_opts = require('plugin.lsp.lsp').hover_opts,
         preview_window = true,
         title = false,
-        mouse_providers = { 'LSP' },
+        mouse_providers = {
+          'hover.providers.lsp',
+          'hover.providers.diagnostic'
+        },
         mouse_delay = 1000,
-      }
+      })
     end
   },
 

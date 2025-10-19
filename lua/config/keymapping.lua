@@ -151,6 +151,7 @@ map('n', '<space>qd', '<cmd>SessionDelete<cr>', { silent = true, desc = "Delete 
 
 -- ==================== File Tree ====================
 map('n', '<C-a>', '<cmd>Neotree toggle<cr>', { silent = true, desc = "Open Tree explorer" })
+-- map('n', '<C-a>', '<Cmd>CHADopen<CR>', { silent = true, desc = "Open Tree explorer" })
 
 -- ==================== Line Movement ====================
 vim.cmd([[

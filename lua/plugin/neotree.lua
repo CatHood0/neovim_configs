@@ -30,19 +30,14 @@ neotree.setup({
       visible = true,
       hide_dotfiles = true,
       hide_gitignored = true,
-      -- only works on Windows for hidden files/directories
       hide_hidden = true,
       show_hidden_count = true,
-      never_show = {
-        '.DS_Store',
-        '.vscode',
-        '.idea'
-      },
+      never_show = {}
     },
     follow_current_file = {
       enabled = true,         -- This will find and focus the file in the active buffer every time
       -- the current file is changed while the tree is open.
-      leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+      leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
     },
     group_empty_dirs = false, -- when true, empty folders will be grouped together
     -- netrw disabled, opening a directory opens neo-tree
@@ -70,7 +65,7 @@ neotree.setup({
       -- This will find and focus the file in the active buffer every time
       enabled = true,
       -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
-      leave_dirs_open = false,
+      leave_dirs_open = true,
     },
     -- when true, empty folders will be grouped together
     group_empty_dirs = true,
@@ -91,8 +86,6 @@ neotree.setup({
   git_status = {
     window = {
       position = "float",
-      mappings = {
-      },
     },
   },
   sources = {
@@ -108,7 +101,7 @@ neotree.setup({
   sort_case_insensitive = true,                                      -- used when sorting files and directories in the tree
   sort_function = nil,                                               -- use a custom function for sorting files and directories in the tree
   source_selector = {
-    winbar = false,                                                   -- removes the header bar
+    winbar = false,                                                  -- removes the header bar
     statusline = false,
     content_layout = "center",
     highlight_tab = "NeoTreeTabInactive",                     -- string

@@ -93,7 +93,16 @@ function M.setup(capabilties)
       settings = {
         showTodos = true,
         completeFunctionCalls = true,
-        analysisExcludedFolders = { "/build", "/.dart_tools", "/android", "/ios", "/web", "/windows", "/linux" },
+        analysisExcludedFolders = {
+          "/build",
+          "/.dart_tools",
+          "/android",
+          "/ios",
+          "/web",
+          "/windows",
+          "/linux",
+          "/macos"
+        },
         renameFilesWithClasses = "prompt", -- "always"
         enableSnippets = true,
         updateImportsOnRename = true,
