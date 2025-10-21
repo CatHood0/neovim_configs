@@ -21,17 +21,40 @@ cmp.setup({
   event = { "InsertEnter", "CmdlineEnter" },
   completion = { completeopt = "menu,menuone,noselect,noinsert" },
   sorting = {
+    priority_weight = 1,
     comparators = {
-      compare.exact,
-      compare.score,
+      ---scopes: Entries defined in a closer scope will be ranked higher (e.g., prefer local variables to globals).
+      -- compare.scopes,
+      ---offset: Entries with smaller offset will be ranked higher.
       compare.offset,
-      compare.locality,
-      compare.length,
-      compare.sort_text,
-      compare.order,
+      ---score: Entries with higher score will be ranked higher.
+      compare.score,
+      ---exact: Entries with exact == true will be ranked higher.
+      compare.exact,
+      ---kind: Entries with smaller ordinal value of 'kind' will be ranked higher.
+      ---(see lsp.CompletionItemKind enum).
+      ---Exceptions are that Text(1) will be ranked the lowest, and snippets be the highest.
       compare.kind,
-      compare.recently_used,
     },
+  },
+  -- default config
+  view = {
+    entries = {
+      name = 'custom',
+      selection_order = 'top_down',
+      follow_cursor = false,
+    },
+    docs = {
+      auto_open = true,
+    },
+  },
+  matching = {
+    disallow_fuzzy_matching = false,
+    disallow_fullfuzzy_matching = false,
+    disallow_partial_fuzzy_matching = true,
+    disallow_partial_matching = false,
+    disallow_prefix_unmatching = false,
+    disallow_symbol_nonprefix_matching = true,
   },
   -- the suggestion floating menu UI configs
   window = {

@@ -91,6 +91,7 @@ return {
   {
     'catppuccin/nvim',
     name = 'catppuccin',
+    priority = 1000,
     config = function()
       -- require('catppuccin').setup()
     end
@@ -129,15 +130,6 @@ return {
     },
     config = function()
       -- require('neo-tree').setup()
-    end
-  },
-  {
-    'ms-jpq/chadtree',
-    branch = 'chad',
-    build = 'python3 -m chadtree deps',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      require('plugin.chadtree')
     end
   },
   { 'ryanoasis/vim-devicons' },
@@ -360,7 +352,7 @@ return {
     },
   },
   -- language injection
-  { "TheNoeTrevino/roids.nvim", },
+  { "TheNoeTrevino/roids.nvim" },
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
