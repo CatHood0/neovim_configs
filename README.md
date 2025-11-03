@@ -92,7 +92,6 @@ sudo apt install libgtk-3-dev
         // First at all install Nodejs and Npm
         // Visit, and follow the steps to install them
         // https://nodejs.org/en/download
-
         // then install typescript globaly
         sudo npm i -g typescript typescript-language-server
         sudo npm i -g tailwindcss-language-server
@@ -165,20 +164,34 @@ sudo apt install libgtk-3-dev
         npm config set python3 /usr/bin/python3
 
         /// optional command
-        python3 -m ensurepip --upgrade
-        python3 -m pip install --user --upgrade pynvim
+        /// be careful while using --break-system-packages option
+        python3 -m pip install --user --upgrade --break-system-packages neovim   
 
         /// you should have installed python3
         /// and you need to have this var in your .bashrc or .zshrc
         export PATH="$PATH":"/usr/bin/python<version>"
+
     ```
 * Flutter
     If you're facing issues with linux not recognizing your phone
     check these sites:
 
+
     1. [adb-device-list-doesnt-show-phone](https://askubuntu.com/questions/863587/adb-device-list-doesnt-show-phone)
     2. [android-adb-no-permissions-for-device](https://stackoverflow.com/questions/77925533/android-adb-no-permissions-for-device)
     ```dart
+        // Run:
+        sudo apt-get install adb android-tools-adb android-tools-fastboot
+        // Using sudo, create this file: /etc/udev/rules.d/51-android.rules.
+        //
+        // Use this format to add each vendor to the file:
+        //
+        // `SUBSYSTEM=="usb", ATTR{idVendor}=="0bb4", MODE="0666", GROUP="plugdev"`
+        //
+        // sudo chmod a+r /etc/udev/rules.d/51-android.rules
+        //
+        // Then restart udev with sudo service udev restart or sudo /etc/init.d/udev restart
+
         // Where should be installed flutter:
         '~/development/flutter/bin/flutter'
         // You should have these variables in your .bashrc or .zshrc
