@@ -64,7 +64,6 @@ return {
   },
   { 'mbbill/undotree' },
   -- This fix an issue with the foldColumn
-  { 'luukvbaal/statuscol.nvim' },
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -112,14 +111,6 @@ return {
 
   -- 3. NAVIGATION AND SEARCH
   -- File explorer
-  {
-    'nvim-tree/nvim-tree.lua',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons',
-      'mrbjarksen/neo-tree-diagnostics.nvim'
-    },
-  },
   {
     'nvim-neo-tree/neo-tree.nvim',
     branch = 'v3.x',
@@ -175,12 +166,17 @@ return {
       })
     end,
   },
+
+  -- Markdown
+  { 'MeanderingProgrammer/markdown.nvim' },
+  -- We set just markview for codecompanion
+  -- since we prefer not using both in markdown files
   {
     "OXY2DEV/markview.nvim",
     lazy = false,
     opts = {
       preview = {
-        filetypes = { "markdown", "codecompanion" },
+        filetypes = { "codecompanion" },
         ignore_buftypes = {},
       },
     },
@@ -505,8 +501,6 @@ return {
     end
   },
 
-  -- Markdown
-  { 'MeanderingProgrammer/markdown.nvim' },
   {
     'echasnovski/mini.nvim',
     config = function()

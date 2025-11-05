@@ -14,6 +14,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup(require('config.plugins'))
 require('config.settings')
+require('config.keymapping')
 
 -- Load plugin configurations
 require('plugin.autopair')
@@ -28,7 +29,7 @@ require('plugin.lualine')
 require('plugin.ts_autotag')
 -- Just use this plugin when you have kitty terminal
 -- and imagemagick and libmagickwand-dev installed
-require('plugin.image')
+-- require('plugin.image')
 require('plugin.neotree')
 -- require('plugin.chadtree')
 require('plugin.neogit')
@@ -41,7 +42,6 @@ require('plugin.tmux')
 require('plugin.toggleterm')
 require('plugin.treesitter')
 require('plugin.simple_dashboard')
-require('plugin.statuscol')
 require('plugin.lspkind')
 require('plugin.lsp.lsp').setup()
 require('plugin.persistent_breakpoints')
@@ -61,8 +61,7 @@ require('core.winbar.nbreadcrumbs').setup({
 })
 
 require('plugin.themes').theme()
-require('config.keymapping')
--- vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("debug")
 
 vim.api.nvim_create_user_command("SetDebug", function() vim.lsp.set_log_level("debug") end, {})
 vim.api.nvim_create_user_command("SetWarnings", function() vim.lsp.set_log_level("warn") end, {})

@@ -7,8 +7,11 @@ map('n', '<c-k>', '<cmd>wincmd k<cr>', { silent = true, desc = "Move cursor to t
 map('n', '<c-j>', '<cmd>wincmd j<cr>', { silent = true, desc = "Move cursor to bottom windows (if available)" })
 map('n', '<c-h>', '<cmd>wincmd h<cr>', { silent = true, desc = "Move cursor to left windows (if available)" })
 map('n', '<c-l>', '<cmd>wincmd l<cr>', { silent = true, desc = "Move cursor to right windows (if available)" })
+-- removes some keymaps inserted by plugins
 map('n', 'n', '<nop>', { silent = true })
 map('n', '<c-u>', '<nop>', { silent = true })
+map('n', '<M-DOWN>', '<nop>', { silent = true })
+map('n', '<M-UP>', '<nop>', { silent = true })
 
 -- ==================== Window Resizing ====================
 map('n', '<space>j', function()
@@ -145,9 +148,10 @@ map('n', '<leader>f', function()
   { silent = true, desc = "Open global text search popup" })
 
 -- ==================== Sessions ====================
-map('n', '<space>qs', '<cmd>SessionSave<cr>', { silent = true, desc = "Save the session" })
-map('n', '<space>ql', '<cmd>SessionRestore<cr>', { silent = true, desc = "Restore to the last session" })
-map('n', '<space>qd', '<cmd>SessionDelete<cr>', { silent = true, desc = "Delete current session of the workspace" })
+map('n', '<space>qs', '<cmd>AutoSession save<cr>', { silent = true, desc = "Save the session" })
+map('n', '<space>ql', '<cmd>AutoSession restore<cr>', { silent = true, desc = "Restore to the last session" })
+map('n', '<space>qd', '<cmd>AutoSession delete<cr>', { silent = true, desc = "Delete current session of the workspace" })
+map('n', '<space>qt', '<cmd>AutoSession search<cr>', { silent = true, desc = "Search sessions" })
 
 -- ==================== File Tree ====================
 map('n', '<C-a>', '<cmd>Neotree toggle<cr>', { silent = true, desc = "Open Tree explorer" })
