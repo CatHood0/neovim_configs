@@ -12,8 +12,9 @@ sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build 
 
 ## Instructions to configure AI
 
-[gemini-cli](https://github.com/google-gemini/gemini-cli/blob/main/docs/get-started/authentication.md#persisting-environment-variables)
-
+**Gemini:** [gemini-cli](https://github.com/google-gemini/gemini-cli/blob/main/docs/get-started/authentication.md#persisting-environment-variables)
+**Copilot:** call `:Copilot setup` in Neovim to generate api token
+ 
 For running Desktop enviroment
 
 ```dart
@@ -179,6 +180,7 @@ sudo apt install libgtk-3-dev
 
     1. [adb-device-list-doesnt-show-phone](https://askubuntu.com/questions/863587/adb-device-list-doesnt-show-phone)
     2. [android-adb-no-permissions-for-device](https://stackoverflow.com/questions/77925533/android-adb-no-permissions-for-device)
+    3. [setup](https://docs.flutter.dev/platform-integration/linux/setup)
     ```dart
         // Run:
         sudo apt-get install adb android-tools-adb android-tools-fastboot

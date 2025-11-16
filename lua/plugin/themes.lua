@@ -2,32 +2,32 @@ local M = {}
 
 function M.theme()
   _G.autoInitThemes();
-  vim.cmd.colorscheme "catppuccin"
-  -- colorscheme palenight
-  -- colorscheme srcery
-  -- colorscheme gruvbox
-  -- colorscheme catppuccin-latte
-  -- colorscheme catppuccin-frappe
-  -- colorscheme catppuccin-macchiato
-  -- colorscheme catppuccin-mocha
-  -- colorscheme oxocarbon
-  -- colorscheme rose-pine-moon
-  -- colorscheme rose-pine-main
-  -- colorscheme rose-pine-moon
-  -- colorscheme rose-pine-dawn
-  -- colorscheme retrobox
-  -- colorscheme onedark
-  -- colorscheme tokyodark
-  -- colorscheme kanagawa-wave
-  -- colorscheme kanagawa-dragon
-  -- colorscheme kanagawa-lotus
-  -- colorscheme kanagawa
-  -- colorscheme github_dark
-  -- colorscheme github_dark_dimmed
-  -- colorscheme github_dark_high_contrast
-  -- colorscheme github_dark_default
-  -- colorscheme github_dark_colorblind
-  -- colorscheme github_dark_tritanopia
+  -- vim.cmd.colorscheme "catppuccin"
+  -- vim.cmd.colorscheme "palenight"
+  -- vim.cmd.colorscheme "srcery"
+  vim.cmd.colorscheme "gruvbox"
+  -- vim.cmd.colorscheme "catppuccin-latte"
+  -- vim.cmd.colorscheme "catppuccin-frappe"
+  -- vim.cmd.colorscheme "catppuccin-macchiato"
+  -- vim.cmd.colorscheme "catppuccin-mocha"
+  -- vim.cmd.colorscheme "oxocarbon"
+  -- vim.cmd.colorscheme "rose-pine-moon"
+  -- vim.cmd.colorscheme "rose-pine-main"
+  -- vim.cmd.colorscheme "rose-pine-moon"
+  -- vim.cmd.colorscheme "rose-pine-dawn"
+  -- vim.cmd.colorscheme "retrobox"
+  -- vim.cmd.colorscheme "onedark"
+  -- vim.cmd.colorscheme "tokyodark"
+  -- vim.cmd.colorscheme "kanagawa-wave"
+  -- vim.cmd.colorscheme "kanagawa-dragon"
+  -- vim.cmd.colorscheme "kanagawa-lotus"
+  -- vim.cmd.colorscheme "kanagawa"
+  -- vim.cmd.colorscheme "github_dark"
+  -- vim.cmd.colorscheme "github_dark_dimmed"
+  -- vim.cmd.colorscheme "github_dark_high_contrast"
+  -- vim.cmd.colorscheme "github_dark_default"
+  -- vim.cmd.colorscheme "github_dark_colorblind"
+  -- vim.cmd.colorscheme "github_dark_tritanopia"
 end
 
 function _G.autoInitThemes()
@@ -116,11 +116,11 @@ function _G.autoInitThemes()
     invert_tabline = false,
     invert_intend_guides = false,
     inverse = false,   -- invert background for search, diffs, statuslines and errors
-    contrast = "soft", -- can be "hard", "soft" or empty string
+    contrast = "hard", -- can be "hard", "soft" or empty string
     palette_overrides = {},
     overrides = {},
     dim_inactive = false,
-    transparent_mode = true,
+    transparent_mode = false,
   })
 
   local onedark = require('onedark');
@@ -241,19 +241,19 @@ function _G.autoInitThemes()
       dark = "macchiato",
     },
 
-    transparent_background = true,
-    show_end_of_buffer = false,     -- shows the '~' characters after the end of buffers
-    term_colors = true,             -- sets terminal colors (e.g. `g:terminal_color_0`)
+    transparent_background = false,
+    show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+    term_colors = true,         -- sets terminal colors (e.g. `g:terminal_color_0`)
     dim_inactive = {
-      enabled = false,              -- dims the background color of inactive window
+      enabled = false,          -- dims the background color of inactive window
       shade = "dark",
-      percentage = 0.15,            -- percentage of the shade to apply to the inactive window
+      percentage = 0.15,        -- percentage of the shade to apply to the inactive window
     },
-    no_italic = false,              -- Force no italic
-    no_bold = false,                -- Force no bold
-    no_underline = false,           -- Force no underline
-    styles = {                      -- Handles the styles of general hi groups (see `:h highlight-args`):
-      comments = { "italic" },      -- Change the style of comments
+    no_italic = true,           -- Force no italic
+    no_bold = true,             -- Force no bold
+    no_underline = false,       -- Force no underline
+    styles = {                  -- Handles the styles of general hi groups (see `:h highlight-args`):
+      comments = { "italic" },  -- Change the style of comments
       conditionals = { "italic" },
       loops = {},
       functions = { "bold" },

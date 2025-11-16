@@ -181,6 +181,7 @@ return {
       },
     },
   },
+  -- { "github/copilot.vim" },
   {
     "olimorris/codecompanion.nvim",
     dependencies = {
@@ -189,19 +190,20 @@ return {
     },
     config = function()
       require("codecompanion").setup({
+        strategies = {
+          chat = {
+            adapter = "gemini_cli",
+          },
+          inline = {
+            adapter = "gemini_cli",
+          },
+          agent = {
+            adapter = "gemini_cli",
+          },
+        },
         adapters = {
           acp = {
             gemini_cli = function()
-              return require("codecompanion.adapters").extend("gemini_cli", {
-                defaults = {
-                  auth_method = "gemini-api-key",
-                },
-                env = {
-                  GEMINI_API_KEY = "GEMINI_API_KEY",
-                },
-              })
-            end,
-            copilot = function()
               return require("codecompanion.adapters").extend("gemini_cli", {
                 defaults = {
                   auth_method = "gemini-api-key",
@@ -302,15 +304,33 @@ return {
     end,
     opts = {}
   },
+  -- to manage the memory management of the lsps used
+  -- by neovim, we use this
+  {
+    "hinell/lsp-timeout.nvim",
+    dependencies = { "neovim/nvim-lspconfig" },
+    init = function()
+      vim.g.lspTimeoutConfig = {
+        stopTimeout  = 1000 * 60 * 5, -- ms, timeout before stopping all LSPs
+        startTimeout = 1000 * 10,     -- ms, timeout before restart
+        silent       = false,         -- true to suppress notifications
+        filetypes    = {
+          ignore = {                  -- filetypes to ignore; empty by default
+            -- lsp-timeout is disabled completely
+          }                           -- for these filetypes
+        }
+      }
+    end
+  },
   { 'neovim/nvim-lspconfig' },
   -- we use schemas for jsonls and yamlls
   { 'b0o/schemastore.nvim' },
   { 'onsails/lspkind.nvim' },
-  {
-    "zeioth/garbage-day.nvim",
-    dependencies = "neovim/nvim-lspconfig",
-    event = "VeryLazy",
-  },
+  -- {
+  --   "zeioth/garbage-day.nvim",
+  --   dependencies = "neovim/nvim-lspconfig",
+  --   event = "VeryLazy",
+  -- },
   -- Show virtual lines lenses
   { 'VidocqH/lsp-lens.nvim' },
   -- Show hover on CursorHold

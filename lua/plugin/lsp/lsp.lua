@@ -35,7 +35,11 @@ function M.config_lsp_langs(capabilities)
     capabilities = capabilities,
     on_attach = function(client, bufnr)
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      if client.server_capabilities["documentSymbolProvider"] then
+        require("nvim-navic").attach(client, bufnr)
+      end
     end,
+
     settings = {
       ['rust-analyzer'] = {
         checkOnSave = true,
@@ -68,6 +72,11 @@ function M.config_lsp_langs(capabilities)
 
   vim.lsp.config("tailwindcss", {
     capabilities = capabilities,
+    on_attach = function(client, bufnr)
+      if client.server_capabilities["documentSymbolProvider"] then
+        require("nvim-navic").attach(client, bufnr)
+      end
+    end,
     settings = {
       tailwindCSS = {
         experimental = {
@@ -92,6 +101,9 @@ function M.config_lsp_langs(capabilities)
     capabilities = capabilities,
     on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = true
+      if client.server_capabilities["documentSymbolProvider"] then
+        require("nvim-navic").attach(client, bufnr)
+      end
     end,
     settings = {
       yamlls = {
@@ -111,6 +123,11 @@ function M.config_lsp_langs(capabilities)
   })
 
   vim.lsp.config("jsonls", {
+    on_attach = function(client, bufnr)
+      if client.server_capabilities["documentSymbolProvider"] then
+        require("nvim-navic").attach(client, bufnr)
+      end
+    end,
     capabilities = capabilities,
     settings = {
       jsonls = {
@@ -121,6 +138,11 @@ function M.config_lsp_langs(capabilities)
   })
 
   vim.lsp.config("clangd", {
+    on_attach = function(client, bufnr)
+      if client.server_capabilities["documentSymbolProvider"] then
+        require("nvim-navic").attach(client, bufnr)
+      end
+    end,
     settings = {
       clangd = {
         InlayHints = {
@@ -135,6 +157,11 @@ function M.config_lsp_langs(capabilities)
   })
 
   vim.lsp.config('gopls', {
+    on_attach = function(client, bufnr)
+      if client.server_capabilities["documentSymbolProvider"] then
+        require("nvim-navic").attach(client, bufnr)
+      end
+    end,
     settings = {
       gopls = {
         -- Análisis estáticos potentes
@@ -203,6 +230,9 @@ function M.config_lsp_langs(capabilities)
   vim.lsp.config('cssls', {
     on_attach = function(client, bufnr)
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      if client.server_capabilities["documentSymbolProvider"] then
+        require("nvim-navic").attach(client, bufnr)
+      end
     end,
     capabilities = capabilities,
     settings = {
@@ -219,10 +249,20 @@ function M.config_lsp_langs(capabilities)
 
   vim.lsp.config('html', {
     capabilities = capabilities,
+    on_attach = function(client, bufnr)
+      if client.server_capabilities["documentSymbolProvider"] then
+        require("nvim-navic").attach(client, bufnr)
+      end
+    end,
   })
 
   vim.lsp.config('dockerls', {
     capabilities = capabilities,
+    on_attach = function(client, bufnr)
+      if client.server_capabilities["documentSymbolProvider"] then
+        require("nvim-navic").attach(client, bufnr)
+      end
+    end,
     settings = {
       docker = {
         languageserver = {

@@ -10,7 +10,7 @@ function M.setup(capabilties)
       -- This determines whether notifications are show with `vim.notify` or with the plugin's custom UI
       -- please note that this option is eventually going to be deprecated and users will need to
       -- depend on plugins like `nvim-notify` instead.
-      notification_style = 'native' -- | 'plugin'
+      notification_style = 'plugin' -- | 'plugin'
     },
     decorations = {
       statusline = {
@@ -43,8 +43,8 @@ function M.setup(capabilties)
       --   }
       -- end,
     },
-    root_patterns = { ".git", "pubspec.yaml" }, -- patterns to find the root of your flutter project
-    fvm = false,                                -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
+    root_patterns = { ".git", ".dart_tools", "pubspec.yaml", ".flutter_dependencies" }, -- patterns to find the root of your flutter project
+    fvm = false,                                                                        -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
     widget_guides = {
       enabled = true,
     },
@@ -75,7 +75,7 @@ function M.setup(capabilties)
     },
     lsp = {
       color = { -- show the derived colours for dart variables
-        enabled = true, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
+        enabled = false, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
         background = false, -- highlight the background
         background_color = nil, -- required, when background is transparent (i.e. background_color = { r = 19, g = 17, b = 24},)
         foreground = false, -- highlight the foreground
@@ -88,22 +88,27 @@ function M.setup(capabilties)
           resolveProvider = true,
           workDoneProgress = true,
         }
+        if client.server_capabilities["documentSymbolProvider"] then
+          require("nvim-navic").attach(client, bufnr)
+        end
       end,
       capabilities = capabilties, -- e.g. lsp_status capabilities
       settings = {
         showTodos = true,
+        suggestUnimportedLibraries = true,
         completeFunctionCalls = true,
         analysisExcludedFolders = {
           "/build",
           "/.dart_tools",
           "/android",
+          -- "/packages",
           "/ios",
           "/web",
           "/windows",
           "/linux",
           "/macos"
         },
-        renameFilesWithClasses = "prompt", -- "always"
+        renameFilesWithClasses = "always", -- "always"
         enableSnippets = true,
         updateImportsOnRename = true,
         codelens = true,
