@@ -3,6 +3,10 @@ function _G.line_fold()
   return line
 end
 
+-- -- for lsp
+-- vim.highlight.priorities.semantic_tokens = 1 -- default is 125
+-- vim.highlight.priorities.treesitter = 1000 -- default is 100
+
 -- ==================== UI/Visual ====================
 vim.o.mousemoveevent = true
 vim.o.relativenumber = true

@@ -97,9 +97,9 @@ cmp.setup({
   },
   -- sources for autocompletion
   sources = {
-    per_filetype = {
-      codecompanion = { "codecompanion" },
-    },
+    -- per_filetype = {
+    --   codecompanion = { "codecompanion" },
+    -- },
     { name = 'nvim_lsp', priority = 1000 },
     { name = 'luasnip',  priority = 750 },
     { name = "buffer",   priority = 500 },

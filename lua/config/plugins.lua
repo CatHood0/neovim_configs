@@ -181,52 +181,23 @@ return {
       },
     },
   },
-  -- { "github/copilot.vim" },
+  { "github/copilot.vim" },
   {
     "olimorris/codecompanion.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
+      "ravitemer/codecompanion-history.nvim"
     },
-    config = function()
-      require("codecompanion").setup({
-        strategies = {
-          chat = {
-            adapter = "gemini_cli",
-          },
-          inline = {
-            adapter = "gemini_cli",
-          },
-          agent = {
-            adapter = "gemini_cli",
-          },
-        },
-        adapters = {
-          acp = {
-            gemini_cli = function()
-              return require("codecompanion.adapters").extend("gemini_cli", {
-                defaults = {
-                  auth_method = "gemini-api-key",
-                },
-                env = {
-                  GEMINI_API_KEY = "GEMINI_API_KEY",
-                },
-              })
-            end,
-          },
-        },
-      })
-    end,
     opts = {
       language = "Spanish",
       strategies = {
         chat = {
-          adapter = "gemini_cli",
-          model = "gemini-2.5-pro"
+          adapter = "copilot",
+          model = "gpt-5-mini"
         },
       },
       inline = {
-        adapter = "gemini_cli",
+        adapter = "copilot",
       },
       opts = {
         log_level = "DEBUG", -- or "TRACE"
@@ -354,9 +325,13 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
-      "nvim-treesitter/nvim-treesitter-context"
+      -- "nvim-treesitter/nvim-treesitter-context"
     },
     lazy = false,
+    -- Telescope current_buffer_fuzzy_find
+    -- does not work with main branch
+    -- branch = "main",
+    build = ":TSUpdate",
   },
   {
     "nvim-neotest/neotest",
@@ -416,13 +391,6 @@ return {
     end
   },
   { 'HiPhish/rainbow-delimiters.nvim' },
-  {
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    config = function()
-      -- require('nvim-treesitter.configs').setup({})
-    end
-  },
   { 'mtdl9/vim-log-highlighting' },
 
   -- Text manipulation
