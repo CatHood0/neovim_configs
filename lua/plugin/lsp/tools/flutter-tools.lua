@@ -62,7 +62,7 @@ function M.setup(capabilties)
       -- takes a log_line as string argument; returns a boolean or nil;
       -- the log_line is only added to the output if the function returns true
       notify_errors = true, -- if there is an error whilst running then notify the user
-      open_cmd = "15vsplit", -- command to use to open the log buffer
+      open_cmd = "30vsplit", -- command to use to open the log buffer
       focus_on_open = true, -- focus on the newly opened log window
     },
     dev_tools = {

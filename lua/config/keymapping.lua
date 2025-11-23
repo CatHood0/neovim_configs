@@ -271,21 +271,12 @@ map('n', '<leader>cr', '<cmd>CMakeRun<cr>',
   }
 )
 
+map('n', '<leader>mn', '<CMD>Neominimap Toggle<CR>', { silent = true, desc = "Toggle minimap" })
+
 
 -- ==================== Insert Mode Mappings ====================
 map('i', '<C-n>', '<nop>')
 map('i', '<C-p>', '<nop>')
-
--- ==================== Codeium (AI) ====================
--- Note: These need to remain as Vimscript expressions
---[[ vim.cmd([[
-    imap <script><silent><nowait><expr> <TAB> codeium#Accept()
-    imap <script><silent><nowait><expr> <C-h> codeium#AcceptNextWord()
-    imap <script><silent><nowait><expr> <C-l> codeium#AcceptNextLine()
-    imap <C-;>   <Cmd>call codeium#CycleCompletions(1)<CR>
-    imap <C-,>   <Cmd>call codeium#CycleCompletions(-1)<CR>
-    imap <C-x>   <Cmd>call codeium#Clear()<CR>
-  ]]
 
 -- ==================== FZF Configuration ====================
 -- These need to remain in Vimscript

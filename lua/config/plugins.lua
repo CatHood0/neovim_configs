@@ -13,6 +13,22 @@ return {
   },
 
   -- 2. USER INTERFACE AND THEMES
+
+  { 'ellisonleao/gruvbox.nvim' },
+  { 'rose-pine/neovim',             name = 'rose-pine' },
+  { 'drewtempelmeyer/palenight.vim' },
+  { 'navarasu/onedark.nvim' },
+  { 'projekt0n/github-nvim-theme' },
+  { 'rebelot/kanagawa.nvim' },
+  { 'srcery-colors/srcery-vim' },
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    config = function()
+      -- require('catppuccin').setup()
+    end
+  },
   { "nyoom-engineering/oxocarbon.nvim" },
   { "tiagovla/tokyodark.nvim" },
   {
@@ -79,23 +95,6 @@ return {
     event = "VeryLazy",
   },
   { 'nvim-telescope/telescope-media-files.nvim', dependencies = 'nvim-lua/popup.nvim' },
-  -- Color schemes
-  { 'ellisonleao/gruvbox.nvim' },
-  { 'rose-pine/neovim',                          name = 'rose-pine' },
-  { 'drewtempelmeyer/palenight.vim' },
-  { 'navarasu/onedark.nvim' },
-  { 'projekt0n/github-nvim-theme' },
-  { 'rebelot/kanagawa.nvim' },
-  { 'srcery-colors/srcery-vim' },
-  {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    priority = 1000,
-    config = function()
-      -- require('catppuccin').setup()
-    end
-  },
-
   -- Status line and dashboard
   {
     'nvim-lualine/lualine.nvim',
@@ -106,7 +105,7 @@ return {
   },
   { "goolord/alpha-nvim" },
   { 'nvim-tree/nvim-web-devicons' },
-  { 'echasnovski/mini.nvim',      version = '*' },
+  { 'echasnovski/mini.nvim',                     version = '*' },
   { 'MunifTanjim/nui.nvim' },
 
   -- 3. NAVIGATION AND SEARCH

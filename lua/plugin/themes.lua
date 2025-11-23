@@ -5,7 +5,7 @@ function M.theme()
   -- vim.cmd.colorscheme "catppuccin"
   -- vim.cmd.colorscheme "palenight"
   -- vim.cmd.colorscheme "srcery"
-  vim.cmd.colorscheme "gruvbox"
+  -- vim.cmd.colorscheme "gruvbox"
   -- vim.cmd.colorscheme "catppuccin-latte"
   -- vim.cmd.colorscheme "catppuccin-frappe"
   -- vim.cmd.colorscheme "catppuccin-macchiato"
@@ -16,7 +16,7 @@ function M.theme()
   -- vim.cmd.colorscheme "rose-pine-moon"
   -- vim.cmd.colorscheme "rose-pine-dawn"
   -- vim.cmd.colorscheme "retrobox"
-  -- vim.cmd.colorscheme "onedark"
+  vim.cmd.colorscheme "onedark"
   -- vim.cmd.colorscheme "tokyodark"
   -- vim.cmd.colorscheme "kanagawa-wave"
   -- vim.cmd.colorscheme "kanagawa-dragon"
@@ -125,11 +125,11 @@ function _G.autoInitThemes()
 
   local onedark = require('onedark');
   onedark.setup {
-    style = 'deep',               -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-    transparent = true,           -- Show/hide background
+    style = 'dark',               -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+    transparent = false,           -- Show/hide background
     term_colors = true,           -- Change terminal color as per the selected theme style
     ending_tildes = false,        -- Show the end-of-buffer tildes. By default they are hidden
-    cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
+    cmp_itemkind_reverse = true, -- reverse item kind highlights in cmp menu
 
     -- toggle theme style ---
     toggle_style_key = nil,                                                              -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"

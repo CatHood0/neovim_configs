@@ -98,6 +98,15 @@ function M.define_hl_groups()
     link = "Normal"
   })
 
+  -- asign the correct background color for the winbar
+  vim.schedule(function()
+    local normal_bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
+    if normal_bg then
+      vim.api.nvim_set_hl(0, "WinBar", { bg = normal_bg, bold = true })
+      vim.api.nvim_set_hl(0, "WinBarNC", { bg = normal_bg })
+    end
+  end)
+
   vim.defer_fn(function()
     vim.api.nvim_set_hl(0, "NavicIconsFile", { fg = "#FFD700" })
     vim.api.nvim_set_hl(0, "NavicIconsModule", { fg = "#4EC9B0" })
@@ -130,8 +139,8 @@ function M.define_hl_groups()
     -- vim.api.nvim_set_hl(0, "NavicText", { fg = "#cad3f5" })
     -- vim.api.nvim_set_hl(0, "NavicSeparator", { fg = "#939ab8" })
     -- gruvbox
-    vim.api.nvim_set_hl(0, "NavicText", { fg = "#ebdbb2" })
-    vim.api.nvim_set_hl(0, "NavicSeparator", { fg = "#928374" })
+    -- vim.api.nvim_set_hl(0, "NavicText", { fg = "#ebdbb2" })
+    -- vim.api.nvim_set_hl(0, "NavicSeparator", { fg = "#928374" })
   end, 3000)
 
   shared_state.state.hl_groups_defined = true
@@ -210,4 +219,3 @@ function M.setup_buffer_cleanup()
 end
 
 return M
-

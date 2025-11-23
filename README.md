@@ -7,7 +7,7 @@
 export PATH="$PATH":"/opt/nvim/bin"
 // and you need to have these libraries installed already
 // to avoid issues with the clipboard and more
-sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build fzf ripgrep fd-find luarocks
+sudo apt-get updated && sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build fzf ripgrep fd-find luarocks
 ```
 
 ## Instructions to configure AI
@@ -32,10 +32,6 @@ sudo apt install libgtk-3-dev
 ```
 
 ## Language requirements
-
-## Using mason
-
-...
 
 ## Manual installation
 
@@ -176,8 +172,6 @@ sudo apt install libgtk-3-dev
 * Flutter
     If you're facing issues with linux not recognizing your phone
     check these sites:
-
-
     1. [adb-device-list-doesnt-show-phone](https://askubuntu.com/questions/863587/adb-device-list-doesnt-show-phone)
     2. [android-adb-no-permissions-for-device](https://stackoverflow.com/questions/77925533/android-adb-no-permissions-for-device)
     3. [setup](https://docs.flutter.dev/platform-integration/linux/setup)
