@@ -13,7 +13,7 @@
   "cmp-path": { "branch": "main", "commit": "c642487086dbd9a93160e1679a1327be111cbc25" },
   "cmp_luasnip": { "branch": "master", "commit": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
   "codecompanion-history.nvim": { "branch": "main", "commit": "eb99d256352144cf3b6a1c45608ec25544a0813d" },
-  "codecompanion.nvim": { "branch": "main", "commit": "3d533fa987dc73f39aba02b8f043caf36380f78a" },
+  "codecompanion.nvim": { "branch": "main", "commit": "4abba4925e409462c0c1ee0bc389ff517fab7f2e" },
   "copilot.vim": { "branch": "release", "commit": "da369d90cfd6c396b1d0ec259836a1c7222fb2ea" },
   "dartlang-snippets": { "branch": "master", "commit": "6ec48e1693ff9576e53dcbf358b32c70d1828ba8" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },

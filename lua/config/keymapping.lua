@@ -199,16 +199,16 @@ map('n', '<space>re', vim.lsp.buf.rename,
   { silent = true, nowait = true, desc = "Rename all references to the symbol under the cursor" })
 
 -- ==================== Flutter ====================
-map('n', '<leader>fr', '<cmd>FlutterRun<cr>', { desc = 'Run your flutter app', silent = true, nowait = true })
+map('n', '<space>r', '<cmd>FlutterRun<cr>', { desc = 'Run your flutter app', silent = true, nowait = true })
 map('n', '<leader>q', '<cmd>FlutterQuit<cr>', { desc = 'Stop your flutter app', silent = true, nowait = true })
 map('n', '<leader>re', '<cmd>FlutterReload<cr>', { desc = 'Run hot reload', silent = true, nowait = true })
 map('n', '<leader>rf', '<cmd>FlutterRestart<cr>', { desc = 'Run Full Restart of the app', silent = true, nowait = true })
 map('n', '<leader>sp', '<cmd>FlutterSuper<cr>', { silent = true, nowait = true })
 map('n', '<leader>eg', '<cmd>FlutterPubGet<cr>',
   { desc = 'Run pub get to restart dependencies', silent = true, nowait = true })
-map('n', '<leader>fl', '<cmd>FlutterLogToggle<cr>',
+map('n', '<leader>wl', '<cmd>FlutterLogToggle<cr>',
   { desc = 'Open/Close flutter log buffer', silent = true, nowait = true })
-map('n', '<leader>fc', '<cmd>FlutterLogClear<cr>', { desc = 'Clear the flutter log buffer', silent = true, nowait = true })
+map('n', '<leader>w', '<cmd>FlutterLogClear<cr>', { desc = 'Clear the flutter log buffer', silent = true, nowait = true })
 -- map('n', '<leader>fmo', '<cmd>FlutterEmulators<cr>', { silent = true, nowait = true })
 -- map('n', '<space>op', '<cmd>FlutterDevTools<cr>', { silent = true, nowait = true })
 -- map('n', '<leader>tou', '<cmd>FlutterOutlineToggle<cr>', { silent = true, nowait = true })

@@ -189,15 +189,6 @@ return {
     },
     opts = {
       language = "Spanish",
-      strategies = {
-        chat = {
-          adapter = "copilot",
-          model = "gpt-5-mini"
-        },
-      },
-      inline = {
-        adapter = "copilot",
-      },
       opts = {
         log_level = "DEBUG", -- or "TRACE"
       },

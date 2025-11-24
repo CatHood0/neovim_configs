@@ -5,6 +5,26 @@ local M = {
   textDocument_codeAction = 'textDocument/codeAction',
 }
 
+local function get_priority(op)
+  local title = op.title or ""
+  -- imports always have priority
+  if op.action.kind == "quickfix.import.librarySdkShow" or
+      op.action.kind == "quickfix.import.librarySdk" or
+      op.action.kind == "quickfix.import.libraryCombinator" then
+    return 0
+  end
+  if title:lower():match("^import") or op.action.kind:lower():match("^quickfix.import") then
+    return 0
+  elseif title:lower():match("^add") then
+    return 1
+    -- for me, ignore is my last option
+  elseif title:lower():match("^ignore") then
+    return 2
+  else
+    return 2
+  end
+end
+
 ---@param opts? vim.lsp.buf.code_action.Opts
 function M.code_action(opts)
   vim.validate('options', opts, 'table', true)
@@ -116,14 +136,21 @@ function M.on_code_action_results(results, opts)
     end
   end
 
+  -- print(vim.inspect(actions))
   -- ===== Sort actions =====
   table.sort(actions, function(a, b)
+    --  obviusly, these actions are sorted using my
+    --  preferences
+    local pa, pb = get_priority(a), get_priority(b)
+    if pa ~= pb then
+      return pa < pb
+    end
     if a.action.isPreferred then
-      return true
+      return false
     end
 
     if b.action.isPreferred then
-      return false
+      return true
     end
 
     local kind_a = a.action.kind or ""
@@ -142,6 +169,7 @@ function M.on_code_action_results(results, opts)
     return
   end
 
+
   ---@param action lsp.Command|lsp.CodeAction
   ---@param client vim.lsp.Client
   ---@param ctx lsp.HandlerContext
@@ -156,6 +184,7 @@ function M.on_code_action_results(results, opts)
       client:exec_cmd(command, ctx)
     end
   end
+
 
   ---@param choice {action: lsp.Command|lsp.CodeAction, ctx: lsp.HandlerContext}
   local function on_user_choice(choice)

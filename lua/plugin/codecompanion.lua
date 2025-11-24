@@ -90,10 +90,10 @@ require("codecompanion").setup({
       adapter = "copilot",
     },
     inline = {
-      adapter = "gemini",
+      adapter = "copilot",
     },
     agent = {
-      adapter = "gemini",
+      adapter = "copilot",
     },
   },
   adapters = {
