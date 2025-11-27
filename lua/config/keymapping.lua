@@ -199,7 +199,7 @@ map('n', '<space>re', vim.lsp.buf.rename,
   { silent = true, nowait = true, desc = "Rename all references to the symbol under the cursor" })
 
 -- ==================== Flutter ====================
-map('n', '<space>r', '<cmd>FlutterRun<cr>', { desc = 'Run your flutter app', silent = true, nowait = true })
+map('n', '<leader>fr', '<cmd>FlutterRun<cr>', { desc = 'Run your flutter app', silent = true, nowait = true })
 map('n', '<leader>q', '<cmd>FlutterQuit<cr>', { desc = 'Stop your flutter app', silent = true, nowait = true })
 map('n', '<leader>re', '<cmd>FlutterReload<cr>', { desc = 'Run hot reload', silent = true, nowait = true })
 map('n', '<leader>rf', '<cmd>FlutterRestart<cr>', { desc = 'Run Full Restart of the app', silent = true, nowait = true })
