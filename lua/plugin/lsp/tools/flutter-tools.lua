@@ -10,20 +10,20 @@ function M.setup(capabilties)
       -- This determines whether notifications are show with `vim.notify` or with the plugin's custom UI
       -- please note that this option is eventually going to be deprecated and users will need to
       -- depend on plugins like `nvim-notify` instead.
-      notification_style = 'native' -- | 'plugin'
+      notification_style = 'plugin' -- | 'plugin'
     },
     decorations = {
       statusline = {
         -- set to true to be able use the 'flutter_tools_decorations.app_version' in your statusline
         -- this will show the current version of the flutter app from the pubspec.yaml file
-        app_version = true,
+        app_version = false,
         -- set to true to be able use the 'flutter_tools_decorations.device' in your statusline
         -- this will show the currently running device if an application was started with a specific
         -- device
-        device = true,
+        device = false,
         -- set to true to be able use the 'flutter_tools_decorations.project_config' in your statusline
         -- this will show the currently selected project configuration
-        project_config = true,
+        project_config = false,
       }
     },
     debugger = { -- integrate with nvim dap + install dart code debugger
@@ -46,12 +46,12 @@ function M.setup(capabilties)
     root_patterns = { ".git", ".dart_tools", "pubspec.yaml", ".flutter_dependencies" }, -- patterns to find the root of your flutter project
     fvm = false,                                                                        -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
     widget_guides = {
-      enabled = true,
+      enabled = false,
     },
     closing_tags = {
       highlight = "Comment", -- highlight for the closing tag
       prefix = "» ",         -- character to use for close tag e.g. > Widget
-      priority = 10,         -- priority of virtual text in current line
+      priority = 99,         -- priority of virtual text in current line
       -- consider to configure this when there is a possibility of multiple virtual text items in one line
       -- see `priority` option in |:help nvim_buf_set_extmark| for more info
       enabled = true -- set to false to disable
@@ -86,11 +86,11 @@ function M.setup(capabilties)
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         client.server_capabilities.inlayHintProvider = {
           resolveProvider = true,
-          workDoneProgress = true,
+          -- workDoneProgress = true,
         }
-        if client.server_capabilities["documentSymbolProvider"] then
-          require("nvim-navic").attach(client, bufnr)
-        end
+        -- if client.server_capabilities["documentSymbolProvider"] then
+        --   require("nvim-navic").attach(client, bufnr)
+        -- end
       end,
       capabilities = capabilties, -- e.g. lsp_status capabilities
       settings = {

@@ -9,7 +9,7 @@ end
 
 -- ==================== UI/Visual ====================
 vim.o.mousemoveevent = true
-vim.o.relativenumber = true
+vim.o.relativenumber = false
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.scrolloff = 8

@@ -3,7 +3,6 @@ local compare = require('cmp.config.compare')
 
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
-local tailwind_formatter = require('tailwindcss-colorizer-cmp')
 require("luasnip.loaders.from_vscode").lazy_load()
 
 local symbols_formatter = lspkind.cmp_format({
@@ -109,10 +108,7 @@ cmp.setup({
     expandable_indicator = true,
     fields = { 'kind', 'abbr', 'menu' },
     format = function(entry, item)
-      local effective_format = symbols_formatter(entry, item)
-      local colored_item = tailwind_formatter.formatter(entry, effective_format)
-      colored_item.kind = colored_item.kind .. " "
-      return colored_item
+      return symbols_formatter(entry, item)
     end
   },
 })

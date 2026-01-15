@@ -2,7 +2,7 @@ local telescope = require('telescope')
 
 telescope.load_extension("notify")
 telescope.load_extension("flutter")
-telescope.load_extension('media_files')
+-- telescope.load_extension('media_files')
 telescope.load_extension('dap')
 
 local dap = require('telescope.builtin')

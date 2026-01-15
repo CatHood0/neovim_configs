@@ -15,11 +15,10 @@ local function get_priority(op)
   end
   if title:lower():match("^import") or op.action.kind:lower():match("^quickfix.import") then
     return 0
+  elseif title:lower():match("^make") or title:lower():match("^replace") then
+    return 0
   elseif title:lower():match("^add") then
     return 1
-    -- for me, ignore is my last option
-  elseif title:lower():match("^ignore") then
-    return 2
   else
     return 2
   end
@@ -159,9 +158,7 @@ function M.on_code_action_results(results, opts)
       return kind_a < kind_b
     end
 
-    local title_a = a.action.title or ""
-    local title_b = b.action.title or ""
-    return title_a:lower() < title_b:lower()
+    return false
   end)
 
   if #actions == 0 then

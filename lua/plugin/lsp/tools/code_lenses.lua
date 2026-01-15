@@ -3,7 +3,7 @@ local SymbolKind = vim.lsp.protocol.SymbolKind
 
 function M.setup()
   require 'lsp-lens'.setup({
-    enable = true,
+    enable = false,
     include_declaration = false, -- Reference include declaration
     sections = {                 -- Enable / Disable specific request, formatter example looks 'Format Requests'
       definition = function(count)

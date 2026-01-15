@@ -78,23 +78,23 @@ return {
       ignore = { filetypes = {}, buftypes = {} },
     }
   },
-  { 'mbbill/undotree' },
+  -- { 'mbbill/undotree' },
   -- This fix an issue with the foldColumn
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {}
   },
-  {
-    "3rd/image.nvim",
-    event = "VeryLazy",
-  },
+  -- {
+  --   "3rd/image.nvim",
+  --   event = "VeryLazy",
+  -- },
   { "SmiteshP/nvim-navic" },
   {
     'catgoose/nvim-colorizer.lua',
     event = "VeryLazy",
   },
-  { 'nvim-telescope/telescope-media-files.nvim', dependencies = 'nvim-lua/popup.nvim' },
+  -- { 'nvim-telescope/telescope-media-files.nvim', dependencies = 'nvim-lua/popup.nvim' },
   -- Status line and dashboard
   {
     'nvim-lualine/lualine.nvim',
@@ -105,7 +105,7 @@ return {
   },
   { "goolord/alpha-nvim" },
   { 'nvim-tree/nvim-web-devicons' },
-  { 'echasnovski/mini.nvim',                     version = '*' },
+  { 'echasnovski/mini.nvim',      version = '*' },
   { 'MunifTanjim/nui.nvim' },
 
   -- 3. NAVIGATION AND SEARCH
@@ -148,12 +148,6 @@ return {
     end,
     dependencies = {
       'junegunn/fzf.vim'
-    }
-  },
-  {
-    'junegunn/fzf.vim',
-    dependencies = {
-      'junegunn/fzf'
     }
   },
   {
@@ -225,7 +219,7 @@ return {
           -- require('hover.providers.gh_user')
           require("hover.providers.lsp")
           -- require('hover.providers.dap')
-          require('hover.providers.diagnostic')
+          -- require('hover.providers.diagnostic')
           -- require('hover.providers.highlight')
         end,
         preview_opts = require('plugin.lsp.lsp').hover_opts,
@@ -233,7 +227,7 @@ return {
         title = false,
         mouse_providers = {
           'hover.providers.lsp',
-          'hover.providers.diagnostic'
+          -- 'hover.providers.diagnostic'
         },
         mouse_delay = 1000,
       })
@@ -249,13 +243,13 @@ return {
       'hrsh7th/cmp-cmdline',
       'saadparwaiz1/cmp_luasnip',
       'rafamadriz/friendly-snippets',
-      'tronikelis/ts-autotag.nvim',
-      { 'roobert/tailwindcss-colorizer-cmp.nvim' },
+      -- 'tronikelis/ts-autotag.nvim',
+      -- { 'roobert/tailwindcss-colorizer-cmp.nvim' },
     },
   },
 
 
-  { 'mfussenegger/nvim-jdtls' },
+  -- { 'mfussenegger/nvim-jdtls' },
   -- required for nvim-jdtls
   -- see the java section in the README
   {
@@ -269,14 +263,16 @@ return {
   -- we use schemas for jsonls and yamlls
   { 'b0o/schemastore.nvim' },
   { 'onsails/lspkind.nvim' },
-  -- {
-  --   "zeioth/garbage-day.nvim",
-  --   dependencies = "neovim/nvim-lspconfig",
-  --   event = "VeryLazy",
-  -- },
+  {
+    "zeioth/garbage-day.nvim",
+    dependencies = "neovim/nvim-lspconfig",
+    event = "VeryLazy",
+  },
   -- Show virtual lines lenses
   { 'VidocqH/lsp-lens.nvim' },
   -- Show hover on CursorHold
+  -- Following either your mouse or your cursor, this plugin provides a custom floating (popup) window that displays
+  -- any diagnostic (Error, Warning, Hint) returned by the Diagnostic API, along with lsp information returned by the LSP API
   { "soulis-1256/eagle.nvim" },
   {
     'akinsho/flutter-tools.nvim',
@@ -311,7 +307,7 @@ return {
     },
   },
   -- language injection
-  { "TheNoeTrevino/roids.nvim" },
+  -- { "TheNoeTrevino/roids.nvim" },
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
@@ -367,6 +363,7 @@ return {
   -- Pairs and surrounds
   {
     'altermo/ultimate-autopair.nvim',
+    event = { 'InsertEnter', 'CmdlineEnter' },
     branch = 'v0.6',
     config = function()
       -- require('ultimate-autopair').setup()
@@ -397,7 +394,23 @@ return {
   },
 
   -- Cursor and editing UI
-  { 'mg979/vim-visual-multi', },
+  {
+    "smoka7/multicursors.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      'nvimtools/hydra.nvim',
+    },
+    opts = {},
+    cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
+    keys = {
+      {
+        mode = { 'v', 'n' },
+        '<Leader>m',
+        '<cmd>MCstart<cr>',
+        desc = 'Create a selection for selected text or word under the cursor',
+      },
+    },
+  },
 
   -- Cursor highlighting
   {
@@ -416,9 +429,6 @@ return {
       -- require('toggleterm').setup()
     end
   },
-
-  -- 8. TESTING
-  { 'vim-test/vim-test' },
 
   -- 9. UTILITIES AND PRODUCTIVITY
   -- Sessions and project management
@@ -472,7 +482,7 @@ return {
           custom_commentstring = nil,
 
           -- Whether to ignore blank lines in actions and textobject
-          ignore_blank_line = false,
+          ignore_blank_line = true,
 
           -- Whether to recognize as comment only lines without indent
           start_of_line = false,
@@ -508,8 +518,8 @@ return {
       })
     end,
   },
-  {
-    'iamcco/markdown-preview.nvim',
-    build = 'cd app && npx --yes yarn install'
-  }
+  -- {
+  --   'iamcco/markdown-preview.nvim',
+  --   build = 'cd app && npx --yes yarn install'
+  -- }
 }

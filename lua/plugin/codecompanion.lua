@@ -12,9 +12,9 @@ require("codecompanion").setup({
         -- Number of days after which chats are automatically deleted (0 to disable)
         expiration_days = 0,
         -- Picker interface (auto resolved to a valid picker)
-        picker = "telescope",       --- ("telescope", "snacks", "fzf-lua", or "default")
+        picker = "telescope", --- ("telescope", "snacks", "fzf-lua", or "default")
         ---Optional filter function to control which chats are shown when browsing
-        chat_filter = nil,          -- function(chat_data) return boolean end
+        chat_filter = nil,    -- function(chat_data) return boolean end
         -- Customize picker keymaps (optional)
         picker_keymaps = {
           rename = { n = "r", i = "<M-r>" },
@@ -26,12 +26,14 @@ require("codecompanion").setup({
         title_generation_opts = {
           ---Adapter for generating titles (defaults to current chat adapter)
           adapter = "copilot",                     -- "copilot"
+          -- adapter = "gemini", -- "copilot"
           ---Model for generating titles (defaults to current chat model)
           model = 'gpt-5-mini',                       -- "gpt-4o"
+          -- model = 'gemini-2.5-flash',  -- "gpt-4o"
           ---Number of user prompts after which to refresh the title (0 to disable)
-          refresh_every_n_prompts = 0,       -- e.g., 3 to refresh after every 3rd user prompt
+          refresh_every_n_prompts = 0, -- e.g., 3 to refresh after every 3rd user prompt
           ---Maximum number of times to refresh the title (default: 3)
-          max_refreshes = 3,
+          max_refreshes = 2,
           format_title = function(original_title)
             -- this can be a custom function that applies some custom
             -- formatting to the title.
@@ -49,19 +51,19 @@ require("codecompanion").setup({
 
         -- Summary system
         summary = {
-          -- Keymap to generate summary for current chat (default: "gcs")
-          create_summary_keymap = "gcs",
-          -- Keymap to browse summaries (default: "gbs")
-          browse_summaries_keymap = "gbs",
+          create_summary_keymap = "gfs",
+          browse_summaries_keymap = "gfb",
 
           generation_opts = {
             adapter = 'copilot',                     -- defaults to current chat adapter
+            -- adapter = "gemini",      -- "copilot"
             model = 'gpt-5-mini',                       -- defaults to current chat model
-            context_size = 90000,              -- max tokens that the model supports
-            include_references = true,         -- include slash command content
-            include_tool_outputs = true,       -- include tool execution results
-            system_prompt = nil,               -- custom system prompt (string or function)
-            format_summary = nil,              -- custom function to format generated summary e.g to remove <think/> tags from summary
+            -- model = 'gemini-2.5-flash',  -- "gpt-4o"
+            context_size = 90000,        -- max tokens that the model supports
+            include_references = true,   -- include slash command content
+            include_tool_outputs = true, -- include tool execution results
+            system_prompt = nil,         -- custom system prompt (string or function)
+            format_summary = nil,        -- custom function to format generated summary e.g to remove <think/> tags from summary
           },
         },
 
@@ -86,6 +88,17 @@ require("codecompanion").setup({
     }
   },
   strategies = {
+    -- chat = {
+    --   adapter = "gemini",
+    --   model = "gemini-2.5-pro",
+    -- },
+    -- inline = {
+    --   adapter = "gemini",
+    -- },
+    -- agent = {
+    --   adapter = "gemini",
+    --   model = "gemini-2.5-pro",
+    -- },
     chat = {
       adapter = "copilot",
     },

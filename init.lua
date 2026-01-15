@@ -27,7 +27,7 @@ require('plugin.eagle')
 require('plugin.gitsigns')
 require('plugin.indent_line')
 require('plugin.lualine')
-require('plugin.ts_autotag')
+-- require('plugin.ts_autotag')
 -- Just use this plugin when you have kitty terminal
 -- and imagemagick and libmagickwand-dev installed
 -- require('plugin.image')
@@ -49,10 +49,13 @@ require('plugin.persistent_breakpoints')
 
 require('core.live_server.live_server')
 -- Load corese
+-- TODO: probably we will need to use vim columns and rows
+-- to know what amount of the winbar we can show and clamp to fit correctly
+-- the window size
 require('core.winbar.nbreadcrumbs').setup({
   enabled = true,
   separator = "»",
-  max_string_length = 13,
+  max_string_length = 40,
   show_diagnostic = true,
   depth = {
     separator = "",
