@@ -19,6 +19,9 @@ local function get_priority(op)
     return 0
   elseif title:lower():match("^add") then
     return 1
+    -- for me, ignore is my last option
+  elseif title:lower():match("^ignore") or op.action.kind:lower():match("^quickfix.ignore") then
+    return 2
   else
     return 2
   end
@@ -158,7 +161,9 @@ function M.on_code_action_results(results, opts)
       return kind_a < kind_b
     end
 
-    return false
+    local title_a = a.action.title or ""
+    local title_b = b.action.title or ""
+    return title_a:lower() < title_b:lower()
   end)
 
   if #actions == 0 then

@@ -75,30 +75,30 @@ map("n", "<leader>ns", '<cmd>Neotest summary<cr>', { silent = true, desc = 'Neot
 
 -- ==================== Debugging ====================
 -- nvim-dap
-map('n', '<leader>t', function()
-  require('persistent-breakpoints.api').toggle_breakpoint()
-end, { silent = true, desc = "Debug: Toggle Breakpoint" })
-map('n', '<leader>w', function()
-  require('persistent-breakpoints.api').set_log_point()
-end, { silent = true, desc = "Debug: Toggle Log Point" })
-map('n', '<F1>', '<cmd>DapContinue<cr>', { silent = true, desc = 'Debug: Start/Continue' })
-map('n', '<F2>', '<cmd>DapStepInto<cr>', { silent = true, desc = 'Debug: Step Into' })
-map('n', '<F3>', '<cmd>DapStepOver<cr>', { silent = true, desc = 'Debug: Step Over' })
-map('n', '<F4>', '<cmd>DapStepOut<cr>', { silent = true, desc = 'Debug: Step Out' })
-map('n', '<F5>', '<cmd>DapDisconnect<cr>', { silent = true, desc = "Ends dap debugging process" })
-map('n', '<F8>', function()
-  require("persistent-breakpoints.api").clear_breakpoints()
-end, { silent = true, desc = "Ends dap debugging process" })
-map('n', '<leader>b',
-  function()
-    require('persistent-breakpoints.api').set_conditional_breakpoint()
-  end,
-  {
-    silent = true,
-    desc = 'Debug: Toggle Conditional Breakpoint'
-  })
+-- map('n', '<leader>t', function()
+--   require('persistent-breakpoints.api').toggle_breakpoint()
+-- end, { silent = true, desc = "Debug: Toggle Breakpoint" })
+-- map('n', '<leader>w', function()
+--   require('persistent-breakpoints.api').set_log_point()
+-- end, { silent = true, desc = "Debug: Toggle Log Point" })
+-- map('n', '<F1>', '<cmd>DapContinue<cr>', { silent = true, desc = 'Debug: Start/Continue' })
+-- map('n', '<F2>', '<cmd>DapStepInto<cr>', { silent = true, desc = 'Debug: Step Into' })
+-- map('n', '<F3>', '<cmd>DapStepOver<cr>', { silent = true, desc = 'Debug: Step Over' })
+-- map('n', '<F4>', '<cmd>DapStepOut<cr>', { silent = true, desc = 'Debug: Step Out' })
+-- map('n', '<F5>', '<cmd>DapDisconnect<cr>', { silent = true, desc = "Ends dap debugging process" })
+-- map('n', '<F8>', function()
+--   require("persistent-breakpoints.api").clear_breakpoints()
+-- end, { silent = true, desc = "Ends dap debugging process" })
+-- map('n', '<leader>b',
+--   function()
+--     require('persistent-breakpoints.api').set_conditional_breakpoint()
+--   end,
+--   {
+--     silent = true,
+--     desc = 'Debug: Toggle Conditional Breakpoint'
+--   })
 -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-map('n', '<F7>', require('dapui').toggle, { silent = true, desc = 'Debug: See last session result.' })
+-- map('n', '<F7>', require('dapui').toggle, { silent = true, desc = 'Debug: See last session result.' })
 
 
 -- ==================== File Operations ====================
@@ -187,8 +187,7 @@ map('n', '<space>pu', vim.cmd.UndotreeToggle)
 -- Setup keymaps
 map("n", "<space>w", require("hover").hover, { desc = "hover.nvim" })
 map('n', '<MouseMove>', require('hover').hover_mouse, { desc = "hover.nvim (mouse)" })
-map('n', '<space>ca', sorted_actions.code_action, { silent = true, desc = "Code actions" })
-map('x', '<space>ca', sorted_actions.code_action, { silent = true, desc = "Code actions" })
+map('n', '<space>ca', vim.lsp.buf.code_action, { silent = true, desc = "Code actions" })
 map('n', '<space>fi', '<cmd>Trouble diagnostics toggle focus=true<cr>', { silent = true, desc = "Toggle diagnostics" })
 map('n', '<C-d>d', vim.lsp.buf.definition, { silent = true, nowait = true, desc = "Go to definition" })
 map('n', '<C-d>i', vim.lsp.buf.type_definition, { silent = true, nowait = true, desc = "Go to type definition" })

@@ -10,13 +10,36 @@ null_ls.setup({
     -- Diagnostics,
     diag.ltrs,
     diag.hadolint,
+    -- Formatting
+    format.prettier.with({
+      filetypes = {
+        "javascript",
+        "typescript",
+        "typescriptreact",
+        "javascriptreact",
+        "vue",
+        "css",
+        "scss",
+        "html",
+        "json",
+        "yaml",
+      },
+      extra_args = { "--single-quote", "--jsx-single-quote" },
+    }),
     format.bibclean,
     format.stylua,
+    format.yamlfmt,
     format.clang_format,
     format.cmake_format.with {
       cmd = "cmake-format",
     },
+    format.shfmt.with {
+      args = { "-s", "-i", "4" },
+    },
+    format.uncrustify,
     -- Actions
     actions.gitsigns,
+    -- Completions
+    completion.spell,
   },
 })

@@ -3,14 +3,14 @@ local telescope = require('telescope')
 telescope.load_extension("notify")
 telescope.load_extension("flutter")
 -- telescope.load_extension('media_files')
-telescope.load_extension('dap')
+-- telescope.load_extension('dap')
 
-local dap = require('telescope.builtin')
+-- local dap = require('telescope.builtin')
 
-vim.keymap.set('n', '<leader>db', function() dap.list_breakpoints() end, { desc = "List DAP Breakpoints" })
-vim.keymap.set('n', '<leader>dc', function() dap.commands() end, { desc = "DAP Commands" })
-vim.keymap.set('n', '<leader>df', function() dap.configurations() end, { desc = "DAP Configurations" })
-vim.keymap.set('n', '<leader>dv', function() dap.variables() end, { desc = "DAP Variables" })
+-- vim.keymap.set('n', '<leader>db', function() dap.list_breakpoints() end, { desc = "List DAP Breakpoints" })
+-- vim.keymap.set('n', '<leader>dc', function() dap.commands() end, { desc = "DAP Commands" })
+-- vim.keymap.set('n', '<leader>df', function() dap.configurations() end, { desc = "DAP Configurations" })
+-- vim.keymap.set('n', '<leader>dv', function() dap.variables() end, { desc = "DAP Variables" })
 
 telescope.setup {
   extensions = {
