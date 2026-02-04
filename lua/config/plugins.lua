@@ -229,6 +229,7 @@ return {
       "hrsh7th/cmp-cmdline",
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
+      "roobert/tailwindcss-colorizer-cmp.nvim",
     },
   },
 
@@ -301,7 +302,7 @@ return {
           -- current_win_mode return currently opened panel, split or popup
           -- qt.run_line()
           -- You can force open split or popup like this:
-          qt.run_line('split')
+          qt.run_line("split")
           -- qt.run_line('popup')
         end,
         desc = "[T]est Run [L]line",
@@ -442,7 +443,13 @@ return {
       -- require('mini.cursorword').setup()
     end,
   },
-  -- { 'sphamba/smear-cursor.nvim' },
+  { "sphamba/smear-cursor.nvim" },
+  {
+    "rachartier/tiny-glimmer.nvim",
+    event = "VeryLazy",
+    priority = 10,
+  },
+  { "windwp/nvim-ts-autotag" },
   {
     "mg979/vim-visual-multi",
     branch = "master",

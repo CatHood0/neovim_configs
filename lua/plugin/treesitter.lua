@@ -48,9 +48,6 @@ require("nvim-treesitter.configs").setup({
     enable = true,
     disable = {},
   },
-  autotag = {
-    enable = true,
-  },
   move = {
     enable = true,
     set_jumps = true, -- whether to set jumps in the jumplist
@@ -79,44 +76,3 @@ vim.treesitter.language.register('markdown', 'vimwiki')
 -- })
 
 vim.api.nvim_set_hl(0, "TreesitterContext", { link = "Normal" })
-
--- require("nvim-treesitter").install {
---   'lua',
---   'vim',
---   'dart',
---   'vimdoc',
---   'regex',
---   'javascript',
---   'typescript',
---   'css',
---   'html',
---   'rust',
---   'kotlin',
---   'c',
---   'cpp',
---   'xml',
---   'sql',
---   'toml',
---   'go',
---   'gomod',
---   'gosum',
---   'json',
---   'markdown',
---   'markdown_inline',
---   'tsx',
---   'java',
---   'fish',
---   'php',
---   'dockerfile',
---   'gitignore',
---   'python',
---   'csv',
---   'yaml',
--- }
---
--- vim.treesitter.language.register('markdown', 'vimwiki')
--- -- require('render-markdown').setup({
--- --   file_types = { 'markdown', 'vimwiki' },
--- -- })
---
--- vim.api.nvim_set_hl(0, "TreesitterContext", { link = "Normal" })
