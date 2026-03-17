@@ -1,9 +1,9 @@
-local cmp = require('cmp')
-local compare = require('cmp.config.compare')
+local cmp = require("cmp")
+local compare = require("cmp.config.compare")
 
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
-local tailwind_formatter = require('tailwindcss-colorizer-cmp')
+local tailwind_formatter = require("tailwindcss-colorizer-cmp")
 require("luasnip.loaders.from_vscode").lazy_load()
 
 local symbols_formatter = lspkind.cmp_format({
@@ -40,8 +40,8 @@ cmp.setup({
   -- default config
   view = {
     entries = {
-      name = 'custom',
-      selection_order = 'top_down',
+      name = "custom",
+      selection_order = "top_down",
       follow_cursor = false,
     },
     docs = {
@@ -59,17 +59,17 @@ cmp.setup({
   -- the suggestion floating menu UI configs
   window = {
     completion = cmp.config.window.bordered({
-      border = 'none', -- 'single', 'double', 'rounded', 'none'
-      winhighlight = 'FloatBorder:Pmenu,Normal:Pmenu,CursorLine:PmenuSel',
+      border = "none", -- 'single', 'double', 'rounded', 'none'
+      winhighlight = "FloatBorder:Pmenu,Normal:Pmenu,CursorLine:PmenuSel",
       scrollbar = true,
       max_width = 50,
-      max_height = 5,
+      max_height = 20,
       side_padding = 1,
     }),
     documentation = cmp.config.window.bordered({
-      border = 'rounded', -- 'single', 'double', 'rounded', 'none'
+      border = "rounded", -- 'single', 'double', 'rounded', 'none'
       -- winhighlight = 'FloatBorder:FloatBorder,Normal:CmpPmenu',
-      winhighlight = 'FloatBorder:Pmenu,Normal:Pmenu,CursorLine:PmenuSel',
+      winhighlight = "FloatBorder:Pmenu,Normal:Pmenu,CursorLine:PmenuSel",
       scrollbar = true,
       max_width = 50,
       max_height = 20,
@@ -82,56 +82,58 @@ cmp.setup({
     end,
   },
   mapping = {
-    ['<C-m>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-p>'] = cmp.mapping.scroll_docs(4),
-    ['<C-space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm {
+    ["<C-m>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-p>"] = cmp.mapping.scroll_docs(4),
+    ["<C-space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
-    },
-    ['<C-j>'] = cmp.mapping.select_next_item(),
-    ['<down>'] = cmp.mapping.select_next_item(),
-    ['<C-k>'] = cmp.mapping.select_prev_item(),
-    ['<up>'] = cmp.mapping.select_prev_item(),
+    }),
+    ["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<down>"] = cmp.mapping.select_next_item(),
+    ["<C-k>"] = cmp.mapping.select_prev_item(),
+    ["<up>"] = cmp.mapping.select_prev_item(),
   },
   -- sources for autocompletion
   sources = {
     -- per_filetype = {
     --   codecompanion = { "codecompanion" },
     -- },
-    { name = 'nvim_lsp', priority = 1000 },
-    { name = 'luasnip',  priority = 750 },
+    { name = "nvim_lsp", priority = 1000 },
+    { name = "luasnip",  priority = 750 },
     { name = "buffer",   priority = 500 },
     { name = "path",     priority = 250 },
   },
   formatting = {
     expandable_indicator = true,
-    fields = { 'kind', 'abbr', 'menu' },
+    fields = { "kind", "abbr", "menu" },
     format = function(entry, item)
       local effective_format = symbols_formatter(entry, item)
       local colored_item = tailwind_formatter.formatter(entry, effective_format)
-      colored_item.kind = colored_item.kind .. " "
+      if colored_item == nil or colored_item.kind == nil then
+        return effective_format
+      end
       return colored_item
-    end
+    end,
   },
 })
 
-cmp.setup.cmdline({ '/', '?' }, {
+cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = 'buffer' }
-  }
+    { name = "buffer" },
+  },
 })
 
-cmp.setup.cmdline(':', {
+cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = 'path' }
+    { name = "path" },
   }, {
-    { name = 'cmdline' }
+    { name = "cmdline" },
   }),
-  matching = { disallow_symbol_nonprefix_matching = false }
+  matching = { disallow_symbol_nonprefix_matching = false },
 })
 
 -- cmp.setup.filetype({ "dap-repl", "dapui_watches" }, {
@@ -143,9 +145,9 @@ cmp.setup.cmdline(':', {
 -- })
 
 -- Deshabilitar autocompletado en ciertos tipos de buffers
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'TelescopePrompt', 'neo-tree', 'qf' },
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "TelescopePrompt", "neo-tree", "qf" },
   callback = function()
     cmp.setup.buffer({ enabled = false })
-  end
+  end,
 })

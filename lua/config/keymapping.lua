@@ -63,12 +63,12 @@ map('n', '<C-q>v', '<cmd>split<cr>', { silent = true, desc = "Open a new horizon
 -- })
 
 -- ==================== Testing ====================
-map('n', '<leader>g', '<cmd>TestFile<cr>', { silent = true, nowait = false })
+map('n', '<leader>tf', '<cmd>TestFile<cr>', { silent = true, nowait = false })
 -- map('n', '<leader>tn', '<cmd>TestNearest<cr>', { silent = true, nowait = true })
 -- map('n', '<leader>a', '<cmd>TestSuite<cr>', { silent = true })
-map('n', '<leader>l', '<cmd>TestLast<cr>', { silent = true })
-map("n", "<leader>ls", '<cmd>LiveServerStart<cr>', { silent = true, desc = 'Server: Toggle Live Server' })
-map("n", "<leader>lc", '<cmd>LiveServerClose<cr>', { silent = true, desc = 'Server: Close Live Server' })
+map('n', '<leader>tl', '<cmd>TestLast<cr>', { silent = true })
+map("n", "<leader>lss", '<cmd>LiveServerStart<cr>', { silent = true, desc = 'Server: Toggle Live Server' })
+map("n", "<leader>lsc", '<cmd>LiveServerClose<cr>', { silent = true, desc = 'Server: Close Live Server' })
 map("n", "<leader>nt", '<cmd>Neotest run file<cr>', { silent = true, desc = 'Neotest: Run file tests' })
 map("n", "<leader>nn", '<cmd>Neotest stop<cr>', { silent = true, desc = 'Neotest: Stop running of test' })
 map("n", "<leader>ns", '<cmd>Neotest summary<cr>', { silent = true, desc = 'Neotest: Toggle summary' })
@@ -179,6 +179,7 @@ map('n', '<space>ph', '<cmd>DiffviewFileHistory<cr>',
   { silent = true, desc = "Open history of the differences of the file" })
 map('n', '<space>gi', '<cmd>Neogit<cr>', { silent = true, desc = "Open Neogit popup" })
 map('n', '<space>pu', vim.cmd.UndotreeToggle)
+map('n', '<leader>lg', '<cmd>LazyGit<cr>', { silent = true, desc = "Open LazyGit popup" })
 
 -- ==================== LSP Mappings ====================
 -- This original map works good, but, does not show diagnostics when required.
@@ -187,7 +188,7 @@ map('n', '<space>pu', vim.cmd.UndotreeToggle)
 -- Setup keymaps
 map("n", "<space>w", require("hover").hover, { desc = "hover.nvim" })
 map('n', '<MouseMove>', require('hover').hover_mouse, { desc = "hover.nvim (mouse)" })
-map('n', '<space>ca', vim.lsp.buf.code_action, { silent = true, desc = "Code actions" })
+map('n', '<space>ca', sorted_actions.code_action, { silent = true, desc = "Code actions" })
 map('n', '<space>fi', '<cmd>Trouble diagnostics toggle focus=true<cr>', { silent = true, desc = "Toggle diagnostics" })
 map('n', '<C-d>d', vim.lsp.buf.definition, { silent = true, nowait = true, desc = "Go to definition" })
 map('n', '<C-d>i', vim.lsp.buf.type_definition, { silent = true, nowait = true, desc = "Go to type definition" })

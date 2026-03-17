@@ -1,9 +1,9 @@
 local null_ls = require("null-ls")
 local builtins = null_ls.builtins
 local format = builtins.formatting
-local actions = builtins.code_actions
+-- local actions = builtins.code_actions
 local diag = builtins.diagnostics
-local completion = builtins.completion
+-- local completion = builtins.completion
 
 null_ls.setup({
   sources = {
@@ -38,8 +38,8 @@ null_ls.setup({
     },
     format.uncrustify,
     -- Actions
-    actions.gitsigns,
+    -- actions.gitsigns,
     -- Completions
-    completion.spell,
+    -- completion.spell,
   },
 })

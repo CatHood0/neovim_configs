@@ -7,7 +7,7 @@ local flutter_setup = require("plugin.lsp.tools.flutter-tools")
 local diagnostics = require("plugin.lsp.configs.lsp_diagnostics_configs")
 local servers = require("plugin.lsp.configs.languages")
 local lspconfig = require("lspconfig")
-local lsp_utils = require('lspconfig.util')
+local lsp_utils = require("lspconfig.util")
 local default_capabilities = require("plugin.lsp.configs.capabilities")
 require("plugin.lsp.tools.none_ls")
 
@@ -23,7 +23,7 @@ function M.setup()
 
   utils.create_autocmds()
   vim.lsp.enable(servers.languages)
-  require('plugin.colorizer')
+  require("plugin.colorizer")
 end
 
 function M.config_lsp_langs(capabilities)
@@ -35,22 +35,32 @@ function M.config_lsp_langs(capabilities)
       end
     end,
     settings = {
-      tailwindCSS = {
+      tailwindcss = {
         experimental = {
           classRegex = {
-            "tw`([^`]*)",           -- Ej: tw`text-red-500`
-            "className=\"([^\"]*)", -- HTML/JSX
-            "class:\\s*\"([^\"]*)", -- Clases dinámicas
-            "classList=\\s*\"([^\"]*)",
-            "cn\\(([^)]*)\\)",      -- Soporte para librerías como `classnames`
+            "tw`([^`]*)",   -- Ej: tw`text-red-500`
+            'className="([^"]*)', -- HTML/JSX
+            'class:\\s*"([^"]*)', -- Clases dinámicas
+            'classList=\\s*"([^"]*)',
+            "cn\\(([^)]*)\\)", -- Soporte para librerías como `classnames`
           },
         },
-        emmetCompletions = true, -- Habilita autocompletado tipo Emmet
       },
     },
     filetypes = {
-      "html", "javascript", "javascriptreact", "typescript", "typescriptreact",
-      "svelte", "vue", "astro", "php", "blade", "twig", "markdown", "mdx"
+      "html",
+      "js",
+      "jsx",
+      "ts",
+      "tsx",
+      "svelte",
+      "vue",
+      "astro",
+      "php",
+      "blade",
+      "twig",
+      "markdown",
+      "mdx",
     },
   })
 
@@ -74,7 +84,28 @@ function M.config_lsp_langs(capabilities)
           -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
           url = "",
         },
-        schemas = require('schemastore').yaml.schemas(),
+        schemas = require("schemastore").yaml.schemas(),
+      },
+    },
+  })
+
+  vim.lsp.config("rust_analyzer", {
+    on_attach = function(client, bufnr)
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      if client.server_capabilities["documentSymbolProvider"] then
+        require("nvim-navic").attach(client, bufnr)
+      end
+    end,
+    capabilities = capabilities,
+    settings = {
+      ["rust-analyzer"] = {
+        checkOnSave = { command = "clippy" },
+        cargo = { allFeatures = true },
+        procMacro = { enable = true },
+        files = {
+          exclude = { ".git", "target", "node_modules" },
+          watcher = "client",
+        },
       },
     },
   })
@@ -88,21 +119,21 @@ function M.config_lsp_langs(capabilities)
     capabilities = capabilities,
     settings = {
       jsonls = {
-        schemas = require('schemastore').json.schemas(),
+        schemas = require("schemastore").json.schemas(),
         validate = { enable = true },
       },
     },
   })
 
-  vim.lsp.config('lua_ls', {
+  vim.lsp.config("lua_ls", {
     capabilities = capabilities,
     on_attach = function(client, bufnr)
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end,
     settings = {
       Lua = {
-        runtime = { version = 'LuaJIT' },
-        diagnostics = { globals = { 'vim' } },
+        runtime = { version = "LuaJIT" },
+        diagnostics = { globals = { "vim" } },
         workspace = {
           library = vim.env.VIMRUNTIME,
           checkThirdParty = false,
@@ -110,17 +141,17 @@ function M.config_lsp_langs(capabilities)
         hint = {
           enable = true,
           arrayIndex = "Enable",
-          paramName = "All"
+          paramName = "All",
         },
         telemetry = { enable = false },
         codelens = {
           enable = true,
         },
-      }
-    }
+      },
+    },
   })
 
-  vim.lsp.config('cssls', {
+  vim.lsp.config("cssls", {
     on_attach = function(client, bufnr)
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
       if client.server_capabilities["documentSymbolProvider"] then
@@ -140,7 +171,7 @@ function M.config_lsp_langs(capabilities)
     },
   })
 
-  vim.lsp.config('html', {
+  vim.lsp.config("html", {
     capabilities = capabilities,
     on_attach = function(client, bufnr)
       if client.server_capabilities["documentSymbolProvider"] then
@@ -149,7 +180,7 @@ function M.config_lsp_langs(capabilities)
     end,
   })
 
-  vim.lsp.config('dockerls', {
+  vim.lsp.config("dockerls", {
     capabilities = capabilities,
     on_attach = function(client, bufnr)
       if client.server_capabilities["documentSymbolProvider"] then
@@ -163,16 +194,16 @@ function M.config_lsp_langs(capabilities)
             ignoreMultilineInstructions = true,
           },
         },
-      }
-    }
+      },
+    },
   })
 end
 
 M.hover_opts = {
-  border = 'rounded',
+  border = "rounded",
   max_width = 45,
   max_height = 20,
-  anchor_bias = 'below', --Determines where put the popup: | above | below | auto |
+  anchor_bias = "below", --Determines where put the popup: | above | below | auto |
 }
 
 return {

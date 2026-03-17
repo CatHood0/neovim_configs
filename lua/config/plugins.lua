@@ -162,19 +162,19 @@ return {
     },
   },
   -- { "github/copilot.vim" },
-  -- {
-  --   "olimorris/codecompanion.nvim",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "ravitemer/codecompanion-history.nvim"
-  --   },
-  --   opts = {
-  --     language = "Spanish",
-  --     opts = {
-  --       log_level = "DEBUG", -- or "TRACE"
-  --     },
-  --     },
-  --   },
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "ravitemer/codecompanion-history.nvim",
+    },
+    opts = {
+      language = "Spanish",
+      opts = {
+        log_level = "DEBUG", -- or "TRACE"
+      },
+    },
+  },
 
   -- Window management
   {
@@ -395,6 +395,17 @@ return {
   },
   { "tpope/vim-fugitive" },
   {
+    "kdheepak/lazygit.nvim",
+    lazy = false,
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+  },
+  {
     "lewis6991/gitsigns.nvim",
     config = function()
       -- require('gitsigns').setup()
@@ -444,12 +455,7 @@ return {
     end,
   },
   { "sphamba/smear-cursor.nvim" },
-  {
-    "rachartier/tiny-glimmer.nvim",
-    event = "VeryLazy",
-    priority = 10,
-  },
-  { "windwp/nvim-ts-autotag" },
+  { "tronikelis/ts-autotag.nvim" },
   {
     "mg979/vim-visual-multi",
     branch = "master",

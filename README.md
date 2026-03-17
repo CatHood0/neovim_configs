@@ -64,6 +64,8 @@ sudo apt install libgtk-3-dev
         // Language server for autocompletion and go-to-definition functionality for CSS modules.
         // and CSS variables autocompletion and go-to-definition
         sudo npm install -g cssmodules-language-server css-variables-language-server
+        // for tailwindcss support use this
+        npm install -g tailwindcss-language-server
     ```
 * Java:
     You need to that we use `jdtls` [docs](https://github.com/mfussenegger/nvim-jdtls?tab=readme-ov-file)
@@ -175,6 +177,7 @@ sudo apt install libgtk-3-dev
     1. [adb-device-list-doesnt-show-phone](https://askubuntu.com/questions/863587/adb-device-list-doesnt-show-phone)
     2. [android-adb-no-permissions-for-device](https://stackoverflow.com/questions/77925533/android-adb-no-permissions-for-device)
     3. [setup](https://docs.flutter.dev/platform-integration/linux/setup)
+    4. [Android + Flutter plugin setup](https://github.com/flutter/flutter/issues/46878#issuecomment-566848200)
     ```dart
         // Run:
         sudo apt-get install adb android-tools-adb android-tools-fastboot

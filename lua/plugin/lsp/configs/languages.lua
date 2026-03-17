@@ -1,23 +1,14 @@
 return {
   languages = {
     "lua_ls",
-    -- 'cmake',
-    -- "clangd",
-    -- "rust_analyzer",
     "jsonls",
     "html",
     "ts_ls",
-    "tailwindcss",
     'cssls',
+    "rust_analyzer",
     'css_variables',
     'cssmodules_ls',
-    -- 'gopls',
-    -- 'golangci_lint_ls',
     "jsonls",
-    -- 'dockerls',
-    -- 'nginx_language_server',
-    -- 'docker_language_server',
-    -- 'docker_compose_language_service',
     'yamlls',
   }
 }
