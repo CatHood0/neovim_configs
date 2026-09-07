@@ -1,5 +1,5 @@
 local M = {}
-local cmp_lsp = require('cmp_nvim_lsp')
+local cmp_lsp = require("cmp_nvim_lsp")
 
 function M.get_capabilities()
   -- return vim.lsp.protocol.make_client_capabilities()
@@ -9,17 +9,20 @@ function M.get_capabilities()
     workspace = {
       configuration = true,
       workspaceEdit = {
-        documentChanges = true
-      }
+        documentChanges = true,
+      },
+      didChangeWatchedFiles = {
+        dynamicRegistration = true,
+      },
     },
     textDocument = {
       completion = {
         completionItem = {
           snippetSupport = true,
           resolveSupport = {
-            properties = { "documentation", "detail", "additionalTextEdits" }
-          }
-        }
+            properties = { "documentation", "detail", "additionalTextEdits" },
+          },
+        },
       },
       diagnostic = {
         dynamicRegistration = true,
@@ -34,15 +37,11 @@ function M.get_capabilities()
       foldingRange = {
         dynamicRegistration = false,
         lineFoldingOnly = true,
-      }
-    }
+      },
+    },
   }
   local prot = vim.lsp.protocol.make_client_capabilities()
-  return vim.tbl_deep_extend('force',
-    cmp_lsp.default_capabilities(),
-    prot,
-    custom_capabilities
-  )
+  return vim.tbl_deep_extend("force", cmp_lsp.default_capabilities(), prot, custom_capabilities)
 end
 
 return M

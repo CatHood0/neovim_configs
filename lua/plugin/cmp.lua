@@ -114,7 +114,7 @@ cmp.setup({
       if colored_item == nil or colored_item.kind == nil then
         return effective_format
       end
-      return colored_item
+      return effective_format
     end,
   },
 })

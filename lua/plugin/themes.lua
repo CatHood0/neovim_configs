@@ -1,7 +1,7 @@
 local M = {}
 
 function M.theme()
-  _G.autoInitThemes();
+  _G.autoInitThemes()
   -- vim.cmd.colorscheme "catppuccin"
   -- vim.cmd.colorscheme "palenight"
   -- vim.cmd.colorscheme "srcery"
@@ -16,7 +16,8 @@ function M.theme()
   -- vim.cmd.colorscheme "rose-pine-moon"
   -- vim.cmd.colorscheme "rose-pine-dawn"
   -- vim.cmd.colorscheme "retrobox"
-  vim.cmd.colorscheme "onedark"
+  vim.cmd.colorscheme("onedark")
+  -- vim.cmd.colorscheme("onedark_vivid")
   -- vim.cmd.colorscheme "tokyodark"
   -- vim.cmd.colorscheme "kanagawa-wave"
   -- vim.cmd.colorscheme "kanagawa-dragon"
@@ -123,52 +124,82 @@ function _G.autoInitThemes()
     transparent_mode = false,
   })
 
-  local onedark = require('onedark');
-  onedark.setup {
-    style = 'dark',               -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-    transparent = true,           -- Show/hide background
-    term_colors = true,           -- Change terminal color as per the selected theme style
-    ending_tildes = false,        -- Show the end-of-buffer tildes. By default they are hidden
-    cmp_itemkind_reverse = true, -- reverse item kind highlights in cmp menu
-
-    -- toggle theme style ---
-    toggle_style_key = nil,                                                              -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
-    toggle_style_list = { 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' }, -- List of styles to toggle between
-
-    -- Change code style ---
-    -- Options are italic, bold, underline, none
-    -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
-    code_style = {
-      comments = 'italic',
-      keywords = 'none',
-      functions = 'bold',
-      strings = 'bold',
-      variables = 'italic'
+  require("onedarkpro").setup({
+    highlights = {
+      Comment = { italic = true },
+      Directory = { bold = true },
+      ErrorMsg = { italic = true, bold = true },
     },
-
-    -- Lualine options --
-    lualine = {
-      transparent = true, -- lualine center bar transparency
+    styles = {
+      types = "NONE",
+      methods = "NONE",
+      numbers = "NONE",
+      strings = "NONE",
+      comments = "NONE",
+      keywords = "bold,italic",
+      constants = "NONE",
+      functions = "italic",
+      operators = "NONE",
+      variables = "NONE",
+      parameters = "NONE",
+      conditionals = "italic",
+      virtual_text = "NONE",
     },
-
-    -- Custom Highlights --
-    colors = {},     -- Override default colors
-    highlights = {}, -- Override highlight groups
-
-    -- Plugins Config --
-    diagnostics = {
-      darker = true,     -- darker colors for diagnostic
-      undercurl = true,  -- use undercurl instead of underline for diagnostics
-      background = true, -- use background color for virtual text
+    options = {
+      cursorline = false,                 -- Use cursorline highlighting?
+      transparency = false,               -- Use a transparent background?
+      terminal_colors = false,            -- Use the theme's colors for Neovim's :terminal?
+      lualine_transparency = false,       -- Center bar transparency?
+      highlight_inactive_windows = false, -- When the window is out of focus, change the normal background?
     },
-  }
-  onedark.load()
+  })
 
-  require('github-theme').setup({
+  -- local onedark = require('onedark');
+  -- onedark.setup {
+  --   style = 'dark',               -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+  --   transparent = true,           -- Show/hide background
+  --   term_colors = true,           -- Change terminal color as per the selected theme style
+  --   ending_tildes = false,        -- Show the end-of-buffer tildes. By default they are hidden
+  --   cmp_itemkind_reverse = true, -- reverse item kind highlights in cmp menu
+
+  --   -- toggle theme style ---
+  --   toggle_style_key = nil,                                                              -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
+  --   toggle_style_list = { 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' }, -- List of styles to toggle between
+
+  --   -- Change code style ---
+  --   -- Options are italic, bold, underline, none
+  --   -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
+  --   code_style = {
+  --     comments = 'italic',
+  --     keywords = 'none',
+  --     functions = 'bold',
+  --     strings = 'bold',
+  --     variables = 'italic'
+  --   },
+
+  --   -- Lualine options --
+  --   lualine = {
+  --     transparent = true, -- lualine center bar transparency
+  --   },
+
+  --   -- Custom Highlights --
+  --   colors = {},     -- Override default colors
+  --   highlights = {}, -- Override highlight groups
+
+  --   -- Plugins Config --
+  --   diagnostics = {
+  --     darker = true,     -- darker colors for diagnostic
+  --     undercurl = true,  -- use undercurl instead of underline for diagnostics
+  --     background = true, -- use background color for virtual text
+  --   },
+  -- }
+  -- onedark.load()
+
+  require("github-theme").setup({
     options = {
       -- Compiled file's destination location
-      compile_path = vim.fn.stdpath('cache') .. '/github-theme',
-      compile_file_suffix = '_compiled', -- Compiled file suffix
+      compile_path = vim.fn.stdpath("cache") .. "/github-theme",
+      compile_file_suffix = "_compiled", -- Compiled file suffix
       hide_end_of_buffer = true,         -- Hide the '~' character at the end of the buffer for a cleaner look
       hide_nc_statusline = true,         -- Override the underline style for non-active statuslines
       transparent = false,               -- Disable setting background
@@ -177,16 +208,16 @@ function _G.autoInitThemes()
       module_default = true,             -- Default enable value for modules
       -- Also 'italic,bold' or 'bold' or 'italic'
       styles = {
-        comments = 'italic',
-        functions = 'bold',
-        keywords = 'NONE',
-        variables = 'NONE',
-        conditionals = 'bold',
-        constants = 'NONE',
-        numbers = 'bold',
-        operators = 'bold',
-        strings = 'italic',
-        types = 'bold',
+        comments = "italic",
+        functions = "bold",
+        keywords = "NONE",
+        variables = "NONE",
+        conditionals = "bold",
+        constants = "NONE",
+        numbers = "bold",
+        operators = "bold",
+        strings = "italic",
+        types = "bold",
       },
       inverse = { -- Inverse highlight for different types
         match_paren = false,
@@ -209,7 +240,7 @@ function _G.autoInitThemes()
     groups = {},
   })
 
-  require('kanagawa').setup({
+  require("kanagawa").setup({
     compile = false,  -- enable compiling the colorscheme
     undercurl = true, -- enable undercurls
     commentStyle = { italic = true },
@@ -230,7 +261,7 @@ function _G.autoInitThemes()
     theme = "wave",  -- Load "wave" theme when 'background' option is not set
     background = {   -- map the value of 'background' option to a theme
       dark = "wave", -- try "dragon" !
-      light = "lotus"
+      light = "lotus",
     },
   })
 
@@ -247,10 +278,10 @@ function _G.autoInitThemes()
     dim_inactive = {
       enabled = false,          -- dims the background color of inactive window
       shade = "dark",
-      percentage = 0.15,        -- percentage of the shade to apply to the inactive window
+      percentage = 1,           -- percentage of the shade to apply to the inactive window
     },
     no_italic = true,           -- Force no italic
-    no_bold = true,             -- Force no bold
+    no_bold = false,            -- Force no bold
     no_underline = false,       -- Force no underline
     styles = {                  -- Handles the styles of general hi groups (see `:h highlight-args`):
       comments = { "italic" },  -- Change the style of comments

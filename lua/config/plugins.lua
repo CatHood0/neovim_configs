@@ -1,4 +1,27 @@
 return {
+  -- For notes
+  {
+    "jellydn/my-note.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    keys = {
+      {
+        "<space>x",
+        "<cmd>MyNote<cr>",
+        desc = "Open note",
+      },
+    },
+    opts = {
+      files = {
+        -- Using the parent .git folder as the current working directory
+        cwd = function()
+          local bufPath = vim.api.nvim_buf_get_name(0)
+          local cwd = require("lspconfig").util.root_pattern(".git")(bufPath)
+
+          return cwd
+        end,
+      },
+    },
+  },
   -- 1. BASIC CONFIGURATION AND ESSENTIALS
   {
     "akinsho/bufferline.nvim",
@@ -16,6 +39,10 @@ return {
   { "ellisonleao/gruvbox.nvim" },
   { "rose-pine/neovim",             name = "rose-pine" },
   { "drewtempelmeyer/palenight.vim" },
+  {
+    "olimorris/onedarkpro.nvim",
+    priority = 1000,
+  },
   { "navarasu/onedark.nvim" },
   { "projekt0n/github-nvim-theme" },
   { "rebelot/kanagawa.nvim" },
@@ -239,7 +266,12 @@ return {
   {
     "mason-org/mason.nvim",
     config = function()
-      require("mason").setup()
+      require("mason").setup({
+        registries = {
+          "github:mason-org/mason-registry",
+          "github:Crashdummyy/mason-registry",
+        },
+      })
     end,
     opts = {},
   },

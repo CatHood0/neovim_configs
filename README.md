@@ -8,13 +8,16 @@ export PATH="$PATH":"/opt/nvim/bin"
 // and you need to have these libraries installed already
 // to avoid issues with the clipboard and more
 sudo apt-get updated && sudo apt install xclip git make cmake gcc g++ yarn clang pkg-config ninja-build fzf ripgrep fd-find luarocks
+
+// freya requires these
+sudo apt install build-essential libssl-dev pkg-config cmake libgtk-3-dev libclang-dev
+// Arch alt: sudo pacman -S base-devel openssl cmake gtk3 clang
+
+// for android studio and react native
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 ```
 
-## Instructions to configure AI
-
-**Gemini:** [gemini-cli](https://github.com/google-gemini/gemini-cli/blob/main/docs/get-started/authentication.md#persisting-environment-variables)
-**Copilot:** call `:Copilot setup` in Neovim to generate api token
- 
 For running Desktop enviroment
 
 ```dart
@@ -33,7 +36,7 @@ sudo apt install libgtk-3-dev
 
 ## Language requirements
 
-## Manual installation
+## Manual installation 
 
 * Lua:
     ```dart
@@ -92,15 +95,15 @@ sudo apt install libgtk-3-dev
         // Visit, and follow the steps to install them
         // https://nodejs.org/en/download
         // then install typescript globaly
-        sudo npm i -g typescript typescript-language-server
-        sudo npm i -g tailwindcss-language-server
-        sudo npm install -g prettier eslint
+        bun install -g typescript typescript-language-server
+        bun install -g tailwindcss-language-server
+        bun install -g prettier eslint
         // for astro
         // npm install -g @astrojs/language-server
         // vim.lsp.enable('astro')
 
         // At this point, just at these vars into your .bashrc or .zshrc
-        export PATH="$PATH":"$HOME/.nvm/versions/node/v22.14.0/bin/typescript-language-server"
+        export PATH="$PATH":"$HOME/.nvm/versions/node/<node_version>/bin/typescript-language-server"
         export PATH="$PATH":"/usr/bin/npm"
     ```
 * Golang

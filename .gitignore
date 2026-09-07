@@ -1,4 +1,4 @@
 **/.git
-lazy-lock.json
+**/lazy-lock*
 **/package-lock.json
 package.json

@@ -35,32 +35,19 @@ function M.config_lsp_langs(capabilities)
       end
     end,
     settings = {
-      tailwindcss = {
-        experimental = {
-          classRegex = {
-            "tw`([^`]*)",   -- Ej: tw`text-red-500`
-            'className="([^"]*)', -- HTML/JSX
-            'class:\\s*"([^"]*)', -- Clases dinámicas
-            'classList=\\s*"([^"]*)',
-            "cn\\(([^)]*)\\)", -- Soporte para librerías como `classnames`
-          },
+      tailwindCSS = {
+        classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
+        lint = {
+          cssConflict = "warning",
+          invalidApply = "error",
+          invalidConfigPath = "error",
+          invalidScreen = "error",
+          invalidTailwindDirective = "error",
+          invalidVariant = "error",
+          recommendedVariantOrder = "warning",
         },
+        validate = true,
       },
-    },
-    filetypes = {
-      "html",
-      "js",
-      "jsx",
-      "ts",
-      "tsx",
-      "svelte",
-      "vue",
-      "astro",
-      "php",
-      "blade",
-      "twig",
-      "markdown",
-      "mdx",
     },
   })
 
