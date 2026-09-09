@@ -10,7 +10,7 @@ function M.setup(capabilties)
       -- This determines whether notifications are show with `vim.notify` or with the plugin's custom UI
       -- please note that this option is eventually going to be deprecated and users will need to
       -- depend on plugins like `nvim-notify` instead.
-      notification_style = 'plugin' -- | 'plugin'
+      notification_style = "plugin", -- | 'plugin'
     },
     decorations = {
       statusline = {
@@ -24,10 +24,11 @@ function M.setup(capabilties)
         -- set to true to be able use the 'flutter_tools_decorations.project_config' in your statusline
         -- this will show the currently selected project configuration
         project_config = false,
-      }
+      },
     },
     debugger = { -- integrate with nvim dap + install dart code debugger
-      enabled = false,
+      enabled = true,
+      run_via_dap = true,
       -- if empty dap will not stop on any exceptions, otherwise it will stop on those specified
       -- see |:help dap.set_exception_breakpoints()| for more info
       exception_breakpoints = {},
@@ -44,17 +45,17 @@ function M.setup(capabilties)
       -- end,
     },
     root_patterns = { ".git", ".dart_tools", "pubspec.yaml", ".flutter_dependencies" }, -- patterns to find the root of your flutter project
-    fvm = false,                                                                        -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
+    fvm = false,                                                                      -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
     widget_guides = {
       enabled = false,
     },
     closing_tags = {
       highlight = "Comment", -- highlight for the closing tag
-      prefix = "» ",         -- character to use for close tag e.g. > Widget
-      priority = 99,         -- priority of virtual text in current line
+      prefix = "» ",      -- character to use for close tag e.g. > Widget
+      priority = 99,      -- priority of virtual text in current line
       -- consider to configure this when there is a possibility of multiple virtual text items in one line
       -- see `priority` option in |:help nvim_buf_set_extmark| for more info
-      enabled = true -- set to false to disable
+      enabled = true, -- set to false to disable
     },
     dev_log = {
       enabled = true,
@@ -66,16 +67,16 @@ function M.setup(capabilties)
       focus_on_open = true, -- focus on the newly opened log window
     },
     dev_tools = {
-      autostart = false,         -- autostart devtools server if not detected
+      autostart = false,      -- autostart devtools server if not detected
       auto_open_browser = false, -- Automatically opens devtools in the browser
     },
     outline = {
       open_cmd = "30vnew", -- command to use to open the outline buffer
-      auto_open = false    -- if true this will open the outline automatically when it is first populated
+      auto_open = false, -- if true this will open the outline automatically when it is first populated
     },
     lsp = {
       color = { -- show the derived colours for dart variables
-        enabled = false, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
+        enabled = true, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
         background = false, -- highlight the background
         background_color = nil, -- required, when background is transparent (i.e. background_color = { r = 19, g = 17, b = 24},)
         foreground = false, -- highlight the foreground
@@ -106,14 +107,14 @@ function M.setup(capabilties)
           "/web",
           "/windows",
           "/linux",
-          "/macos"
+          "/macos",
         },
         renameFilesWithClasses = "always", -- "always"
         enableSnippets = true,
         updateImportsOnRename = true,
         codelens = true,
-      }
-    }
+      },
+    },
   })
 end
 

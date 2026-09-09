@@ -13,5 +13,6 @@ return {
     "tailwindcss",
     "jsonls",
     "yamlls",
+    "jdtls",
   },
 }

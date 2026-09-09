@@ -29,7 +29,8 @@
     "telemetry.enable": false
   },
   "diagnostics.disable": [
-    "unused-local"
+    "unused-local",
+        "need-check-nil"
   ],
     "diagnostics.globals": [
         "vim",

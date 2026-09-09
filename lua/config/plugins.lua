@@ -123,6 +123,8 @@ return {
   { "goolord/alpha-nvim" },
   { "nvim-tree/nvim-web-devicons" },
   { "MunifTanjim/nui.nvim" },
+  { "mfussenegger/nvim-dap" },
+  { "igorlfs/nvim-dap-view",      version = "1.*" },
 
   -- 3. NAVIGATION AND SEARCH
   -- File explorer
@@ -262,6 +264,15 @@ return {
 
   -- { 'mfussenegger/nvim-jdtls' },
   -- required for nvim-jdtls
+  {
+    "nvim-java/nvim-java",
+  },
+  -- 默认使用 mason 或 ~/.vscode/extensions/vmware.vscode-spring-boot-x.xx.x 中的 jar
+  {
+    "JavaHello/spring-boot.nvim",
+    ft = { "java", "yaml", "jproperties" },
+    opts = {},
+  },
   -- see the java section in the README
   {
     "mason-org/mason.nvim",
@@ -400,7 +411,8 @@ return {
   { "SirVer/Ultisnips" },
   { "natebosch/dartlang-snippets" },
   -- {
-  --   "Weissle/persistent-breakpoints.nvim",
+  { "Weissle/persistent-breakpoints.nvim" },
+
   -- },
   -- language injection
   -- { "TheNoeTrevino/roids.nvim" },

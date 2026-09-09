@@ -1,5 +1,5 @@
 require('persistent-breakpoints').setup {
-  save_dir = vim.fn.stdpath("cache") .. '/dap',
+  save_dir = vim.fn.stdpath("data") .. '/dap',
   -- when to load the breakpoints? "BufReadPost" is recommanded.
   load_breakpoints_event = { "BufReadPost" },
   -- record the performance of different function. 
