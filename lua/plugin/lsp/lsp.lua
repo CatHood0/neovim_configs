@@ -46,11 +46,6 @@ function M.config_lsp_langs(capabilities)
 		init_options = {
 			bundles = require("spring_boot").java_extensions(),
 		},
-		on_attach = function(client, bufnr)
-			if client.server_capabilities["documentSymbolProvider"] then
-				require("nvim-navic").attach(client, bufnr)
-			end
-		end,
 	})
 	vim.lsp.config("tailwindcss", {
 		capabilities = capabilities,

@@ -268,11 +268,11 @@ return {
     "nvim-java/nvim-java",
   },
   -- 默认使用 mason 或 ~/.vscode/extensions/vmware.vscode-spring-boot-x.xx.x 中的 jar
-  {
-    "JavaHello/spring-boot.nvim",
-    ft = { "java", "yaml", "jproperties" },
-    opts = {},
-  },
+  -- {
+  --   "JavaHello/spring-boot.nvim",
+  --   ft = { "java", "yaml", "jproperties" },
+  --   opts = {},
+  -- },
   -- see the java section in the README
   {
     "mason-org/mason.nvim",
